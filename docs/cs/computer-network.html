@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算机网络 - 考研笔记</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        header .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        h2:first-child {
+            margin-top: 0;
+        }
+
+        h3 {
+            color: #444;
+            font-size: 1.2rem;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: #555;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            color: #666;
+            margin-left: 25px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95rem;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .note p {
+            margin-bottom: 0;
+            color: #856404;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>💻 计算机网络</h1>
+            <p>408计算机学科专业基础核心知识点梳理</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">
+            <i>←</i> 返回首页
+        </a>
+
+        <div class="content">
+            <h2>第一章 计算机网络概述</h2>
+
+            <h3>1.1 计算机网络的定义和分类</h3>
+
+            <h4>计算机网络的定义</h4>
+            <p>将地理位置不同的、具有独立功能的多个计算机系统通过通信设备和线路连接起来，在网络软件的支持下实现数据通信和资源共享的系统。</p>
+
+            <h4>计算机网络的分类</h4>
+            <ul>
+                <li>按覆盖范围：局域网（LAN）、城域网（MAN）、广域网（WAN）</li>
+                <li>按拓扑结构：总线型、星型、环型、树型、网状</li>
+                <li>按传输介质：有线网络、无线网络</li>
+            </ul>
+
+            <h3>1.2 计算机网络的功能</h3>
+
+            <ul>
+                <li>数据通信</li>
+                <li>资源共享</li>
+                <li>分布式处理</li>
+                <li>提高可靠性</li>
+            </ul>
+
+            <h3>1.3 网络体系结构</h3>
+
+            <h4>OSI七层模型</h4>
+            <ol>
+                <li>物理层</li>
+                <li>数据链路层</li>
+                <li>网络层</li>
+                <li>传输层</li>
+                <li>会话层</li>
+                <li>表示层</li>
+                <li>应用层</li>
+            </ol>
+
+            <h4>TCP/IP四层模型</h4>
+            <ol>
+                <li>网络接口层</li>
+                <li>网际层</li>
+                <li>传输层</li>
+                <li>应用层</li>
+            </ol>
+
+            <h2>第二章 物理层</h2>
+
+            <h3>2.1 物理层的基本概念</h3>
+
+            <h4>物理层的功能</h4>
+            <ul>
+                <li>传输比特流</li>
+                <li>定义物理介质的特性</li>
+                <li>定义接口特性</li>
+                <li>定义传输模式（单工、半双工、全双工）</li>
+            </ul>
+
+            <h3>2.2 传输介质</h3>
+
+            <h4>有线传输介质</h4>
+            <ul>
+                <li>双绞线：屏蔽双绞线（STP）、非屏蔽双绞线（UTP）</li>
+                <li>同轴电缆：基带同轴电缆、宽带同轴电缆</li>
+                <li>光纤：单模光纤、多模光纤</li>
+            </ul>
+
+            <h4>无线传输介质</h4>
+            <ul>
+                <li>无线电波、微波、红外线、激光</li>
+            </ul>
+
+            <h3>2.3 信道复用技术</h3>
+
+            <ul>
+                <li>频分复用（FDM）</li>
+                <li>时分复用（TDM）</li>
+                <li>波分复用（WDM）</li>
+                <li>码分复用（CDM）</li>
+            </ul>
+
+            <h2>第三章 数据链路层</h2>
+
+            <h3>3.1 数据链路层的基本概念</h3>
+
+            <h4>数据链路层的功能</h4>
+            <ul>
+                <li>帧同步</li>
+                <li>差错控制</li>
+                <li>流量控制</li>
+                <li>链路管理</li>
+            </ul>
+
+            <h4>帧的格式</h4>
+            <p>帧头、数据、帧尾</p>
+
+            <h3>3.2 差错控制</h3>
+
+            <h4>检错码</h4>
+            <ul>
+                <li>奇偶校验</li>
+                <li>CRC（循环冗余校验）</li>
+            </ul>
+
+            <h4>纠错码</h4>
+            <p>汉明码</p>
+
+            <h3>3.3 流量控制</h3>
+
+            <ul>
+                <li>停-等协议</li>
+                <li>滑动窗口协议</li>
+            </ul>
+
+            <h3>3.4 介质访问控制</h3>
+
+            <h4>随机访问介质访问控制</h4>
+            <ul>
+                <li>ALOHA协议</li>
+                <li>CSMA协议</li>
+                <li>CSMA/CD协议（以太网）</li>
+            </ul>
+
+            <h4>局域网</h4>
+            <ul>
+                <li>以太网帧格式</li>
+                <li>MAC地址</li>
+            </ul>
+
+            <h2>第四章 网络层</h2>
+
+            <h3>4.1 网络层的基本概念</h3>
+
+            <h4>网络层的功能</h4>
+            <ul>
+                <li>路由选择</li>
+                <li>拥塞控制</li>
+                <li>网络互联</li>
+            </ul>
+
+            <h3>4.2 IP协议</h3>
+
+            <h4>IPv4地址</h4>
+            <ul>
+                <li>32位地址，点分十进制表示</li>
+                <li>A类、B类、C类、D类、E类地址</li>
+                <li>子网划分、子网掩码</li>
+            </ul>
+
+            <h4>IPv6地址</h4>
+            <p>128位地址，冒号分隔十六进制表示。</p>
+
+            <h4>IP数据报格式</h4>
+            <ul>
+                <li>版本、头长度、服务类型、总长度</li>
+                <li>标识、标志、片偏移、生存时间</li>
+                <li>协议、校验和、源地址、目的地址</li>
+            </ul>
+
+            <h3>4.3 路由协议</h3>
+
+            <h4>内部网关协议</h4>
+            <ul>
+                <li>RIP（路由信息协议）</li>
+                <li>OSPF（开放最短路径优先）</li>
+            </ul>
+
+            <h4>外部网关协议</h4>
+            <p>BGP（边界网关协议）</p>
+
+            <h3>4.4 拥塞控制</h3>
+
+            <ul>
+                <li>慢开始</li>
+                <li>拥塞避免</li>
+                <li>快重传</li>
+                <li>快恢复</li>
+            </ul>
+
+            <h2>第五章 传输层</h2>
+
+            <h3>5.1 传输层的基本概念</h3>
+
+            <h4>传输层的功能</h4>
+            <ul>
+                <li>端到端的通信</li>
+                <li>流量控制</li>
+                <li>差错控制</li>
+                <li>复用和分用</li>
+            </ul>
+
+            <h4>端口号</h4>
+            <ul>
+                <li>知名端口（0-1023）</li>
+                <li>注册端口（1024-49151）</li>
+                <li>动态端口（49152-65535）</li>
+            </ul>
+
+            <h3>5.2 TCP协议</h3>
+
+            <h4>TCP的特点</h4>
+            <ul>
+                <li>面向连接</li>
+                <li>可靠传输</li>
+                <li>有序传输</li>
+                <li>流量控制</li>
+                <li>拥塞控制</li>
+            </ul>
+
+            <h4>TCP三次握手</h4>
+            <ol>
+                <li>第一次：SYN</li>
+                <li>第二次：SYN+ACK</li>
+                <li>第三次：ACK</li>
+            </ol>
+
+            <h4>TCP四次挥手</h4>
+            <ol>
+                <li>第一次：FIN</li>
+                <li>第二次：ACK</li>
+                <li>第三次：FIN+ACK</li>
+                <li>第四次：ACK</li>
+            </ol>
+
+            <h3>5.3 UDP协议</h3>
+
+            <h4>UDP的特点</h4>
+            <ul>
+                <li>无连接</li>
+                <li>不可靠传输</li>
+                <li>面向报文</li>
+                <li>开销小</li>
+            </ul>
+
+            <h4>UDP的应用场景</h4>
+            <ul>
+                <li>实时应用（视频、音频）</li>
+                <li>DNS查询</li>
+            </ul>
+
+            <h2>第六章 应用层</h2>
+
+            <h3>6.1 应用层的基本概念</h3>
+
+            <h4>应用层协议</h4>
+            <p>为应用程序提供网络服务。</p>
+
+            <h3>6.2 常见应用层协议</h3>
+
+            <h4>HTTP协议</h4>
+            <ul>
+                <li>超文本传输协议</li>
+                <li>请求方法：GET、POST、PUT、DELETE</li>
+                <li>状态码：200、301、404、500</li>
+            </ul>
+
+            <h4>HTTPS协议</h4>
+            <p>安全的HTTP协议，使用SSL/TLS加密。</p>
+
+            <h4>FTP协议</h4>
+            <p>文件传输协议。</p>
+
+            <h4>SMTP协议</h4>
+            <p>简单邮件传输协议，发送邮件。</p>
+
+            <h4>POP3协议</h4>
+            <p>邮局协议版本3，接收邮件。</p>
+
+            <h4>DNS协议</h4>
+            <p>域名系统，将域名转换为IP地址。</p>
+
+            <h4>DHCP协议</h4>
+            <p>动态主机配置协议，自动分配IP地址。</p>
+        </div>
+
+        <footer>
+            <p>© 2026 cx861 | 考研笔记</p>
+        </footer>
+    </div>
+</body>
+</html>

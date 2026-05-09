@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>考研笔记 - cx861</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            color: #333;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #666;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .nav-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-card h2 {
+            color: #333;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            position: relative;
+        }
+
+        .nav-card h2::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .nav-card ul {
+            list-style: none;
+        }
+
+        .nav-card li {
+            margin-bottom: 12px;
+        }
+
+        .nav-card a {
+            display: flex;
+            align-items: center;
+            color: #555;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .nav-card a:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .nav-card a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .plan-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .plan-section h2 {
+            color: #333;
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .plan-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .plan-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .plan-card ul {
+            list-style: none;
+            padding-left: 10px;
+        }
+
+        .plan-card li {
+            color: #555;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .plan-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 30px;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .plan-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 考研笔记</h1>
+            <p>备战考研，记录每一步的学习与成长</p>
+        </header>
+
+        <div class="nav-grid">
+            <div class="nav-card">
+                <h2>🧮 数学</h2>
+                <ul>
+                    <li><a href="math/calculus.html">高等数学</a></li>
+                    <li><a href="math/linear-algebra.html">线性代数</a></li>
+                    <li><a href="math/probability.html">概率论与数理统计</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-card">
+                <h2>💻 408 计算机基础</h2>
+                <ul>
+                    <li><a href="cs/data-structure.html">数据结构</a></li>
+                    <li><a href="cs/computer-organization.html">计算机组成原理</a></li>
+                    <li><a href="cs/operating-system.html">操作系统</a></li>
+                    <li><a href="cs/computer-network.html">计算机网络</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-card">
+                <h2>📖 英语</h2>
+                <ul>
+                    <li><a href="english/reading.html">阅读理解</a></li>
+                    <li><a href="english/writing.html">写作</a></li>
+                    <li><a href="english/translation.html">翻译</a></li>
+                    <li><a href="english/cloze.html">完形填空</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-card">
+                <h2>📜 政治</h2>
+                <ul>
+                    <li><a href="politics/marxism.html">马克思主义基本原理</a></li>
+                    <li><a href="politics/mao.html">毛泽东思想概论</a></li>
+                    <li><a href="politics/history.html">中国近现代史纲要</a></li>
+                    <li><a href="politics/moral.html">思想道德修养与法律基础</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="plan-section">
+            <h2>📅 备考计划</h2>
+            <div class="plan-grid">
+                <div class="plan-card">
+                    <h3>基础阶段（3-6月）</h3>
+                    <ul>
+                        <li>数学：系统复习教材，完成课后习题</li>
+                        <li>英语：背单词，做真题阅读</li>
+                        <li>408：过一遍教材，建立知识框架</li>
+                    </ul>
+                </div>
+                <div class="plan-card">
+                    <h3>强化阶段（7-9月）</h3>
+                    <ul>
+                        <li>数学：大量刷题，总结题型</li>
+                        <li>英语：真题二刷，整理写作模板</li>
+                        <li>408：深入理解，做练习题</li>
+                    </ul>
+                </div>
+                <div class="plan-card">
+                    <h3>冲刺阶段（10-12月）</h3>
+                    <ul>
+                        <li>全真模拟，查漏补缺</li>
+                        <li>背诵政治，掌握时政</li>
+                        <li>调整心态，保持状态</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 cx861 | 考研笔记 | <a href="https://github.com/cx861" style="color: rgba(255,255,255,0.8);">GitHub</a></p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>线性代数 - 考研笔记</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        header .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        h2:first-child {
+            margin-top: 0;
+        }
+
+        h3 {
+            color: #444;
+            font-size: 1.2rem;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: #555;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            color: #666;
+            margin-left: 25px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95rem;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .note p {
+            margin-bottom: 0;
+            color: #856404;
+        }
+
+        .matrix {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .matrix-inner {
+            display: inline-block;
+            border: 2px solid #333;
+            padding: 10px;
+        }
+
+        .matrix-row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .matrix-item {
+            padding: 5px 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🧮 线性代数</h1>
+            <p>考研数学核心知识点梳理</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">
+            <i>←</i> 返回首页
+        </a>
+
+        <div class="content">
+            <h2>第一章 行列式</h2>
+
+            <h3>1.1 二阶与三阶行列式</h3>
+
+            <h4>二阶行列式</h4>
+            <div class="matrix">
+                <div class="matrix-inner">
+                    <div class="matrix-row">
+                        <div class="matrix-item">a</div>
+                        <div class="matrix-item">b</div>
+                    </div>
+                    <div class="matrix-row">
+                        <div class="matrix-item">c</div>
+                        <div class="matrix-item">d</div>
+                    </div>
+                </div>
+            </div>
+            <p>= ad - bc</p>
+
+            <h4>三阶行列式</h4>
+            <p>对角线法则：实线上元素乘积之和减去虚线上元素乘积之和。</p>
+
+            <h3>1.2 n阶行列式的定义</h3>
+
+            <h4>排列与逆序</h4>
+            <ul>
+                <li>排列：由1到n的n个数组成的有序数组</li>
+                <li>逆序：排列中逆序对的个数</li>
+                <li>奇排列与偶排列：逆序数为奇数/偶数</li>
+            </ul>
+
+            <h4>n阶行列式的定义</h4>
+            <pre><code>D = Σ(-1)^τ(j₁j₂...jₙ) a₁ⱼ₁ a₂ⱼ₂ ... aₙⱼₙ</code></pre>
+
+            <h3>1.3 行列式的性质</h3>
+
+            <ul>
+                <li>性质1：转置行列式相等，即 D = D^T</li>
+                <li>性质2：互换两行（列），行列式变号</li>
+                <li>性质3：某行（列）有公因子可提取</li>
+                <li>性质4：两行（列）成比例，行列式为0</li>
+                <li>性质5：行列式可按行（列）拆分</li>
+                <li>性质6：某行（列）的k倍加到另一行（列），行列式不变</li>
+            </ul>
+
+            <h3>1.4 行列式按行（列）展开</h3>
+
+            <h4>余子式与代数余子式</h4>
+            <ul>
+                <li>余子式 M<sub>ij</sub>：去掉第i行第j列后的行列式</li>
+                <li>代数余子式 A<sub>ij</sub> = (-1)^(i+j) M<sub>ij</sub></li>
+            </ul>
+
+            <h4>展开定理</h4>
+            <pre><code>D = aᵢ₁Aᵢ₁ + aᵢ₂Aᵢ₂ + ... + aᵢₙAᵢₙ
+D = a₁ⱼA₁ⱼ + a₂ⱼA₂ⱼ + ... + aₙⱼAₙⱼ</code></pre>
+
+            <h3>1.5 克拉默法则</h3>
+
+            <h4>非齐次线性方程组</h4>
+            <p>如果系数行列式 D ≠ 0，则方程组有唯一解：x<sub>j</sub> = D<sub>j</sub>/D</p>
+
+            <h4>齐次线性方程组</h4>
+            <ul>
+                <li>如果 D ≠ 0，则只有零解</li>
+                <li>如果有非零解，则 D = 0</li>
+            </ul>
+
+            <div class="note">
+                <p><strong>注意：</strong>克拉默法则只适用于系数行列式非零的情况。</p>
+            </div>
+
+            <h2>第二章 矩阵及其运算</h2>
+
+            <h3>2.1 矩阵的概念</h3>
+
+            <h4>矩阵的定义</h4>
+            <p>m×n 个数排成的m行n列的数表。</p>
+
+            <h4>特殊矩阵</h4>
+            <ul>
+                <li>零矩阵：所有元素都是0</li>
+                <li>单位矩阵：主对角线为1，其余为0</li>
+                <li>对角矩阵：非主对角线元素都是0</li>
+                <li>三角矩阵：上三角或下三角</li>
+                <li>对称矩阵：A = A^T</li>
+                <li>反对称矩阵：A = -A^T</li>
+            </ul>
+
+            <h3>2.2 矩阵的运算</h3>
+
+            <h4>矩阵的加法</h4>
+            <p>对应元素相加。</p>
+
+            <h4>数与矩阵相乘</h4>
+            <p>数乘每个元素。</p>
+
+            <h4>矩阵与矩阵相乘</h4>
+            <p>第一个矩阵的列数等于第二个矩阵的行数，乘积矩阵的元素 c<sub>ij</sub> = Σa<sub>ik</sub> b<sub>kj</sub></p>
+
+            <h3>2.3 逆矩阵</h3>
+
+            <h4>逆矩阵的定义</h4>
+            <p>AB = BA = E，则 B 是 A 的逆矩阵。</p>
+
+            <h4>逆矩阵的性质</h4>
+            <ul>
+                <li>(A⁻¹)⁻¹ = A</li>
+                <li>(kA)⁻¹ = k⁻¹A⁻¹</li>
+                <li>(AB)⁻¹ = B⁻¹A⁻¹</li>
+                <li>(Aᵀ)⁻¹ = (A⁻¹)ᵀ</li>
+            </ul>
+
+            <h4>伴随矩阵法求逆</h4>
+            <pre><code>A⁻¹ = (1/|A|)A*</code></pre>
+
+            <h2>第三章 矩阵的初等变换与线性方程组</h2>
+
+            <h3>3.1 矩阵的初等变换</h3>
+
+            <h4>初等行变换</h4>
+            <ul>
+                <li>互换两行</li>
+                <li>某行乘以非零常数</li>
+                <li>某行的k倍加到另一行</li>
+            </ul>
+
+            <h4>初等矩阵</h4>
+            <p>单位矩阵经过一次初等变换得到的矩阵。</p>
+
+            <h3>3.2 矩阵的秩</h3>
+
+            <h4>k阶子式</h4>
+            <p>任取k行k列交叉元素构成的行列式。</p>
+
+            <h4>秩的定义</h4>
+            <p>矩阵中最高阶非零子式的阶数。</p>
+
+            <h4>秩的性质</h4>
+            <ul>
+                <li>r(A) = r(Aᵀ)</li>
+                <li>r(AB) ≤ min{r(A), r(B)}</li>
+            </ul>
+
+            <h3>3.3 线性方程组的解</h3>
+
+            <h4>线性方程组的矩阵形式</h4>
+            <p>Ax = b</p>
+
+            <h4>齐次线性方程组</h4>
+            <p>Ax = 0，有非零解的充要条件：r(A) < n</p>
+
+            <h4>非齐次线性方程组</h4>
+            <p>Ax = b，有解的充要条件：r(A) = r(A|b)</p>
+
+            <h2>第四章 向量组的线性相关性</h2>
+
+            <h3>4.1 向量组及其线性组合</h3>
+
+            <h4>n维向量</h4>
+            <p>n个数组成的有序数组。</p>
+
+            <h4>线性组合与线性表示</h4>
+            <p>向量b可由向量组A线性表示：存在k₁,k₂,...,k<sub>m</sub>，使得b = k₁α₁ + k₂α₂ + ... + k<sub>m</sub>α<sub>m</sub></p>
+
+            <h3>4.2 向量组的线性相关性</h3>
+
+            <h4>线性相关与线性无关的定义</h4>
+            <ul>
+                <li>线性相关：存在不全为零的k₁,k₂,...,k<sub>m</sub>，使得k₁α₁ + k₂α₂ + ... + k<sub>m</sub>α<sub>m</sub> = 0</li>
+                <li>线性无关：只有k₁=k₂=...=k<sub>m</sub>=0时成立</li>
+            </ul>
+
+            <h4>线性相关性的判定</h4>
+            <p>向量组构成的矩阵的秩 &lt; 向量个数，线性相关；秩 = 向量个数，线性无关。</p>
+
+            <h3>4.3 向量组的秩</h3>
+
+            <h4>极大线性无关组</h4>
+            <p>向量组中部分向量构成的线性无关组，且能表示其余所有向量。</p>
+
+            <h4>向量组的秩</h4>
+            <p>极大线性无关组所含向量的个数。</p>
+
+            <h2>第五章 相似矩阵及二次型</h2>
+
+            <h3>5.1 向量的内积</h3>
+
+            <h4>内积的定义</h4>
+            <pre><code>[x,y] = x₁y₁ + x₂y₂ + ... + xₙyₙ</code></pre>
+
+            <h4>向量的长度</h4>
+            <pre><code>||x|| = √[x,x]</code></pre>
+
+            <h4>正交向量组</h4>
+            <p>向量两两正交且长度为1。</p>
+
+            <h3>5.2 方阵的特征值与特征向量</h3>
+
+            <h4>特征值与特征向量的定义</h4>
+            <p>Ax = λx，λ是特征值，x是特征向量。</p>
+
+            <h4>特征方程</h4>
+            <pre><code>|A - λE| = 0</code></pre>
+
+            <h4>特征值的性质</h4>
+            <ul>
+                <li>特征值之和等于迹（主对角线元素之和）</li>
+                <li>特征值之积等于行列式</li>
+            </ul>
+
+            <h3>5.3 相似矩阵</h3>
+
+            <h4>相似矩阵的定义</h4>
+            <p>存在可逆矩阵P，使得P⁻¹AP = B，则A与B相似。</p>
+
+            <h4>矩阵对角化</h4>
+            <p>可对角化的充要条件：有n个线性无关的特征向量。</p>
+
+            <h3>5.4 对称矩阵的对角化</h3>
+
+            <h4>对称矩阵的性质</h4>
+            <ul>
+                <li>特征值都是实数</li>
+                <li>不同特征值的特征向量正交</li>
+            </ul>
+
+            <h3>5.5 二次型及其标准形</h3>
+
+            <h4>二次型的定义</h4>
+            <pre><code>f(x₁,x₂,...,xₙ) = ΣΣaᵢⱼ xᵢ xⱼ</code></pre>
+
+            <h4>二次型的矩阵表示</h4>
+            <p>f = xᵀAx，A是对称矩阵。</p>
+
+            <h3>5.6 正定二次型</h3>
+
+            <h4>正定二次型的定义</h4>
+            <p>对任意x≠0，有f(x) > 0。</p>
+
+            <h4>正定矩阵的判定</h4>
+            <ul>
+                <li>所有顺序主子式都大于0</li>
+                <li>所有特征值都大于0</li>
+                <li>合同于单位矩阵</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>© 2026 cx861 | 考研笔记</p>
+        </footer>
+    </div>
+</body>
+</html>
