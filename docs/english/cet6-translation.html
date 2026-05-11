@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语六级 - 翻译 - 考研笔记</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        header .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #28a745;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 10px 20px;
+            background: white;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+        }
+
+        .nav-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .content {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #28a745;
+        }
+
+        h2:first-child {
+            margin-top: 0;
+        }
+
+        h3 {
+            color: #444;
+            font-size: 1.2rem;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: #555;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            color: #666;
+            margin-left: 25px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .tip {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tip p {
+            margin-bottom: 0;
+            color: #155724;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .note p {
+            margin-bottom: 0;
+            color: #856404;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 3px solid #28a745;
+        }
+
+        .example {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .example .chinese {
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .example .english {
+            color: #28a745;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🌍 英语六级 - 翻译</h1>
+            <p>六级汉译英核心技巧</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">
+            <i>←</i> 返回首页
+        </a>
+
+        <div class="nav-tabs">
+            <a href="cet6-listening.html" class="nav-tab">听力</a>
+            <a href="cet6-reading.html" class="nav-tab">阅读</a>
+            <a href="cet6-translation.html" class="nav-tab active">翻译</a>
+            <a href="cet6-writing.html" class="nav-tab">写作</a>
+        </div>
+
+        <div class="content">
+            <h2>一、翻译题型概述</h2>
+            
+            <p>六级翻译为汉译英，要求将一段150-200字的中文翻译成英文。题材涉及中国文化、历史、社会、经济等方面。</p>
+
+            <div class="section">
+                <div class="section-title">评分标准</div>
+                <ul>
+                    <li><strong>词汇语法（30%）：</strong>用词准确，语法正确</li>
+                    <li><strong>语句结构（40%）：</strong>句式多样，表达流畅</li>
+                    <li><strong>语域恰当（30%）：</strong>符合英语表达习惯</li>
+                </ul>
+            </div>
+
+            <h2>二、翻译技巧</h2>
+
+            <h3>1. 理解原文</h3>
+            <ul>
+                <li>通读全文，理解整体意思</li>
+                <li>注意专业术语和文化词汇</li>
+                <li>分析句子结构，确定主谓宾</li>
+            </ul>
+
+            <h3>2. 选词技巧</h3>
+            <ul>
+                <li>选择常用词，避免生僻词</li>
+                <li>注意一词多义，根据语境选择</li>
+                <li>使用正式、书面化词汇</li>
+            </ul>
+
+            <h3>3. 句式转换</h3>
+            <ul>
+                <li>中文多短句，英文多复合句</li>
+                <li>合理使用从句和分词结构</li>
+                <li>避免逐字翻译，保持流畅</li>
+            </ul>
+
+            <h3>4. 时态处理</h3>
+            <ul>
+                <li>一般现在时：客观事实、普遍真理</li>
+                <li>现在完成时：过去动作对现在的影响</li>
+                <li>一般过去时：过去发生的动作</li>
+            </ul>
+
+            <h3>5. 被动语态</h3>
+            <p>英文常用被动语态，中文多用主动语态，翻译时注意转换。</p>
+
+            <div class="example">
+                <div class="chinese">中国的传统文化正在受到越来越多人的关注。</div>
+                <div class="english">Traditional Chinese culture is receiving increasing attention.</div>
+            </div>
+
+            <h2>三、常见题材</h2>
+
+            <h3>1. 中国文化</h3>
+            <ul>
+                <li>传统节日：春节、中秋节、端午节</li>
+                <li>传统文化：书法、绘画、剪纸、戏曲</li>
+                <li>名胜古迹：长城、故宫、兵马俑</li>
+            </ul>
+
+            <h3>2. 社会发展</h3>
+            <ul>
+                <li>经济发展、科技进步、环境保护</li>
+                <li>教育、医疗、社会保障</li>
+            </ul>
+
+            <h3>3. 历史人物</h3>
+            <ul>
+                <li>孔子、老子、李白、杜甫</li>
+                <li>历史事件、朝代更替</li>
+            </ul>
+
+            <h2>四、高频词汇</h2>
+
+            <h3>文化类</h3>
+            <p>civilization, tradition, custom, festival, ceremony, heritage, art, literature</p>
+
+            <h3>经济类</h3>
+            <p>economy, development, market, investment, trade, industry, technology</p>
+
+            <h3>社会类</h3>
+            <p>society, population, education, health, environment, technology, innovation</p>
+
+            <div class="tip">
+                <p><strong>小贴士：</strong>翻译时要注意中英文表达习惯的差异，避免中式英语。</p>
+            </div>
+
+            <h2>五、备考建议</h2>
+
+            <h3>1. 积累词汇</h3>
+            <ul>
+                <li>背诵六级核心词汇</li>
+                <li>积累文化相关词汇</li>
+                <li>学习常用搭配</li>
+            </ul>
+
+            <h3>2. 练习翻译</h3>
+            <ul>
+                <li>每天翻译一段中文</li>
+                <li>对照参考译文，分析差距</li>
+                <li>注意句型结构和用词</li>
+            </ul>
+
+            <h3>3. 阅读范文</h3>
+            <ul>
+                <li>阅读优秀翻译范文</li>
+                <li>学习表达方式和技巧</li>
+                <li>模仿经典句式</li>
+            </ul>
+
+            <div class="note">
+                <p><strong>注意：</strong>翻译需要长期积累，每天坚持练习效果更好。</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 cx861 | 考研笔记</p>
+        </footer>
+    </div>
+</body>
+</html>
