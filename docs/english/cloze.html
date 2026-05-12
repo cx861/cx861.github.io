@@ -4,203 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>英语完形填空 - 考研笔记</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-            background: #f5f7fa;
-            min-height: 100vh;
-        }
-
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-
-        header .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        header h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            opacity: 0.9;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            color: #667eea;
-            text-decoration: none;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        .content {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        h2 {
-            color: #333;
-            font-size: 1.5rem;
-            margin-top: 30px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #667eea;
-        }
-
-        h2:first-child {
-            margin-top: 0;
-        }
-
-        h3 {
-            color: #444;
-            font-size: 1.2rem;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-
-        h4 {
-            color: #555;
-            font-size: 1.1rem;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        ul, ol {
-            color: #666;
-            margin-left: 25px;
-            margin-bottom: 15px;
-            line-height: 1.8;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            overflow-x: auto;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-            background: #f8f9fa;
-            font-weight: 600;
-            color: #333;
-        }
-
-        code {
-            background: #f4f4f4;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Consolas', monospace;
-            font-size: 0.95rem;
-        }
-
-        pre {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border: 1px solid #e9ecef;
-        }
-
-        .note {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .note p {
-            margin-bottom: 0;
-            color: #856404;
-        }
-
-        .tip {
-            background: #d4edda;
-            border-left: 4px solid #28a745;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .tip p {
-            margin-bottom: 0;
-            color: #155724;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #999;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.5rem;
-            }
-
-            .content {
-                padding: 20px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>📝 英语完形填空</h1>
-            <p>考研英语核心知识点梳理</p>
+    <nav class="site-nav">
+        <div class="site-nav-inner">
+            <a href="../index.html">首页</a>
+            <a href="reading.html">阅读理解</a>
+            <a href="sentence-analysis.html">长难句分析</a>
+            <a href="writing.html">写作</a>
+            <a href="translation.html">翻译</a>
+            <a href="cloze.html" class="active">完形填空</a>
+            <a href="cet6-listening.html">六级</a>
         </div>
-    </header>
+    </nav>
+
+    <div class="page-header english">
+        <h1>📝 英语完形填空</h1>
+        <div class="breadcrumb"><a href="../index.html">首页</a> / 英语完形填空</div>
+    </div>
 
     <div class="container">
-        <a href="../index.html" class="back-link">
-            <i>←</i> 返回首页
-        </a>
+        <div class="toc">
+            <h3>目录</h3>
+            <ul>
+                <li><a href="#ch1">第一章 完形填空题型分析</a></li>
+                <li><a href="#ch2">第二章 完形填空解题技巧</a></li>
+                <li><a href="#ch3">第三章 常见词汇辨析</a></li>
+                <li><a href="#ch4">第四章 逻辑关系词总结</a></li>
+                <li><a href="#ch5">第五章 完形填空练习方法</a></li>
+                <li><a href="#ch6">第六章 真题完形填空示例</a></li>
+            </ul>
+        </div>
 
-        <div class="content">
-            <h2>第一章 完形填空题型分析</h2>
+        <div class="content-card">
+            <h2 id="ch1">第一章 完形填空题型分析</h2>
 
             <h3>1.1 考查内容</h3>
             <p>一篇约240-280词的英语文章，其中有20个空白处，要求从每题的4个选项中选出最佳答案。</p>
@@ -216,7 +54,7 @@
                 <li>上下文理解</li>
             </ul>
 
-            <h2>第二章 完形填空解题技巧</h2>
+            <h2 id="ch2">第二章 完形填空解题技巧</h2>
 
             <h3>2.1 通读全文</h3>
             <ul>
@@ -256,11 +94,11 @@
                 <li>检查核对（2-3分钟）</li>
             </ol>
 
-            <div class="tip">
+            <div class="tip-box">
                 <p><strong>小贴士：</strong>做完形填空时，不要急于选择答案，要注意上下文的联系。</p>
             </div>
 
-            <h2>第三章 常见词汇辨析</h2>
+            <h2 id="ch3">第三章 常见词汇辨析</h2>
 
             <h3>3.1 近义词辨析</h3>
             <ul>
@@ -280,7 +118,7 @@
                 <li>on the contrary</li>
             </ul>
 
-            <h2>第四章 逻辑关系词总结</h2>
+            <h2 id="ch4">第四章 逻辑关系词总结</h2>
 
             <table>
                 <tr>
@@ -313,7 +151,7 @@
                 </tr>
             </table>
 
-            <h2>第五章 完形填空练习方法</h2>
+            <h2 id="ch5">第五章 完形填空练习方法</h2>
 
             <h3>5.1 真题练习</h3>
             <ul>
@@ -336,17 +174,17 @@
                 <li>记忆固定搭配</li>
             </ul>
 
-            <div class="note">
+            <div class="highlight-box">
                 <p><strong>注意：</strong>完形填空是考研英语中难度较大的题型，需要大量练习才能提高正确率。</p>
             </div>
 
-            <h2>第六章 真题完形填空示例</h2>
+            <h2 id="ch6">第六章 真题完形填空示例</h2>
 
             <h3>6.1 原文片段</h3>
             <pre>
-The world is facing a serious environmental crisis. 
-Pollution, climate change, and deforestation are just a few of the problems that we need to __1__. 
-Many people believe that governments should take the __2__ in addressing these issues. 
+The world is facing a serious environmental crisis.
+Pollution, climate change, and deforestation are just a few of the problems that we need to __1__.
+Many people believe that governments should take the __2__ in addressing these issues.
 However, individuals can also make a __3__ by reducing their carbon footprint.
             </pre>
 
@@ -364,10 +202,18 @@ However, individuals can also make a __3__ by reducing their carbon footprint.
                 <li><strong>B) difference</strong> - make a difference是固定搭配</li>
             </ol>
         </div>
-
-        <footer>
-            <p>© 2026 cx861 | 考研笔记</p>
-        </footer>
     </div>
+
+    <div class="site-footer">
+        <p>&copy; 2026 cx861 | 考研笔记 | <a href="https://github.com/cx861">GitHub</a></p>
+    </div>
+
+    <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <script>
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+        backTop.classList.toggle('visible', window.scrollY > 300);
+    });
+    </script>
 </body>
 </html>

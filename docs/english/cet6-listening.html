@@ -4,216 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>英语六级 - 听力 - 考研笔记</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-            background: #f5f7fa;
-            min-height: 100vh;
-        }
-
-        header {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-
-        header .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        header h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            opacity: 0.9;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            color: #28a745;
-            text-decoration: none;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        .nav-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .nav-tab {
-            padding: 10px 20px;
-            background: white;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #333;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: all 0.3s;
-        }
-
-        .nav-tab.active {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-        }
-
-        .nav-tab:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .content {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        h2 {
-            color: #333;
-            font-size: 1.5rem;
-            margin-top: 30px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #28a745;
-        }
-
-        h2:first-child {
-            margin-top: 0;
-        }
-
-        h3 {
-            color: #444;
-            font-size: 1.2rem;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-
-        h4 {
-            color: #555;
-            font-size: 1.1rem;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        ul, ol {
-            color: #666;
-            margin-left: 25px;
-            margin-bottom: 15px;
-            line-height: 1.8;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        .tip {
-            background: #d4edda;
-            border-left: 4px solid #28a745;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .tip p {
-            margin-bottom: 0;
-            color: #155724;
-        }
-
-        .note {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .note p {
-            margin-bottom: 0;
-            color: #856404;
-        }
-
-        .section {
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 15px;
-            padding-left: 10px;
-            border-left: 3px solid #28a745;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #999;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.5rem;
-            }
-
-            .content {
-                padding: 20px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>🎧 英语六级 - 听力</h1>
-            <p>六级听力备考核心技巧</p>
+    <nav class="site-nav">
+        <div class="site-nav-inner">
+            <a href="../index.html">首页</a>
+            <a href="reading.html">阅读理解</a>
+            <a href="sentence-analysis.html">长难句分析</a>
+            <a href="writing.html">写作</a>
+            <a href="translation.html">翻译</a>
+            <a href="cloze.html">完形填空</a>
+            <a href="cet6-listening.html" class="active">六级</a>
         </div>
-    </header>
+    </nav>
+
+    <div class="page-header cet6">
+        <h1>🎧 英语六级 - 听力</h1>
+        <div class="breadcrumb"><a href="../index.html">首页</a> / 六级听力</div>
+    </div>
 
     <div class="container">
-        <a href="../index.html" class="back-link">
-            <i>←</i> 返回首页
-        </a>
-
-        <div class="nav-tabs">
-            <a href="cet6-listening.html" class="nav-tab active">听力</a>
-            <a href="cet6-reading.html" class="nav-tab">阅读</a>
-            <a href="cet6-translation.html" class="nav-tab">翻译</a>
-            <a href="cet6-writing.html" class="nav-tab">写作</a>
+        <div class="tag-nav">
+            <a href="cet6-listening.html" class="active">听力</a>
+            <a href="cet6-reading.html">阅读</a>
+            <a href="cet6-translation.html">翻译</a>
+            <a href="cet6-writing.html">写作</a>
         </div>
 
-        <div class="content">
-            <h2>一、听力题型概述</h2>
-            
+        <div class="toc">
+            <h3>目录</h3>
+            <ul>
+                <li><a href="#ch1">一、听力题型概述</a></li>
+                <li><a href="#ch2">二、听力技巧</a></li>
+                <li><a href="#ch3">三、备考建议</a></li>
+                <li><a href="#ch4">四、高频场景词汇</a></li>
+            </ul>
+        </div>
+
+        <div class="content-card">
+            <h2 id="ch1">一、听力题型概述</h2>
+
             <div class="section">
                 <div class="section-title">Section A 短篇新闻（3篇，7题）</div>
                 <ul>
@@ -241,7 +72,7 @@
                 </ul>
             </div>
 
-            <h2>二、听力技巧</h2>
+            <h2 id="ch2">二、听力技巧</h2>
 
             <h3>1. 预读技巧</h3>
             <ul>
@@ -273,11 +104,11 @@
                 <li>选项陷阱：部分信息正确但整体错误</li>
             </ul>
 
-            <div class="tip">
+            <div class="tip-box">
                 <p><strong>小贴士：</strong>平时练习时，可以尝试只听一遍就做题，模拟考试真实场景。</p>
             </div>
 
-            <h2>三、备考建议</h2>
+            <h2 id="ch3">三、备考建议</h2>
 
             <h3>1. 精听训练</h3>
             <ol>
@@ -301,11 +132,11 @@
                 <li>模拟考试时间，提高答题速度</li>
             </ul>
 
-            <div class="note">
+            <div class="highlight-box">
                 <p><strong>注意：</strong>听力需要长期坚持，建议每天至少练习30分钟。</p>
             </div>
 
-            <h2>四、高频场景词汇</h2>
+            <h2 id="ch4">四、高频场景词汇</h2>
 
             <h3>校园场景</h3>
             <p>campus, lecture, seminar, assignment, deadline, scholarship, tuition</p>
@@ -319,10 +150,18 @@
             <h3>生活场景</h3>
             <p>restaurant, shopping, weather, appointment, hospital, bank, post office</p>
         </div>
-
-        <footer>
-            <p>© 2026 cx861 | 考研笔记</p>
-        </footer>
     </div>
+
+    <div class="site-footer">
+        <p>&copy; 2026 cx861 | 考研笔记 | <a href="https://github.com/cx861">GitHub</a></p>
+    </div>
+
+    <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <script>
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+        backTop.classList.toggle('visible', window.scrollY > 300);
+    });
+    </script>
 </body>
 </html>

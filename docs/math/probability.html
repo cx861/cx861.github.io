@@ -4,199 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>概率论与数理统计 - 考研笔记</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-            background: #f5f7fa;
-            min-height: 100vh;
-        }
-
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-
-        header .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        header h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            opacity: 0.9;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            color: #667eea;
-            text-decoration: none;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        .content {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        h2 {
-            color: #333;
-            font-size: 1.5rem;
-            margin-top: 30px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #667eea;
-        }
-
-        h2:first-child {
-            margin-top: 0;
-        }
-
-        h3 {
-            color: #444;
-            font-size: 1.2rem;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-
-        h4 {
-            color: #555;
-            font-size: 1.1rem;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        ul, ol {
-            color: #666;
-            margin-left: 25px;
-            margin-bottom: 15px;
-            line-height: 1.8;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            overflow-x: auto;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-            background: #f8f9fa;
-            font-weight: 600;
-            color: #333;
-        }
-
-        code {
-            background: #f4f4f4;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Consolas', monospace;
-            font-size: 0.95rem;
-        }
-
-        pre {
-            background: #2d2d2d;
-            color: #f8f8f2;
-            padding: 20px;
-            border-radius: 10px;
-            overflow-x: auto;
-            margin-bottom: 20px;
-        }
-
-        pre code {
-            background: none;
-            padding: 0;
-            color: inherit;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .note {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .note p {
-            margin-bottom: 0;
-            color: #856404;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #999;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.5rem;
-            }
-
-            .content {
-                padding: 20px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>🧮 概率论与数理统计</h1>
-            <p>考研数学一、三核心知识点梳理</p>
+    <!-- Navigation Bar -->
+    <nav class="site-nav">
+        <div class="site-nav-inner">
+            <a href="../index.html">首页</a>
+            <a href="calculus.html">高等数学</a>
+            <a href="linear-algebra.html">线性代数</a>
+            <a href="probability.html" class="active">概率论与数理统计</a>
         </div>
-    </header>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header math">
+        <h1>🧮 概率论与数理统计</h1>
+        <div class="breadcrumb"><a href="../index.html">首页</a> / 概率论与数理统计</div>
+    </div>
 
     <div class="container">
-        <a href="../index.html" class="back-link">
-            <i>←</i> 返回首页
-        </a>
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>目录</h3>
+            <ul>
+                <li><a href="#ch1">第一章 概率论的基本概念</a></li>
+                <li><a href="#ch2">第二章 随机变量及其分布</a></li>
+                <li><a href="#ch3">第三章 多维随机变量及其分布</a></li>
+                <li><a href="#ch4">第四章 随机变量的数字特征</a></li>
+                <li><a href="#ch5">第五章 大数定律及中心极限定理</a></li>
+                <li><a href="#ch6">第六章 样本及抽样分布</a></li>
+                <li><a href="#ch7">第七章 参数估计</a></li>
+                <li><a href="#ch8">第八章 假设检验</a></li>
+            </ul>
+        </div>
 
-        <div class="content">
-            <h2>第一章 概率论的基本概念</h2>
+        <!-- Main Content -->
+        <div class="content-card">
+            <h2 id="ch1">第一章 概率论的基本概念</h2>
 
             <h3>1.1 随机试验</h3>
 
@@ -271,11 +116,11 @@
             <h4>多个事件独立</h4>
             <p>两两独立且任意多个事件的积的概率等于概率的积。</p>
 
-            <div class="note">
+            <div class="highlight-box">
                 <p><strong>注意：</strong>独立与互斥是两个不同的概念，独立事件不一定互斥，互斥事件不一定独立。</p>
             </div>
 
-            <h2>第二章 随机变量及其分布</h2>
+            <h2 id="ch2">第二章 随机变量及其分布</h2>
 
             <h3>2.1 随机变量</h3>
 
@@ -370,7 +215,7 @@
                 </tr>
             </table>
 
-            <h2>第三章 多维随机变量及其分布</h2>
+            <h2 id="ch3">第三章 多维随机变量及其分布</h2>
 
             <h3>3.1 二维随机变量</h3>
 
@@ -410,7 +255,7 @@ f_Y(y) = ∫(-∞,+∞) f(x,y)dx</code></pre>
                 <li>连续型：f(x,y) = f_X(x)f_Y(y)</li>
             </ul>
 
-            <h2>第四章 随机变量的数字特征</h2>
+            <h2 id="ch4">第四章 随机变量的数字特征</h2>
 
             <h3>4.1 数学期望</h3>
 
@@ -455,7 +300,7 @@ f_Y(y) = ∫(-∞,+∞) f(x,y)dx</code></pre>
                 <li>ρ = ±1 当且仅当X与Y线性相关</li>
             </ul>
 
-            <h2>第五章 大数定律及中心极限定理</h2>
+            <h2 id="ch5">第五章 大数定律及中心极限定理</h2>
 
             <h3>5.1 大数定律</h3>
 
@@ -476,7 +321,7 @@ f_Y(y) = ∫(-∞,+∞) f(x,y)dx</code></pre>
             <h4>棣莫弗-拉普拉斯定理</h4>
             <p>二项分布近似正态分布。</p>
 
-            <h2>第六章 样本及抽样分布</h2>
+            <h2 id="ch6">第六章 样本及抽样分布</h2>
 
             <h3>6.1 随机样本</h3>
 
@@ -509,7 +354,7 @@ f_Y(y) = ∫(-∞,+∞) f(x,y)dx</code></pre>
             <h4>F分布</h4>
             <p>F = (X/n₁) / (Y/n₂)，X~χ²(n₁), Y~χ²(n₂)独立。</p>
 
-            <h2>第七章 参数估计</h2>
+            <h2 id="ch7">第七章 参数估计</h2>
 
             <h3>7.1 点估计</h3>
 
@@ -542,7 +387,7 @@ f_Y(y) = ∫(-∞,+∞) f(x,y)dx</code></pre>
                 <li>均值μ（σ²未知）：X̄ ± t_(α/2)(n-1)(S/√n)</li>
             </ul>
 
-            <h2>第八章 假设检验</h2>
+            <h2 id="ch8">第八章 假设检验</h2>
 
             <h3>8.1 假设检验的基本概念</h3>
 
@@ -569,10 +414,18 @@ f_Y(y) = ∫(-∞,+∞) f(x,y)dx</code></pre>
             <h4>方差的检验</h4>
             <p>χ²检验。</p>
         </div>
-
-        <footer>
-            <p>© 2026 cx861 | 考研笔记</p>
-        </footer>
     </div>
+
+    <div class="site-footer">
+        <p>&copy; 2026 cx861 | 考研笔记 | <a href="https://github.com/cx861">GitHub</a></p>
+    </div>
+
+    <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <script>
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+        backTop.classList.toggle('visible', window.scrollY > 300);
+    });
+    </script>
 </body>
 </html>

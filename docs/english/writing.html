@@ -4,204 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>英语写作 - 考研笔记</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-            background: #f5f7fa;
-            min-height: 100vh;
-        }
-
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-
-        header .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        header h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            opacity: 0.9;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            color: #667eea;
-            text-decoration: none;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        .content {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        h2 {
-            color: #333;
-            font-size: 1.5rem;
-            margin-top: 30px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #667eea;
-        }
-
-        h2:first-child {
-            margin-top: 0;
-        }
-
-        h3 {
-            color: #444;
-            font-size: 1.2rem;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-
-        h4 {
-            color: #555;
-            font-size: 1.1rem;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        ul, ol {
-            color: #666;
-            margin-left: 25px;
-            margin-bottom: 15px;
-            line-height: 1.8;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            overflow-x: auto;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-            background: #f8f9fa;
-            font-weight: 600;
-            color: #333;
-        }
-
-        code {
-            background: #f4f4f4;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Consolas', monospace;
-            font-size: 0.95rem;
-        }
-
-        pre {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border: 1px solid #e9ecef;
-            font-family: 'Times New Roman', serif;
-        }
-
-        .note {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .note p {
-            margin-bottom: 0;
-            color: #856404;
-        }
-
-        .tip {
-            background: #d4edda;
-            border-left: 4px solid #28a745;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .tip p {
-            margin-bottom: 0;
-            color: #155724;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #999;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.5rem;
-            }
-
-            .content {
-                padding: 20px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>✍️ 英语写作</h1>
-            <p>考研英语核心知识点梳理</p>
+    <nav class="site-nav">
+        <div class="site-nav-inner">
+            <a href="../index.html">首页</a>
+            <a href="reading.html">阅读理解</a>
+            <a href="sentence-analysis.html">长难句分析</a>
+            <a href="writing.html" class="active">写作</a>
+            <a href="translation.html">翻译</a>
+            <a href="cloze.html">完形填空</a>
+            <a href="cet6-listening.html">六级</a>
         </div>
-    </header>
+    </nav>
+
+    <div class="page-header english">
+        <h1>✍️ 英语写作</h1>
+        <div class="breadcrumb"><a href="../index.html">首页</a> / 英语写作</div>
+    </div>
 
     <div class="container">
-        <a href="../index.html" class="back-link">
-            <i>←</i> 返回首页
-        </a>
+        <div class="toc">
+            <h3>目录</h3>
+            <ul>
+                <li><a href="#ch1">第一章 写作题型分析</a></li>
+                <li><a href="#ch2">第二章 写作结构</a></li>
+                <li><a href="#ch3">第三章 常用句型</a></li>
+                <li><a href="#ch4">第四章 高分技巧</a></li>
+                <li><a href="#ch5">第五章 常用模板</a></li>
+                <li><a href="#ch6">第六章 常见话题</a></li>
+            </ul>
+        </div>
 
-        <div class="content">
-            <h2>第一章 写作题型分析</h2>
+        <div class="content-card">
+            <h2 id="ch1">第一章 写作题型分析</h2>
 
             <h3>1.1 应用文写作（小作文）</h3>
 
@@ -236,7 +73,7 @@
                 <li>语法和拼写（3-4分）</li>
             </ul>
 
-            <h2>第二章 写作结构</h2>
+            <h2 id="ch2">第二章 写作结构</h2>
 
             <h3>2.1 应用文结构</h3>
 
@@ -265,7 +102,7 @@
                 <li>总结或提出建议（2-3句）</li>
             </ol>
 
-            <h2>第三章 常用句型</h2>
+            <h2 id="ch3">第三章 常用句型</h2>
 
             <h3>3.1 开头句型</h3>
             <ul>
@@ -292,7 +129,7 @@
                 <li>Only in this way can we...</li>
             </ul>
 
-            <h2>第四章 高分技巧</h2>
+            <h2 id="ch4">第四章 高分技巧</h2>
 
             <h3>4.1 使用多样化的词汇</h3>
             <ul>
@@ -314,11 +151,11 @@
                 <li>保持逻辑清晰</li>
             </ul>
 
-            <div class="tip">
+            <div class="tip-box">
                 <p><strong>小贴士：</strong>在写作时，尽量使用自己熟悉的句型和词汇，避免为了追求复杂而出现语法错误。</p>
             </div>
 
-            <h2>第五章 常用模板</h2>
+            <h2 id="ch5">第五章 常用模板</h2>
 
             <h3>5.1 建议信模板</h3>
             <pre>
@@ -356,7 +193,7 @@ The reasons for this trend are as follows. Firstly, [reason 1]. Secondly, [reaso
 Taking all these factors into consideration, we can draw the conclusion that [conclusion]. In the future, [prediction].
             </pre>
 
-            <h2>第六章 常见话题</h2>
+            <h2 id="ch6">第六章 常见话题</h2>
 
             <h3>6.1 教育类</h3>
             <ul>
@@ -386,14 +223,22 @@ Taking all these factors into consideration, we can draw the conclusion that [co
                 <li>职业发展</li>
             </ul>
 
-            <div class="note">
+            <div class="highlight-box">
                 <p><strong>注意：</strong>写作需要多练习，建议每周写1-2篇，并请老师或同学帮忙批改。</p>
             </div>
         </div>
-
-        <footer>
-            <p>© 2026 cx861 | 考研笔记</p>
-        </footer>
     </div>
+
+    <div class="site-footer">
+        <p>&copy; 2026 cx861 | 考研笔记 | <a href="https://github.com/cx861">GitHub</a></p>
+    </div>
+
+    <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <script>
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+        backTop.classList.toggle('visible', window.scrollY > 300);
+    });
+    </script>
 </body>
 </html>

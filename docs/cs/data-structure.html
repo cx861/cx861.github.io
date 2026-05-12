@@ -4,199 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数据结构 - 考研笔记</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-            background: #f5f7fa;
-            min-height: 100vh;
-        }
-
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-
-        header .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        header h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            opacity: 0.9;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            color: #667eea;
-            text-decoration: none;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        .content {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        h2 {
-            color: #333;
-            font-size: 1.5rem;
-            margin-top: 30px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #667eea;
-        }
-
-        h2:first-child {
-            margin-top: 0;
-        }
-
-        h3 {
-            color: #444;
-            font-size: 1.2rem;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-
-        h4 {
-            color: #555;
-            font-size: 1.1rem;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        ul, ol {
-            color: #666;
-            margin-left: 25px;
-            margin-bottom: 15px;
-            line-height: 1.8;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            overflow-x: auto;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-            background: #f8f9fa;
-            font-weight: 600;
-            color: #333;
-        }
-
-        code {
-            background: #f4f4f4;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Consolas', monospace;
-            font-size: 0.95rem;
-        }
-
-        pre {
-            background: #2d2d2d;
-            color: #f8f8f2;
-            padding: 20px;
-            border-radius: 10px;
-            overflow-x: auto;
-            margin-bottom: 20px;
-        }
-
-        pre code {
-            background: none;
-            padding: 0;
-            color: inherit;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .note {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .note p {
-            margin-bottom: 0;
-            color: #856404;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #999;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.5rem;
-            }
-
-            .content {
-                padding: 20px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>💻 数据结构</h1>
-            <p>408计算机学科专业基础核心知识点梳理</p>
+    <!-- Navigation Bar -->
+    <nav class="site-nav">
+        <div class="site-nav-inner">
+            <a href="../index.html">首页</a>
+            <a href="../cs/computer-network.html">计算机网络</a>
+            <a href="../cs/computer-organization.html">计算机组成原理</a>
+            <a href="../cs/data-structure.html" class="active">数据结构</a>
+            <a href="../cs/operating-system.html">操作系统</a>
         </div>
-    </header>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header cs">
+        <h1>💻 数据结构</h1>
+        <div class="breadcrumb"><a href="../index.html">首页</a> / 数据结构</div>
+    </div>
 
     <div class="container">
-        <a href="../index.html" class="back-link">
-            <i>←</i> 返回首页
-        </a>
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>目录</h3>
+            <ul>
+                <li><a href="#ch1">第一章 线性表</a></li>
+                <li><a href="#ch2">第二章 栈和队列</a></li>
+                <li><a href="#ch3">第三章 树和二叉树</a></li>
+                <li><a href="#ch4">第四章 图</a></li>
+                <li><a href="#ch5">第五章 查找</a></li>
+                <li><a href="#ch6">第六章 排序</a></li>
+            </ul>
+        </div>
 
-        <div class="content">
-            <h2>第一章 线性表</h2>
+        <!-- Main Content -->
+        <div class="content-card">
+            <h2 id="ch1">第一章 线性表</h2>
 
             <h3>1.1 线性表的定义和基本操作</h3>
 
@@ -288,7 +132,7 @@ typedef struct DNode {
             <h4>循环链表</h4>
             <p>单循环链表：尾节点指针指向头节点；双循环链表：头节点前驱指向尾节点，尾节点后继指向头节点。</p>
 
-            <h2>第二章 栈和队列</h2>
+            <h2 id="ch2">第二章 栈和队列</h2>
 
             <h3>2.1 栈</h3>
 
@@ -359,11 +203,11 @@ int DeQueue(SqQueue *Q, int *e) {
                 <li>缓冲区管理</li>
             </ul>
 
-            <div class="note">
+            <div class="highlight-box">
                 <p><strong>注意：</strong>循环队列中，判空条件是 front == rear，判满条件是 (rear + 1) % MAXSIZE == front。</p>
             </div>
 
-            <h2>第三章 树和二叉树</h2>
+            <h2 id="ch3">第三章 树和二叉树</h2>
 
             <h3>3.1 树的基本概念</h3>
 
@@ -471,7 +315,7 @@ typedef struct BiTNode {
     else return InsertBST(&((*T)->rchild), key);
 }</code></pre>
 
-            <h2>第四章 图</h2>
+            <h2 id="ch4">第四章 图</h2>
 
             <h3>4.1 图的基本概念</h3>
 
@@ -567,7 +411,7 @@ typedef struct {
             <h4>拓扑排序</h4>
             <p>AOV网，每次选入度为0的顶点，删除该顶点及相关边。</p>
 
-            <h2>第五章 查找</h2>
+            <h2 id="ch5">第五章 查找</h2>
 
             <h3>5.1 顺序查找</h3>
             <pre><code>int SeqSearch(int a[], int n, int key) {
@@ -589,7 +433,7 @@ typedef struct {
     return -1;
 }</code></pre>
 
-            <h2>第六章 排序</h2>
+            <h2 id="ch6">第六章 排序</h2>
 
             <h3>6.1 插入排序</h3>
 
@@ -701,10 +545,18 @@ typedef struct {
                 </tr>
             </table>
         </div>
-
-        <footer>
-            <p>© 2026 cx861 | 考研笔记</p>
-        </footer>
     </div>
+
+    <div class="site-footer">
+        <p>&copy; 2026 cx861 | 考研笔记 | <a href="https://github.com/cx861">GitHub</a></p>
+    </div>
+
+    <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <script>
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+        backTop.classList.toggle('visible', window.scrollY > 300);
+    });
+    </script>
 </body>
 </html>
