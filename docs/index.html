@@ -8,6 +8,17 @@
 </head>
 <body>
 
+<nav class="site-nav">
+    <div class="site-nav-inner">
+        <span class="nav-logo">考研笔记</span>
+        <a href="index.html" class="active">首页</a>
+        <a href="math/calculus.html">数学</a>
+        <a href="cs/data-structure.html">408计算机</a>
+        <a href="english/reading.html">英语</a>
+        <a href="politics/marxism.html">政治</a>
+    </div>
+</nav>
+
 <div class="hero">
     <h1>考研笔记</h1>
     <p>备战考研，记录每一步的学习与成长</p>
@@ -16,24 +27,27 @@
 <div class="container">
 
     <!-- 数学 -->
-    <div class="content-card">
-        <h2 style="border-bottom-color: var(--math-color);">🧮 数学</h2>
-        <div class="sub-link-grid">
-            <a href="math/calculus.html" class="sub-link-card">
+    <div class="section-block">
+        <div class="section-header">
+            <span class="icon">🧮</span>
+            <h2 style="color: var(--math-color);">数学</h2>
+        </div>
+        <div class="link-grid">
+            <a href="math/calculus.html" class="link-card">
                 <span class="emoji">📐</span>
                 <span class="info">
                     <span class="title">高等数学</span>
                     <span class="desc">极限、导数、积分、微分方程</span>
                 </span>
             </a>
-            <a href="math/linear-algebra.html" class="sub-link-card">
+            <a href="math/linear-algebra.html" class="link-card">
                 <span class="emoji">🔢</span>
                 <span class="info">
                     <span class="title">线性代数</span>
                     <span class="desc">矩阵、向量、特征值、二次型</span>
                 </span>
             </a>
-            <a href="math/probability.html" class="sub-link-card">
+            <a href="math/probability.html" class="link-card">
                 <span class="emoji">🎲</span>
                 <span class="info">
                     <span class="title">概率论与数理统计</span>
@@ -44,31 +58,34 @@
     </div>
 
     <!-- 408 计算机 -->
-    <div class="content-card">
-        <h2 style="border-bottom-color: var(--cs-color);">💻 408 计算机基础</h2>
-        <div class="sub-link-grid">
-            <a href="cs/data-structure.html" class="sub-link-card">
+    <div class="section-block">
+        <div class="section-header">
+            <span class="icon">💻</span>
+            <h2 style="color: var(--cs-color);">408 计算机基础</h2>
+        </div>
+        <div class="link-grid">
+            <a href="cs/data-structure.html" class="link-card">
                 <span class="emoji">🗃️</span>
                 <span class="info">
                     <span class="title">数据结构</span>
                     <span class="desc">线性表、树、图、排序、查找</span>
                 </span>
             </a>
-            <a href="cs/computer-organization.html" class="sub-link-card">
+            <a href="cs/computer-organization.html" class="link-card">
                 <span class="emoji">⚙️</span>
                 <span class="info">
                     <span class="title">计算机组成原理</span>
                     <span class="desc">CPU、存储器、指令系统、I/O</span>
                 </span>
             </a>
-            <a href="cs/operating-system.html" class="sub-link-card">
+            <a href="cs/operating-system.html" class="link-card">
                 <span class="emoji">💾</span>
                 <span class="info">
                     <span class="title">操作系统</span>
                     <span class="desc">进程、内存、文件、设备管理</span>
                 </span>
             </a>
-            <a href="cs/computer-network.html" class="sub-link-card">
+            <a href="cs/computer-network.html" class="link-card">
                 <span class="emoji">🌐</span>
                 <span class="info">
                     <span class="title">计算机网络</span>
@@ -79,38 +96,41 @@
     </div>
 
     <!-- 英语 -->
-    <div class="content-card">
-        <h2 style="border-bottom-color: var(--english-color);">📖 英语</h2>
-        <div class="sub-link-grid">
-            <a href="english/reading.html" class="sub-link-card">
+    <div class="section-block">
+        <div class="section-header">
+            <span class="icon">📖</span>
+            <h2 style="color: var(--english-color);">英语</h2>
+        </div>
+        <div class="link-grid">
+            <a href="english/reading.html" class="link-card">
                 <span class="emoji">📖</span>
                 <span class="info">
                     <span class="title">阅读理解</span>
                     <span class="desc">题型归纳、解题技巧、真题精读</span>
                 </span>
             </a>
-            <a href="english/sentence-analysis.html" class="sub-link-card">
+            <a href="english/sentence-analysis.html" class="link-card">
                 <span class="emoji">🔍</span>
                 <span class="info">
                     <span class="title">长难句分析</span>
                     <span class="desc">句子成分、从句拆解、翻译方法</span>
                 </span>
             </a>
-            <a href="english/writing.html" class="sub-link-card">
+            <a href="english/writing.html" class="link-card">
                 <span class="emoji">✍️</span>
                 <span class="info">
                     <span class="title">写作</span>
                     <span class="desc">应用文、短文、模板句型</span>
                 </span>
             </a>
-            <a href="english/translation.html" class="sub-link-card">
+            <a href="english/translation.html" class="link-card">
                 <span class="emoji">🌏</span>
                 <span class="info">
                     <span class="title">翻译</span>
                     <span class="desc">英译中技巧、策略、真题练习</span>
                 </span>
             </a>
-            <a href="english/cloze.html" class="sub-link-card">
+            <a href="english/cloze.html" class="link-card">
                 <span class="emoji">🔤</span>
                 <span class="info">
                     <span class="title">完形填空</span>
@@ -119,30 +139,30 @@
             </a>
         </div>
 
-        <h3 style="margin-top: 20px; font-size: 0.9rem; color: var(--cet6-color);">英语六级（CET-6）</h3>
-        <div class="sub-link-grid" style="margin-top: 8px;">
-            <a href="english/cet6-listening.html" class="sub-link-card">
+        <div class="subsection-title">🎯 CET-6 英语六级</div>
+        <div class="link-grid">
+            <a href="english/cet6-listening.html" class="link-card">
                 <span class="emoji">🎧</span>
                 <span class="info">
                     <span class="title">六级听力</span>
                     <span class="desc">长对话、篇章、讲座</span>
                 </span>
             </a>
-            <a href="english/cet6-reading.html" class="sub-link-card">
+            <a href="english/cet6-reading.html" class="link-card">
                 <span class="emoji">📚</span>
                 <span class="info">
                     <span class="title">六级阅读</span>
                     <span class="desc">选词填空、长篇、仔细阅读</span>
                 </span>
             </a>
-            <a href="english/cet6-translation.html" class="sub-link-card">
+            <a href="english/cet6-translation.html" class="link-card">
                 <span class="emoji">🌍</span>
                 <span class="info">
                     <span class="title">六级翻译</span>
                     <span class="desc">汉译英、文化社会话题</span>
                 </span>
             </a>
-            <a href="english/cet6-writing.html" class="sub-link-card">
+            <a href="english/cet6-writing.html" class="link-card">
                 <span class="emoji">📝</span>
                 <span class="info">
                     <span class="title">六级写作</span>
@@ -153,17 +173,20 @@
     </div>
 
     <!-- 政治 -->
-    <div class="content-card">
-        <h2 style="border-bottom-color: var(--politics-color);">📜 政治</h2>
-        <div class="sub-link-grid">
-            <a href="politics/marxism.html" class="sub-link-card">
+    <div class="section-block">
+        <div class="section-header">
+            <span class="icon">📜</span>
+            <h2 style="color: var(--politics-color);">政治</h2>
+        </div>
+        <div class="link-grid">
+            <a href="politics/marxism.html" class="link-card">
                 <span class="emoji">📕</span>
                 <span class="info">
                     <span class="title">马克思主义基本原理</span>
                     <span class="desc">唯物论、辩证法、认识论</span>
                 </span>
             </a>
-            <a href="politics/maoism.html" class="sub-link-card">
+            <a href="politics/maoism.html" class="link-card">
                 <span class="emoji">📗</span>
                 <span class="info">
                     <span class="title">毛泽东思想概论</span>
@@ -174,31 +197,37 @@
     </div>
 
     <!-- 备考计划 -->
-    <div class="content-card" style="margin-top: 24px;">
-        <h2 style="border-bottom-color: var(--primary);">📅 备考计划</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 8px;">
-            <div style="background: linear-gradient(135deg, #EEF2FF, #E0E7FF); border-radius: var(--radius-sm); padding: 20px;">
-                <h3 style="font-size: 1rem; margin-bottom: 10px;">基础阶段（3-6月）</h3>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 6px; font-size: 0.9rem;">✓ 数学：系统复习教材，完成课后习题</li>
-                    <li style="margin-bottom: 6px; font-size: 0.9rem;">✓ 英语：背单词，做真题阅读</li>
-                    <li style="margin-bottom: 6px; font-size: 0.9rem;">✓ 408：过一遍教材，建立知识框架</li>
+    <div class="section-block">
+        <div class="section-header">
+            <span class="icon">📅</span>
+            <h2>备考计划</h2>
+        </div>
+        <div class="plan-grid">
+            <div class="plan-card" style="background: linear-gradient(135deg, #EEF2FF, #E8E4FF);">
+                <h3>基础阶段</h3>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px;">3月 – 6月</p>
+                <ul>
+                    <li>数学：系统复习教材，完成课后习题</li>
+                    <li>英语：背单词，做真题阅读</li>
+                    <li>408：过一遍教材，建立知识框架</li>
                 </ul>
             </div>
-            <div style="background: linear-gradient(135deg, #FEF3C7, #FDE68A); border-radius: var(--radius-sm); padding: 20px;">
-                <h3 style="font-size: 1rem; margin-bottom: 10px;">强化阶段（7-9月）</h3>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 6px; font-size: 0.9rem;">✓ 数学：大量刷题，总结题型</li>
-                    <li style="margin-bottom: 6px; font-size: 0.9rem;">✓ 英语：真题二刷，整理写作模板</li>
-                    <li style="margin-bottom: 6px; font-size: 0.9rem;">✓ 408：深入理解，做练习题</li>
+            <div class="plan-card" style="background: linear-gradient(135deg, #FEF3C7, #FDE68A);">
+                <h3>强化阶段</h3>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px;">7月 – 9月</p>
+                <ul>
+                    <li>数学：大量刷题，总结题型</li>
+                    <li>英语：真题二刷，整理写作模板</li>
+                    <li>408：深入理解，做练习题</li>
                 </ul>
             </div>
-            <div style="background: linear-gradient(135deg, #FCE7F3, #FBCFE8); border-radius: var(--radius-sm); padding: 20px;">
-                <h3 style="font-size: 1rem; margin-bottom: 10px;">冲刺阶段（10-12月）</h3>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 6px; font-size: 0.9rem;">✓ 全真模拟，查漏补缺</li>
-                    <li style="margin-bottom: 6px; font-size: 0.9rem;">✓ 背诵政治，掌握时政</li>
-                    <li style="margin-bottom: 6px; font-size: 0.9rem;">✓ 调整心态，保持状态</li>
+            <div class="plan-card" style="background: linear-gradient(135deg, #FCE7F3, #FBCFE8);">
+                <h3>冲刺阶段</h3>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px;">10月 – 12月</p>
+                <ul>
+                    <li>全真模拟，查漏补缺</li>
+                    <li>背诵政治，掌握时政</li>
+                    <li>调整心态，保持状态</li>
                 </ul>
             </div>
         </div>
