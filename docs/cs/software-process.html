@@ -28,6 +28,19 @@
         .toc-list a[href*="concept"] { border-left-color: #3B82F6; }
         .toc-list a[href*="short"] { border-left-color: #14B8A6; }
         .toc-list a[href*="calc"] { border-left-color: #F97316; }
+        .score-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+        .score-header { font-weight: 700; font-size: 1rem; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--border-light); }
+        .score-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+        .score-item { flex: 1; min-width: 180px; padding: 16px; border-radius: var(--radius-sm); text-align: center; }
+        .score-item.score-mc { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
+        .score-item.score-sa { background: linear-gradient(135deg, #ECFDF5, #D1FAE5); }
+        .score-item.score-calc { background: linear-gradient(135deg, #FFF7ED, #FED7AA); }
+        .score-type { font-weight: 700; font-size: 1.05rem; margin-bottom: 6px; }
+        .score-detail { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; }
+        .score-total { display: inline-block; font-weight: 700; font-size: 1.1rem; padding: 2px 14px; border-radius: 20px; background: rgba(255,255,255,0.7); }
+        .score-mc .score-type { color: #1D4ED8; }
+        .score-sa .score-type { color: #047857; }
+        .score-calc .score-type { color: #B45309; }
     </style>
 </head>
 <body>
@@ -49,6 +62,27 @@
 </div>
 
 <div class="container">
+
+    <div class="score-card">
+        <div class="score-header">📊 试卷结构 · 满分 100 分</div>
+        <div class="score-grid">
+            <div class="score-item score-mc">
+                <div class="score-type">基本概念</div>
+                <div class="score-detail">选择 10×2' + 填空 10×2' + 名解 5×3'</div>
+                <div class="score-total">共 45 分</div>
+            </div>
+            <div class="score-item score-sa">
+                <div class="score-type">简答题</div>
+                <div class="score-detail">5 题 × 6'</div>
+                <div class="score-total">共 30 分</div>
+            </div>
+            <div class="score-item score-calc">
+                <div class="score-type">计算题</div>
+                <div class="score-detail">1 题 × 15'</div>
+                <div class="score-total">共 15 分</div>
+            </div>
+        </div>
+    </div>
 
     <div class="toc">
         <div class="toc-header">📌 目录</div>
