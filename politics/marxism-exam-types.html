@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>马原常见题型与解题方法 - 考研笔记</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/main.js" defer></script>
+    <script>MathJax = {tex: {inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"], ["\\[", "\\]"]], packages: {'[+]': ['physics']}}, options: {ignoreHtmlClass: "no-math"}};</script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+    <style>
+        mjx-container {
+            max-width: 100%;
+            overflow-x: auto;
+            white-space: normal;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .table-wrapper table {
+            table-layout: auto;
+            width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .math-block {
+            overflow-x: auto;
+            padding: 0.5em 0;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 12px 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre code {
+            background: transparent;
+            padding: 0;
+        }
+        blockquote {
+            border-left: 4px solid var(--politics);
+            background: var(--politics-bg);
+            padding: 12px 16px;
+            margin: 12px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        blockquote p {
+            margin: 0;
+        }
+        .container {
+            margin-left: 3%;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">跳到内容</a>
+<div id="scroll-progress"></div>
+
+    <nav class="site-nav">
+        <div class="site-nav-inner">
+            <span class="nav-logo">考研笔记</span>
+            <a href="../index.html">首页</a>
+            <a href="../knowledge-base.html">知识库</a>
+            <a href="../exam-types.html" class="active">常考题型及解法</a>
+            <a href="../notes.html">个人笔记</a>
+            <a href="../mistakes.html">错题本</a>
+            <div class="nav-controls">
+                <button class="theme-toggle" aria-label="切换深色/浅色模式"><span class="theme-toggle-icon">🌙</span></button>
+                <button class="hamburger" aria-label="菜单" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+<div class="mobile-nav-overlay"></div>
+<div class="mobile-menu" role="dialog" aria-label="导航菜单">
+    <a href="../index.html">首页</a>
+    <a href="../knowledge-base.html">知识库</a>
+    <a href="../exam-types.html">常考题型及解法</a>
+    <a href="../notes.html">个人笔记</a>
+    <a href="../mistakes.html">错题本</a>
+    <button class="menu-theme-toggle"><span class="menu-theme-icon">🌙</span> 切换深色/浅色模式</button>
+</div>
+
+    <div class="page-header politics">
+        <h1>📕 马原常见题型与解题方法</h1>
+        <div class="breadcrumb"><a href="../index.html">首页</a> / <a href="../exam-types.html">常考题型及解法</a> / 马原</div>
+    </div>
+
+    <div class="container" id="main-content">
+        <div class="toc">
+            <h3>章节导航</h3>
+            <ul>
+<li><a href="#第一部分马原命题规律总览">第一部分 马原命题规律总览</a></li>
+<li><a href="#第二部分选择题常见题型与解法">第二部分 选择题常见题型与解法</a></li>
+<li><a href="#第三部分分析题万能答题模板">第三部分 分析题万能答题模板</a></li>
+<li><a href="#第四部分高频命题角度速查">第四部分 高频命题角度速查</a></li>
+<li><a href="#第五部分考场实战技巧">第五部分 考场实战技巧</a></li>
+            </ul>
+        </div>
+
+        <div class="content-card">
+
+<blockquote>
+<p>来源：基于《2027考研政治 考点总结"漫漫学"考点一本通》知识框架 + 考研命题规律总结</p><p>本部分涵盖马原科目（唯物论、辩证法、认识论、唯物史观、政经、科社）的选择题和分析题常见题型与解题模板</p></blockquote>
+
+<hr>
+
+<h2 id="第一部分马原命题规律总览">第一部分 马原命题规律总览</h2>
+
+<h3 id="一马原在考研政治中的地位">一、马原在考研政治中的地位</h3>
+
+<div class="table-wrapper"><table>
+<tr><th class="table-header">维度</th><th class="table-header">说明</th></tr><tr><td><strong>分值占比</strong></td><td>约24分（选择题约10分 + 分析题约14分，即第34题）</td></tr><tr><td><strong>学科特点</strong></td><td>理论性最强，需要理解原理而非死记硬背</td></tr><tr><td><strong>命题风格</strong></td><td>选择题重在概念辨析和原理理解；分析题材料多为经典名言/寓言故事/热点事件</td></tr><tr><td><strong>高频章节</strong></td><td><strong>唯物辩证法（第二章第二节）</strong> 和 <strong>认识论（第二章）</strong> 是分析题绝对主力</td></tr></table></div>
+
+<h3 id="二分析题命题规律">二、分析题命题规律</h3>
+
+<div class="table-wrapper"><table>
+<tr><th class="table-header">规律</th><th class="table-header">说明</th></tr><tr><td><strong>侧重哲学部分</strong></td><td>第34题分析题95%以上考哲学（唯物论+辩证法+认识论+唯物史观），几乎不单独考政经和科社</td></tr><tr><td><strong>双重角度设问</strong></td><td>通常两问：一问考原理内容，一问考方法论意义/现实启示</td></tr><tr><td><strong>材料引导原理</strong></td><td>题干材料暗示考点方向——"根据材料中XX，运用XX原理分析"</td></tr><tr><td><strong>原理不限一个</strong></td><td>近年来常有"从唯物辩证法角度""从认识论角度"等宽泛设问，需要多原理综合作答</td></tr></table></div>
+
+<blockquote>
+<p><strong>⭐ 核心策略</strong>：马原分析题的本质是<strong>材料→原理→分析</strong>三步走。看到材料中的关键词，立刻定位到对应原理，然后用"原理内容+结合材料分析+方法论意义"框架作答。</p></blockquote>
+
+<hr>
+
+<h2 id="第二部分选择题常见题型与解法">第二部分 选择题常见题型与解法</h2>
+
+<h3 id="题型一概念辨析型选择题">题型一：概念辨析型选择题</h3>
+
+<p><strong>命题特点</strong>：考查两个或多个易混概念的区别（如"辩证否定观"vs"形而上学否定观"、"量变"vs"质变"等）。</p>
+
+<p><strong>解题钥匙</strong>：</p>
+
+<div class="table-wrapper"><table>
+<tr><th class="table-header">步骤</th><th class="table-header">操作</th></tr><tr><td>①</td><td><strong>找出核心概念</strong>：判断题干在考哪个或哪几个概念</td></tr><tr><td>②</td><td><strong>还原定义</strong>：准确回忆每个概念的核心定义（不能模棱两可）</td></tr><tr><td>③</td><td><strong>对比排除</strong>：将选项与定义逐字对照，排除偷换概念、扩大/缩小范围、张冠李戴的选项</td></tr><tr><td>④</td><td><strong>特别注意</strong>：绝对化表述（"唯一""只能""一切""任何时候"）往往是错误选项</td></tr></table></div>
+
+<p><strong>常见易混概念对照表</strong>：</p>
+
+<div class="table-wrapper"><table>
+<tr><th class="table-header">对比组</th><th class="table-header">区别要点</th></tr><tr><td><strong>唯物主义 vs 唯心主义</strong></td><td>对"物质与意识何者为本原"的回答不同</td></tr><tr><td><strong>辩证法 vs 形而上学</strong></td><td>是否承认对立统一（是否承认矛盾是事物发展的根本动力）</td></tr><tr><td><strong>量变 vs 质变</strong></td><td>量变是数量的增减和场所的变更（不显著），质变是事物根本性质的变化（显著）</td></tr><tr><td><strong>辩证否定观 vs 形而上学否定观</strong></td><td>辩证：扬弃（既克服又保留）；形而上学：要么肯定一切要么否定一切</td></tr><tr><td><strong>绝对真理 vs 相对真理</strong></td><td>同一真理的两重属性，不是两个不同的真理</td></tr><tr><td><strong>使用价值 vs 价值</strong></td><td>使用价值是商品的自然属性（有用性），价值是商品的社会属性（抽象劳动凝结）</td></tr><tr><td><strong>不变资本 vs 可变资本</strong></td><td>购买生产资料的资本vs购买劳动力的资本；能否带来剩余价值</td></tr><tr><td><strong>绝对剩余价值 vs 相对剩余价值</strong></td><td>延长劳动时间 vs 缩短必要劳动时间（提高劳动生产率）</td></tr></table></div>
+
+<hr>
+
+<h3 id="题型二名言理解型选择题">题型二：名言理解型选择题</h3>
+
+<p><strong>命题特点</strong>：题干引用一句经典名言、诗句、成语或寓言，要求选出体现的哲学原理。</p>
+
+<p><strong>解题钥匙</strong>：</p>
+
+<div class="table-wrapper"><table>
+<tr><th class="table-header">步骤</th><th class="table-header">操作</th></tr><tr><td>①</td><td><strong>翻译名言</strong>：用白话理解这句话在说什么</td></tr><tr><td>②</td><td><strong>提炼关键词</strong>：如"蝉噪林逾静"→ 噪与静 → 矛盾的对立统一</td></tr><tr><td>③</td><td><strong>匹配原理</strong>：将提炼出的哲学含义与所学原理对接</td></tr><tr><td>④</td><td><strong>排除无关项</strong>：原理本身正确但与名言无关的，坚决排除</td></tr></table></div>
+
+<p><strong>高频名言与原理对应表</strong>：</p>
+
+<div class="table-wrapper"><table>
+<tr><th class="table-header">名言/成语</th><th class="table-header">对应原理</th></tr><tr><td>"沉舟侧畔千帆过，病树前头万木春"</td><td>新事物必然战胜旧事物（发展的实质）</td></tr><tr><td>"蝉噪林逾静，鸟鸣山更幽"</td><td>矛盾双方的对立统一（同一性和斗争性）</td></tr><tr><td>"量体裁衣""对症下药"</td><td>矛盾的特殊性——具体问题具体分析</td></tr><tr><td>"一叶落而知天下秋"</td><td>共性与个性（一般存在于个别之中）</td></tr><tr><td>"不积跬步，无以至千里"</td><td>量变引起质变</td></tr><tr><td>"纸上得来终觉浅，绝知此事要躬行"</td><td>实践是认识的来源</td></tr><tr><td>"真理是时间的女儿"</td><td>实践是检验真理的唯一标准</td></tr><tr><td>"一千个读者有一千个哈姆雷特"</td><td>认识的主体差异性（价值评价的主体性）</td></tr><tr><td>"白马非马"</td><td>割裂了共性与个性的辩证关系（诡辩论）</td></tr><tr><td>"画饼充饥"</td><td>夸大了意识的能动作用（唯心主义）</td></tr></table></div>
+
+<hr>
+
+<h3 id="题型三计算型选择题政经">题型三：计算型选择题（政经）</h3>
+
+<p><strong>命题特点</strong>：考剩余价值率、利润率、资本有机构成等计算。</p>
+
+<p><strong>核心公式卡片</strong>：</p>
+
+<pre><code>剩余价值率 m' = m（剩余价值）/ v（可变资本）= 剩余劳动时间 / 必要劳动时间
+利润率 p' = m / (c + v)（全部预付资本）
+资本有机构成 = c : v
+年剩余价值率 = 年剩余价值总量 / 预付可变资本
+社会总产品价值 = c + v + m</code></pre>
+
+<blockquote>
+<p><strong>⭐ 解题顺序</strong>：①判题→②找已知量→③套公式→④代入计算。注意利润率的分母是全部资本（c+v），剩余价值率的分母只是可变资本（v），这是最容易混淆的地方。</p></blockquote>
+
+<hr>
+
+<h2 id="第三部分分析题万能答题模板">第三部分 分析题万能答题模板</h2>
+
+<h3 id="核心答题框架三步法">核心答题框架（三步法）</h3>
+
+<pre><code>【第一步：点明原理】
+"上述材料体现了XX哲学原理：……（写出原理的准确表述）"</code></pre>
+
+<p>【第二步：结合材料分析】</p>
+<p>"材料中'XXX'（引用材料关键词句），说明了/反映了/体现了……（用原理语言阐释材料现象）"</p>
+
+<p>【第三步：方法论意义】</p>
+<p>"这一原理要求我们……（写出方法论）""这一原理对于……具有重要启示/指导意义"</p>
+
+<hr>
+
+<h3 id="模板一唯物论辨析题">模板一：唯物论辨析题</h3>
+
+<p><strong>适用场景</strong>：涉及物质与意识关系、主观能动性与客观规律性、意识能动作用、人工智能等</p>
+
+<div class="table-wrapper"><table>
+<tr><th class="table-header">设问关键词</th><th class="table-header">对应的原理选择</th></tr><tr><td>"物质决定意识" / "世界的本原"</td><td>世界的物质统一性原理</td></tr><tr><td>"发挥主观能动性" / "精神力量"</td><td>意识的能动作用 + 主观能动性与客观规律性的辩证统一</td></tr><tr><td>"因地制宜""从实际出发"</td><td>物质决定意识，一切从实际出发</td></tr><tr><td>"人工智能" / "AI能否超越人类"</td><td>意识与人脑的关系、人类意识与人工智能的本质区别</td></tr></table></div>
+
+<p><strong>标准答题框架</strong>：</p>
+
+<blockquote>
+<p><strong>（一）原理层面</strong></p><ul><li>如果考"物质与意识"：物质决定意识，意识依赖于物质并反作用于物质。世界的统一性在于它的物质性。</li><li>如果考"主观能动性"：①尊重客观规律是正确发挥主观能动性的前提；②只有充分发挥主观能动性，才能正确认识和利用客观规律。</li></ul><br><p><strong>（二）分析层面</strong></p><p>材料中……体现了……（用原理阐释材料）</p><br><p><strong>（三）方法论</strong></p><p>这要求我们在实践中既要尊重客观规律，从实际出发；又要充分发挥主观能动性，勇于探索、敢于创新。</p></blockquote>
+
+<hr>
+
+<h3 id="模板二辩证法应用题最高频">模板二：辩证法应用题 — ⭐ 最高频</h3>
+
+<p><strong>适用场景</strong>：涉及矛盾、变化、发展、联系、辩证看待问题等</p>
+
+<div class="table-wrapper"><table>
+<tr><th class="table-header">设问关键词</th><th class="table-header">首选的原理组合</th></tr><tr><td>"矛盾""对立统一""两面性"</td><td><strong>矛盾同一性与斗争性</strong> → 矛盾普遍性与特殊性</td></tr><tr><td>"抓重点""关键""牛鼻子"</td><td><strong>矛盾不平衡性</strong>：主要矛盾vs次要矛盾、矛盾主要方面vs次要方面</td></tr><tr><td>"渐进""积累""质变"</td><td><strong>量变质变规律</strong></td></tr><tr><td>"辩证看待""扬弃""取其精华"</td><td><strong>辩证否定观</strong>（否定之否定规律）</td></tr><tr><td>"普遍联系""全局""整体"</td><td><strong>联系观</strong> + 系统思维能力</td></tr><tr><td>"发展变化""新旧交替"</td><td><strong>发展的实质</strong>（新事物产生、旧事物灭亡）</td></tr><tr><td>"内容与形式""本质与现象"</td><td><strong>五对范畴</strong>中的对应范畴</td></tr></table></div>
+
+<p><strong>"矛盾分析法"万能模板（最高频考点）</strong>：</p>
+
+<blockquote>
+<p><strong>（一）矛盾的同一性和斗争性原理</strong></p><p>矛盾即对立统一。同一性是指矛盾双方相互依存、相互贯通的性质和趋势；斗争性是指矛盾着的对立面之间相互排斥、相互分离的性质和趋势。同一性与斗争性相互联结、相互制约，共同推动事物发展。</p><br><p><strong>（二）矛盾普遍性与特殊性原理</strong></p><p>矛盾的普遍性即矛盾的共性（无处不在、无时不有），矛盾的特殊性即矛盾的个性（不同事物的矛盾各有特点）。矛盾的普遍性与特殊性是共性与个性的关系。共性寓于个性之中，并通过个性表现出来。</p><br><p><strong>（三）矛盾的不平衡性原理</strong></p><p>在复杂的矛盾体系中，有主要矛盾和次要矛盾之分；在每一矛盾中，有矛盾的主要方面和次要方面之分。事物的性质主要是由主要矛盾的主要方面决定的。</p><br><p><strong>（四）分析</strong></p><p>材料中……既存在……又存在……，二者构成了……的矛盾关系。其中……是主要矛盾（或矛盾的主要方面），决定/影响着……的发展方向。</p><br><p><strong>（五）方法论</strong></p><p>要求我们坚持"两点论"与"重点论"的统一——既要全面看待矛盾双方，又要善于抓住主要矛盾和矛盾的主要方面。</p></blockquote>
+
+<p><strong>"量变质变"答题模板</strong>：</p>
+
+<blockquote>
+<p><strong>（一）原理</strong>：量变是质变的必要准备，质变是量变的必然结果。量变和质变相互渗透。</p><p><strong>（二）分析</strong>：材料中……从……逐步发展为……，体现了量变积累最终引发质变的过程。</p><p><strong>（三）方法论</strong>：要求我们重视量的积累，为质变创造条件；同时也要抓住时机促成质变，实现飞跃。</p></blockquote>
+
+<p><strong>"辩证否定观"答题模板</strong>：</p>
+
+<blockquote>
+<p><strong>（一）原理</strong>：辩证否定的实质是"扬弃"，即既克服又保留。辩证否定是事物发展的环节（推动新事物产生），也是新旧事物联系的环节。</p><p><strong>（二）分析</strong>：材料中对……既……（保留合理成分），又……（克服不足之处），体现了辩证否定。</p><p><strong>（三）方法论</strong>：要求我们对一切事物采取科学分析的态度，反对肯定一切或否定一切的形而上学错误。</p></blockquote>
+
+<hr>
+
+<h3 id="模板三认识论分析题第二高频">模板三：认识论分析题 — ⭐ 第二高频</h3>
+
+<p><strong>适用场景</strong>：涉及实践、认识、真理、谬误、创新、科学发现等</p>
+
+<div class="table-wrapper"><table>
+<tr><th class="table-header">设问关键词</th><th class="table-header">首选的原理组合</th></tr><tr><td>"认识来源""实践出真知""调查研究"</td><td><strong>实践决定认识</strong>（实践是认识的来源、动力、目的、检验标准）</td></tr><tr><td>"真理""谬误""正确认识"</td><td><strong>真理的客观性、绝对性和相对性</strong></td></tr><tr><td>"成功与失败""错误的价值"</td><td><strong>真理与谬误的辩证关系</strong></td></tr><tr><td>"从感性到理性""透过现象看本质"</td><td><strong>认识过程的两次飞跃</strong>（感性→理性、理性→实践）</td></tr><tr><td>"反复认识""不断深化"</td><td><strong>认识的反复性和无限性</strong></td></tr><tr><td>"价值评价""不同人不同看法"</td><td><strong>价值评价的主体性特点</strong></td></tr></table></div>
+
+<p><strong>"实践与认识"答题模板</strong>：</p>
+
+<blockquote>
+<p><strong>（一）原理</strong>：实践是认识的基础，对认识具有决定作用。具体表现为：①实践是认识的来源；②实践是认识发展的动力；③实践是认识的目的；④实践是检验认识真理性的唯一标准。同时，认识对实践具有反作用，正确的认识指导实践取得成功，错误的认识导致实践失败。</p><br><p><strong>（二）分析</strong>：材料中……（人的认识/理论/政策/方案）来源于……（实践活动/经验积累/调查研究），又在……（新的实践）中得到检验和发展（或修正）。这体现了实践与认识的辩证运动。</p><br><p><strong>（三）方法论</strong>：要求我们坚持实践第一的观点，一切从实际出发，在实践中检验真理和发展真理。同时要重视科学理论对实践的指导作用。</p></blockquote>
+
+<p><strong>"真理与谬误"答题模板</strong>：</p>
+
+<blockquote>
+<p><strong>（一）原理</strong>：真理和谬误在一定条件下相互转化。真理是具体的、有条件的——超出一定范围，真理就会变成谬误。谬误在一定条件下也可能转化为真理。真理和谬误相比较而存在、相斗争而发展，这是真理发展的规律。</p><br><p><strong>（二）分析</strong>：材料中……在……条件下是正确/错误的，但在条件变化后……，体现了真理与谬误的辩证转化关系。</p><br><p><strong>（三）方法论</strong>：要求我们①坚持真理、修正错误；②善于从错误中吸取教训，化失败为成功；③认识到错误常常是正确的先导。</p></blockquote>
+
+<p><strong>"认识过程两次飞跃"答题模板</strong>：</p>
+
+<blockquote>
+<p><strong>（一）原理</strong>：从实践到认识是认识的第一次飞跃（感性认识→理性认识）；从认识到实践是第二次飞跃（理性认识回到实践中指导实践并接受检验），这是意义更为重大的飞跃。</p><br><p><strong>（二）分析</strong>：材料中先通过……（调查/观察/实践）获得……的感性认识，然后经过……（分析/研究/思考）上升为理性认识，最后通过……（方案/政策/行动）回到实践中。体现了认识的两次飞跃。</p><br><p><strong>（三）方法论</strong>：要求我们勇于实践、深入调查，获取丰富的感性材料；同时运用科学思维方法加工制作，实现从感性认识到理性认识的飞跃。</p></blockquote>
+
+<hr>
+
+<h3 id="模板四唯物史观分析题">模板四：唯物史观分析题</h3>
+
+<p><strong>适用场景</strong>：涉及社会存在与社会意识、人民群众与历史人物、科技与社会发展等</p>
+
+<div class="table-wrapper"><table>
+<tr><th class="table-header">设问关键词</th><th class="table-header">首选原理</th></tr><tr><td>"社会意识""文化""意识形态"</td><td>社会存在决定社会意识</td></tr><tr><td>"人民群众""英雄人物""群众路线"</td><td>人民群众是历史的创造者 + 历史人物在历史发展中的作用</td></tr><tr><td>"科技""互联网""人工智能的影响"</td><td>科学技术在社会发展中的作用（双重性）</td></tr><tr><td>"改革""革命"</td><td>社会基本矛盾运动（生产力与生产关系、经济基础与上层建筑）</td></tr></table></div>
+
+<hr>
+
+<h2 id="第四部分高频命题角度速查">第四部分 高频命题角度速查</h2>
+
+<div class="table-wrapper"><table>
+<tr><th class="table-header">命题角度</th><th class="table-header">涉及章节</th><th class="table-header">核心原理</th><th class="table-header">题类</th></tr><tr><td>"新发展理念" / "改革"</td><td>唯物辩证法</td><td>矛盾分析法 + 联系发展观</td><td>分析题</td></tr><tr><td>"科技创新" / "AI"</td><td>认识论 + 唯物史观</td><td>实践与认识 + 科技双重性</td><td>分析题</td></tr><tr><td>名言/诗句/成语</td><td>唯物论/辩证法</td><td>对应原理辨析</td><td>选择题</td></tr><tr><td>"调查研究" / "从群众中来"</td><td>认识论</td><td>实践与认识 + 群众路线</td><td>分析题</td></tr><tr><td>人与自然 / "生态"</td><td>唯物论</td><td>人与自然关系 + 主观能动性</td><td>分析题</td></tr><tr><td>"全过程人民民主"</td><td>唯物史观</td><td>上层建筑（结合本体论也可）</td><td>分析题</td></tr><tr><td>剩余价值率计算</td><td>政经</td><td>m'=m/v</td><td>选择题</td></tr><tr><td>资本分类 / 资本构成</td><td>政经</td><td>不变/可变资本 + 资本有机构成</td><td>选择题</td></tr></table></div>
+
+<hr>
+
+<h2 id="第五部分考场实战技巧">第五部分 考场实战技巧</h2>
+
+<h3 id="一时间分配">一、时间分配</h3>
+
+<div class="table-wrapper"><table>
+<tr><th class="table-header">阶段</th><th class="table-header">用时</th><th class="table-header">操作</th></tr><tr><td>审题</td><td>1-2分钟</td><td>圈出关键词，确定原理方向</td></tr><tr><td>列提纲</td><td>1分钟</td><td>写出要用的原理名称和要点</td></tr><tr><td>作答</td><td>10-12分钟</td><td>按三步法逐段书写</td></tr><tr><td>检查</td><td>1分钟</td><td>补充遗漏、修改表述</td></tr></table></div>
+
+<h3 id="二选择题速解口诀">二、选择题速解口诀</h3>
+
+<pre><code>概念辨析——还原定义，逐字对照
+名言成语——翻译理解，匹配原理
+计算题——判题找量，套用公式
+排错法——绝对化表述高频错
+排异法——正确但与题无关</code></pre>
+
+<h3 id="三分析题失分雷区">三、分析题失分雷区</h3>
+
+<div class="table-wrapper"><table>
+<tr><th class="table-header">雷区</th><th class="table-header">表现</th><th class="table-header">避免方法</th></tr><tr><td><strong>原理堆砌</strong></td><td>把可能的原理全写上去</td><td>精确定位，一题2-3个原理即可</td></tr><tr><td><strong>脱离材料</strong></td><td>只写原理不结合材料</td><td>必须引用材料中的关键词句</td></tr><tr><td><strong>术语不准</strong></td><td>"矛盾对立"写成"矛盾对抗"</td><td>平时熟记准确表述</td></tr><tr><td><strong>方法论缺失</strong></td><td>只写原理和分析，没有方法论</td><td>每个原理都要带方法论</td></tr><tr><td><strong>条理不清</strong></td><td>没有分点，一大段文字</td><td>按①②③分点，原理→分析→方法论</td></tr></table></div>
+
+<hr>
+
+<blockquote>
+<p><strong>配套复习建议</strong>：</p><ul><li>选择题：配套《全真轮训"漫漫"学》1500题册练习，重点关注概念辨析和名言题型</li><li>分析题：熟记本文中的答题模板，每周练习1-2道分析题，形成答题肌肉记忆</li><li>参考知识点查询：详见「01-马克思主义基本原理.md」知识库文档</li></ul></blockquote>
+
+        </div>
+    </div>
+
+    <div class="site-footer" style="display:none">
+        <p>&copy; 2026 cx861 | 考研笔记 | <a href="https://github.com/cx861">GitHub</a></p>
+    </div>
+
+    <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <script>
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+        backTop.classList.toggle('visible', window.scrollY > 300);
+    });
+    </script>
+</body>
+</html>

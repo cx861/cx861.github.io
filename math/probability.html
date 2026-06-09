@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>概率论与数理统计 - 考研笔记</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/main.js" defer></script>
+    <script>MathJax = {tex: {inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"], ["\\[", "\\]"]], packages: {'[+]': ['physics']}}, options: {ignoreHtmlClass: "no-math"}};</script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">跳到内容</a>
+<div id="scroll-progress"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="site-nav">
+        <div class="site-nav-inner">
+            <span class="nav-logo">考研笔记</span>
+            <a href="../index.html">首页</a>
+            <a href="../knowledge-base.html" class="active">知识库</a>
+            <a href="../notes.html">个人笔记</a>
+            <a href="../mistakes.html">错题本</a>
+            <a href="../exam-types.html">常考题型及解法</a>
+            <div class="nav-controls">
+                <button class="theme-toggle" aria-label="切换深色/浅色模式"><span class="theme-toggle-icon">🌙</span></button>
+                <button class="hamburger" aria-label="菜单" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+<!-- 移动端菜单 -->
+<div class="mobile-nav-overlay"></div>
+<div class="mobile-menu" role="dialog" aria-label="导航菜单">
+    <a href="../index.html">首页</a>
+    <a href="../knowledge-base.html">知识库</a>
+    <a href="../notes.html">个人笔记</a>
+    <a href="../mistakes.html">错题本</a>
+    <a href="../exam-types.html">常考题型及解法</a>
+    <button class="menu-theme-toggle"><span class="menu-theme-icon">🌙</span> 切换深色/浅色模式</button>
+</div>
+
+    <!-- Page Header -->
+    <div class="page-header math">
+        <h1>🧮 概率论与数理统计</h1>
+        <div class="breadcrumb"><a href="../index.html">首页</a> / <a href="../knowledge-base.html">知识库</a> / 概率论与数理统计</div>
+    </div>
+
+    <div class="container" id="main-content">
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>目录</h3>
+            <ul>
+                <li><a href="#ch1">第1章 随机事件与概率</a></li>
+                <li><a href="#ch2">第2章 随机变量及其分布</a></li>
+                <li><a href="#ch3">第3章 多维随机变量及其分布</a></li>
+                <li><a href="#ch4">第4章 随机变量的数字特征</a></li>
+                <li><a href="#ch5">第5章 大数定律与中心极限定理</a></li>
+                <li><a href="#ch6">第6章 数理统计的基本概念</a></li>
+                <li><a href="#ch7">第7章 参数估计</a></li>
+                <li><a href="#ch8">第8章 假设检验</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-card">
+            <blockquote>基于王式安《复习全书基础篇·概率论学习册》知识体系整理<br>适用：数学一考生 | 数一考查范围：全8章</blockquote>
+            <hr>
+            <h2 id="ch1">第1章 随机事件与概率</h2>
+            <h3>1.1 随机事件</h3>
+            <p><strong>随机试验 $E$ 的特征</strong></p>
+            <ul>
+            <li>可以在相同条件下重复进行</li>
+            <li>试验结果不止一个，且能事先明确所有可能结果</li>
+            <li>试验前不能确定会出现哪个结果</li>
+            </ul>
+            <p><strong>样本空间 $\Omega$</strong>：随机试验所有可能结果组成的集合</p>
+            <p><strong>随机事件</strong>：样本空间的子集，简称事件</p>
+            <p><strong>事件的关系与运算</strong></p>
+            <table>
+            <tr><th>关系/运算</th><th>符号</th><th>含义</th></tr>
+            <tr><td>包含</td><td>$A \subset B$</td><td>$A$ 发生则 $B$ 一定发生</td></tr>
+            <tr><td>相等</td><td>$A = B$</td><td>$A \subset B$ 且 $B \subset A$</td></tr>
+            <tr><td>和（并）</td><td>$A \cup B$</td><td>$A, B$ 至少一个发生</td></tr>
+            <tr><td>积（交）</td><td>$A \cap B$ 或 $AB$</td><td>$A, B$ 同时发生</td></tr>
+            <tr><td>差</td><td>$A - B$</td><td>$A$ 发生且 $B$ 不发生</td></tr>
+            <tr><td>互斥（不相容）</td><td>$AB = \varnothing$</td><td>$A, B$ 不能同时发生</td></tr>
+            <tr><td>对立（逆）</td><td>$A \cup B = \Omega, AB = \varnothing$</td><td>$B = \overline{A}$</td></tr>
+            <tr><td>完备事件组</td><td>$A_1 \cup \cdots \cup A_n = \Omega$，且 $A_iA_j = \varnothing(i\neq j)$</td><td>两两互斥且覆盖全空间</td></tr>
+            </table>
+            <p><strong>运算律</strong></p>
+            <ul>
+            <li>交换律：$A \cup B = B \cup A,\; AB = BA$</li>
+            <li>结合律：$(A \cup B) \cup C = A \cup (B \cup C),\; (AB)C = A(BC)$</li>
+            <li>分配律：$(A \cup B)C = AC \cup BC$</li>
+            <li>德·摩根律：$\overline{A \cup B} = \overline{A}\,\overline{B},\;\overline{AB} = \overline{A} \cup \overline{B}$</li>
+            </ul>
+            <hr>
+            <h3>1.2 概率的定义与性质</h3>
+            <p><strong>概率的公理化定义</strong>（柯尔莫哥洛夫）</p>
+            <p>设 $\Omega$ 为样本空间，$\mathcal{F}$ 为事件域，$P(\cdot)$ 为定义在 $\mathcal{F}$ 上的实值函数，若满足：</p>
+            <ol>
+            <li><strong>非负性</strong>：$P(A) \geq 0,\;\forall A \in \mathcal{F}$</li>
+            <li><strong>规范性</strong>：$P(\Omega) = 1$</li>
+            <li><strong>可列可加性</strong>：若 $A_1, A_2, \ldots$ 两两互斥，则 $P\left(\bigcup_{i=1}^{\infty} A_i\right) = \sum_{i=1}^{\infty} P(A_i)$</li>
+            </ol>
+            <p>则称 $P(A)$ 为事件 $A$ 的概率。</p>
+            <p><strong>概率的基本性质</strong></p>
+            <ol>
+            <li>$P(\varnothing) = 0$</li>
+            <li><strong>有限可加性</strong>：若 $A_1,\ldots,A_n$ 两两互斥，则 $P\left(\bigcup_{i=1}^n A_i\right) = \sum_{i=1}^n P(A_i)$</li>
+            <li><strong>单调性与减法公式</strong>：若 $A \subset B$，则 $P(B-A) = P(B) - P(A)$ 且 $P(A) \leq P(B)$</li>
+            <li><strong>有界性</strong>：$0 \leq P(A) \leq 1$</li>
+            <li><strong>加法公式</strong>：$P(A \cup B) = P(A) + P(B) - P(AB)$</li>
+            </ol>
+            <ul>
+            <li>推广：$P(A \cup B \cup C) = P(A)+P(B)+P(C)-P(AB)-P(AC)-P(BC)+P(ABC)$</li>
+            </ul>
+            <ol>
+            <li><strong>求逆公式</strong>：$P(\overline{A}) = 1 - P(A)$</li>
+            </ol>
+            <hr>
+            <h3>1.3 古典概型与几何概型</h3>
+            <p><strong>古典概型</strong>（等可能有限样本空间）</p>
+            <div class="math-block">$$P(A) = \frac{|A|}{|\Omega|} = \frac{\text{事件}A\text{包含的样本点数}}{\text{样本点总数}}$$</div>
+            <p>适用条件：① $\Omega$ 有限；② 每个样本点等可能</p>
+            <p><strong>几何概型</strong>（等可能无限样本空间）</p>
+            <div class="math-block">$$P(A) = \frac{A\text{的几何度量（长度/面积/体积）}}{\Omega\text{的几何度量}}$$</div>
+            <hr>
+            <h3>1.4 条件概率</h3>
+            <p><strong>定义</strong>：设 $P(B) > 0$，则在事件 $B$ 发生的条件下事件 $A$ 发生的<strong>条件概率</strong>为</p>
+            <div class="math-block">$$P(A|B) = \frac{P(AB)}{P(B)}$$</div>
+            <p><strong>乘法公式</strong></p>
+            <ul>
+            <li>$P(AB) = P(A)P(B|A),\;P(A)>0$</li>
+            <li>$P(AB) = P(B)P(A|B),\;P(B)>0$</li>
+            <li>推广：$P(ABC) = P(A)P(B|A)P(C|AB)$</li>
+            </ul>
+            <p><strong>全概率公式</strong></p>
+            <p>设 $B_1,B_2,\ldots,B_n$ 是 $\Omega$ 的一个完备事件组，且 $P(B_i) > 0$，则对任意事件 $A$：</p>
+            <div class="math-block">$$P(A) = \sum_{i=1}^{n} P(B_i)P(A|B_i)$$</div>
+            <p><strong>贝叶斯公式（逆概率公式）</strong></p>
+            <p>设 $B_1,\ldots,B_n$ 是 $\Omega$ 的一个完备事件组，$P(A)>0$，则</p>
+            <div class="math-block">$$P(B_j|A) = \frac{P(B_j)P(A|B_j)}{\sum_{i=1}^{n} P(B_i)P(A|B_i)}$$</div>
+            <hr>
+            <h3>1.5 事件的独立性</h3>
+            <p><strong>两个事件的独立性</strong></p>
+            <p>定义：若 $P(AB) = P(A)P(B)$，则称 $A, B$ 相互独立</p>
+            <p>等价条件（$P(A)>0,\;P(B)>0$ 时）：</p>
+            <ul>
+            <li>$P(B|A) = P(B)$（或 $P(A|B)=P(A)$）</li>
+            </ul>
+            <p><strong>三个事件的独立性</strong></p>
+            <p>$A,B,C$ 相互独立 $\iff$</p>
+            <div class="math-block">$$\begin{cases}
+            P(AB) = P(A)P(B)\\
+            P(AC) = P(A)P(C)\\
+            P(BC) = P(B)P(C)\\
+            P(ABC) = P(A)P(B)P(C)
+            \end{cases}$$</div>
+            <p><strong>$n$ 个事件的相互独立性</strong></p>
+            <p>任意 $k$ 个事件（$2 \leq k \leq n$）的交的概率等于各事件概率的乘积</p>
+            <p><strong>重要结论</strong></p>
+            <ul>
+            <li>$A$ 与 $B$ 独立 $\iff$ $A$ 与 $\overline{B}$ 独立 $\iff$ $\overline{A}$ 与 $B$ 独立 $\iff$ $\overline{A}$ 与 $\overline{B}$ 独立</li>
+            <li>若 $A_1,\ldots,A_n$ 相互独立，则 $P\left(\bigcup_{i=1}^n A_i\right) = 1 - \prod_{i=1}^n [1-P(A_i)]$</li>
+            </ul>
+            <hr>
+            <h3>1.6 伯努利试验</h3>
+            <p><strong>伯努利试验</strong>：只有两种可能结果（$A$ 发生 / $A$ 不发生）的试验</p>
+            <p><strong>$n$ 重伯努利试验</strong>：独立重复进行 $n$ 次伯努利试验</p>
+            <p><strong>二项分布的概率</strong>：$P(\text{恰好}k\text{次}A) = \mathrm{C}_n^k p^k (1-p)^{n-k}$，其中 $p = P(A)$</p>
+            <hr>
+            <h2 id="ch2">第2章 随机变量及其分布</h2>
+            <h3>2.1 随机变量</h3>
+            <p><strong>定义</strong>：设 $\Omega$ 为样本空间，若对任意 $\omega \in \Omega$ 都有唯一的实数 $X(\omega)$ 与之对应，则称 $X = X(\omega)$ 为随机变量。</p>
+            <p><strong>随机变量的分布函数</strong></p>
+            <div class="math-block">$$F(x) = P(X \leq x),\quad x \in \mathbb{R}$$</div>
+            <p><strong>分布函数的性质</strong></p>
+            <ol>
+            <li><strong>单调非减</strong>：若 $x_1 < x_2$，则 $F(x_1) \leq F(x_2)$</li>
+            <li><strong>右连续性</strong>：$F(x^+) = F(x)$</li>
+            <li><strong>规范性</strong>：$F(-\infty) = 0,\;F(+\infty) = 1$</li>
+            </ol>
+            <hr>
+            <h3>2.2 离散型随机变量</h3>
+            <p><strong>定义</strong>：若随机变量 $X$ 的可能取值为有限个或可列个，则称 $X$ 为离散型随机变量。</p>
+            <p><strong>分布律（概率分布）</strong></p>
+            <div class="math-block">$$P(X = x_k) = p_k,\quad k=1,2,\ldots$$</div>
+            <p>满足：$p_k \geq 0,\;\sum_k p_k = 1$</p>
+            <p><strong>常见离散型分布</strong></p>
+            <table>
+            <tr><th>分布名称</th><th>记号</th><th>分布律</th><th>期望</th><th>方差</th></tr>
+            <tr><td>0-1分布</td><td>$X \sim B(1,p)$</td><td>$P(X=1)=p,\;P(X=0)=1-p$</td><td>$p$</td><td>$p(1-p)$</td></tr>
+            <tr><td>二项分布</td><td>$X \sim B(n,p)$</td><td>$P(X=k)=\mathrm{C}_n^k p^k(1-p)^{n-k}$</td><td>$np$</td><td>$np(1-p)$</td></tr>
+            <tr><td>泊松分布</td><td>$X \sim P(\lambda)$</td><td>$P(X=k)=\dfrac{\lambda^k}{k!}e^{-\lambda}$</td><td>$\lambda$</td><td>$\lambda$</td></tr>
+            <tr><td>几何分布</td><td>$X \sim Geo(p)$</td><td>$P(X=k)=(1-p)^{k-1}p$</td><td>$\dfrac{1}{p}$</td><td>$\dfrac{1-p}{p^2}$</td></tr>
+            <tr><td>超几何分布</td><td>$X \sim H(N,M,n)$</td><td>$P(X=k)=\dfrac{\mathrm{C}_M^k \mathrm{C}_{N-M}^{n-k}}{\mathrm{C}_N^n}$</td><td>$n\dfrac{M}{N}$</td><td>$n\dfrac{M}{N}\left(1-\dfrac{M}{N}\right)\dfrac{N-n}{N-1}$</td></tr>
+            </table>
+            <p><strong>泊松定理</strong>（二项分布近似）：$n \geq 20,\;p \leq 0.05$ 时，$B(n,p) \approx P(np)$</p>
+            <hr>
+            <h3>2.3 连续型随机变量</h3>
+            <p><strong>定义</strong>：若存在非负可积函数 $f(x)$，使得对任意 $x$ 有 $F(x) = \int_{-\infty}^{x} f(t)dt$，则称 $X$ 为连续型随机变量，$f(x)$ 为<strong>概率密度函数</strong>。</p>
+            <p><strong>概率密度的性质</strong></p>
+            <ol>
+            <li>$f(x) \geq 0$</li>
+            <li>$\int_{-\infty}^{+\infty} f(x)dx = 1$</li>
+            <li>$P(a < X \leq b) = \int_a^b f(x)dx$</li>
+            <li>在 $f(x)$ 的连续点处：$f(x) = F'(x)$</li>
+            </ol>
+            <p><strong>常见连续型分布</strong></p>
+            <table>
+            <tr><th>分布名称</th><th>记号</th><th>概率密度 $f(x)$</th><th>期望</th><th>方差</th></tr>
+            <tr><td>均匀分布</td><td>$X \sim U(a,b)$</td><td>$f(x)=\dfrac{1}{b-a},\;a<x<b$</td><td>$\dfrac{a+b}{2}$</td><td>$\dfrac{(b-a)^2}{12}$</td></tr>
+            <tr><td>指数分布</td><td>$X \sim E(\lambda)$</td><td>$f(x)=\lambda e^{-\lambda x},\;x>0$</td><td>$\dfrac{1}{\lambda}$</td><td>$\dfrac{1}{\lambda^2}$</td></tr>
+            <tr><td>正态分布</td><td>$X \sim N(\mu,\sigma^2)$</td><td>$f(x)=\dfrac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$</td><td>$\mu$</td><td>$\sigma^2$</td></tr>
+            <tr><td>标准正态分布</td><td>$X \sim N(0,1)$</td><td>$\varphi(x)=\dfrac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}$</td><td>$0$</td><td>$1$</td></tr>
+            </table>
+            <p><strong>正态分布的标准化</strong>：若 $X \sim N(\mu,\sigma^2)$，则 $Z = \dfrac{X-\mu}{\sigma} \sim N(0,1)$</p>
+            <p><strong>指数分布的无记忆性</strong>：$P(X > s+t | X > s) = P(X > t)$</p>
+            <hr>
+            <h3>2.4 随机变量函数的分布</h3>
+            <p><strong>离散型</strong>：若 $Y = g(X)$，$X$ 的分布律为 $P(X=x_k)=p_k$，则 $P(Y = y_j) = \sum_{x_k: g(x_k)=y_j} p_k$</p>
+            <p><strong>连续型（分布函数法）</strong></p>
+            <p>求 $Y = g(X)$ 的分布：</p>
+            <ol>
+            <li>写出 $F_Y(y) = P(Y \leq y) = P(g(X) \leq y) = \int_{g(x) \leq y} f_X(x)dx$</li>
+            <li>对 $F_Y(y)$ 求导得 $f_Y(y)$</li>
+            </ol>
+            <p><strong>单调函数公式法</strong>（ $g$ 严格单调可导时）</p>
+            <p>若 $y = g(x)$ 严格单调，反函数 $x = h(y)$ 存在，则</p>
+            <div class="math-block">$$f_Y(y) = f_X(h(y)) \cdot |h'(y)|$$</div>
+            <p><strong>正态变量的线性函数</strong>：若 $X \sim N(\mu,\sigma^2)$，则 $aX+b \sim N(a\mu+b, a^2\sigma^2)$</p>
+            <hr>
+            <h2 id="ch3">第3章 多维随机变量及其分布</h2>
+            <h3>3.1 二维随机变量</h3>
+            <p><strong>联合分布函数</strong></p>
+            <div class="math-block">$$F(x,y) = P(X \leq x, Y \leq y)$$</div>
+            <p><strong>联合分布函数的性质</strong></p>
+            <ol>
+            <li>关于 $x,y$ 分别单调非减、右连续</li>
+            <li>$F(-\infty,y) = F(x,-\infty) = 0,\;F(+\infty,+\infty) = 1$</li>
+            <li><strong>矩形不等式</strong>：$F(b,d) - F(a,d) - F(b,c) + F(a,c) \geq 0$（其中 $a<b,\;c<d$）</li>
+            </ol>
+            <hr>
+            <h3>3.2 二维离散型随机变量</h3>
+            <p><strong>联合分布律</strong></p>
+            <div class="math-block">$$P(X=x_i, Y=y_j) = p_{ij},\quad \sum_i\sum_j p_{ij} = 1,\;p_{ij}\geq 0$$</div>
+            <p><strong>边缘分布律</strong></p>
+            <div class="math-block">$$P(X=x_i) = \sum_j p_{ij} = p_{i\cdot},\quad P(Y=y_j) = \sum_i p_{ij} = p_{\cdot j}$$</div>
+            <p><strong>条件分布律</strong></p>
+            <div class="math-block">$$P(X=x_i|Y=y_j) = \frac{p_{ij}}{p_{\cdot j}}\;(p_{\cdot j}>0),\quad P(Y=y_j|X=x_i) = \frac{p_{ij}}{p_{i\cdot}}\;(p_{i\cdot}>0)$$</div>
+            <hr>
+            <h3>3.3 二维连续型随机变量</h3>
+            <p><strong>联合概率密度</strong>：$f(x,y) \geq 0,\;\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} f(x,y)dxdy = 1$</p>
+            <p><strong>边缘概率密度</strong></p>
+            <div class="math-block">$$f_X(x) = \int_{-\infty}^{+\infty} f(x,y)dy,\quad f_Y(y) = \int_{-\infty}^{+\infty} f(x,y)dx$$</div>
+            <p><strong>条件概率密度</strong>（ $f_Y(y)>0$ 时）</p>
+            <div class="math-block">$$f_{X|Y}(x|y) = \frac{f(x,y)}{f_Y(y)},\quad f_{Y|X}(y|x) = \frac{f(x,y)}{f_X(x)}$$</div>
+            <p><strong>二维均匀分布</strong>：$f(x,y)=\dfrac{1}{S_D},\;(x,y)\in D$（$S_D$ 为区域 $D$ 的面积）</p>
+            <p><strong>二维正态分布</strong>：$(X,Y)\sim N(\mu_1,\mu_2;\sigma_1^2,\sigma_2^2;\rho)$</p>
+            <div class="math-block">$$f(x,y)=\frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}}\exp\left\{-\frac{1}{2(1-\rho^2)}\left[\frac{(x-\mu_1)^2}{\sigma_1^2}-2\rho\frac{(x-\mu_1)(y-\mu_2)}{\sigma_1\sigma_2}+\frac{(y-\mu_2)^2}{\sigma_2^2}\right]\right\}$$</div>
+            <hr>
+            <h3>3.4 随机变量的独立性</h3>
+            <p><strong>定义</strong>：$X,Y$ 相互独立 $\iff$ $F(x,y) = F_X(x)F_Y(y),\;\forall x,y$</p>
+            <ul>
+            <li>离散型：$X,Y$ 独立 $\iff$ $p_{ij} = p_{i\cdot} \cdot p_{\cdot j},\;\forall i,j$</li>
+            <li>连续型：$X,Y$ 独立 $\iff$ $f(x,y) = f_X(x)f_Y(y),\;\forall x,y$</li>
+            </ul>
+            <p><strong>二维正态分布的独立性</strong>：$X,Y$ 相互独立 $\iff$ $\rho = 0$</p>
+            <hr>
+            <h3>3.5 二维随机变量函数的分布</h3>
+            <p><strong>和的分布（卷积公式）</strong></p>
+            <div class="math-block">$$f_{X+Y}(z) = \int_{-\infty}^{+\infty} f(x,z-x)dx = \int_{-\infty}^{+\infty} f(z-y,y)dy$$</div>
+            <p>若 $X,Y$ 独立：$f_{X+Y}(z) = \int_{-\infty}^{+\infty} f_X(x)f_Y(z-x)dx$（连续型）</p>
+            <div class="math-block">$$P(Z=k) = \sum_{i=0}^{k} P(X=i)P(Y=k-i)\quad\text{（离散型）}$$</div>
+            <p><strong>极值分布</strong></p>
+            <ul>
+            <li>$M = \max(X,Y)$：$F_M(z) = F_X(z)F_Y(z)$</li>
+            <li>$N = \min(X,Y)$：$F_N(z) = 1 - [1-F_X(z)][1-F_Y(z)]$</li>
+            </ul>
+            <p><strong>独立正态变量的和</strong>：若 $X \sim N(\mu_1,\sigma_1^2),\;Y \sim N(\mu_2,\sigma_2^2)$ 且独立，则</p>
+            <div class="math-block">$$X+Y \sim N(\mu_1+\mu_2, \sigma_1^2+\sigma_2^2)$$</div>
+            <p><strong>$X^2$ 的分布</strong>（卡方分布）</p>
+            <p>若 $X \sim N(0,1)$，则 $X^2 \sim \chi^2(1)$（自由度为1的卡方分布）</p>
+            <hr>
+            <h2 id="ch4">第4章 随机变量的数字特征</h2>
+            <h3>4.1 数学期望</h3>
+            <p><strong>离散型</strong>：$E(X) = \sum_{k} x_k p_k$（要求级数绝对收敛）</p>
+            <p><strong>连续型</strong>：$E(X) = \int_{-\infty}^{+\infty} x f(x)dx$（要求积分绝对收敛）</p>
+            <p><strong>随机变量函数的期望</strong></p>
+            <ul>
+            <li>一维：$E[g(X)] = \sum_k g(x_k)p_k$（离散）；$E[g(X)] = \int_{-\infty}^{+\infty} g(x)f(x)dx$（连续）</li>
+            <li>二维：$E[g(X,Y)] = \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} g(x,y)f(x,y)dxdy$</li>
+            </ul>
+            <p><strong>期望的性质</strong></p>
+            <ol>
+            <li>$E(C) = C$</li>
+            <li>$E(aX+b) = aE(X) + b$</li>
+            <li>$E(X+Y) = E(X) + E(Y)$（不要求独立性）</li>
+            <li>若 $X,Y$ 独立，则 $E(XY) = E(X)E(Y)$</li>
+            </ol>
+            <hr>
+            <h3>4.2 方差</h3>
+            <p><strong>定义</strong>：$\mathrm{Var}(X) = D(X) = E[(X-E(X))^2] = E(X^2) - [E(X)]^2$</p>
+            <p><strong>方差的性质</strong></p>
+            <ol>
+            <li>$D(C) = 0$</li>
+            <li>$D(aX+b) = a^2 D(X)$</li>
+            <li>若 $X,Y$ 独立，则 $D(X\pm Y) = D(X) + D(Y)$</li>
+            <li>$D(X) = 0 \iff P(X = E(X)) = 1$（常数）</li>
+            </ol>
+            <p><strong>重要不等式</strong></p>
+            <ul>
+            <li><strong>切比雪夫不等式</strong>：$P(|X-E(X)| \geq \varepsilon) \leq \dfrac{D(X)}{\varepsilon^2}$</li>
+            </ul>
+            <p>等价形式：$P(|X-E(X)| < \varepsilon) \geq 1 - \dfrac{D(X)}{\varepsilon^2}$</p>
+            <hr>
+            <h3>4.3 协方差与相关系数</h3>
+            <p><strong>协方差</strong></p>
+            <div class="math-block">$$\mathrm{Cov}(X,Y) = E[(X-E(X))(Y-E(Y))] = E(XY) - E(X)E(Y)$$</div>
+            <p><strong>相关系数</strong></p>
+            <div class="math-block">$$\rho_{XY} = \frac{\mathrm{Cov}(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)}}$$</div>
+            <p><strong>性质</strong></p>
+            <ol>
+            <li>$\mathrm{Cov}(X,Y) = \mathrm{Cov}(Y,X)$</li>
+            <li>$\mathrm{Cov}(aX+b, cY+d) = ac\cdot\mathrm{Cov}(X,Y)$</li>
+            <li>$\mathrm{Cov}(X_1+X_2, Y) = \mathrm{Cov}(X_1,Y) + \mathrm{Cov}(X_2,Y)$</li>
+            <li>$|\rho_{XY}| \leq 1$</li>
+            <li>$|\rho_{XY}| = 1 \iff$ 存在常数 $a,b$ 使得 $P(Y = aX+b) = 1$</li>
+            <li>$\rho_{XY} = 0$（$X,Y$ 不相关）$\iff \mathrm{Cov}(X,Y)=0 \iff E(XY)=E(X)E(Y) \iff D(X+Y)=D(X)+D(Y)$</li>
+            </ol>
+            <p><strong>独立 $\Rightarrow$ 不相关；不相关 $\nRightarrow$ 独立</strong></p>
+            <p>（二维正态分布：独立 $\iff$ 不相关）</p>
+            <hr>
+            <h3>4.4 矩、协方差矩阵</h3>
+            <p><strong>原点矩</strong>：$k$ 阶原点矩 $\alpha_k = E(X^k)$</p>
+            <p><strong>中心矩</strong>：$k$ 阶中心矩 $\beta_k = E[(X-E(X))^k]$</p>
+            <p><strong>混合矩</strong>：$\mathrm{Cov}(X,Y) = E[(X-E(X))(Y-E(Y))]$ 是 $1+1$ 阶混合中心矩</p>
+            <p><strong>协方差矩阵</strong>（随机向量 $(X_1,\ldots,X_n)^T$）</p>
+            <div class="math-block">$$C = \begin{pmatrix}
+            D(X_1) & \mathrm{Cov}(X_1,X_2) & \cdots & \mathrm{Cov}(X_1,X_n)\\
+            \mathrm{Cov}(X_2,X_1) & D(X_2) & \cdots & \mathrm{Cov}(X_2,X_n)\\
+            \vdots & \vdots & \ddots & \vdots\\
+            \mathrm{Cov}(X_n,X_1) & \mathrm{Cov}(X_n,X_2) & \cdots & D(X_n)
+            \end{pmatrix}$$</div>
+            <p>协方差矩阵是对称非负定矩阵。</p>
+            <hr>
+            <h2 id="ch5">第5章 大数定律与中心极限定理</h2>
+            <h3>5.1 大数定律</h3>
+            <p><strong>依概率收敛</strong>：设 $X_n, X$ 为随机变量，若 $\forall \varepsilon > 0$，$\lim\limits_{n\to\infty} P(|X_n - X| \geq \varepsilon) = 0$，则称 $X_n$ <strong>依概率收敛</strong>于 $X$，记作 $X_n \xrightarrow{P} X$。</p>
+            <p><strong>切比雪夫大数定律</strong></p>
+            <p>设 $X_1,X_2,\ldots$ 相互独立，$D(X_i) \leq C$（方差一致有界），则</p>
+            <div class="math-block">$$\frac{1}{n}\sum_{i=1}^{n} X_i \xrightarrow{P} \frac{1}{n}\sum_{i=1}^{n} E(X_i)$$</div>
+            <p><strong>伯努利大数定律</strong></p>
+            <p>设 $n_A$ 为 $n$ 次独立重复试验中 $A$ 发生的次数，$p = P(A)$，则</p>
+            <div class="math-block">$$\frac{n_A}{n} \xrightarrow{P} p$$</div>
+            <p><strong>辛钦大数定律</strong></p>
+            <p>设 $X_1,X_2,\ldots$ 独立同分布，$E(X_i) = \mu$，则</p>
+            <div class="math-block">$$\frac{1}{n}\sum_{i=1}^{n} X_i \xrightarrow{P} \mu$$</div>
+            <p>（注：不要求方差存在，只要求期望存在）</p>
+            <hr>
+            <h3>5.2 中心极限定理</h3>
+            <p><strong>列维-林德伯格中心极限定理（独立同分布情形）</strong></p>
+            <p>设 $X_1,X_2,\ldots$ 独立同分布，$E(X_i)=\mu$，$D(X_i)=\sigma^2>0$，则</p>
+            <div class="math-block">$$\frac{\sum_{i=1}^{n} X_i - n\mu}{\sqrt{n}\sigma} \xrightarrow{d} N(0,1)$$</div>
+            <p>即：当 $n$ 充分大时，$\sum_{i=1}^{n} X_i$ 近似服从 $N(n\mu, n\sigma^2)$。</p>
+            <p><strong>棣莫弗-拉普拉斯中心极限定理（二项分布情形）</strong></p>
+            <p>设 $X \sim B(n,p)$，则</p>
+            <div class="math-block">$$\frac{X - np}{\sqrt{np(1-p)}} \xrightarrow{d} N(0,1)$$</div>
+            <p>即：当 $n$ 充分大时，$B(n,p)$ 可用 $N(np, np(1-p))$ 近似。</p>
+            <p><strong>中心极限定理的应用</strong></p>
+            <ul>
+            <li>用正态分布近似计算二项分布的概率（ $n$ 较大时）</li>
+            <li>独立同分布随机变量和的概率计算</li>
+            </ul>
+            <hr>
+            <h2 id="ch6">第6章 数理统计的基本概念</h2>
+            <h3>6.1 总体与样本</h3>
+            <p><strong>总体</strong>：研究对象的某项数量指标 $X$ 的取值全体（视为随机变量）</p>
+            <p><strong>样本</strong>：从总体中抽取的 $n$ 个个体，对应的随机变量 $X_1,X_2,\ldots,X_n$ 称为<strong>简单随机样本</strong>，若：</p>
+            <ol>
+            <li>$X_1,\ldots,X_n$ 与 $X$ 同分布</li>
+            <li>$X_1,\ldots,X_n$ 相互独立</li>
+            </ol>
+            <p><strong>样本观测值</strong>：$x_1,x_2,\ldots,x_n$（小写表示具体数值）</p>
+            <hr>
+            <h3>6.2 统计量</h3>
+            <p><strong>定义</strong>：设 $X_1,\ldots,X_n$ 为样本，$g(X_1,\ldots,X_n)$ 为连续函数，且不含未知参数，则称 $g(X_1,\ldots,X_n)$ 为<strong>统计量</strong>。</p>
+            <p><strong>常用统计量</strong></p>
+            <ul>
+            <li><strong>样本均值</strong>：$\overline{X} = \dfrac{1}{n}\sum_{i=1}^{n} X_i$</li>
+            <li><strong>样本方差</strong>：$S^2 = \dfrac{1}{n-1}\sum_{i=1}^{n} (X_i - \overline{X})^2$</li>
+            <li><strong>样本标准差</strong>：$S = \sqrt{S^2}$</li>
+            <li><strong>样本 $k$ 阶原点矩</strong>：$A_k = \dfrac{1}{n}\sum_{i=1}^{n} X_i^k$</li>
+            <li><strong>样本 $k$ 阶中心矩</strong>：$B_k = \dfrac{1}{n}\sum_{i=1}^{n} (X_i - \overline{X})^k$</li>
+            </ul>
+            <hr>
+            <h3>6.3 三大分布</h3>
+            <p><strong>$\chi^2$ 分布</strong></p>
+            <p>设 $X_1,\ldots,X_n \sim N(0,1)$ 且独立，则 $\sum_{i=1}^{n} X_i^2 \sim \chi^2(n)$（$n$ 为自由度）</p>
+            <p>性质：</p>
+            <ul>
+            <li>可加性：若 $X\sim\chi^2(n_1),\;Y\sim\chi^2(n_2)$ 独立，则 $X+Y\sim\chi^2(n_1+n_2)$</li>
+            <li>$E[\chi^2(n)] = n,\;D[\chi^2(n)] = 2n$</li>
+            </ul>
+            <p><strong>$t$ 分布</strong></p>
+            <p>设 $X \sim N(0,1),\;Y \sim \chi^2(n)$ 且独立，则 $T = \dfrac{X}{\sqrt{Y/n}} \sim t(n)$</p>
+            <p>性质：</p>
+            <ul>
+            <li>$t$ 分布的概率密度是偶函数，关于 $x=0$ 对称</li>
+            <li>$n \to \infty$ 时，$t(n)$ 趋近于 $N(0,1)$</li>
+            <li>$E[T] = 0\;(n>1),\;D[T] = \dfrac{n}{n-2}\;(n>2)$</li>
+            </ul>
+            <p><strong>$F$ 分布</strong></p>
+            <p>设 $X \sim \chi^2(n_1),\;Y \sim \chi^2(n_2)$ 且独立，则 $F = \dfrac{X/n_1}{Y/n_2} \sim F(n_1,n_2)$</p>
+            <p>性质：</p>
+            <ul>
+            <li>若 $F \sim F(n_1,n_2)$，则 $\dfrac{1}{F} \sim F(n_2,n_1)$</li>
+            <li>$F_{1-\alpha}(n_1,n_2) = \dfrac{1}{F_{\alpha}(n_2,n_1)}$</li>
+            </ul>
+            <hr>
+            <h3>6.4 正态总体的抽样分布</h3>
+            <p><strong>单个正态总体 $N(\mu,\sigma^2)$</strong></p>
+            <ol>
+            <li>$\overline{X} \sim N\left(\mu, \dfrac{\sigma^2}{n}\right)$，即 $\dfrac{\overline{X} - \mu}{\sigma/\sqrt{n}} \sim N(0,1)$</li>
+            <li>$\dfrac{(n-1)S^2}{\sigma^2} \sim \chi^2(n-1)$，且 $\overline{X}$ 与 $S^2$ 相互独立</li>
+            <li>$\dfrac{\overline{X} - \mu}{S/\sqrt{n}} \sim t(n-1)$</li>
+            </ol>
+            <p><strong>两个正态总体 $N(\mu_1,\sigma_1^2),\;N(\mu_2,\sigma_2^2)$</strong></p>
+            <p>设 $\overline{X},\overline{Y},S_1^2,S_2^2$ 分别为两个样本的样本均值和样本方差，$n_1,n_2$ 为样本量。</p>
+            <ol>
+            <li>$\overline{X} - \overline{Y} \sim N\left(\mu_1-\mu_2, \dfrac{\sigma_1^2}{n_1}+\dfrac{\sigma_2^2}{n_2}\right)$</li>
+            <li><strong>$\sigma_1^2 = \sigma_2^2 = \sigma^2$ 时</strong>：</li>
+            </ol>
+            <div class="math-block">$$\frac{(\overline{X}-\overline{Y})-(\mu_1-\mu_2)}{S_w\sqrt{\dfrac{1}{n_1}+\dfrac{1}{n_2}}} \sim t(n_1+n_2-2)$$</div>
+            <p>其中 $S_w^2 = \dfrac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}$</p>
+            <ol>
+            <li>$\dfrac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2} \sim F(n_1-1, n_2-1)$</li>
+            </ol>
+            <hr>
+            <h2 id="ch7">第7章 参数估计</h2>
+            <h3>7.1 点估计</h3>
+            <p><strong>矩估计法</strong></p>
+            <p>用样本矩估计总体矩：令</p>
+            <div class="math-block">$$\begin{cases}
+            A_1 = \alpha_1(\theta_1,\ldots,\theta_k)\\
+            \cdots\\
+            A_k = \alpha_k(\theta_1,\ldots,\theta_k)
+            \end{cases}$$</div>
+            <p>解出 $\hat{\theta}_1,\ldots,\hat{\theta}_k$ 即为矩估计量。</p>
+            <p><strong>最大似然估计法（MLE）</strong></p>
+            <ol>
+            <li>写出似然函数 $L(\theta) = \prod_{i=1}^{n} f(x_i;\theta)$（连续）或 $L(\theta) = \prod_{i=1}^{n} p(x_i;\theta)$（离散）</li>
+            <li>取对数：$\ln L(\theta) = \sum_{i=1}^{n} \ln f(x_i;\theta)$</li>
+            <li>令 $\dfrac{\partial \ln L(\theta)}{\partial \theta_j} = 0$，解方程组得 $\hat{\theta}_j$</li>
+            <li>若导数方程无解，则 $\hat{\theta}$ 在参数空间边界取得（此时用单调性分析）</li>
+            </ol>
+            <hr>
+            <h3>7.2 估计量的评价标准</h3>
+            <p><strong>无偏性</strong>：$E(\hat{\theta}) = \theta$，则称 $\hat{\theta}$ 为 $\theta$ 的<strong>无偏估计量</strong></p>
+            <ul>
+            <li>$\overline{X}$ 是 $\mu$ 的无偏估计</li>
+            <li>$S^2 = \dfrac{1}{n-1}\sum(X_i-\overline{X})^2$ 是 $\sigma^2$ 的无偏估计</li>
+            <li>注意：$\dfrac{1}{n}\sum(X_i-\overline{X})^2$ 不是 $\sigma^2$ 的无偏估计（有偏，偏小）</li>
+            </ul>
+            <p><strong>有效性</strong>：设 $\hat{\theta}_1,\hat{\theta}_2$ 均为 $\theta$ 的无偏估计，若 $D(\hat{\theta}_1) < D(\hat{\theta}_2)$，则称 $\hat{\theta}_1$ 比 $\hat{\theta}_2$ <strong>更有效</strong>。</p>
+            <p><strong>一致性（相合性）</strong>：若 $\hat{\theta}_n \xrightarrow{P} \theta$（当 $n \to \infty$），则称 $\hat{\theta}_n$ 为 $\theta$ 的<strong>一致估计量</strong>。</p>
+            <hr>
+            <h3>7.3 区间估计</h3>
+            <p><strong>置信区间</strong>：设 $\theta$ 为未知参数，若对任意 $\alpha \in (0,1)$，存在统计量 $\hat{\theta}_1,\hat{\theta}_2$ 使得</p>
+            <div class="math-block">$$P(\hat{\theta}_1 < \theta < \hat{\theta}_2) = 1-\alpha$$</div>
+            <p>则称 $(\hat{\theta}_1, \hat{\theta}_2)$ 为 $\theta$ 的<strong>置信水平为 $1-\alpha$ 的置信区间</strong>。</p>
+            <p><strong>单个正态总体 $N(\mu,\sigma^2)$ 的置信区间</strong></p>
+            <table>
+            <tr><th>待估参数</th><th>条件</th><th>置信区间</th></tr>
+            <tr><td>$\mu$</td><td>$\sigma^2$ 已知</td><td>$\overline{X} \pm z_{\alpha/2}\dfrac{\sigma}{\sqrt{n}}$</td></tr>
+            <tr><td>$\mu$</td><td>$\sigma^2$ 未知</td><td>$\overline{X} \pm t_{\alpha/2}(n-1)\dfrac{S}{\sqrt{n}}$</td></tr>
+            <tr><td>$\sigma^2$</td><td>$\mu$ 未知</td><td>$\left(\dfrac{(n-1)S^2}{\chi^2_{\alpha/2}(n-1)}, \dfrac{(n-1)S^2}{\chi^2_{1-\alpha/2}(n-1)}\right)$</td></tr>
+            </table>
+            <p><strong>两个正态总体 $N(\mu_1,\sigma_1^2),\;N(\mu_2,\sigma_2^2)$ 的置信区间</strong></p>
+            <table>
+            <tr><th>待估参数</th><th>条件</th><th>置信区间</th></tr>
+            <tr><td>$\mu_1-\mu_2$</td><td>$\sigma_1^2,\sigma_2^2$ 已知</td><td>$(\overline{X}-\overline{Y}) \pm z_{\alpha/2}\sqrt{\dfrac{\sigma_1^2}{n_1}+\dfrac{\sigma_2^2}{n_2}}$</td></tr>
+            <tr><td>$\mu_1-\mu_2$</td><td>$\sigma_1^2=\sigma_2^2$ 未知</td><td>$(\overline{X}-\overline{Y}) \pm t_{\alpha/2}(n_1+n_2-2)S_w\sqrt{\dfrac{1}{n_1}+\dfrac{1}{n_2}}$</td></tr>
+            <tr><td>$\dfrac{\sigma_1^2}{\sigma_2^2}$</td><td>$\mu_1,\mu_2$ 未知</td><td>$\left(\dfrac{S_1^2/S_2^2}{F_{\alpha/2}(n_1-1,n_2-1)}, \dfrac{S_1^2/S_2^2}{F_{1-\alpha/2}(n_1-1,n_2-1)}\right)$</td></tr>
+            </table>
+            <hr>
+            <h2 id="ch8">第8章 假设检验</h2>
+            <h3>8.1 假设检验的基本概念</h3>
+            <p><strong>基本思想</strong>：先对总体参数提出一个假设 $H_0$（原假设），然后抽取样本，根据样本信息判断是否有足够证据拒绝 $H_0$。</p>
+            <p><strong>两类错误</strong></p>
+            <ul>
+            <li><strong>第一类错误（弃真）</strong>：$H_0$ 为真时拒绝 $H_0$，概率记为 $\alpha$（显著性水平）</li>
+            <li><strong>第二类错误（取伪）</strong>：$H_0$ 为假时接受 $H_0$，概率记为 $\beta$</li>
+            </ul>
+            <p><strong>显著性检验</strong>：只控制第一类错误的检验（通常取 $\alpha=0.05$ 或 $0.01$）</p>
+            <p><strong>检验步骤</strong></p>
+            <ol>
+            <li>提出原假设 $H_0$ 和备择假设 $H_1$</li>
+            <li>选取合适的检验统计量，确定其分布</li>
+            <li>给定显著性水平 $\alpha$，确定拒绝域</li>
+            <li>根据样本计算统计量的值，作出判断</li>
+            </ol>
+            <hr>
+            <h3>8.2 单个正态总体的假设检验</h3>
+            <p><strong>检验 $\mu$（$\sigma^2$ 已知）— $Z$ 检验</strong></p>
+            <ul>
+            <li>$H_0: \mu = \mu_0$，$H_1: \mu \neq \mu_0$（双侧）</li>
+            <li>检验统计量：$Z = \dfrac{\overline{X} - \mu_0}{\sigma/\sqrt{n}} \sim N(0,1)$</li>
+            <li>拒绝域：$|Z| > z_{\alpha/2}$</li>
+            </ul>
+            <p><strong>检验 $\mu$（$\sigma^2$ 未知）— $t$ 检验</strong></p>
+            <ul>
+            <li>检验统计量：$T = \dfrac{\overline{X} - \mu_0}{S/\sqrt{n}} \sim t(n-1)$</li>
+            <li>拒绝域（双侧）：$|T| > t_{\alpha/2}(n-1)$</li>
+            </ul>
+            <p><strong>检验 $\sigma^2$（$\mu$ 未知）— $\chi^2$ 检验</strong></p>
+            <ul>
+            <li>检验统计量：$\chi^2 = \dfrac{(n-1)S^2}{\sigma_0^2} \sim \chi^2(n-1)$</li>
+            <li>拒绝域（双侧）：$\chi^2 > \chi^2_{\alpha/2}(n-1)$ 或 $\chi^2 < \chi^2_{1-\alpha/2}(n-1)$</li>
+            </ul>
+            <hr>
+            <h3>8.3 两个正态总体的假设检验</h3>
+            <p><strong>检验 $\mu_1 = \mu_2$（$\sigma_1^2=\sigma_2^2$ 未知）— 两样本 $t$ 检验</strong></p>
+            <ul>
+            <li>检验统计量：$T = \dfrac{(\overline{X}-\overline{Y})-(\mu_1-\mu_2)}{S_w\sqrt{\dfrac{1}{n_1}+\dfrac{1}{n_2}}} \sim t(n_1+n_2-2)$</li>
+            <li>拒绝域（双侧）：$|T| > t_{\alpha/2}(n_1+n_2-2)$</li>
+            </ul>
+            <p><strong>检验 $\sigma_1^2 = \sigma_2^2$（$\mu_1,\mu_2$ 未知）— $F$ 检验</strong></p>
+            <ul>
+            <li>检验统计量：$F = \dfrac{S_1^2}{S_2^2} \sim F(n_1-1,n_2-1)$</li>
+            <li>拒绝域（双侧）：$F > F_{\alpha/2}(n_1-1,n_2-1)$ 或 $F < F_{1-\alpha/2}(n_1-1,n_2-1)$</li>
+            </ul>
+            <hr>
+            <h3>8.4 置信区间与假设检验的对偶关系</h3>
+            <p><strong>对偶原理</strong>：</p>
+            <ul>
+            <li>若 $\mu_0$ 落在 $\mu$ 的 $1-\alpha$ 置信区间内，则接受 $H_0: \mu = \mu_0$（显著性水平 $\alpha$）</li>
+            <li>若 $\mu_0$ 不在 $\mu$ 的 $1-\alpha$ 置信区间内，则拒绝 $H_0: \mu = \mu_0$</li>
+            </ul>
+            <p>即：<strong>假设检验的接受域 = 置信区间</strong></p>
+            <hr>
+            <h2>附录：常用概率公式速查</h2>
+            <table>
+            <tr><th>公式</th><th>表达式</th></tr>
+            <tr><td>加法公式</td><td>$P(A\cup B)=P(A)+P(B)-P(AB)$</td></tr>
+            <tr><td>条件概率</td><td>$P(A\mid B)=P(AB)/P(B)$</td></tr>
+            <tr><td>乘法公式</td><td>$P(AB)=P(A)P(B\mid A)$</td></tr>
+            <tr><td>全概率公式</td><td>$P(A)=\sum P(B_i)P(A\mid B_i)$</td></tr>
+            <tr><td>贝叶斯公式</td><td>$P(B_j\mid A)=P(B_j)P(A\mid B_j)/\sum P(B_i)P(A\mid B_i)$</td></tr>
+            <tr><td>二项分布</td><td>$P(X=k)=C_n^k p^k(1-p)^{n-k}$</td></tr>
+            <tr><td>泊松分布</td><td>$P(X=k)=\lambda^k e^{-\lambda}/k!$</td></tr>
+            <tr><td>正态分布</td><td>$\varphi(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$</td></tr>
+            <tr><td>期望线性</td><td>$E(aX+bY)=aE(X)+bE(Y)$</td></tr>
+            <tr><td>方差（独立）</td><td>$D(aX+bY)=a^2D(X)+b^2D(Y)$</td></tr>
+            <tr><td>协方差</td><td>$\mathrm{Cov}(X,Y)=E(XY)-E(X)E(Y)$</td></tr>
+            <tr><td>矩估计</td><td>样本矩 = 总体矩，解方程</td></tr>
+            <tr><td>MLE</td><td>$\frac{d\ln L}{d\theta}=0$</td></tr>
+            <tr><td>单样本 $t$ 区间</td><td>$\overline{X}\pm t_{\alpha/2}(n-1)\frac{S}{\sqrt{n}}$</td></tr>
+            <tr><td>两样本 $t$ 检验</td><td>$T=\frac{\overline{X}-\overline{Y}}{S_w\sqrt{1/n_1+1/n_2}}\sim t(n_1+n_2-2)$</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="site-footer">
+        <p>&copy; 2026 cx861 | 考研笔记 | <a href="https://github.com/cx861">GitHub</a></p>
+    </div>
+
+    <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <script>
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+        backTop.classList.toggle('visible', window.scrollY > 300);
+    });
+    </script>
+</body>
+</html>

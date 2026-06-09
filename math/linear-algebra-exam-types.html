@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常考题型 - 线性代数 - 考研笔记</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/main.js" defer></script>
+    <script>MathJax = {tex: {inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"], ["\\[", "\\]"]], packages: {'[+]': ['physics']}}, options: {ignoreHtmlClass: "no-math"}};</script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+    <style>
+        mjx-container {
+            max-width: 100%;
+            overflow-x: auto;
+            white-space: normal;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .table-wrapper table {
+            table-layout: auto;
+            width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .math-block {
+            overflow-x: auto;
+            padding: 0.5em 0;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 12px 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre code {
+            background: transparent;
+            padding: 0;
+        }
+        blockquote {
+            border-left: 4px solid #f5a623;
+            background: #fffbe6;
+            padding: 12px 16px;
+            margin: 12px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        blockquote p {
+            margin: 0;
+        }
+        .container {
+            margin-left: 3%;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">跳到内容</a>
+<div id="scroll-progress"></div>
+
+    <nav class="site-nav">
+        <div class="site-nav-inner">
+            <span class="nav-logo">考研笔记</span>
+            <a href="../index.html">首页</a>
+            <a href="../knowledge-base.html">知识库</a>
+            <a href="../exam-types.html" class="active">常考题型及解法</a>
+            <a href="../notes.html">个人笔记</a>
+            <a href="../mistakes.html">错题本</a>
+            <div class="nav-controls">
+                <button class="theme-toggle" aria-label="切换深色/浅色模式"><span class="theme-toggle-icon">🌙</span></button>
+                <button class="hamburger" aria-label="菜单" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+<div class="mobile-nav-overlay"></div>
+<div class="mobile-menu" role="dialog" aria-label="导航菜单">
+    <a href="../index.html">首页</a>
+    <a href="../knowledge-base.html">知识库</a>
+    <a href="../exam-types.html">常考题型及解法</a>
+    <a href="../notes.html">个人笔记</a>
+    <a href="../mistakes.html">错题本</a>
+    <button class="menu-theme-toggle"><span class="menu-theme-icon">🌙</span> 切换深色/浅色模式</button>
+</div>
+
+    <div class="page-header math">
+        <h1>🎯 线性代数 · 常考题型与解法</h1>
+        <div class="breadcrumb"><a href="../index.html">首页</a> / <a href="../exam-types.html">常考题型及解法</a> / 线性代数</div>
+    </div>
+
+    <div class="container" id="main-content">
+        <div class="toc">
+            <h3>章节导航</h3>
+            <ul>
+                <li><a href="#题型总览">题型总览</a></li>
+                <li><a href="#第一章-行列式-常考题型">第一章 行列式 —— 常考题型</a></li>
+                <li><a href="#题型1-行列式概念与性质题">　　题型1：行列式概念与性质题</a></li>
+                <li><a href="#题型2-数字型行列式计算">　　题型2：数字型行列式计算</a></li>
+                <li><a href="#题型3-含参数行列式计算">　　题型3：含参数行列式计算</a></li>
+                <li><a href="#题型4-抽象行列式计算">　　题型4：抽象行列式计算</a></li>
+                <li><a href="#题型5-克拉默法则应用">　　题型5：克拉默法则应用</a></li>
+                <li><a href="#第二章-矩阵-常考题型">第二章 矩阵 —— 常考题型</a></li>
+                <li><a href="#题型6-矩阵基本运算">　　题型6：矩阵基本运算</a></li>
+                <li><a href="#题型7-求逆矩阵">　　题型7：求逆矩阵</a></li>
+                <li><a href="#题型8-伴随矩阵相关">　　题型8：伴随矩阵相关</a></li>
+                <li><a href="#题型9-初等变换与初等矩阵">　　题型9：初等变换与初等矩阵</a></li>
+                <li><a href="#题型10-求矩阵的秩">　　题型10：求矩阵的秩</a></li>
+                <li><a href="#题型11-解矩阵方程">　　题型11：解矩阵方程</a></li>
+                <li><a href="#题型12-分块矩阵运算">　　题型12：分块矩阵运算</a></li>
+                <li><a href="#第三章-向量-常考题型">第三章 向量 —— 常考题型</a></li>
+                <li><a href="#题型13-线性相关性判定">　　题型13：线性相关性判定</a></li>
+                <li><a href="#题型14-求极大线性无关组">　　题型14：求极大线性无关组</a></li>
+                <li><a href="#题型15-向量组的秩">　　题型15：向量组的秩</a></li>
+                <li><a href="#题型16-线性表示问题">　　题型16：线性表示问题</a></li>
+                <li><a href="#题型17-施密特正交化与正交矩阵">　　题型17：施密特正交化与正交矩阵</a></li>
+                <li><a href="#第四章-线性方程组-常考题型">第四章 线性方程组 —— 常考题型</a></li>
+                <li><a href="#题型18-解的判定">　　题型18：解的判定</a></li>
+                <li><a href="#题型19-求基础解系与通解">　　题型19：求基础解系与通解</a></li>
+                <li><a href="#题型20-含参数线性方程组">　　题型20：含参数线性方程组</a></li>
+                <li><a href="#题型21-公共解与同解问题">　　题型21：公共解与同解问题</a></li>
+                <li><a href="#第五章-特征值与特征向量-常考题型">第五章 特征值与特征向量 —— 常考题型</a></li>
+                <li><a href="#题型22-求特征值与特征向量">　　题型22：求特征值与特征向量</a></li>
+                <li><a href="#题型23-相似矩阵的判定">　　题型23：相似矩阵的判定</a></li>
+                <li><a href="#题型24-矩阵对角化">　　题型24：矩阵对角化</a></li>
+                <li><a href="#题型25-实对称矩阵的对角化">　　题型25：实对称矩阵的对角化</a></li>
+                <li><a href="#第六章-二次型-常考题型">第六章 二次型 —— 常考题型</a></li>
+                <li><a href="#题型26-写出二次型的矩阵">　　题型26：写出二次型的矩阵</a></li>
+                <li><a href="#题型27-化二次型为标准形">　　题型27：化二次型为标准形</a></li>
+                <li><a href="#题型28-二次型正定性判定">　　题型28：二次型正定性判定</a></li>
+                <li><a href="#题型29-合同矩阵的判定">　　题型29：合同矩阵的判定</a></li>
+                <li><a href="#题型30-二次型的最值问题与几何应用">　　题型30：二次型的最值问题与几何应用</a></li>
+                <li><a href="#综合题型">综合题型</a></li>
+                <li><a href="#题型31-跨章节综合题-高频">　　题型31：跨章节综合题（高频！）</a></li>
+                <li><a href="#考试策略与答题规范">考试策略与答题规范</a></li>
+                <li><a href="#考试时间分配建议">　　考试时间分配建议</a></li>
+                <li><a href="#线代部分在整卷中的典型位置">　　线代部分在整卷中的典型位置</a></li>
+                <li><a href="#答题注意事项">　　答题注意事项</a></li>
+            </ul>
+        </div>
+
+        <div class="content-card">
+<blockquote><p>编著：李永乐 | 覆盖数学一/二/三全部线代题型 | 题型分类：选择题/填空题/解答题</p></blockquote>
+<hr>
+<h2 id="题型总览">题型总览</h2>
+<div class="table-wrapper"><table><tr class="table-header"><th>章节</th><th>常考题型数</th><th>主要题型</th></tr>
+<tr><td>第一章 行列式</td><td>5种</td><td>概念题、计算题、含参行列式、抽象行列式、克拉默法则</td></tr>
+<tr><td>第二章 矩阵</td><td>7种</td><td>矩阵运算、求逆矩阵、伴随矩阵、初等变换、求秩、矩阵方程、分块矩阵</td></tr>
+<tr><td>第三章 向量</td><td>6种</td><td>线性相关性判定、求极大无关组、求秩、线性表示、正交化、正交矩阵</td></tr>
+<tr><td>第四章 线性方程组</td><td>5种</td><td>解的判定、求基础解系、求通解、含参方程组、公共解同解</td></tr>
+<tr><td>第五章 特征值与特征向量</td><td>5种</td><td>求特征值特征向量、对角化、相似判定、实对称矩阵对角化、特征值应用</td></tr>
+<tr><td>第六章 二次型</td><td>5种</td><td>写二次型矩阵、化标准形（正交变换/配方法）、正定性判定、合同判定、最值问题</td></tr></table></div>
+<hr>
+<h2 id="第一章-行列式-常考题型">第一章 行列式 —— 常考题型</h2>
+<h3 id="题型1-行列式概念与性质题">题型1：行列式概念与性质题</h3>
+<p><strong>难度</strong>：★★☆☆☆ | <strong>题型</strong>：选择题/填空题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>n阶行列式的定义（不同行不同列）</li>
+<li>排列与逆序数</li>
+<li>行列式的7条性质</li>
+</ul>
+<p><strong>典型考法</strong>：</p>
+<ol>
+<li>判断行列式中某项的符号（利用逆序数）</li>
+<li>利用性质判断行列式的值（如某两行相同→值为0）</li>
+<li>给出含0较多的行列式，利用定义直接写出值</li>
+</ol>
+<p><strong>解法</strong>：</p>
+<pre><code>解法1：逆序数法 —— 对于n阶行列式的项 a1j1·a2j2·...·anjn，
+       符号 = (-1)^τ(j1j2...jn)，先确定列标排列，计算逆序数
+
+解法2：性质法 —— 观察行列式特征：
+       · 两行相同 → 值为0
+       · 两行成比例 → 值为0
+       · 某行全为0 → 值为0
+       · 上三角 → 对角线元素乘积</code></pre>
+<p><strong>例题</strong>：求四阶行列式中含有因子 a23 且带负号的项。</p>
+<p>解析：设该项为 a1j1·a23·a3j3·a4j4，(j1,j3,j4) 是 (1,2,4) 的排列。枚举6种排列，计算逆序数。如 τ(124) = 0（偶排列），τ(142) = 1（奇排列），τ(214) = 1（奇排列），τ(241) = 2（偶排列），τ(412) = 2（偶排列），τ(421) = 3（奇排列）。带负号需奇排列(1,1,3个逆序)，即 τ = 1 or 3。答案为 a12·a23·a31·a44 和 a14·a23·a32·a41。</p>
+<hr>
+<h3 id="题型2-数字型行列式计算">题型2：数字型行列式计算</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：填空题/解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>行列式性质（倍加变换）</li>
+<li>按行（列）展开定理</li>
+<li>上/下三角行列式</li>
+<li>范德蒙行列式</li>
+</ul>
+<p><strong>典型考法</strong>：直接计算给定的3~5阶行列式</p>
+<p><strong>解法框架</strong>：</p>
+<pre><code>步骤1：观察 —— 行列式是否具有特殊结构（对称、各行和相等、范德蒙等）
+步骤2：化简 —— 利用倍加变换（性质5）将某行（列）化为含较多0的形式
+步骤3：展开/三角化 —— 
+        · 若某行含较多0：按该行展开（降阶法）
+        · 否则：继续倍加变换，化为上三角
+步骤4：计算 —— 三角行列式 = 对角线元素乘积</code></pre>
+<p><strong>核心技巧</strong>：</p>
+<ul>
+<li><strong>各行（列）和相等</strong>：将所有列加到第一列，提取公因子</li>
+<li><strong>爪型行列式</strong>：从第二行起，每行减去第一行</li>
+<li><strong>三对角行列式</strong>：建立递推关系 <span class="math-inline">$D_n = aD_{n-1} + bD_{n-2}$</span></li>
+</ul>
+<div class="table-wrapper"><table><tr class="table-header"><th>方法</th><th>适用条件</th><th>操作要点</th></tr>
+<tr><td><strong>各行和相等</strong></td><td>每行元素之和相同</td><td>各列加到第1列→提公因子→化三角</td></tr>
+<tr><td><strong>加边法</strong></td><td>不易直接化简</td><td>添加一行 <span class="math-inline">$(1,0,\cdots,0)$</span>，添加一列 <span class="math-inline">$(1,a,\cdots,a)^T$</span></td></tr>
+<tr><td><strong>递推法</strong></td><td>有递推结构的行列式</td><td>建立 <span class="math-inline">$D_n$</span> 与 <span class="math-inline">$D_{n-1}, D_{n-2}$</span> 的关系</td></tr>
+<tr><td><strong>数学归纳法</strong></td><td>范德蒙等</td><td>先猜公式再证明</td></tr></table></div>
+<hr>
+<h3 id="题型3-含参数行列式计算">题型3：含参数行列式计算</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>行列式展开</li>
+<li>因式分解</li>
+<li>特征多项式形式</li>
+</ul>
+<p><strong>典型考法</strong>：</p>
+<ol>
+<li>计算含参数 λ 的行列式 <span class="math-inline">$|\lambda E - A|$</span></li>
+<li>因式分解求行列式的零点</li>
+</ol>
+<p><strong>解法</strong>：</p>
+<pre><code>步骤1：写出 $|\lambda E - A|$
+步骤2：利用行列式性质化简（不必严格三角化，可保留参数）
+步骤3：利用行列式展开求特征多项式 $f(\lambda) = |\lambda E - A|$
+步骤4：因式分解得各特征值</code></pre>
+<hr>
+<h3 id="题型4-抽象行列式计算">题型4：抽象行列式计算</h3>
+<p><strong>难度</strong>：★★★★☆ | <strong>题型</strong>：填空题/选择题/解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>矩阵运算与行列式的关系</li>
+<li>伴随矩阵性质 <span class="math-inline">$|A^*| = |A|^{n-1}$</span></li>
+<li><span class="math-inline">$|AB| = |A||B|$</span></li>
+<li><span class="math-inline">$|kA| = k^n|A|$</span></li>
+<li><span class="math-inline">$|A^{-1}| = 1/|A|$</span></li>
+</ul>
+<p><strong>典型考法</strong>：已知 <span class="math-inline">$|A|$</span> 的值，求 <span class="math-inline">$|A^*|, |A^{-1}|, |3A^T|, |A^*B|$</span> 等表达式的值。</p>
+<p><strong>核心公式速查</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>表达式</th><th>结果</th><th>条件</th></tr>
+<tr><td><span class="math-inline">$\|A^T\|$</span></td><td><span class="math-inline">$\|A\|$</span></td><td>恒成立</td></tr>
+<tr><td><span class="math-inline">$\|kA\|$</span></td><td><span class="math-inline">$k^n\|A\|$</span></td><td>A为n阶方阵</td></tr>
+<tr><td><span class="math-inline">$\|A^{-1}\|$</span></td><td><span class="math-inline">$1/\|A\|$</span></td><td>A可逆</td></tr>
+<tr><td><span class="math-inline">$\|A^*\|$</span></td><td><span class="math-inline">$\|A\|^{n-1}$</span></td><td>A为n阶方阵(n≥2)</td></tr>
+<tr><td><span class="math-inline">$\|AB\|$</span></td><td><span class="math-inline">$\|A\|\cdot\|B\|$</span></td><td>A和B为同阶方阵</td></tr>
+<tr><td><span class="math-inline">$\|A+B\|$</span></td><td>≠ <span class="math-inline">$\|A\|+\|B\|$</span></td><td>一般不相等！</td></tr></table></div>
+<p><strong>易错警示</strong>：</p>
+<ul>
+<li><span class="math-inline">$\|A+B\| \neq \|A\| + \|B\|$</span>（常见陷阱）</li>
+<li><span class="math-inline">$\|kA\| = k^n\|A\|$</span>，不要漏了幂次n</li>
+<li><span class="math-inline">$\|A\| = 0 \iff A$</span> 不可逆 <span class="math-inline">$\iff r(A) < n \iff Ax = 0$</span> 有非零解</li>
+</ul>
+<hr>
+<h3 id="题型5-克拉默法则应用">题型5：克拉默法则应用</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>克拉默法则的使用条件（系数矩阵为方阵且 <span class="math-inline">$|A| \neq 0$</span>）</li>
+<li>齐次方程组有非零解条件（<span class="math-inline">$|A| = 0$</span>）</li>
+</ul>
+<p><strong>典型考法</strong>：</p>
+<ol>
+<li>利用克拉默法则解方程组（n较小的情况）</li>
+<li>判断齐次方程组何时有非零解</li>
+<li>利用克拉默法则的几何应用（如求直线方程）</li>
+</ol>
+<p><strong>解法</strong>：</p>
+<pre><code>非齐次情况($|A| \neq 0$, n个方程n个未知量)：
+  x_i = |A_i| / |A|，其中|A_i|是将第i列替换为常数项列
+
+齐次情况：
+  有非零解 ⇔ |A| = 0 ⇔ r(A) &lt; n
+  仅有零解 ⇔ |A| ≠ 0 ⇔ r(A) = n</code></pre>
+<hr>
+<h2 id="第二章-矩阵-常考题型">第二章 矩阵 —— 常考题型</h2>
+<h3 id="题型6-矩阵基本运算">题型6：矩阵基本运算</h3>
+<p><strong>难度</strong>：★★☆☆☆ | <strong>题型</strong>：选择题/填空题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>矩阵乘法（不满足交换律！）</li>
+<li>矩阵转置 <span class="math-inline">$(AB)^T = B^T A^T$</span></li>
+<li>方阵的幂</li>
+<li>对称矩阵与反对称矩阵</li>
+</ul>
+<p><strong>典型考法</strong>：</p>
+<ol>
+<li>计算 <span class="math-inline">$A^n$</span>（对角阵或特殊矩阵）</li>
+<li>判断矩阵运算的正确性（如 <span class="math-inline">$(A+B)^2 = A^2 + AB + BA + B^2 \neq A^2 + 2AB + B^2$</span>）</li>
+<li>矩阵乘法的维度匹配问题</li>
+</ol>
+<p><strong>重点公式</strong>：</p>
+<ul>
+<li>对角阵的幂：<span class="math-inline">$\Lambda^n = \text{diag}(\lambda_1^n, \lambda_2^n, \cdots, \lambda_n^n)$</span></li>
+<li><span class="math-inline">$(A \pm B)^2 = A^2 \pm AB \pm BA + B^2$</span>（一般不简化）</li>
+<li><span class="math-inline">$(A + B)(A - B) = A^2 - AB + BA - B^2$</span></li>
+<li>只有当 <span class="math-inline">$AB = BA$</span> 时，<span class="math-inline">$(A+B)^2 = A^2 + 2AB + B^2$</span> 成立</li>
+</ul>
+<hr>
+<h3 id="题型7-求逆矩阵">题型7：求逆矩阵</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：填空题/解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>可逆的充要条件</li>
+<li>伴随矩阵法求逆</li>
+<li>初等变换法求逆</li>
+<li>分块矩阵求逆</li>
+</ul>
+<p><strong>典型考法</strong>：</p>
+<ol>
+<li>给定具体矩阵，求其逆矩阵</li>
+<li>利用伴随矩阵求逆（二阶矩阵特别简单）</li>
+<li>分块对角阵的逆</li>
+</ol>
+<p><strong>解法对比</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>方法</th><th>适用场景</th><th>公式/步骤</th></tr>
+<tr><td><strong>伴随矩阵法</strong></td><td>2阶或3阶</td><td><span class="math-inline">$A^{-1} = \frac{1}{\|A\|}A^*$</span>；二阶：<span class="math-inline">$\begin{pmatrix} a & b \\ c & d \end{pmatrix}^{-1} = \frac{1}{ad-bc}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$</span></td></tr>
+<tr><td><strong>初等变换法</strong></td><td>一般情况</td><td><span class="math-inline">$(A \mid E) \xrightarrow{\text{行变换}} (E \mid A^{-1})$</span></td></tr>
+<tr><td><strong>分块对角法</strong></td><td>分块对角阵</td><td><span class="math-inline">$A^{-1} = \text{diag}(A_1^{-1}, A_2^{-1}, \cdots)$</span></td></tr>
+<tr><td><strong>定义法</strong></td><td>抽象矩阵</td><td>找B使 <span class="math-inline">$AB = BA = E$</span></td></tr></table></div>
+<p><strong>二阶矩阵求逆（必背）</strong>：</p>
+<div class="math-block">$$A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}, \quad A^{-1} = \frac{1}{ad-bc}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$$</div>
+<hr>
+<h3 id="题型8-伴随矩阵相关">题型8：伴随矩阵相关</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：选择/填空/解答</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>伴随矩阵定义（代数余子式转置）</li>
+<li><span class="math-inline">$AA^* = A^*A = |A|E$</span></li>
+<li><span class="math-inline">$A^*$</span> 与 <span class="math-inline">$A^{-1}$</span> 的关系</li>
+</ul>
+<p><strong>典型考法</strong>：</p>
+<ol>
+<li>已知 <span class="math-inline">$|A|$</span> 和n，求 <span class="math-inline">$|A^*|$</span> 或 <span class="math-inline">$(A^*)^*$</span></li>
+<li>判断 <span class="math-inline">$A^*$</span> 的可逆性</li>
+<li>利用伴随矩阵求逆或解矩阵方程</li>
+</ol>
+<p><strong>核心公式</strong>：</p>
+<ul>
+<li><span class="math-inline">$A^* = |A|A^{-1}$</span>（A可逆）</li>
+<li><span class="math-inline">$|A^*| = |A|^{n-1}$</span></li>
+<li><span class="math-inline">$(A^*)^* = |A|^{n-2}A$</span>（<span class="math-inline">$n \geq 3$</span>）</li>
+<li><span class="math-inline">$(kA)^* = k^{n-1}A^*$</span></li>
+<li><span class="math-inline">$(AB)^* = B^*A^*$</span></li>
+</ul>
+<hr>
+<h3 id="题型9-初等变换与初等矩阵">题型9：初等变换与初等矩阵</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：选择题/填空题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>三种初等变换及对应的初等矩阵</li>
+<li>左乘→行变换；右乘→列变换</li>
+<li>初等变换不改变矩阵的秩</li>
+</ul>
+<p><strong>典型考法</strong>：</p>
+<ol>
+<li>已知初等变换过程，写出对应的初等矩阵乘积</li>
+<li>利用初等变换化简矩阵</li>
+<li>用初等变换法求逆矩阵</li>
+</ol>
+<p><strong>核心记忆</strong>：</p>
+<pre><code>初等矩阵与变换对应关系（左乘）：
+  E(i,j)  →  互换i,j两行
+  E(i(k)) →  第i行乘以k
+  E(i,j(k)) → 第j行的k倍加到第i行
+
+初等矩阵的逆：
+  E(i,j)^{-1} = E(i,j)
+  E(i(k))^{-1} = E(i, 1/k)
+  E(i,j(k))^{-1} = E(i,j(-k))</code></pre>
+<hr>
+<h3 id="题型10-求矩阵的秩">题型10：求矩阵的秩</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：填空题/解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>秩的定义（非零子式最高阶数）</li>
+<li>初等变换不改变秩</li>
+<li>秩的性质与不等式</li>
+</ul>
+<p><strong>典型考法</strong>：</p>
+<ol>
+<li>给定具体矩阵，求其秩</li>
+<li>含参数矩阵，讨论参数取何值时秩为多少</li>
+<li>利用秩的性质判断命题正确性</li>
+</ol>
+<p><strong>求解步骤</strong>：</p>
+<pre><code>步骤1：利用初等行变换将矩阵化为行阶梯形
+步骤2：数非零行的行数，即为秩
+步骤3：含参数时，需对参数分类讨论</code></pre>
+<p><strong>秩的不等式（常考点）</strong>：</p>
+<ul>
+<li><span class="math-inline">$r(A_{m \times n}) \leq \min(m, n)$</span></li>
+<li><span class="math-inline">$r(AB) \leq \min(r(A), r(B))$</span></li>
+<li><span class="math-inline">$r(A + B) \leq r(A) + r(B)$</span></li>
+<li>若A可逆，则 <span class="math-inline">$r(AB) = r(B)$</span></li>
+<li><span class="math-inline">$r(A) + r(B) - n \leq r(AB)$</span>（Sylvester）</li>
+</ul>
+<hr>
+<h3 id="题型11-解矩阵方程">题型11：解矩阵方程</h3>
+<p><strong>难度</strong>：★★★★☆ | <strong>题型</strong>：解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>矩阵方程的化简</li>
+<li>逆矩阵的求解</li>
+<li>矩阵乘法顺序</li>
+</ul>
+<p><strong>典型考法</strong>：</p>
+<ol>
+<li>解 <span class="math-inline">$AX = B$</span> 型方程</li>
+<li>解 <span class="math-inline">$XA = B$</span> 型方程</li>
+<li>解 <span class="math-inline">$AXB = C$</span> 型方程</li>
+</ol>
+<p><strong>解法框架</strong>：</p>
+<pre><code>类型1：AX = B
+  → 若A可逆，则 X = A^{-1}B
+  → 可以用 (A ∣ B) 行变换→ (E ∣ X)
+
+类型2：XA = B
+  → 若A可逆，则 X = BA^{-1}
+  → 对 (A^T ∣ B^T) 做行变换
+
+类型3：AXB = C
+  → X = A^{-1}CB^{-1}（A和B都可逆时）
+
+关键注意点：
+  · 先判断系数矩阵是否可逆（计算行列式）
+  · 左乘逆矩阵与右乘逆矩阵的方向不同！
+  · 矩阵乘法不满足交换律，不能随意挪位置</code></pre>
+<hr>
+<h3 id="题型12-分块矩阵运算">题型12：分块矩阵运算</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：填空题/选择题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>分块矩阵的乘法</li>
+<li>分块对角阵</li>
+<li>分块矩阵的行列式</li>
+</ul>
+<p><strong>核心公式</strong>：</p>
+<ul>
+<li><span class="math-inline">$\begin{vmatrix} A & O \\ O & B \end{vmatrix} = |A|\cdot|B|$</span></li>
+<li><span class="math-inline">$\begin{vmatrix} A & C \\ O & B \end{vmatrix} = |A|\cdot|B|$</span></li>
+<li><span class="math-inline">$\begin{vmatrix} O & A \\ B & O \end{vmatrix} = (-1)^{mn}|A|\cdot|B|$</span></li>
+</ul>
+<hr>
+<h2 id="第三章-向量-常考题型">第三章 向量 —— 常考题型</h2>
+<h3 id="题型13-线性相关性判定">题型13：线性相关性判定</h3>
+<p><strong>难度</strong>：★★★★☆ | <strong>题型</strong>：选择题/解答题/证明题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>线性相关与线性无关的定义</li>
+<li>向量组秩与线性相关性的关系</li>
+<li>用矩阵秩判定线性相关性</li>
+</ul>
+<p><strong>判定方法汇总</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>方法</th><th>判定条件</th></tr>
+<tr><td><strong>定义法</strong></td><td>设 <span class="math-inline">$k_1\alpha_1 + \cdots + k_m\alpha_m = 0$</span>，判断是否只有零解</td></tr>
+<tr><td><strong>秩法</strong></td><td>以向量为列构成矩阵A，若 <span class="math-inline">$r(A) = m$</span> 则无关，<span class="math-inline">$r(A) < m$</span> 则相关</td></tr>
+<tr><td><strong>行列式法</strong>(方阵)</td><td>若 <span class="math-inline">$m = n$</span>，<span class="math-inline">$|A| \neq 0$</span> 则无关，<span class="math-inline">$|A| = 0$</span> 则相关</td></tr>
+<tr><td><strong>维数法</strong></td><td>m > n（向量个数 > 维数）→ 必相关</td></tr></table></div>
+<p><strong>典型考法</strong>：</p>
+<ol>
+<li>判断具体向量组是否线性相关</li>
+<li>已知部分向量无关，讨论添加向量后的相关性</li>
+<li>用向量组间线性表示关系判定相关性</li>
+</ol>
+<p><strong>重要定理（选择题高频）</strong>：</p>
+<ul>
+<li>若 <span class="math-inline">$\alpha_1,\cdots,\alpha_r$</span> 线性无关，且可由 <span class="math-inline">$\beta_1,\cdots,\beta_s$</span> 表示，则 <span class="math-inline">$r \leq s$</span></li>
+<li>若向量组(I)可由向量组(II)表示且 <span class="math-inline">$r(I) > r(II)$</span>，则(I)一定线性相关</li>
+<li>m个n维向量当 <span class="math-inline">$m > n$</span> 时必线性相关</li>
+</ul>
+<hr>
+<h3 id="题型14-求极大线性无关组">题型14：求极大线性无关组</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>极大线性无关组的定义</li>
+<li>用初等行变换求极大无关组</li>
+<li>其余向量用无关组线性表示</li>
+</ul>
+<p><strong>解法步骤</strong>：</p>
+<pre><code>步骤1：以向量为列构成矩阵A
+步骤2：对A进行初等行变换，化为行阶梯形或行最简形
+步骤3：主元所在的列对应的原向量即为极大线性无关组
+步骤4：若有要求，将其他向量用极大无关组线性表示（利用行最简形的系数）</code></pre>
+<hr>
+<h3 id="题型15-向量组的秩">题型15：向量组的秩</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：填空题/解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>向量组的秩 = 矩阵的秩</li>
+<li>等价的充要条件</li>
+<li>三秩相等</li>
+</ul>
+<p><strong>典型考法</strong>：</p>
+<ol>
+<li>求向量组的秩</li>
+<li>判断两向量组是否等价</li>
+<li>已知向量组秩，求参数</li>
+</ol>
+<p><strong>向量组等价判定</strong>：</p>
+<div class="math-block">$$\alpha_1,\cdots,\alpha_m \text{ 与 } \beta_1,\cdots,\beta_s \text{ 等价} \iff r(\alpha_1,\cdots,\alpha_m) = r(\beta_1,\cdots,\beta_s) = r(\alpha_1,\cdots,\alpha_m, \beta_1,\cdots,\beta_s)$$</div>
+<p><strong>三秩相等定理（核心！）</strong>：</p>
+<div class="math-block">$$r(A) = \text{行秩} = \text{列秩}$$</div>
+<hr>
+<h3 id="题型16-线性表示问题">题型16：线性表示问题</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>线性组合与线性表示的定义</li>
+<li>用方程组求解线性表示系数</li>
+</ul>
+<p><strong>典型考法</strong>：</p>
+<ol>
+<li>判断 <span class="math-inline">$\beta$</span> 能否由 <span class="math-inline">$\alpha_1,\cdots,\alpha_m$</span> 线性表示</li>
+<li>若可以，求出表示系数</li>
+<li>表示法是否唯一</li>
+</ol>
+<p><strong>解法</strong>：</p>
+<pre><code>判定：$\beta$ 可由 $\alpha_1,\cdots,\alpha_m$ 表示
+  ⇔ 方程组 x1α1 + ··· + xmαm = β 有解
+  ⇔ r(α1,...,αm) = r(α1,...,αm, β)
+
+唯一表示 ⇔ 有解且 r = m（α_i 线性无关时表示法唯一）
+无穷表示 ⇔ 有解且 r &lt; m</code></pre>
+<hr>
+<h3 id="题型17-施密特正交化与正交矩阵">题型17：施密特正交化与正交矩阵</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>施密特正交化公式</li>
+<li>标准正交基</li>
+<li>正交矩阵的定义和判定</li>
+</ul>
+<p><strong>施密特正交化步骤（必熟练）</strong>：</p>
+<pre><code>输入：线性无关组 α1, α2, α3
+过程：
+  β1 = α1
+  β2 = α2 - [(α2,β1)/(β1,β1)]·β1
+  β3 = α3 - [(α3,β1)/(β1,β1)]·β1 - [(α3,β2)/(β2,β2)]·β2
+单位化：
+  e1 = β1/||β1||, e2 = β2/||β2||, e3 = β3/||β3||
+输出：标准正交基 {e1, e2, e3}</code></pre>
+<p><strong>正交矩阵判定</strong>：A是正交矩阵 ⇔ <span class="math-inline">$A^TA = E$</span> ⇔ A的列向量组是标准正交向量组 ⇔ <span class="math-inline">$A^{-1} = A^T$</span></p>
+<hr>
+<h2 id="第四章-线性方程组-常考题型">第四章 线性方程组 —— 常考题型</h2>
+<h3 id="题型18-解的判定">题型18：解的判定</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：选择题/解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>有解条件（系数矩阵秩 = 增广矩阵秩）</li>
+<li>唯一解/无穷解/无解的判定</li>
+</ul>
+<p><strong>判定流程图</strong>：</p>
+<pre><code>          ┌── r(A) = r(A,b) = n → 唯一解
+Ax = b ──┤ ┌── r(A) = r(A,b) &lt; n → 无穷多解
+          └─┤
+            └── r(A) &lt; r(A,b) → 无解</code></pre>
+<p><strong>齐次方程组</strong>：</p>
+<pre><code>Ax = 0 ──┬── r(A) = n → 仅有零解
+          └── r(A) &lt; n → 有非零解（无穷多解）</code></pre>
+<p><strong>含参数方程组的讨论</strong>：</p>
+<pre><code>步骤1：列出增广矩阵 (A ∣ b)
+步骤2：行变换化为行阶梯形
+步骤3：根据参数取值分类讨论r(A)和r(A,b)的关系
+步骤4：对每种情况给出解的情况</code></pre>
+<hr>
+<h3 id="题型19-求基础解系与通解">题型19：求基础解系与通解</h3>
+<p><strong>难度</strong>：★★★★☆ | <strong>题型</strong>：解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>基础解系的概念</li>
+<li>齐次方程组通解</li>
+<li>非齐次方程组通解结构</li>
+</ul>
+<p><strong>齐次方程组求基础解系</strong>：</p>
+<pre><code>步骤1：对A进行行变换，化为行最简形
+步骤2：确定自由未知量（共 n-r 个）
+步骤3：依次令自由未知量为：
+  (1,0,...,0)^T, (0,1,...,0)^T, ..., (0,...,0,1)^T
+  解出对应的基础解系 ξ1, ξ2, ..., ξ_{n-r}
+步骤4：通解为 x = k1·ξ1 + k2·ξ2 + ... + k_{n-r}·ξ_{n-r}</code></pre>
+<p><strong>非齐次方程组求通解</strong>：</p>
+<pre><code>步骤1：对增广矩阵 (A ∣ b) 行变换，判定是否有解
+步骤2：若有解，求出一个特解 η*
+步骤3：求对应齐次方程组的基础解系 ξ1,...,ξ_{n-r}
+步骤4：通解 = η* + k1·ξ1 + ... + k_{n-r}·ξ_{n-r}</code></pre>
+<hr>
+<h3 id="题型20-含参数线性方程组">题型20：含参数线性方程组</h3>
+<p><strong>难度</strong>：★★★★☆ | <strong>题型</strong>：解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>含参数的秩讨论</li>
+<li>分类讨论解的情况</li>
+<li>求参数满足的条件</li>
+</ul>
+<p><strong>典型考法</strong>：</p>
+<ol>
+<li>讨论参数a取何值时方程组有解、无解、唯一解、无穷解</li>
+<li>已知方程组有非零解，求参数</li>
+<li>已知方程组解满足某条件，求参数</li>
+</ol>
+<p><strong>分类讨论框架</strong>：</p>
+<pre><code>1. 对含参增广矩阵行变换
+2. 找出使矩阵"质变"的临界参数值（如某元素为0/非0）
+3. 对各参数区间分别讨论 r(A) 与 r(A,b)
+4. 给出各情况下的解</code></pre>
+<hr>
+<h3 id="题型21-公共解与同解问题">题型21：公共解与同解问题</h3>
+<p><strong>难度</strong>：★★★★☆ | <strong>题型</strong>：解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>公共解的求法</li>
+<li>同解的判定条件</li>
+<li>联立方程组</li>
+</ul>
+<p><strong>公共解的求法</strong>：</p>
+<pre><code>方法1（联立法）：解联立方程组
+  [A]       [0]
+  [B] x  =  [0]
+  通解即为公共解
+
+方法2（通解代入法）：将Ax=0的通解代入Bx=0中，求满足条件的解
+
+方法3：分别求通解，令其相等求公共解</code></pre>
+<p><strong>同解条件</strong>：两齐次方程组同解 ⇔ 行向量组等价 ⇔ <span class="math-inline">$r(A) = r(B) = r\begin{pmatrix} A \\ B \end{pmatrix}$</span></p>
+<hr>
+<h2 id="第五章-特征值与特征向量-常考题型">第五章 特征值与特征向量 —— 常考题型</h2>
+<h3 id="题型22-求特征值与特征向量">题型22：求特征值与特征向量</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：填空题/解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>特征方程 <span class="math-inline">$|\lambda E - A| = 0$</span></li>
+<li>特征向量的求解（解方程组）</li>
+</ul>
+<p><strong>标准求解步骤</strong>：</p>
+<pre><code>步骤1：计算特征多项式 f(λ) = |λE - A|
+步骤2：解 f(λ) = 0，得特征值 λ1, λ2, ..., λn
+步骤3：对每个 λi，解 (λiE - A)x = 0，得特征向量</code></pre>
+<p><strong>快速求特征值技巧</strong>：</p>
+<ul>
+<li>观察矩阵是否可以写成特殊形式（如每行和为常数c → λ = c）</li>
+<li>利用 <span class="math-inline">$\sum \lambda_i = \text{tr}(A)$</span> 和 <span class="math-inline">$\prod \lambda_i = |A|$</span> 验算</li>
+<li>上/下三角阵的特征值即主对角元素</li>
+</ul>
+<hr>
+<h3 id="题型23-相似矩阵的判定">题型23：相似矩阵的判定</h3>
+<p><strong>难度</strong>：★★★★☆ | <strong>题型</strong>：选择题/解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>相似的定义</li>
+<li>相似的必要条件</li>
+<li>相似与特征值的关系</li>
+</ul>
+<p><strong>判定方法</strong>：</p>
+<pre><code>充分条件：特征值相同 + 都可对角化 → 相似
+必要条件（不满足任一条件则不相似）：
+  · 特征值必须相同
+  · 行列式必须相同
+  · 迹必须相同
+  · 秩必须相同</code></pre>
+<p><strong>常见陷阱</strong>：</p>
+<ul>
+<li>特征值相同不一定是相似矩阵！（还需判断是否可对角化）</li>
+<li>若特征值相同，但对某个特征值，特征向量的维数不同，则不相似</li>
+</ul>
+<hr>
+<h3 id="题型24-矩阵对角化">题型24：矩阵对角化</h3>
+<p><strong>难度</strong>：★★★★☆ | <strong>题型</strong>：解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>可对角化的充要条件</li>
+<li>对角化的步骤</li>
+<li>利用对角化求 <span class="math-inline">$A^n$</span></li>
+</ul>
+<p><strong>对角化步骤</strong>：</p>
+<pre><code>步骤1：求所有特征值 λ1, λ2, ..., λn
+步骤2：对每个λi求一个极大线性无关的特征向量组
+步骤3：检查是否有n个线性无关的特征向量
+步骤4：以特征向量为列构造矩阵P
+步骤5：P^{-1}AP = diag(λ1, λ2, ..., λn)</code></pre>
+<p><strong>可对角化判定</strong>：</p>
+<ul>
+<li>✅ 有n个不同特征值 → 可对角化</li>
+<li>✅ 实对称矩阵 → 必可对角化</li>
+<li>❌ 对k重特征值，若 r(λE-A) > n-k → 不可对角化</li>
+</ul>
+<p><strong>利用对角化求 <span class="math-inline">$A^n$</span></strong>：</p>
+<div class="math-block">$$A^n = P \Lambda^n P^{-1} = P \begin{pmatrix} \lambda_1^n & & \\ & \ddots & \\ & & \lambda_n^n \end{pmatrix} P^{-1}$$</div>
+<hr>
+<h3 id="题型25-实对称矩阵的对角化">题型25：实对称矩阵的对角化</h3>
+<p><strong>难度</strong>：★★★★☆ | <strong>题型</strong>：解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>实对称矩阵的特征值都是实数</li>
+<li>不同特征值对应的特征向量正交</li>
+<li>正交对角化</li>
+</ul>
+<p><strong>正交对角化步骤</strong>：</p>
+<pre><code>步骤1：求特征值
+步骤2：对每个特征值求特征向量
+步骤3：对属于同一特征值的特征向量施密特正交化
+步骤4：将所有特征向量单位化
+步骤5：以单位正交向量为列构造正交矩阵Q
+步骤6：Q^T AQ = Q^{-1} AQ = diag(λ1, ..., λn)</code></pre>
+<blockquote><p>与一般对角化的区别：实对称矩阵可以使用正交矩阵Q对角化！</p></blockquote>
+<hr>
+<h2 id="第六章-二次型-常考题型">第六章 二次型 —— 常考题型</h2>
+<h3 id="题型26-写出二次型的矩阵">题型26：写出二次型的矩阵</h3>
+<p><strong>难度</strong>：★★☆☆☆ | <strong>题型</strong>：填空题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>二次型矩阵必须是对称矩阵</li>
+<li>交叉项系数的分配</li>
+</ul>
+<p><strong>规则</strong>：</p>
+<div class="math-block">$$f = \sum_{i=1}^n a_{ii}x_i^2 + 2\sum_{i<j} a_{ij}x_ix_j \implies A = (a_{ij}) \text{ 其中 } a_{ij} = a_{ji}$$</div>
+<p><strong>示例</strong>：<span class="math-inline">$f = x_1^2 + 4x_1x_2 + 2x_2^2$</span> → <span class="math-inline">$A = \begin{pmatrix} 1 & 2 \\ 2 & 2 \end{pmatrix}$</span>（交叉项系数拆成 <span class="math-inline">$2+2=4$</span>）</p>
+<hr>
+<h3 id="题型27-化二次型为标准形">题型27：化二次型为标准形</h3>
+<p><strong>难度</strong>：★★★★☆ | <strong>题型</strong>：解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>正交变换法</li>
+<li>配方法</li>
+<li>合同变换法</li>
+</ul>
+<p><strong>方法一：正交变换法</strong>（必考）</p>
+<pre><code>步骤1：写出二次型的矩阵A（对称矩阵）
+步骤2：求A的特征值 λ1, λ2, ..., λn
+步骤3：求对应的标准正交特征向量
+步骤4：构造正交矩阵Q
+步骤5：正交变换 x = Qy → f = λ1 y1² + λ2 y2² + ... + λn yn²</code></pre>
+<p><strong>方法二：配方法</strong></p>
+<pre><code>步骤1：若含平方项 xi²：
+  · 所有含xi的项配方，写为 (xi + ...)² 的形式
+  · 对剩余项重复此步骤
+
+步骤2：若不含任何平方项（仅有交叉项）：
+  · 令 x1 = y1 + y2, x2 = y1 - y2（将交叉项化为平方项之差）
+  · 再配方
+
+最终得到 f = d1 z1² + d2 z2² + ... + dn zn²</code></pre>
+<hr>
+<h3 id="题型28-二次型正定性判定">题型28：二次型正定性判定</h3>
+<p><strong>难度</strong>：★★★★☆ | <strong>题型</strong>：选择题/解答题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>正定的定义</li>
+<li>正定的充要条件</li>
+<li>顺序主子式</li>
+</ul>
+<p><strong>正定判定方法</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>方法</th><th>判定条件</th></tr>
+<tr><td><strong>定义法</strong></td><td><span class="math-inline">$\forall x \neq 0, x^TAx > 0$</span></td></tr>
+<tr><td><strong>特征值法</strong></td><td>所有特征值 > 0</td></tr>
+<tr><td><strong>顺序主子式法</strong></td><td>所有顺序主子式 > 0</td></tr>
+<tr><td><strong>惯性指数法</strong></td><td>正惯性指数 p = n</td></tr>
+<tr><td><strong>合同判定法</strong></td><td>A合同于E</td></tr></table></div>
+<p><strong>顺序主子式法（最常用）</strong>：</p>
+<pre><code>A正定 ⇔ 
+  a11 &gt; 0
+  |a11  a12| &gt; 0
+  |a21  a22|
+  ......
+  |A| &gt; 0</code></pre>
+<p><strong>含参数正定问题</strong>：</p>
+<pre><code>步骤1：写出A的各阶顺序主子式
+步骤2：令每个主子式 &gt; 0
+步骤3：解不等式组，得参数取值范围</code></pre>
+<hr>
+<h3 id="题型29-合同矩阵的判定">题型29：合同矩阵的判定</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：选择题</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>合同的定义 <span class="math-inline">$B = C^TAC$</span></li>
+<li>合同的充要条件</li>
+</ul>
+<p><strong>判定方法</strong>：</p>
+<pre><code>A与B合同 ⇔ A与B有相同的正惯性指数和负惯性指数
+         ⇔ A与B的秩相同且符号差相同
+
+实对称矩阵A与B合同 ⇔ 正惯性指数相同且负惯性指数相同</code></pre>
+<p><strong>注意与相似的区别</strong>：</p>
+<ul>
+<li>相似 → 特征值相同</li>
+<li>合同 → 正负惯性指数相同（特征值可不同，但正负号个数相同）</li>
+</ul>
+<hr>
+<h3 id="题型30-二次型的最值问题与几何应用">题型30：二次型的最值问题与几何应用</h3>
+<p><strong>难度</strong>：★★★☆☆ | <strong>题型</strong>：选择/填空</p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>瑞利商 <span class="math-inline">$R(x) = \frac{x^TAx}{x^Tx}$</span></li>
+<li>最大/最小特征值与二次型最值</li>
+</ul>
+<p><strong>核心结论</strong>：</p>
+<div class="math-block">$$\lambda_{\min} \leq \frac{x^T A x}{x^T x} \leq \lambda_{\max}$$</div>
+<p>其中 <span class="math-inline">$\lambda_{\min}$</span> 和 <span class="math-inline">$\lambda_{\max}$</span> 为A的最小和最大特征值（A为实对称矩阵）。</p>
+<hr>
+<h2 id="综合题型">综合题型</h2>
+<h3 id="题型31-跨章节综合题-高频">题型31：跨章节综合题（高频！）</h3>
+<p><strong>难度</strong>：★★★★★ | <strong>题型</strong>：解答题</p>
+<p><strong>常见跨章节组合</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>组合类型</th><th>涉及章节</th><th>典型问题</th></tr>
+<tr><td>行列式+矩阵</td><td>Ch1+Ch2</td><td>利用 <span class="math-inline">$|A|$</span> 判断可逆性，求 <span class="math-inline">$A^*$</span></td></tr>
+<tr><td>矩阵+向量</td><td>Ch2+Ch3</td><td>利用矩阵秩判断向量组相关性</td></tr>
+<tr><td>矩阵+特征值</td><td>Ch2+Ch5</td><td><span class="math-inline">$A^n$</span> 的计算，矩阵多项式</td></tr>
+<tr><td>向量+方程组</td><td>Ch3+Ch4</td><td>解的结构与线性表示</td></tr>
+<tr><td>特征值+二次型</td><td>Ch5+Ch6</td><td>正交变换化标准形，正定判定</td></tr>
+<tr><td>矩阵+方程组+特征值</td><td>Ch2+Ch4+Ch5</td><td>利用特征值分析方程组的解</td></tr></table></div>
+<p><strong>综合题解题思路</strong>：</p>
+<ol>
+<li><strong>识别考点</strong>：读题后判断考查哪些知识点</li>
+<li><strong>建立联系</strong>：找到跨章节知识的连接点（如秩、行列式、特征值）</li>
+<li><strong>选择工具</strong>：选择最合适的工具（秩判定、特征值、对角化等）</li>
+<li><strong>分步求解</strong>：将复杂问题分解为独立步骤</li>
+</ol>
+<hr>
+<h2 id="考试策略与答题规范">考试策略与答题规范</h2>
+<h3 id="考试时间分配建议">考试时间分配建议</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>题型</th><th>时间</th><th>策略</th></tr>
+<tr><td>选择题（6题，30分）</td><td>15-20分钟</td><td>巧用排除法、特殊值法</td></tr>
+<tr><td>填空题（6题，30分）</td><td>15-20分钟</td><td>先易后难，不留空</td></tr>
+<tr><td>解答题（6题，70分）</td><td>70-80分钟</td><td>步骤完整，关键公式不得遗漏</td></tr></table></div>
+<h3 id="线代部分在整卷中的典型位置">线代部分在整卷中的典型位置</h3>
+<p>考研数学线代占32分，通常安排：</p>
+<ul>
+<li>选择题 × 2（10分）</li>
+<li>填空题 × 1（5分）</li>
+<li>解答题 × 1（约12分）+ 综合解答题中含线代部分</li>
+</ul>
+<h3 id="答题注意事项">答题注意事项</h3>
+<ol>
+<li><strong>矩阵乘法</strong>：严格遵守顺序，不可随意交换</li>
+<li><strong>向量表示</strong>：区分行向量和列向量</li>
+<li><strong>特征向量</strong>：必须为非零向量，记得写上"k ≠ 0"</li>
+<li><strong>通解表示</strong>：齐次通解要写全 k₁,k₂ 等任意常数</li>
+<li><strong>二次型矩阵</strong>：必须是对称矩阵！交叉项系数要平方</li>
+<li><strong>秩的写法</strong>：行阶梯形要呈现清楚</li>
+</ol>
+<hr>
+<blockquote><p><strong>使用建议</strong>： 1. 对照知识点文档中的公式定理，理解每种题型的解题原理 2. 每个题型至少练习3-5道对应的《基础过关660题》中的题目 3. 解题步骤要规范完整，特别是解答题要写清楚推理过程 4. 跨章节综合题重点关注，是命题趋势</p></blockquote>
+        </div>
+    </div>
+
+    <div class="site-footer" style="display:none">
+        <p>&copy; 2026 cx861 | 考研笔记 | <a href="https://github.com/cx861">GitHub</a></p>
+    </div>
+
+    <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <script>
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+        backTop.classList.toggle('visible', window.scrollY > 300);
+    });
+    </script>
+</body>
+</html>

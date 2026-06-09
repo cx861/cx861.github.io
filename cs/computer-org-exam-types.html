@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常考题型 - 线性代数 - 考研笔记</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/main.js" defer></script>
+    <script>MathJax = {tex: {inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"], ["\\[", "\\]"]], packages: {'[+]': ['physics']}}, options: {ignoreHtmlClass: "no-math"}};</script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+    <style>
+        mjx-container {
+            max-width: 100%;
+            overflow-x: auto;
+            white-space: normal;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .table-wrapper table {
+            table-layout: fixed;
+            width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .math-block {
+            overflow-x: auto;
+            padding: 0.5em 0;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 12px 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre code {
+            background: transparent;
+            padding: 0;
+        }
+        blockquote {
+            border-left: 4px solid #f5a623;
+            background: #fffbe6;
+            padding: 12px 16px;
+            margin: 12px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        blockquote p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">跳到内容</a>
+<div id="scroll-progress"></div>
+
+    <nav class="site-nav">
+        <div class="site-nav-inner">
+            <span class="nav-logo">考研笔记</span>
+            <a href="../index.html">首页</a>
+            <a href="../knowledge-base.html">知识库</a>
+            <a href="../exam-types.html" class="active">常考题型及解法</a>
+            <a href="../notes.html">个人笔记</a>
+            <a href="../mistakes.html">错题本</a>
+            <div class="nav-controls">
+                <button class="theme-toggle" aria-label="切换深色/浅色模式"><span class="theme-toggle-icon">🌙</span></button>
+                <button class="hamburger" aria-label="菜单" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+<div class="mobile-nav-overlay"></div>
+<div class="mobile-menu" role="dialog" aria-label="导航菜单">
+    <a href="../index.html">首页</a>
+    <a href="../knowledge-base.html">知识库</a>
+    <a href="../exam-types.html">常考题型及解法</a>
+    <a href="../notes.html">个人笔记</a>
+    <a href="../mistakes.html">错题本</a>
+    <button class="menu-theme-toggle"><span class="menu-theme-icon">🌙</span> 切换深色/浅色模式</button>
+</div>
+
+    <div class="page-header cs">
+        <h1>⚙️ 计算机组成原理 常考题型与解法</h1>
+        <div class="breadcrumb"><a href="../index.html">首页</a> / <a href="../exam-types.html">常考题型及解法</a> / 计算机组成原理</div>
+    </div>
+
+    <div class="container" id="main-content">
+        <div class="toc">
+            <h3>章节导航</h3>
+            <ul>
+                <li><a href="#s1">一、计算机性能指标计算题 ⭐⭐⭐</a></li>
+                <li><a href="#s2">二、定点数编码与表示范围题 ⭐⭐⭐</a></li>
+                <li><a href="#s3">三、C语言类型转换题 ⭐⭐⭐</a></li>
+                <li><a href="#s4">四、IEEE 754浮点数题 ⭐⭐⭐</a></li>
+                <li><a href="#s5">五、Cache映射与计算题 ⭐⭐⭐</a></li>
+                <li><a href="#s6">六、指令寻址与地址计算题 ⭐⭐</a></li>
+                <li><a href="#s7">七、CISC vs RISC 对比题 ⭐</a></li>
+                <li><a href="#s8">八、数据通路与指令执行分析题 ⭐⭐</a></li>
+                <li><a href="#s9">九、指令流水线冒险分析与性能计算题 ⭐⭐⭐</a></li>
+                <li><a href="#s10">十、中断与DMA方式对比题 ⭐⭐</a></li>
+                <li><a href="#s11">十一、存储器扩展与交叉编址题 ⭐⭐</a></li>
+                <li><a href="#s12">十二、总线带宽与定时方式题 ⭐</a></li>
+                <li><a href="#s13">十三、虚拟存储器与TLB题 ⭐⭐</a></li>
+            </ul>
+        </div>
+
+        <div class="content-card">
+<blockquote>来源：《2027王道考研·计算机组成原理》<br>覆盖408统考计算机组成原理高频题型及解题策略</blockquote>
+<hr>
+<h2 id="s1">一、计算机性能指标计算题 ⭐⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>给出主频、CPI、指令条数等参数，计算CPU执行时间、MIPS、MFLOPS等</li>
+<li>选择题或综合题，<strong>408统考每年必考</strong></li>
+<li>2022、2023、2024连续考查CPU执行时间与平均CPI计算</li></ul>
+<h3>核心公式</h3>
+<pre><code>CPU执行时间 = CPU时钟周期数 / 主频 = (指令条数 × CPI) / 主频
+MIPS = 主频 / (CPI × 10⁶)
+CPI = Σ(各类指令CPI × 所占比例)    ← 加权平均
+程序执行总时间 = (总指令条数 × 平均CPI) / 主频</code></pre>
+<h3>解题模板</h3>
+<p><strong>Step 1</strong>：确定平均CPI（加权平均）</p>
+<pre><code>CPI_avg = Σ(CPI_i × 比例_i)</code></pre>
+<p><strong>Step 2</strong>：代入CPU执行时间公式</p>
+<pre><code>T = (指令条数 × CPI_avg) / 主频</code></pre>
+<p><strong>Step 3</strong>：注意单位换算</p>
+<ul><li>主频：GHz = 10⁹Hz，MHz = 10⁶Hz</li>
+<li>时间：ns = 10⁻⁹s，μs = 10⁻⁶s，ms = 10⁻³s</li>
+<li>MIPS：结果 = 主频(MHz) / CPI</li></ul>
+<p><strong>涉及知识点</strong>：1.3节 计算机性能指标</p>
+<h3>常考真题示例</h3>
+<p><strong>1.【2013统考真题】</strong> 某计算机主频1.2GHz，4类指令比例及CPI如下，求MIPS。</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>类型</th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+<tr><td>比例</td><td>50%</td><td>20%</td><td>10%</td><td>20%</td></tr>
+<tr><td>CPI</td><td>2</td><td>3</td><td>4</td><td>5</td></tr></table></div>
+<p><strong>解</strong>：CPI = 2×0.5+3×0.2+4×0.1+5×0.2=3，MIPS=1200/3=<strong>400</strong></p>
+<p><strong>2.【2023统考真题】</strong> 主频1.5GHz，指令条数5×10⁵，平均CPI=1.2，求执行速度(GIPS)和CPU时间。</p>
+<p><strong>解</strong>：IPS=1.5G/1.2=<strong>1.25GIPS</strong>，CPU时间=5×10⁵×1.2/1.5×10⁹=<strong>0.4ms</strong></p>
+<p><strong>3.【2017统考真题】</strong> 比较M1(1.5GHz, CPI=2)与M2(1.2GHz, CPI=1)运行程序P的时间比。</p>
+<p><strong>解</strong>：时间比 = (2/1.5)/(1/1.2) = <strong>1.6</strong>（M1时间是M2的1.6倍）</p>
+<hr>
+<h2 id="s2">二、定点数编码与表示范围题 ⭐⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>给定机器数编码，判断真值、表示范围</li>
+<li>补码、移码与真值的相互转换</li>
+<li>给定若干个0和1组成的位串，求某种编码下的最大/最小值</li>
+<li>选择题为主，<strong>高频考点</strong></li></ul>
+<h3>核心解法</h3>
+<h4>1. 四种编码对比记忆</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>编码</th><th>n+1位整数范围</th><th>+0/-0</th><th>转换要点</th></tr>
+<tr><td>原码</td><td>-(2ⁿ-1)~2ⁿ-1</td><td>有±0</td><td>负数：符号1+绝对值</td></tr>
+<tr><td>反码</td><td>-(2ⁿ-1)~2ⁿ-1</td><td>有±0</td><td>负数：按位取反</td></tr>
+<tr><td>补码</td><td><strong>-2ⁿ~2ⁿ-1</strong></td><td>唯一0</td><td>负数：取反+1</td></tr>
+<tr><td>移码</td><td>-2ⁿ~2ⁿ-1</td><td>唯一0</td><td>=真值+2ⁿ</td></tr></table></div>
+<h4>2. 补码快速解题技巧</h4>
+<p><strong>负数补码判断大小</strong>（2015考点）：</p>
+<ul><li>负数补码：<strong>数值部分越小，绝对值越大（越负）</strong></li>
+<li>找最小负数 → 符号位1 + 数值位尽量小(min=全0)</li>
+<li>找最大负数 → 符号位1 + 数值位尽量大(max=全1)</li></ul>
+<p><strong>补码转真值</strong>（2020、2023考点）：</p>
+<pre><code>若符号位=0 → 真值为正，直接读数值
+若符号位=1 → 真值为负，数值"取反+1"得绝对值</code></pre>
+<p><strong>涉及知识点</strong>：2.1.2节 定点数的编码表示</p>
+<h3>常考真题示例</h3>
+<p><strong>1.【2015统考真题】</strong> 由3个"1"和5个"0"组成的8位二进制补码，最小整数是？</p>
+<p><strong>解</strong>：补码最小负数符号位必为1，剩余2个1放在数值最低位使数值最小→10000011→按位取反+1得绝对值11111101=125→真值<strong>-125</strong></p>
+<p><strong>2.【2022统考真题】</strong> 32位补码所能表示的整数范围？</p>
+<p><strong>解</strong>：-2³¹ ~ 2³¹-1，<strong>选B</strong></p>
+<p><strong>3.【2021统考真题】</strong> 已知x,y,z的机器数FFFDH,FFDFH,7FFCH，判断大小关系。</p>
+<p><strong>解</strong>：按补码规则：有符号时FFDFH<FFFDH<7FFCH→y<x<z；无符号时7FFCH<FFFDH<FFDFH→z<x<y</p>
+<hr>
+<h2 id="s3">三、C语言类型转换题 ⭐⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>给定C语言代码片段，判断变量的最终值</li>
+<li>涉及short↔int转换、signed↔unsigned转换</li>
+<li><strong>2011-2024连续考查</strong>，几乎每年1题</li>
+<li>纯选择题</li></ul>
+<h3>核心解法</h3>
+<p><strong>三种转换规则</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>场景</th><th>规则</th><th>位变化</th><th>值变化</th></tr>
+<tr><td>长→短</td><td><strong>截断高位</strong></td><td>高位丢弃</td><td>可能变化（隐蔽！）</td></tr>
+<tr><td>同字长</td><td><strong>重新解释</strong></td><td>不变</td><td>有符号↔无符号语义不同</td></tr>
+<tr><td>短→长(有符号)</td><td><strong>符号扩展</strong></td><td>高位补符号位</td><td>不变</td></tr>
+<tr><td>短→长(无符号)</td><td><strong>零扩展</strong></td><td>高位补0</td><td>不变</td></tr></table></div>
+<p><strong>解题三步走</strong>：</p>
+<ol><li>写出源数据的<strong>二进制位模式</strong>（补码形式）</li>
+<li>根据转换规则得到目标位模式</li>
+<li>按目标类型解读位模式</li></ol>
+<p><strong>涉及知识点</strong>：2.1.4节 C语言中的整数类型及类型转换</p>
+<h3>常考真题示例</h3>
+<p><strong>1.【2016统考真题】</strong></p>
+<pre><code>short si = -32767;
+unsigned short usi = si;</code></pre>
+<p>求usi的值。</p>
+<p><strong>解</strong>：si=-32767的补码=0x8001（16位），同字长转换不改变位模式，usi按无符号解读=<strong>32769</strong></p>
+<p><strong>2.【2019统考真题】</strong></p>
+<pre><code>unsigned short usi = 65535;
+short si = usi;</code></pre>
+<p>求si的值。</p>
+<p><strong>解</strong>：usi=65535=0xFFFF，同字长→si按有符号补码解读，全1=-1，<strong>选A(-1)</strong></p>
+<p><strong>3.【2024统考真题】</strong></p>
+<pre><code>short si = -32767;
+unsigned int ui = si;</code></pre>
+<p>求ui的值。</p>
+<p><strong>解</strong>：si=-32767=0x8001(16位)→扩展为32位0xFFFF8001(符号扩展)→按无符号解读=2³²-32767</p>
+<hr>
+<h2 id="s4">四、IEEE 754浮点数题 ⭐⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>十进制数↔IEEE 754单/双精度格式的相互转换</li>
+<li>浮点数加减运算（对阶、规格化、舍入）</li>
+<li>选择题+综合题均出现</li>
+<li><strong>408统考必考重点</strong></li></ul>
+<h3>核心解法</h3>
+<h4>1. 十进制→IEEE 754格式</h4>
+<p><strong>步骤</strong>：</p>
+<ol><li>将十进制数转为二进制（规格化：±1.M×2^E）</li>
+<li>符号位S：正为0，负为1</li>
+<li>阶码e = E + 偏置值（单精度127，双精度1023），写为8位/11位</li>
+<li>尾数M：去掉隐含的"1."，右补0凑满23/52位</li></ol>
+<h4>2. 浮点数加减步骤</h4>
+<pre><code>① 对阶：小阶向大阶看齐，尾数右移
+② 尾数求和：定点加减法
+③ 规格化：左规（尾数左移）或右规（尾数右移）
+④ 舍入：0舍1入等
+⑤ 溢出判断：阶码上溢/下溢</code></pre>
+<h4>3. IEEE 754特殊值识别</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>值</th><th>阶码</th><th>尾数</th></tr>
+<tr><td>0</td><td>全0</td><td>全0</td></tr>
+<tr><td>±∞</td><td>全1</td><td>全0</td></tr>
+<tr><td>NaN</td><td>全1</td><td>非0</td></tr></table></div>
+<p><strong>涉及知识点</strong>：2.3节 浮点数的表示与运算</p>
+<h3>常考真题示例</h3>
+<p><strong>1.</strong> 将-12.625转换为IEEE 754单精度浮点数。</p>
+<p><strong>解</strong>：12.625=1100.101=1.100101×2³，S=1，e=3+127=130=10000010，M=100101000...0</p>
+<p>→ <strong>1 10000010 10010100000000000000000</strong></p>
+<p><strong>2.</strong> 浮点数加减中对阶操作时，遵循的规则是"小阶向大阶看齐"，原因是减少精度损失。</p>
+<hr>
+<h2 id="s5">五、Cache映射与计算题 ⭐⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>根据主存容量、Cache容量、块大小等参数，计算地址划分（tag/index/offset位数）</li>
+<li>三种映射方式（直接、全相联、组相联）的地址分析和命中率比较</li>
+<li>Cache替换算法（LRU）的模拟判断</li>
+<li>选择题和综合题均有出现</li>
+<li><strong>近几年高频考点</strong>（2016-2024）</li></ul>
+<h3>核心解法</h3>
+<h4>1. 地址划分计算</h4>
+<p><strong>直接映射</strong>：</p>
+<pre><code>主存地址 = {标记(tag), Cache行号(index), 块内地址(offset)}
+offset位数 = log₂(块大小)
+index位数  = log₂(Cache行数)
+tag位数    = 主存地址总位数 - offset位数 - index位数</code></pre>
+<p><strong>n路组相联映射</strong>：</p>
+<pre><code>组数 = Cache行数 / n
+index位数 = log₂(组数)
+主存地址 = {标记(tag), 组号(index), 块内地址(offset)}</code></pre>
+<p><strong>全相联映射</strong>：</p>
+<pre><code>主存地址 = {标记(tag), 块内地址(offset)}
+tag位数 = 主存地址总位数 - offset位数</code></pre>
+<h4>2. LRU替换算法模拟</h4>
+<p>对每组（或整个Cache）中的块，记录最近使用顺序：</p>
+<ul><li>最近访问的块 → 排到最前</li>
+<li>需要替换时 → 替换排在最后的块（最久未用）</li></ul>
+<h4>3. Cache性能计算</h4>
+<pre><code>命中率 H = 命中次数 / 总访问次数
+平均访问时间 = H × Cache访问时间 + (1-H) × 主存访问时间</code></pre>
+<p><strong>涉及知识点</strong>：3.3节 主存与Cache的映射</p>
+<h3>常考真题示例</h3>
+<p><strong>1.</strong> 主存容量64KB，Cache容量4KB，块大小为16B，按字节编址。求直接映射时tag/index/offset的位数。</p>
+<p><strong>解</strong>：主存地址16位。offset=log₂16=4位。Cache行数=4K/16=256→index=log₂256=8位。tag=16-8-4=<strong>4位</strong>。</p>
+<p><strong>2.</strong> 对于连续地址序列{0,1,2,...,7,0,1,...,7,0,1,2,3}的访存，在2路组相联(每组2行)、LRU替换、块大小=4、Cache共4行的情况下，求命中率。</p>
+<p><strong>解</strong>：Cache共4行，2路组相联→共2组，每组2行。地址0-3在块0，4-7在块1。块0映射到组0，块1映射到组1。序列分析可得命中率。</p>
+<hr>
+<h2 id="s6">六、指令寻址与地址计算题 ⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>给定寻址方式和参数，计算有效地址(EA)</li>
+<li>基址、变址、相对三种偏移寻址的地址计算与区别</li>
+<li>选择题为主，较小概率出综合题</li></ul>
+<h3>核心解法</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>寻址方式</th><th>EA公式</th><th>应用场景</th></tr>
+<tr><td>立即寻址</td><td>操作数=指令中直接给出</td><td>常量赋值</td></tr>
+<tr><td>直接寻址</td><td>EA=A（指令地址码）</td><td>访问固定地址变量</td></tr>
+<tr><td>间接寻址</td><td>EA=(A)</td><td>指针访问</td></tr>
+<tr><td>寄存器寻址</td><td>EA=Ri</td><td>寄存器变量</td></tr>
+<tr><td>寄存器间接</td><td>EA=(Ri)</td><td>指针变量</td></tr>
+<tr><td>相对寻址</td><td>EA=(PC)+A</td><td>转移/循环/重定位</td></tr>
+<tr><td>基址寻址</td><td>EA=(BR)+A</td><td>多道程序/重定位</td></tr>
+<tr><td>变址寻址</td><td>EA=(IX)+A</td><td>数组/字符串处理</td></tr>
+<tr><td>堆栈寻址</td><td>隐含SP</td><td>函数调用/参数传递</td></tr></table></div>
+<p><strong>三种偏移寻址对比</strong>（易混淆）：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>寻址</th><th>基地址</th><th>偏移量来源</th><th>用途</th></tr>
+<tr><td>相对</td><td>PC提供</td><td>指令地址码A</td><td>程序转移</td></tr>
+<tr><td>基址</td><td>BR提供</td><td>指令地址码A</td><td>程序重定位</td></tr>
+<tr><td>变址</td><td>指令地址码A</td><td>IX提供</td><td>数组循环</td></tr></table></div>
+<p><strong>涉及知识点</strong>：4.2节 寻址方式</p>
+<hr>
+<h2 id="s7">七、CISC vs RISC 对比题 ⭐</h2>
+<h3>题型特征</h3>
+<ul><li>选择题给出若干条CISC/RISC的特点，判断正误</li>
+<li>通常以对比表格形式出现</li>
+<li>几乎每年1题</li></ul>
+<h3>核心解法</h3>
+<p>背记CISC和RISC的核心区别：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>维度</th><th>CISC</th><th>RISC</th></tr>
+<tr><td>指令数量</td><td>多</td><td>少</td></tr>
+<tr><td>指令长度</td><td>变长</td><td>定长（多为32位）</td></tr>
+<tr><td>寻址方式</td><td>多</td><td>少</td></tr>
+<tr><td>访存方式</td><td>多种指令可访存</td><td><strong>仅LOAD/STORE</strong></td></tr>
+<tr><td>控制器</td><td>微程序</td><td>硬布线</td></tr>
+<tr><td>寄存器</td><td>少</td><td>多</td></tr>
+<tr><td>流水线</td><td>不易实现</td><td>容易实现</td></tr>
+<tr><td>编译器</td><td>简单</td><td>复杂</td></tr>
+<tr><td>代表</td><td>x86</td><td>ARM, MIPS, RISC-V</td></tr></table></div>
+<p><strong>涉及知识点</strong>：4.3节 CISC和RISC</p>
+<hr>
+<h2 id="s8">八、数据通路与指令执行分析题 ⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>分析某条指令通过数据通路各阶段的控制信号流程</li>
+<li>画出单总线结构下指令的执行流程（取指周期、执行周期）</li>
+<li>比较多总线结构的优劣</li>
+<li>综合题为主</li></ul>
+<h3>核心解法</h3>
+<p><strong>单总线结构下的典型指令执行流程</strong>：</p>
+<p><strong>取指周期（公共操作）</strong>：</p>
+<pre><code>PC→MAR, 读存储器 → MDR→IR, PC+1→PC</code></pre>
+<p><strong>加法指令 ADD R0, R1</strong> 的执行周期：</p>
+<pre><code>R1→Y（暂存）, R0+Y→Z（ALU运算）, Z→R0（写回）</code></pre>
+<p><strong>涉及知识点</strong>：5.1-5.3节 CPU结构与控制器</p>
+<hr>
+<h2 id="s9">九、指令流水线冒险分析与性能计算题 ⭐⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>给定代码序列，分析数据冒险和控制冒险</li>
+<li>流水线时空图绘制与分析</li>
+<li>计算流水线的吞吐率、加速比、效率</li>
+<li><strong>408统考高频综合题考点</strong></li></ul>
+<h3>核心解法</h3>
+<h4>1. 数据冒险识别与解决</h4>
+<p><strong>RAW（写后读）冒险</strong>：</p>
+<ul><li>识别：前条指令写某寄存器，后条指令读同一寄存器且间隔<流水段数</li>
+<li>解决：<strong>转发/旁路</strong>（将EX/MEM或MEM/WB结果直接前递到EX阶段输入）</li></ul>
+<p><strong>Load-Use冒险</strong>：</p>
+<ul><li>LOAD指令后紧跟使用其结果的指令</li>
+<li>必须插入一个<strong>气泡/阻塞</strong>(stall)，转发无法完全解决</li></ul>
+<h4>2. 控制冒险处理</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>方式</th><th>说明</th></tr>
+<tr><td>阻塞</td><td>等转移结果，损失2-3个时钟</td></tr>
+<tr><td>静态分支预测</td><td>"总是预测不跳转"</td></tr>
+<tr><td>动态分支预测</td><td>BTB记录历史跳转信息</td></tr>
+<tr><td>延迟分支</td><td>转移指令后插入一条不受影响的指令</td></tr></table></div>
+<h4>3. 流水线性能计算</h4>
+<p><strong>经典五段流水线（IF-ID-EX-MEM-WB）</strong>：</p>
+<pre><code>执行n条指令所需时间：T = k + n - 1 个时钟周期（k=5）
+非流水执行：T_non = k × n
+加速比：S = (k×n)/(k+n-1)
+吞吐率：TP = n/(k+n-1) (条/时钟周期)
+效率：E = n/(k+n-1)</code></pre>
+<p><strong>涉及知识点</strong>：5.5节 指令流水线</p>
+<h3>常考真题示例</h3>
+<p><strong>1.</strong> 分析以下代码段在五段流水线中各存在何种数据冒险及解决方式：</p>
+<pre><code>ADD R1, R2, R3  // R1←R2+R3
+SUB R4, R1, R5  // R4←R1-R5  ← RAW冒险于R1
+AND R6, R1, R7  // R6←R1&amp;R7  ← RAW冒险于R1</code></pre>
+<p><strong>解</strong>：ADD在EX段产生R1，SUB在EX段需要R1→需一次转发。AND在EX段需要R1→ADD在MEM段转发。</p>
+<p><strong>2.</strong> 五段流水线执行100条指令，无冒险时，需多少周期？加速比？</p>
+<p><strong>解</strong>：T=5+100-1=104周期。非流水=5×100=500。加速比=500/104≈<strong>4.81</strong>。</p>
+<hr>
+<h2 id="s10">十、中断与DMA方式对比题 ⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>比较程序查询、中断、DMA三种I/O方式的特点与适用场景</li>
+<li>中断响应过程及中断向量计算</li>
+<li>DMA传送过程</li>
+<li>选择题为主</li></ul>
+<h3>核心解法</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>特性</th><th>程序查询</th><th>程序中断</th><th>DMA</th></tr>
+<tr><td>CPU参与数据传送</td><td>全程</td><td>每次传送</td><td>仅开始和结束</td></tr>
+<tr><td>传送单位</td><td>字/字节</td><td>字/字节</td><td>数据块</td></tr>
+<tr><td>对CPU利用率影响</td><td>极大(踏步等待)</td><td>中等(中断开销)</td><td>小(仅初始化)</td></tr>
+<tr><td>适用设备速度</td><td>极低速</td><td>中低速</td><td>高速</td></tr>
+<tr><td>额外硬件</td><td>无</td><td>中断控制器</td><td>DMA控制器</td></tr>
+<tr><td>数据传送路径</td><td>设备→CPU→主存</td><td>设备→CPU→主存</td><td><strong>设备↔主存(绕过CPU)</strong></td></tr></table></div>
+<p><strong>涉及知识点</strong>：7.2节 I/O控制方式</p>
+<h3>常考真题示例</h3>
+<p><strong>1.</strong> 比较程序中断和DMA方式，DMA方式的主要优势是？</p>
+<p><strong>答</strong>：DMA方式下数据在设备和主存之间<strong>直接传送</strong>，不经CPU中转，传送过程CPU可继续执行其他程序，大幅提高CPU利用率。每次DMA传送<strong>整块</strong>数据，而不是逐字传送。</p>
+<p><strong>2.</strong> CPU响应DMA请求与响应中断请求的时刻有何不同？</p>
+<p><strong>答</strong>：CPU通常在<strong>每条指令执行结束</strong>时采样中断请求；但DMA请求可在<strong>任何总线周期结束</strong>时被响应（只要CPU不占用总线）。</p>
+<hr>
+<h2 id="s11">十一、存储器扩展与交叉编址题 ⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>根据存储芯片容量和主存容量，计算所需芯片数和地址线数</li>
+<li>低位交叉编址下连续地址的访问时间计算</li>
+<li>选择题+综合题</li></ul>
+<h3>核心解法</h3>
+<p><strong>存储器芯片数量计算</strong>：</p>
+<pre><code>所需芯片数 = (主存容量) / (单芯片容量)</code></pre>
+<p><strong>低位交叉编址访问时间</strong>：</p>
+<ul><li>m体低位交叉，存取周期T，总线周期τ</li>
+<li>连续访问m个地址的时间 = T + (m-1)×τ</li>
+<li>若τ << T，可实现接近m倍的带宽提升</li></ul>
+<p><strong>涉及知识点</strong>：3.2节 主存储器</p>
+<hr>
+<h2 id="s12">十二、总线带宽与定时方式题 ⭐</h2>
+<h3>题型特征</h3>
+<ul><li>计算总线带宽、传输时间</li>
+<li>同步/异步定时方式特点判断</li>
+<li>常见总线标准辨析</li>
+<li>选择题为主</li></ul>
+<h3>核心解法</h3>
+<p><strong>总线带宽计算</strong>：</p>
+<pre><code>总线带宽 = 总线宽度(字节) × 总线时钟频率 / 每次传输所需时钟数
+猝发传输带宽 = 数据总量 / (地址阶段 + 数据阶段×n)</code></pre>
+<p><strong>定时方式判定</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>特征</th><th>同步</th><th>异步</th><th>半同步</th></tr>
+<tr><td>时钟控制</td><td>统一时钟</td><td>握手信号</td><td>时钟+等待</td></tr>
+<tr><td>速度</td><td>快</td><td>较慢</td><td>较快</td></tr>
+<tr><td>灵活性</td><td>低</td><td>高</td><td>中</td></tr></table></div>
+<p><strong>涉及知识点</strong>：6.1-6.2节 总线</p>
+<hr>
+<h2 id="s13">十三、虚拟存储器与TLB题 ⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>页式虚拟存储器的地址转换过程</li>
+<li>TLB+Cache+Page缺失的组合分析</li>
+<li>页表大小计算</li>
+<li>选择题+综合题</li></ul>
+<h3>核心解法</h3>
+<p><strong>地址转换</strong>：</p>
+<pre><code>虚拟地址 = {虚页号(VPN), 页内偏移}
+物理地址 = {物理页框号(PFN), 页内偏移}</code></pre>
+<p><strong>TLB缺失组合</strong>（2010考点）：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>组合</th><th>TLB</th><th>Page</th><th>Cache</th><th>是否可能</th></tr>
+<tr><td>1</td><td>命中</td><td>命中</td><td>命中</td><td>✓ 最佳情况</td></tr>
+<tr><td>2</td><td>命中</td><td>命中</td><td>缺失</td><td>✓</td></tr>
+<tr><td>3</td><td>缺失</td><td>命中</td><td>命中</td><td>✓ TLB缺失但页表在内存</td></tr>
+<tr><td>4</td><td>缺失</td><td>命中</td><td>缺失</td><td>✓</td></tr>
+<tr><td>5</td><td>缺失</td><td>缺失</td><td>命中</td><td><strong>✗</strong> Page缺失则Cache必缺失</td></tr>
+<tr><td>6</td><td>缺失</td><td>缺失</td><td>缺失</td><td>✓ 最差情况</td></tr>
+<tr><td>7</td><td>命中</td><td>缺失</td><td>命中</td><td><strong>✗</strong> Page缺失则TLB必缺失</td></tr>
+<tr><td>8</td><td>命中</td><td>缺失</td><td>缺失</td><td><strong>✗</strong> 同上</td></tr></table></div>
+<p><strong>涉及知识点</strong>：3.4节 虚拟存储器</p>
+<hr>
+<p>*（全文涵盖408统考计算机组成原理全部高频题型，每类题型均附真题示例和详细解题思路）*</p>
+        </div>
+    </div>
+
+    <div class="site-footer">
+        <p>&copy; 2026 cx861 | 考研笔记 | <a href="https://github.com/cx861">GitHub</a></p>
+    </div>
+
+    <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <script>
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+        backTop.classList.toggle('visible', window.scrollY > 300);
+    });
+    </script>
+</body>
+</html>
