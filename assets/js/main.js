@@ -6,18 +6,53 @@
   'use strict';
 
   /* ====== 深色模式管理 ====== */
+  const SafeStorage = {
+    get(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch {
+        return null;
+      }
+    },
+
+    set(key, value) {
+      try {
+        localStorage.setItem(key, value);
+        return true;
+      } catch {
+        return false;
+      }
+    }
+  };
+
+  const Media = {
+    query(query) {
+      return window.matchMedia ? window.matchMedia(query) : null;
+    },
+
+    onChange(mediaQuery, handler) {
+      if (!mediaQuery) return;
+      if (typeof mediaQuery.addEventListener === 'function') {
+        mediaQuery.addEventListener('change', handler);
+      } else if (typeof mediaQuery.addListener === 'function') {
+        mediaQuery.addListener(handler);
+      }
+    }
+  };
+
   const ThemeManager = {
     KEY: 'kaoyan-theme',
 
     init() {
-      const saved = localStorage.getItem(this.KEY);
+      const saved = SafeStorage.get(this.KEY);
+      const darkQuery = Media.query('(prefers-color-scheme: dark)');
       if (saved) {
         this.apply(saved);
-      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      } else if (darkQuery && darkQuery.matches) {
         this.apply('dark');
       }
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem(this.KEY)) {
+      Media.onChange(darkQuery, (e) => {
+        if (!SafeStorage.get(this.KEY)) {
           this.apply(e.matches ? 'dark' : 'light');
         }
       });
@@ -27,7 +62,7 @@
       const current = document.documentElement.getAttribute('data-theme');
       const next = current === 'dark' ? 'light' : 'dark';
       this.apply(next);
-      localStorage.setItem(this.KEY, next);
+      SafeStorage.set(this.KEY, next);
     },
 
     apply(theme) {
@@ -65,6 +100,7 @@
     open() {
       this.isOpen = true;
       this.hamburger.classList.add('active');
+      this.hamburger.setAttribute('aria-expanded', 'true');
       this.overlay.classList.add('active');
       this.menu.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -73,6 +109,7 @@
     close() {
       this.isOpen = false;
       this.hamburger.classList.remove('active');
+      this.hamburger.setAttribute('aria-expanded', 'false');
       this.overlay.classList.remove('active');
       this.menu.classList.remove('active');
       document.body.style.overflow = '';
@@ -102,7 +139,8 @@
   /* ====== 滚动入场动画 ====== */
   const RevealAnimations = {
     init() {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const reducedMotion = Media.query('(prefers-reduced-motion: reduce)');
+      if (reducedMotion && reducedMotion.matches) {
         document.querySelectorAll('.reveal').forEach(el => el.classList.add('revealed'));
         return;
       }
@@ -142,8 +180,10 @@
   /* ====== 仪表板卡片倾斜效果 ====== */
   const TiltCards = {
     init() {
-      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const canHover = Media.query('(hover: hover) and (pointer: fine)');
+      const reducedMotion = Media.query('(prefers-reduced-motion: reduce)');
+      if (canHover && !canHover.matches) return;
+      if (reducedMotion && reducedMotion.matches) return;
       document.querySelectorAll('.dash-card').forEach(card => {
         card.addEventListener('mousemove', (e) => {
           const rect = card.getBoundingClientRect();
@@ -211,11 +251,11 @@
 
     _toggle() {
       const collapsed = this.tocEl.classList.toggle('collapsed');
-      localStorage.setItem(this.KEY, collapsed ? '1' : '0');
+      SafeStorage.set(this.KEY, collapsed ? '1' : '0');
     },
 
     _restoreState() {
-      if (localStorage.getItem(this.KEY) === '1') {
+      if (SafeStorage.get(this.KEY) === '1') {
         this.tocEl.classList.add('collapsed');
       }
     },
