@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>常考题型 - 线性代数 - 考研笔记</title>
+    <title>常考题型 - 计算机网络 - 考研笔记</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <script src="../assets/js/main.js" defer></script>
     <script>MathJax = {tex: {inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"], ["\\[", "\\]"]], packages: {'[+]': ['physics']}}, options: {ignoreHtmlClass: "no-math"}};</script>
@@ -106,16 +106,20 @@
                 <li><a href="#s4">四、CRC循环冗余码计算题</a></li>
                 <li><a href="#s5">五、ARQ协议窗口与信道利用率</a></li>
                 <li><a href="#s6">六、CSMA/CD冲突检测计算题</a></li>
+                <li><a href="#s6a">补充、交换机自学习、VLAN与广播域题</a></li>
                 <li><a href="#s7">七、IP分片计算题 ⭐⭐⭐</a></li>
                 <li><a href="#s8">八、子网划分与CIDR计算题 ⭐⭐⭐</a></li>
                 <li><a href="#s9">九、ARP与分组转发综合题</a></li>
                 <li><a href="#s10">十、路由协议比较题（RIP/OSPF/BGP）</a></li>
+                <li><a href="#s10a">补充、NAT/DHCP/ICMP综合题</a></li>
                 <li><a href="#s11">十一、TCP三次握手与四次挥手 ⭐⭐⭐</a></li>
                 <li><a href="#s12">十二、TCP拥塞控制计算题 ⭐⭐⭐</a></li>
                 <li><a href="#s13">十三、TCP序号与确认号计算题</a></li>
+                <li><a href="#s13a">补充、UDP校验和与TCP流量控制题</a></li>
                 <li><a href="#s14">十四、DNS查询过程题</a></li>
                 <li><a href="#s15">十五、FTP双连接理解题</a></li>
                 <li><a href="#s16">十六、HTTP综合题</a></li>
+                <li><a href="#s16a">补充、电子邮件协议辨析题</a></li>
                 <li><a href="#s17">十七、综合应用题（跨章节）</a></li>
                 <li><a href="#s18">附录：408计算机网络高频考点分布</a></li>
             </ul>
@@ -288,6 +292,33 @@ SR窗口最大 = 2^(n-1)</code></pre>
 <blockquote>A前4次失败，第5次成功<br>第5次退避：k=5，r ∈ {0,...,31}，随机选取<br>若A选r最小而B冲突，A成功</blockquote>
 <p><strong>涉及知识点</strong>：3.5.2 随机访问介质访问控制（CSMA/CD）</p>
 <hr>
+<h2 id="s6a">补充、交换机自学习、VLAN与广播域题</h2>
+<h3>题型特征</h3>
+<ul><li>给出交换机初始转发表和若干帧，判断学习、转发、泛洪或丢弃</li>
+<li>给出网络拓扑，计算冲突域和广播域数量</li>
+<li>考查Access/Trunk端口、802.1Q标签和VLAN间通信方式</li></ul>
+<h3>核心解法</h3>
+<pre><code>交换机处理帧：
+1. 先学习源MAC：源MAC → 入端口
+2. 再查目的MAC：
+   查不到：除入端口外泛洪
+   查到且出端口不同：转发
+   查到且出端口相同：丢弃
+
+冲突域/广播域：
+Hub：不隔离冲突域，不隔离广播域
+交换机：每个端口一个冲突域，默认不隔离广播域
+路由器：隔离广播域，也隔离冲突域
+VLAN：逻辑隔离广播域</code></pre>
+<h3>典型题</h3>
+<p><strong>1. 交换机空表，A在1口向B发送帧，B在2口。交换机如何处理？</strong></p>
+<blockquote>先学习 <strong>A→1口</strong>；由于不知道B在哪个端口，向除1口外所有端口泛洪。B响应后，交换机再学习 <strong>B→2口</strong>。</blockquote>
+<p><strong>2. 一台24口交换机划分3个VLAN，每个VLAN有8台主机。共有多少广播域？</strong></p>
+<blockquote>每个VLAN是一个广播域，因此共有 <strong>3个广播域</strong>。交换机端口一般各自形成冲突域，因此最多可看作24个冲突域。</blockquote>
+<p><strong>3. 两台交换机之间需要承载VLAN 10和VLAN 20，应使用什么端口？</strong></p>
+<blockquote>使用<strong>Trunk端口</strong>，通过802.1Q标签区分不同VLAN；接终端主机通常使用Access端口。</blockquote>
+<p><strong>涉及知识点</strong>：3.6.4 VLAN、3.8.2 以太网交换机</p>
+<hr>
 <h2 id="s7">七、IP分片计算题 ⭐⭐⭐</h2>
 <h3>题型特征（408热门考点）</h3>
 <ul><li>给出原始IP数据报大小、MTU，求分片后的片偏移、MF标志、总长度</li>
@@ -366,7 +397,10 @@ MF标志：最后一片=0，其他片=1</code></pre>
 <p><strong>1. 主机A(192.168.1.1/24)向主机B(10.0.0.1/8)发送数据，A的ARP请求是什么？</strong></p>
 <blockquote>A和B不在同一网络，A需先将数据发给默认网关<br>ARP请求：<strong>默认网关的IP对应的MAC地址</strong>（非B的MAC）</blockquote>
 <p><strong>2. 路由器收到目的IP=192.168.5.17的分组，路由表如下。走哪条？</strong></p>
-<blockquote>``<code>&lt;br&gt;192.168.0.0/16  → R1（匹配5/16）&lt;br&gt;192.168.5.0/24  → R2（匹配5/24）&lt;br&gt;0.0.0.0/0       → R3（默认）&lt;br&gt;</code>``<br>三条都匹配，选前缀最长的：<strong>/24 → R2</strong></blockquote>
+<pre><code>192.168.0.0/16  → R1（匹配）
+192.168.5.0/24  → R2（匹配）
+0.0.0.0/0       → R3（默认，匹配）</code></pre>
+<blockquote>三条都匹配，选前缀最长的：<strong>/24 → R2</strong></blockquote>
 <p><strong>涉及知识点</strong>：4.2.5 地址解析协议(ARP)、4.2.4 网络层转发分组的过程</p>
 <hr>
 <h2 id="s10">十、路由协议比较题（RIP/OSPF/BGP）</h2>
@@ -392,6 +426,25 @@ MF标志：最后一片=0，其他片=1</code></pre>
 <p><strong>3. 最大跳数限制是由哪个协议引入的？</strong></p>
 <blockquote><strong>RIP</strong>（最大15跳，16=不可达）</blockquote>
 <p><strong>涉及知识点</strong>：4.4 路由算法与路由协议</p>
+<hr>
+<h2 id="s10a">补充、NAT/DHCP/ICMP综合题</h2>
+<h3>题型特征</h3>
+<ul><li>给出内网主机访问公网的过程，判断NAT表项和地址/端口变化</li>
+<li>考查DHCP四步交互、源/目的IP和UDP端口</li>
+<li>判断哪些情况发送或不发送ICMP差错报文</li></ul>
+<h3>核心速记</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>专题</th><th>必会点</th><th>易错点</th></tr>
+<tr><td><strong>NAT/NAPT</strong></td><td>私有IP/端口 ↔ 公网IP/端口</td><td>转换后需重算IP首部和TCP/UDP检验和</td></tr>
+<tr><td><strong>DHCP</strong></td><td>DORA：Discover、Offer、Request、ACK</td><td>客户端端口68，服务器端口67；初始请求常用广播</td></tr>
+<tr><td><strong>ICMP</strong></td><td>封装在IP中，用于差错报告和询问</td><td>ICMP差错报文出错、多播/广播、非首片分片不再发差错报告</td></tr></table></div>
+<h3>典型题</h3>
+<p><strong>1. 内网主机10.0.0.2:5000经NAT访问公网服务器1.1.1.1:80，NAT公网地址为202.1.1.1。NAT表可能是什么？</strong></p>
+<blockquote>可建立映射：<strong>10.0.0.2:5000 ↔ 202.1.1.1:某公网端口</strong>。外出报文源地址/端口被替换，返回报文再按NAT表还原。</blockquote>
+<p><strong>2. DHCP客户机刚启动时还没有IP地址，Discover报文常见源/目的IP是什么？</strong></p>
+<blockquote>源IP常为 <strong>0.0.0.0</strong>，目的IP为 <strong>255.255.255.255</strong>；UDP源端口68，目的端口67。</blockquote>
+<p><strong>3. IP分片的第二片在传输中出错，路由器是否发送ICMP差错报告？</strong></p>
+<blockquote>不发送。对<strong>第一个分片以外</strong>的后续分片，不发送ICMP差错报告。</blockquote>
+<p><strong>涉及知识点</strong>：4.2.3 NAT、4.2.6 DHCP、4.2.7 ICMP</p>
 <hr>
 <h2 id="s11">十一、TCP三次握手与四次挥手 ⭐⭐⭐</h2>
 <h3>题型特征</h3>
@@ -456,16 +509,38 @@ MF标志：最后一片=0，其他片=1</code></pre>
 <h3>题型特征</h3>
 <ul><li>给定TCP连接的初始序号和已传输数据量，计算当前seq和ack</li></ul>
 <h3>计算规则</h3>
-<pre><code>⭐ seq = 初始序号 + 已发送的数据字节数（不含SYN/FIN消耗的序号）
+<pre><code>⭐ seq = 本报文段数据第一个字节的序号
 ⭐ ack = 对方初始序号 + 已收到对方数据字节数 + 1（若SYN/FIN）
 ⭐ SYN和FIN各消耗一个序号
 ⭐ 纯ACK报文（无数据）不消耗序号</code></pre>
 <h3>典型真题</h3>
 <p><strong>1. 主机A发起连接：SYN=1，seq=100。建立连接后A发送200B数据。求B回复的确认号。</strong></p>
-<blockquote>连接建立消耗1个序号（SYN），seq从101开始<br>A发送200B，占用seq 101~300<br>B确认号 = 201（期望下一个字节）</blockquote>
+<blockquote>连接建立消耗1个序号（SYN），seq从101开始<br>A发送200B，占用seq 101~300<br>B确认号 = 301（期望下一个字节）</blockquote>
 <p><strong>2. A的seq=100，向B发送300B。B的seq=200，向A发送200B并捎带确认。求B报文的seq和ack。</strong></p>
 <blockquote>B的seq = 200（B自己的初始序号，假设未发过数据）<br>B的ack = 100 + 300 = <strong>400</strong>（确认收到A的300B）<br>若B还发送了200B数据，则下次A的ack = 200 + 200 = 400</blockquote>
 <p><strong>涉及知识点</strong>：5.3.2 TCP报文段、5.3.3 TCP连接管理</p>
+<hr>
+<h2 id="s13a">补充、UDP校验和与TCP流量控制题</h2>
+<h3>题型特征</h3>
+<ul><li>判断UDP/TCP检验和覆盖范围，与IP首部检验和区别</li>
+<li>给出接收窗口rwnd、拥塞窗口cwnd，求实际发送窗口</li>
+<li>考查零窗口、持续计时器、零窗口探测报文和糊涂窗口综合征</li></ul>
+<h3>核心规则</h3>
+<pre><code>UDP检验和覆盖：伪首部 + UDP首部 + 数据
+TCP检验和覆盖：伪首部 + TCP首部 + 数据
+IP首部检验和：只检验IP首部
+
+TCP实际发送窗口 = min(rwnd, cwnd)
+rwnd用于流量控制：保护接收方
+cwnd用于拥塞控制：保护网络</code></pre>
+<h3>典型题</h3>
+<p><strong>1. UDP检验和计算时，伪首部是否会被发送？</strong></p>
+<blockquote>不会。伪首部只参与检验和计算，用来把源/目的IP、协议号、UDP长度纳入差错检测。</blockquote>
+<p><strong>2. rwnd=12KB，cwnd=8KB，发送方最多还能发送多少未确认数据？</strong></p>
+<blockquote>发送窗口取两者较小值：<strong>min(12KB, 8KB)=8KB</strong>。</blockquote>
+<p><strong>3. 接收方通告零窗口后，窗口更新报文丢失怎么办？</strong></p>
+<blockquote>发送方启动持续计时器，超时后发送<strong>零窗口探测报文</strong>，避免双方永久等待。</blockquote>
+<p><strong>涉及知识点</strong>：5.2.2 UDP检验和、5.3.5 TCP流量控制</p>
 <hr>
 <h2 id="s14">十四、DNS查询过程题</h2>
 <h3>题型特征</h3>
@@ -545,6 +620,26 @@ Connection: keep-alive
 <blockquote><strong>Not Found</strong> - 请求的资源未找到</blockquote>
 <p><strong>涉及知识点</strong>：6.5.2 超文本传输协议(HTTP)</p>
 <hr>
+<h2 id="s16a">补充、电子邮件协议辨析题</h2>
+<h3>题型特征</h3>
+<ul><li>区分SMTP、POP3、IMAP、MIME的作用和端口</li>
+<li>给出邮件收发过程，判断哪一段使用哪个协议</li>
+<li>考查“推/拉协议”、邮件服务器和用户代理的职责</li></ul>
+<h3>核心对照</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>协议/扩展</th><th>作用</th><th>传输层/端口</th><th>关键词</th></tr>
+<tr><td><strong>SMTP</strong></td><td>发送邮件、服务器间转发</td><td>TCP 25</td><td>推协议、命令/响应</td></tr>
+<tr><td><strong>POP3</strong></td><td>从服务器下载邮件</td><td>TCP 110</td><td>拉协议、离线阅读</td></tr>
+<tr><td><strong>IMAP</strong></td><td>在线管理服务器邮件</td><td>TCP 143</td><td>拉协议、多终端同步</td></tr>
+<tr><td><strong>MIME</strong></td><td>扩展邮件内容格式</td><td>-</td><td>支持中文、图片、附件等非ASCII内容</td></tr></table></div>
+<h3>典型题</h3>
+<p><strong>1. 用户A把邮件发到自己的邮件服务器，再转发到用户B的邮件服务器，使用什么协议？</strong></p>
+<blockquote>两段通常都使用<strong>SMTP</strong>。</blockquote>
+<p><strong>2. 用户B从邮件服务器读取邮件，可使用哪些协议？</strong></p>
+<blockquote>可使用<strong>POP3</strong>或<strong>IMAP</strong>。POP3偏下载，IMAP偏服务器端管理与多终端同步。</blockquote>
+<p><strong>3. SMTP只能直接传7位ASCII文本，如何发送图片附件？</strong></p>
+<blockquote>使用<strong>MIME</strong>扩展，对非ASCII内容和附件进行描述与编码。</blockquote>
+<p><strong>涉及知识点</strong>：6.4 电子邮件</p>
+<hr>
 <h2 id="s17">十七、综合应用题（跨章节）</h2>
 <h3>题型特征</h3>
 <ul><li>综合多章知识点的大型场景题</li>
@@ -571,10 +666,10 @@ Connection: keep-alive
 <div class="table-wrapper"><table><tr class="table-header"><th>章节</th><th>重要度</th><th>常考题型</th><th>近五年出现频次</th></tr>
 <tr><td>第1章 体系结构</td><td>★★★</td><td>时延计算、分层结构</td><td>高</td></tr>
 <tr><td>第2章 物理层</td><td>★★</td><td>奈氏/香农定理、编码</td><td>中</td></tr>
-<tr><td>第3章 数据链路层</td><td>★★★</td><td>CRC、CSMA/CD、滑动窗口、交换机</td><td>高</td></tr>
-<tr><td>第4章 网络层</td><td>★★★★★</td><td>IP分片、子网划分、路由协议</td><td>极高</td></tr>
-<tr><td>第5章 传输层</td><td>★★★★★</td><td>TCP拥塞控制、连接管理</td><td>极高</td></tr>
-<tr><td>第6章 应用层</td><td>★★★</td><td>DNS、HTTP、FTP</td><td>中高</td></tr></table></div>
+<tr><td>第3章 数据链路层</td><td>★★★★</td><td>CRC、CSMA/CD、滑动窗口、交换机、VLAN</td><td>高</td></tr>
+<tr><td>第4章 网络层</td><td>★★★★★</td><td>IP分片、子网划分、ARP、NAT/DHCP/ICMP、路由协议</td><td>极高</td></tr>
+<tr><td>第5章 传输层</td><td>★★★★★</td><td>TCP拥塞控制、连接管理、序号确认号、流量控制、UDP校验和</td><td>极高</td></tr>
+<tr><td>第6章 应用层</td><td>★★★</td><td>DNS、HTTP、FTP、电子邮件</td><td>中高</td></tr></table></div>
 <hr>
 <blockquote>📚 <strong>参考资料</strong>：《2027年计算机网络考研复习指导》（王道论坛组编）<br>⭐ 标注星号 = 高频考点/必考题型<br>📝 <strong>解题原则</strong>：理解原理 → 记忆公式 → 精准计算 → 细致推导</blockquote>
         </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>常考题型 - 线性代数 - 考研笔记</title>
+    <title>常考题型 - 计算机组成原理 - 考研笔记</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <script src="../assets/js/main.js" defer></script>
     <script>MathJax = {tex: {inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"], ["\\[", "\\]"]], packages: {'[+]': ['physics']}}, options: {ignoreHtmlClass: "no-math"}};</script>
@@ -104,10 +104,14 @@
                 <li><a href="#s2">二、定点数编码与表示范围题 ⭐⭐⭐</a></li>
                 <li><a href="#s3">三、C语言类型转换题 ⭐⭐⭐</a></li>
                 <li><a href="#s4">四、IEEE 754浮点数题 ⭐⭐⭐</a></li>
+                <li><a href="#s4a">补充：定点运算与标志位题 ⭐⭐</a></li>
                 <li><a href="#s5">五、Cache映射与计算题 ⭐⭐⭐</a></li>
+                <li><a href="#s5a">补充：DRAM刷新与存储芯片扩展题 ⭐⭐</a></li>
                 <li><a href="#s6">六、指令寻址与地址计算题 ⭐⭐</a></li>
+                <li><a href="#s6a">补充：扩展操作码编码题 ⭐⭐</a></li>
                 <li><a href="#s7">七、CISC vs RISC 对比题 ⭐</a></li>
                 <li><a href="#s8">八、数据通路与指令执行分析题 ⭐⭐</a></li>
+                <li><a href="#s8a">补充：微程序控制器题 ⭐⭐</a></li>
                 <li><a href="#s9">九、指令流水线冒险分析与性能计算题 ⭐⭐⭐</a></li>
                 <li><a href="#s10">十、中断与DMA方式对比题 ⭐⭐</a></li>
                 <li><a href="#s11">十一、存储器扩展与交叉编址题 ⭐⭐</a></li>
@@ -246,6 +250,30 @@ unsigned int ui = si;</code></pre>
 <p>→ <strong>1 10000010 10010100000000000000000</strong></p>
 <p><strong>2.</strong> 浮点数加减中对阶操作时，遵循的规则是"小阶向大阶看齐"，原因是减少精度损失。</p>
 <hr>
+<h2 id="s4a">补充：定点运算与标志位题 ⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>给定补码加减结果，判断是否溢出</li>
+<li>判断OF、CF、ZF、SF等标志位</li>
+<li>区分算术移位、逻辑移位，以及补码乘除中的符号扩展</li>
+<li>选择题高频，偶尔结合ALU数据通路考查</li></ul>
+<h3>核心解法</h3>
+<h4>1. 补码溢出判断</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>方法</th><th>判断规则</th><th>适用</th></tr>
+<tr><td>符号位法</td><td>同号相加结果异号则溢出；异号相加不溢出</td><td>带符号补码加法</td></tr>
+<tr><td>进位法</td><td>符号位进位与最高数值位进位不同则OF=1</td><td>硬件标志位判断</td></tr>
+<tr><td>双符号位法</td><td>00/11正常，01正溢出，10负溢出</td><td>变形补码</td></tr></table></div>
+<h4>2. 标志位速查</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>标志位</th><th>含义</th><th>看什么</th></tr>
+<tr><td>OF</td><td>带符号数溢出</td><td>同号加异号结果，或符号位进位异或</td></tr>
+<tr><td>CF</td><td>无符号数进位/借位</td><td>最高位是否产生进位或借位</td></tr>
+<tr><td>ZF</td><td>结果为0</td><td>结果所有位是否全0</td></tr>
+<tr><td>SF</td><td>结果符号</td><td>结果最高位</td></tr></table></div>
+<h4>3. 移位与乘除易错点</h4>
+<ul><li>逻辑右移高位补0；算术右移高位补符号位。</li>
+<li>左移可能改变符号并造成溢出，不能简单等同于乘2。</li>
+<li>补码乘除运算中，右移通常为算术右移，注意符号扩展。</li></ul>
+<p><strong>涉及知识点</strong>：2.2节 运算方法和运算电路</p>
+<hr>
 <h2 id="s5">五、Cache映射与计算题 ⭐⭐⭐</h2>
 <h3>题型特征</h3>
 <ul><li>根据主存容量、Cache容量、块大小等参数，计算地址划分（tag/index/offset位数）</li>
@@ -281,6 +309,29 @@ tag位数 = 主存地址总位数 - offset位数</code></pre>
 <p><strong>2.</strong> 对于连续地址序列{0,1,2,...,7,0,1,...,7,0,1,2,3}的访存，在2路组相联(每组2行)、LRU替换、块大小=4、Cache共4行的情况下，求命中率。</p>
 <p><strong>解</strong>：Cache共4行，2路组相联→共2组，每组2行。地址0-3在块0，4-7在块1。块0映射到组0，块1映射到组1。序列分析可得命中率。</p>
 <hr>
+<h2 id="s5a">补充：DRAM刷新与存储芯片扩展题 ⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>计算DRAM刷新间隔、刷新死时间、刷新次数</li>
+<li>根据芯片容量和主存容量计算芯片片数</li>
+<li>判断字扩展、位扩展、字位同时扩展</li>
+<li>结合地址线、数据线、片选信号考查</li></ul>
+<h3>核心解法</h3>
+<h4>1. DRAM刷新计算</h4>
+<pre><code>刷新间隔 = 刷新周期 / 行数
+集中刷新死时间 = 行数 × 单行刷新时间
+异步刷新：每隔“刷新间隔”刷新一行</code></pre>
+<div class="table-wrapper"><table><tr class="table-header"><th>刷新方式</th><th>判断关键词</th><th>易错点</th></tr>
+<tr><td>集中刷新</td><td>集中一段时间刷新所有行</td><td>有死时间</td></tr>
+<tr><td>分散刷新</td><td>每个存取周期后刷新一行</td><td>存取周期变长</td></tr>
+<tr><td>异步刷新</td><td>均匀分散到刷新周期内</td><td>常考刷新间隔</td></tr></table></div>
+<h4>2. 存储芯片扩展</h4>
+<pre><code>位扩展片数 = 目标字长 / 单芯片位宽
+字扩展组数 = 目标字数 / 单组字数
+总芯片数 = 位扩展片数 × 字扩展组数
+芯片内地址线 = log₂(单芯片字数)</code></pre>
+<p><strong>解题提醒</strong>：先统一单位。若题目“按字节编址”，容量要换成字节数再求地址线；若芯片写成 <code>16K×4位</code>，16K是字数，4位是位宽。</p>
+<p><strong>涉及知识点</strong>：3.2节 主存储器</p>
+<hr>
 <h2 id="s6">六、指令寻址与地址计算题 ⭐⭐</h2>
 <h3>题型特征</h3>
 <ul><li>给定寻址方式和参数，计算有效地址(EA)</li>
@@ -303,6 +354,23 @@ tag位数 = 主存地址总位数 - offset位数</code></pre>
 <tr><td>基址</td><td>BR提供</td><td>指令地址码A</td><td>程序重定位</td></tr>
 <tr><td>变址</td><td>指令地址码A</td><td>IX提供</td><td>数组循环</td></tr></table></div>
 <p><strong>涉及知识点</strong>：4.2节 寻址方式</p>
+<hr>
+<h2 id="s6a">补充：扩展操作码编码题 ⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>给定指令字长、地址码长度和各类地址指令数量，判断能否编码</li>
+<li>计算某类指令最多还能设计多少条</li>
+<li>区分定长操作码与扩展操作码</li></ul>
+<h3>核心解法</h3>
+<p><strong>通用思路</strong>：短地址指令的未用编码，可作为长操作码指令的前缀。</p>
+<pre><code>某层剩余前缀数 = 该层操作码总编码数 - 已分配该层指令条数
+下一层可扩展条数 = 剩余前缀数 × 2^(释放出的地址码位数)</code></pre>
+<h3>做题步骤</h3>
+<ol><li>画出指令格式：操作码字段 + 地址码字段。</li>
+<li>从地址码最多的指令开始分配，因为它的操作码最短。</li>
+<li>每少一个地址码，就把释放出的地址码位并入操作码扩展。</li>
+<li>检查各层已用编码是否超过可用编码数。</li></ol>
+<p><strong>易错点</strong>：不能只看最终总编码数是否够，还要看每一层前缀是否已经被短操作码占满。</p>
+<p><strong>涉及知识点</strong>：4.1节 指令格式</p>
 <hr>
 <h2 id="s7">七、CISC vs RISC 对比题 ⭐</h2>
 <h3>题型特征</h3>
@@ -336,6 +404,33 @@ tag位数 = 主存地址总位数 - offset位数</code></pre>
 <p><strong>加法指令 ADD R0, R1</strong> 的执行周期：</p>
 <pre><code>R1→Y（暂存）, R0+Y→Z（ALU运算）, Z→R0（写回）</code></pre>
 <p><strong>涉及知识点</strong>：5.1-5.3节 CPU结构与控制器</p>
+<hr>
+<h2 id="s8a">补充：微程序控制器题 ⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>判断微命令、微操作、微指令、微程序、机器指令之间的关系</li>
+<li>计算控制存储器容量</li>
+<li>比较水平型/垂直型微指令，直接编码/字段编码</li>
+<li>分析微地址形成方式</li></ul>
+<h3>核心解法</h3>
+<h4>1. 层次关系</h4>
+<pre><code>机器指令
+  └─ 对应一段微程序
+       └─ 多条微指令
+            └─ 多个微命令，控制多个微操作</code></pre>
+<h4>2. 控制存储器容量</h4>
+<pre><code>控制存储器容量 = 微指令条数 × 微指令字长
+若结果为bit，换算Byte时除以8</code></pre>
+<h4>3. 微指令格式对比</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>项目</th><th>水平型微指令</th><th>垂直型微指令</th></tr>
+<tr><td>并行性</td><td>强</td><td>弱</td></tr>
+<tr><td>字长</td><td>长</td><td>短</td></tr>
+<tr><td>执行速度</td><td>快</td><td>慢</td></tr>
+<tr><td>编码复杂度</td><td>低，控制位多</td><td>高，需译码</td></tr></table></div>
+<h4>4. 编码方式对比</h4>
+<ul><li>直接编码：一个控制信号一位，最快但最长。</li>
+<li>字段直接编码：互斥微命令分组编码，需译码。</li>
+<li>字段间接编码：一个字段解释依赖另一个字段，最省位但最慢。</li></ul>
+<p><strong>涉及知识点</strong>：5.3节 控制器的功能和工作原理</p>
 <hr>
 <h2 id="s9">九、指令流水线冒险分析与性能计算题 ⭐⭐⭐</h2>
 <h3>题型特征</h3>

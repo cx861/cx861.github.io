@@ -209,6 +209,9 @@
 <tr><td><strong>翻译程序 vs 编译程序 vs 解释程序 vs 汇编程序</strong></td><td>翻译程序是总称；编译程序=高级语言→低级语言；解释程序=逐条翻译执行；汇编程序=汇编→机器语言</td></tr>
 <tr><td><strong>透明性</strong></td><td>计算机中=不可见/无法感知（与日常相反！）。如IR、MAR、MDR对所有程序员透明</td></tr>
 <tr><td><strong>体系结构 vs 组成</strong></td><td>体系结构=程序员可见属性（指令集等）；组成=具体硬件实现（微架构等）</td></tr></table></div>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="computer-org-exam-types.html#s1">查看本章常考题型 →</a>
+</div>
 <hr>
 <h2 id="ch2">第2章 数据的表示和运算</h2>
 <h3>2.1 数制与编码</h3>
@@ -321,6 +324,13 @@
 <tr><td><strong>SF（符号标志）</strong></td><td>结果为负</td><td>结果最高位=1</td></tr>
 <tr><td><strong>OF（溢出标志）</strong></td><td>带符号数溢出</td><td>双符号位异或</td></tr>
 <tr><td><strong>CF（进位/借位标志）</strong></td><td>无符号数溢出</td><td>最高位产生进位或借位</td></tr></table></div>
+<h4>2.2.3 定点乘除运算补充</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>运算</th><th>核心思想</th><th>常考关注点</th></tr>
+<tr><td>原码一位乘法</td><td>符号单独处理，数值部分按乘数最低位决定是否加被乘数，再右移</td><td>部分积、右移次数、符号位确定</td></tr>
+<tr><td>补码一位乘法</td><td>符号位参与运算，常见 Booth 思想根据相邻两位差值决定加/减被乘数</td><td>末两位判断、算术右移、补码符号扩展</td></tr>
+<tr><td>原码除法</td><td>符号单独处理，数值部分用恢复余数法或不恢复余数法</td><td>余数符号、商位确定、最后修正</td></tr>
+<tr><td>补码除法</td><td>被除数、除数用补码参与运算，商符与余数符号按规则修正</td><td>商符、余数符号、溢出判断</td></tr></table></div>
+<p><strong>易错提醒</strong>：逻辑右移高位补0，算术右移高位补符号位；补码乘除中的右移通常是算术右移。</p>
 <hr>
 <h3>2.3 浮点数的表示与运算</h3>
 <h4>2.3.1 IEEE 754标准浮点数 ⭐⭐⭐</h4>
@@ -374,6 +384,9 @@
 <div class="table-wrapper"><table><tr class="table-header"><th>方式</th><th>特点</th><th>使用架构</th></tr>
 <tr><td><strong>小端(Little Endian)</strong></td><td>低字节在低地址</td><td>x86/ARM（多数PC）</td></tr>
 <tr><td><strong>大端(Big Endian)</strong></td><td>高字节在低地址</td><td>网络字节序/PowerPC</td></tr></table></div>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="computer-org-exam-types.html#s2">查看本章常考题型 →</a>
+</div>
 <hr>
 <h2 id="ch3">第3章 存储系统</h2>
 <h3>3.1 存储器概述</h3>
@@ -412,6 +425,12 @@
 <li>刷新周期：一般为2ms、4ms或64ms</li>
 <li>刷新方式：集中刷新、分散刷新、异步刷新</li>
 <li><strong>刷新按行进行</strong>，读出行数据再写回</li></ul>
+<div class="table-wrapper"><table><tr class="table-header"><th>刷新方式</th><th>做法</th><th>特点</th></tr>
+<tr><td>集中刷新</td><td>在刷新周期末集中刷新所有行</td><td>存在一段不能访存的“死时间”</td></tr>
+<tr><td>分散刷新</td><td>每个存取周期后安排一次刷新</td><td>无死时间，但存取周期变长</td></tr>
+<tr><td>异步刷新</td><td>在刷新周期内均匀安排各行刷新</td><td>折中，408最常考计算模型</td></tr></table></div>
+<pre><code>刷新间隔 = 刷新周期 / 行数
+集中刷新死时间 = 行数 × 单行刷新时间</code></pre>
 <h4>3.2.2 ROM（只读存储器）</h4>
 <div class="table-wrapper"><table><tr class="table-header"><th>类型</th><th>特点</th><th>可编程性</th></tr>
 <tr><td><strong>MROM（掩模ROM）</strong></td><td>出厂时固定</td><td>不可编程</td></tr>
@@ -428,6 +447,12 @@
 <p><strong>二、存储器地址分配</strong></p>
 <ul><li>片选信号(CS)选择存储芯片</li>
 <li>地址线分高位地址（用于片选译码）和低位地址（芯片内部寻址）</li></ul>
+<p><strong>地址线与片选速查</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>问题</th><th>计算方法</th><th>提醒</th></tr>
+<tr><td>芯片内部地址线</td><td>log₂(单芯片字数)</td><td>只看“多少个存储单元”</td></tr>
+<tr><td>系统总地址线</td><td>log₂(主存总字数)</td><td>按编址单位统一换算</td></tr>
+<tr><td>位扩展芯片数</td><td>目标字长 / 单芯片位宽</td><td>数据线并联，同时选中</td></tr>
+<tr><td>字扩展芯片组数</td><td>目标字数 / 单组字数</td><td>高位地址译码产生片选</td></tr></table></div>
 <h4>3.2.4 多模块存储器 ⭐</h4>
 <p><strong>一、单体多字存储器</strong></p>
 <ul><li>一个存储体，但每次可并行读出多个存储字</li></ul>
@@ -451,6 +476,10 @@
 <tr><td><strong>命中率H</strong></td><td>CPU访存命中Cache的概率</td><td>H = 命中次数/总访问次数</td></tr>
 <tr><td><strong>平均访问时间Tₐ</strong></td><td>考虑命中和缺失的平均时间</td><td>Tₐ = H×T꜀ + (1-H)×Tₘ</td></tr>
 <tr><td><strong>Cache-主存系统效率</strong></td><td>—</td><td>e = T꜀/Tₐ</td></tr></table></div>
+<p><strong>更常用的缺失代价写法</strong>：</p>
+<pre><code>平均访问时间 AMAT = 命中时间 + 缺失率 × 缺失代价
+缺失率 = 1 - 命中率</code></pre>
+<p><strong>Cache表项常见控制位</strong>：有效位 valid 判断该行内容是否有效；脏位 dirty 用于写回法，表示该块被修改且尚未写回主存。</p>
 <h4>3.3.2 Cache地址映射方式 ⭐⭐⭐</h4>
 <p><strong>一、三种映射方式对比</strong></p>
 <div class="table-wrapper"><table><tr class="table-header"><th>特性</th><th>直接映射</th><th>全相联映射</th><th>组相联映射</th></tr>
@@ -510,6 +539,11 @@
 <tr><td><strong>TLB缺失</strong></td><td>虚页号不在TLB中</td><td>—</td></tr>
 <tr><td><strong>Cache缺失</strong></td><td>主存块不在Cache中</td><td>—</td></tr>
 <tr><td><strong>Page缺失(缺页)</strong></td><td>页面不在主存中</td><td>缺页→TLB必缺失，Cache也必缺失</td></tr></table></div>
+<p><strong>TLB + Cache 访问顺序</strong>：</p>
+<ol><li>CPU产生虚拟地址，先用虚页号查TLB。</li>
+<li>TLB命中则得到物理页框号；TLB缺失但页面在主存，则查页表并回填TLB。</li>
+<li>若页表项无效，产生缺页异常，由操作系统调页。</li>
+<li>得到物理地址后，再访问Cache或主存。</li></ol>
 <h4>3.4.3 段式虚拟存储器</h4>
 <ul><li>按程序的逻辑结构（代码段、数据段等）划分</li>
 <li>段表记录：段号→段基址、段长、访问权限等</li>
@@ -519,6 +553,9 @@
 <ul><li>结合段式和页式：程序按逻辑分段，每段再分页</li>
 <li>地址转换：段号→段表→页表起始地址→页号→物理地址</li>
 <li>兼具段式的逻辑清晰和页式的内存利用高效</li></ul>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="computer-org-exam-types.html#s5">查看本章常考题型 →</a>
+</div>
 <hr>
 <h2 id="ch4">第4章 指令系统</h2>
 <h3>4.1 指令格式</h3>
@@ -544,6 +581,9 @@
 <div class="table-wrapper"><table><tr class="table-header"><th>编码方式</th><th>规则</th><th>优缺点</th></tr>
 <tr><td><strong>定长操作码</strong></td><td>操作码长度固定</td><td>译码简单，但指令数量受限</td></tr>
 <tr><td><strong>扩展操作码</strong></td><td>不同指令操作码长度不同</td><td>可表示更多指令，但译码复杂</td></tr></table></div>
+<p><strong>扩展操作码计数模板</strong>：短操作码未用编码可作为长操作码前缀。做题时从短到长逐层扣除已分配编码，再乘以下一级地址码字段可扩展出的编码数。</p>
+<pre><code>某层剩余前缀数 = 该层总编码数 - 已分配该层指令数
+下一层最多指令数 = 剩余前缀数 × 2^(新增操作码位数)</code></pre>
 <hr>
 <h3>4.2 寻址方式 ⭐⭐⭐</h3>
 <h4>4.2.1 数据寻址方式</h4>
@@ -594,6 +634,9 @@
 <tr><td><strong>循环(for/while)</strong></td><td>条件跳转(Jxx) 组成循环体</td></tr>
 <tr><td><strong>函数调用</strong></td><td>CALL(保存返回地址+跳转) + RET(返回)</td></tr>
 <tr><td><strong>数组访问</strong></td><td>基址+变址寻址（首地址+下标×元素大小）</td></tr></table></div>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="computer-org-exam-types.html#s6">查看本章常考题型 →</a>
+</div>
 <hr>
 <h2 id="ch5">第5章 中央处理器</h2>
 <h3>5.1 CPU的功能和基本结构</h3>
@@ -676,6 +719,12 @@
 <div class="table-wrapper"><table><tr class="table-header"><th>方式</th><th>规则</th></tr>
 <tr><td><strong>增量方式</strong></td><td>微地址+1指向下条微指令</td></tr>
 <tr><td><strong>断定方式</strong></td><td>由微指令的下地址字段直接指定</td></tr></table></div>
+<p><strong>微指令编码方式</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>方式</th><th>特点</th><th>适用</th></tr>
+<tr><td>直接编码</td><td>每个控制信号占一位，可并行性强</td><td>控制字段长，速度快</td></tr>
+<tr><td>字段直接编码</td><td>互斥微命令分组，每组译码输出一个控制信号</td><td>压缩位数，需译码</td></tr>
+<tr><td>字段间接编码</td><td>一个字段含义受另一个字段控制</td><td>进一步压缩，速度较慢</td></tr></table></div>
+<p><strong>控制存储器容量</strong>常按“微指令条数 × 微指令字长”计算，注意单位是 bit 还是 Byte。</p>
 <hr>
 <h3>5.4 异常和中断机制 ⭐⭐</h3>
 <h4>5.4.1 基本概念</h4>
@@ -706,6 +755,7 @@
 <tr><td><strong>加速比(S)</strong></td><td>非流水与流水的时间比</td><td>S = T非流水/T流水</td></tr>
 <tr><td><strong>效率(E)</strong></td><td>流水线设备的利用率</td><td>E = n/(k+n-1)</td></tr></table></div>
 <p>其中 n=指令数，k=流水段数</p>
+<p><strong>非均匀流水段</strong>：流水线时钟周期由最慢流水段决定，若还给出锁存器延迟，则时钟周期 = max(各段时间) + 锁存器延迟。</p>
 <h4>5.5.2 流水线的三类冒险(冲突) ⭐⭐⭐</h4>
 <p><strong>一、结构冒险（资源冲突）</strong></p>
 <p>多个指令同时争用同一硬件资源。如：取指和访存同时访问存储器。</p>
@@ -741,6 +791,9 @@
 <tr><td><strong>SIMD</strong></td><td>单指令多数据流（向量处理器）</td></tr>
 <tr><td><strong>MIMD</strong></td><td>多指令多数据流（多核处理器）</td></tr>
 <tr><td><strong>SMP</strong></td><td>对称多处理（共享主存）</td></tr></table></div>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="computer-org-exam-types.html#s8">查看本章常考题型 →</a>
+</div>
 <hr>
 <h2 id="ch6">第6章 总线</h2>
 <h3>6.1 总线概述</h3>
@@ -775,13 +828,20 @@
 <tr><td><strong>猝发传输</strong></td><td>一次提供首地址后连续传输多个数据</td><td>提升传输效率</td></tr></table></div>
 <hr>
 <h3>6.2 总线事务和定时</h3>
-<h4>6.2.1 总线事务的阶段</h4>
+<h4>6.2.1 总线仲裁</h4>
+<p><strong>总线仲裁</strong>解决多个主设备同时申请总线使用权的问题。</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>方式</th><th>特点</th><th>易错点</th></tr>
+<tr><td>集中式链式查询</td><td>硬件简单，按链路位置决定优先级</td><td>离仲裁器越近优先级越高，故障敏感</td></tr>
+<tr><td>集中式计数器定时查询</td><td>计数器决定查询起点，优先级可变化</td><td>公平性好于链式查询</td></tr>
+<tr><td>集中式独立请求</td><td>每个设备独立请求/授权线</td><td>响应快，线数多</td></tr>
+<tr><td>分布式仲裁</td><td>各设备共同参与仲裁</td><td>无集中仲裁器，控制复杂</td></tr></table></div>
+<h4>6.2.2 总线事务的阶段</h4>
 <div class="table-wrapper"><table><tr class="table-header"><th>阶段</th><th>操作</th></tr>
 <tr><td><strong>总线请求与仲裁</strong></td><td>主设备请求总线使用权</td></tr>
 <tr><td><strong>寻址</strong></td><td>主设备发送地址和命令</td></tr>
 <tr><td><strong>数据传送</strong></td><td>主从设备间传输数据</td></tr>
 <tr><td><strong>结束</strong></td><td>撤销总线控制信号</td></tr></table></div>
-<h4>6.2.2 总线定时方式 ⭐</h4>
+<h4>6.2.3 总线定时方式 ⭐</h4>
 <div class="table-wrapper"><table><tr class="table-header"><th>方式</th><th>特点</th><th>优点</th><th>缺点</th></tr>
 <tr><td><strong>同步定时</strong></td><td>所有操作严格按统一时钟进行</td><td>控制简单、速度快</td><td>所有设备必须同步，不灵活</td></tr>
 <tr><td><strong>异步定时</strong></td><td>采用握手信号（请求/应答）</td><td>可连接不同速度设备，灵活</td><td>控制复杂、速度较慢</td></tr>
@@ -792,6 +852,9 @@
 <tr><td><strong>非互锁</strong></td><td>主设备发请求后，等待固定时间便撤销</td></tr>
 <tr><td><strong>半互锁</strong></td><td>主设备发请求→从设备发应答→主设备撤销请求</td></tr>
 <tr><td><strong>全互锁</strong></td><td>主设备请求→从设备应答→主设备撤销请求→从设备撤销应答</td></tr></table></div>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="computer-org-exam-types.html#s12">查看本章常考题型 →</a>
+</div>
 <hr>
 <h2 id="ch7">第7章 输入/输出系统</h2>
 <h3>7.1 I/O接口</h3>
@@ -863,8 +926,8 @@
 <li>传送完毕，DMA控制器向CPU发中断</li></ol>
 <p><strong>四、DMA与CPU访问主存的冲突解决</strong></p>
 <div class="table-wrapper"><table><tr class="table-header"><th>方式</th><th>说明</th></tr>
-<tr><td><strong>暂停CPU访存（周期窃取/挪用）</strong></td><td>DMA传送时CPU暂停访存，简单但影响CPU</td></tr>
-<tr><td><strong>周期窃取（挪用）</strong></td><td>CPU不访存时DMA趁机传送</td></tr>
+<tr><td><strong>停止CPU访问主存</strong></td><td>DMA成批传送期间CPU暂停访存，控制简单但影响CPU</td></tr>
+<tr><td><strong>周期窃取（挪用）</strong></td><td>DMA每次窃取一个或几个主存周期，传完后归还总线</td></tr>
 <tr><td><strong>交替访存</strong></td><td>CPU和DMA分时交替使用总线</td></tr></table></div>
 <p><strong>五、DMA与程序中断的区别</strong></p>
 <div class="table-wrapper"><table><tr class="table-header"><th>区别</th><th>DMA</th><th>程序中断</th></tr>
@@ -872,6 +935,10 @@
 <tr><td><strong>CPU干预</strong></td><td>仅开始和结束时</td><td>每次数据传送</td></tr>
 <tr><td><strong>适用速度</strong></td><td>高速设备</td><td>低速设备</td></tr>
 <tr><td><strong>对CPU影响</strong></td><td>CPU可继续执行</td><td>被打断执行中断服务</td></tr></table></div>
+<p><strong>DMA响应时机</strong>：DMA请求通常在总线周期结束时响应；中断请求通常在一条指令执行结束后响应。DMA结束后一般仍需通过中断通知CPU。</p>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="computer-org-exam-types.html#s10">查看本章常考题型 →</a>
+</div>
 <hr>
 <p>*（全文知识点由OCR提取+专业知识整理，涵盖408统考计算机组成原理全部核心考点）*</p>
         </div>

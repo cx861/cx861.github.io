@@ -272,6 +272,9 @@
 <li><strong>发送时延 vs 传播时延</strong>：<ul><li>发送时延 = 数据量/带宽（发生在发送器）</li><li>传播时延 = 距离/传播速度（发生在信道）</li></ul></li>
 <li><strong>时延计算综合题</strong>：需要同时考虑发送时延、传播时延、处理时延</li>
 <li><strong>OSI与TCP/IP模型对应关系</strong>的各层功能剖析</li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="network-exam-types.html#s1">查看本章常考题型 →</a>
+</div>
 <hr>
 <h2 id="ch2">第2章 物理层</h2>
 <h3>2.1 通信基础</h3>
@@ -383,6 +386,9 @@
 <li><strong>码元与比特</strong>的关系：一个码元可携带多个比特</li>
 <li><strong>自同步编码</strong>：曼彻斯特和差分曼彻斯特包含时钟信号</li>
 <li><strong>物理层设备不能隔离冲突域</strong></li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="network-exam-types.html#s2">查看本章常考题型 →</a>
+</div>
 <hr>
 <h2 id="ch3">第3章 数据链路层</h2>
 <h3>3.1 数据链路层的功能</h3>
@@ -616,6 +622,12 @@
 <tr><td>值</td><td>0x8100</td><td>优先级</td><td>0</td><td>VLAN ID</td></tr></table></div>
 <ul><li><strong>VID</strong>：12位，可标记4094个VLAN（0和4095保留）</li>
 <li>VLAN隔离广播域，不同VLAN间通信需要路由器/三层交换机</li></ul>
+<p><strong>VLAN端口类型（选择题高频）</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>端口类型</th><th>连接对象</th><th>帧处理规则</th></tr>
+<tr><td><strong>Access端口</strong></td><td>终端主机</td><td>进出端口通常是不带标签帧；进入交换机后归入端口所属VLAN</td></tr>
+<tr><td><strong>Trunk端口</strong></td><td>交换机/路由器/三层交换机</td><td>可承载多个VLAN，通常通过802.1Q标签区分不同VLAN</td></tr>
+<tr><td><strong>Hybrid端口</strong></td><td>混合场景</td><td>可按配置决定哪些VLAN带标签、哪些VLAN不带标签</td></tr></table></div>
+<blockquote>⚠️ 易错点：交换机默认不隔离广播域，VLAN才把同一物理交换网络逻辑切成多个广播域；不同VLAN通信必须经过三层转发。</blockquote>
 <hr>
 <h3>3.7 广域网</h3>
 <h4>3.7.1 广域网的基本概念</h4>
@@ -671,6 +683,12 @@
 <li>若找到且与接收端口不同→转发到对应端口；若相同→丢弃</li>
 <li>若找不到→向除接收端口外的所有端口广播（泛洪）</li>
 <li>交换表条目有老化时间（默认300秒）</li></ol>
+<p><strong>交换机转发判定模板</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>目的MAC查表结果</th><th>动作</th><th>考试关键词</th></tr>
+<tr><td>查不到</td><td>除入端口外泛洪</td><td>未知单播</td></tr>
+<tr><td>查到且出端口 ≠ 入端口</td><td>转发到指定端口</td><td>过滤通信量</td></tr>
+<tr><td>查到且出端口 = 入端口</td><td>丢弃该帧</td><td>过滤/不转发</td></tr>
+<tr><td>目的MAC为全1</td><td>广播到同一广播域内端口</td><td>广播帧</td></tr></table></div>
 <p><strong>⭐ 冲突域与广播域</strong>：</p>
 <div class="table-wrapper"><table><tr class="table-header"><th>设备</th><th>隔离冲突域</th><th>隔离广播域</th></tr>
 <tr><td><strong>集线器（Hub）</strong></td><td>❌</td><td>❌</td></tr>
@@ -685,6 +703,10 @@
 <li><strong>CSMA/CD协议</strong>的核心：争用期、最短帧长、截断二进制指数退避</li>
 <li><strong>交换机自学习</strong>与VLAN的基本概念</li>
 <li>冲突域与广播域的区别</li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="network-exam-types.html#s4">查看本章常考题型 →</a>
+    <a class="chapter-exam-link" href="network-exam-types.html#s6a">交换机/VLAN专题 →</a>
+</div>
 <hr>
 <h2 id="ch4">第4章 网络层</h2>
 <h3>4.1 网络层的功能</h3>
@@ -784,6 +806,11 @@
 <tr><td><strong>位置</strong></td><td>NAT路由器（通常位于内网出口处）</td></tr>
 <tr><td><strong>转换</strong></td><td>修改IP数据报的源IP地址（和端口号）</td></tr>
 <tr><td><strong>NAT表</strong></td><td>维护私有IP+端口 ↔ 公网IP+端口的映射</td></tr></table></div>
+<p><strong>NAT/NAPT考试补充</strong>：</p>
+<ul><li><strong>普通NAT</strong>主要转换IP地址；<strong>NAPT</strong>同时转换IP地址和端口号，是家用路由器最常见形式</li>
+<li>出站报文：源私有IP/端口 → 公网IP/新端口；入站响应报文再根据NAT表还原</li>
+<li>NAT修改IP地址或端口后，必须重新计算<strong>IP首部检验和</strong>以及TCP/UDP检验和</li>
+<li>若外部主机主动访问内网主机，通常需要静态映射或端口转发</li></ul>
 <p><strong>私有IP地址范围</strong>：</p>
 <div class="table-wrapper"><table><tr class="table-header"><th>类别</th><th>范围</th><th>CIDR</th></tr>
 <tr><td>A类私有</td><td>10.0.0.0 ~ 10.255.255.255</td><td>10.0.0.0/8</td></tr>
@@ -828,6 +855,7 @@
 <tr><td>②</td><td>DHCP OFFER</td><td>服务器→客户（广播）</td><td>提供IP地址</td></tr>
 <tr><td>③</td><td>DHCP REQUEST</td><td>客户→服务器（广播）</td><td>请求使用该IP</td></tr>
 <tr><td>④</td><td>DHCP ACK</td><td>服务器→客户（广播）</td><td>确认分配</td></tr></table></div>
+<blockquote>记忆：DORA = Discover → Offer → Request → ACK。客户初次请求时常用源IP <code>0.0.0.0</code>、目的IP <code>255.255.255.255</code>。</blockquote>
 <h4>4.2.7 网际控制报文协议（ICMP）</h4>
 <div class="table-wrapper"><table><tr class="table-header"><th>要点</th><th>说明</th></tr>
 <tr><td><strong>作用</strong></td><td>报告网络层差错和异常情况</td></tr>
@@ -1009,6 +1037,10 @@
 <li><strong>ARP协议</strong>在不同场景下的请求对象</li>
 <li><strong>RIP/OSPF/BGP</strong>三大路由协议的全面对比</li>
 <li><strong>IP地址与MAC地址的转换</strong>：ARP和RARP</li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="network-exam-types.html#s7">查看本章常考题型 →</a>
+    <a class="chapter-exam-link" href="network-exam-types.html#s10a">NAT/DHCP/ICMP专题 →</a>
+</div>
 <hr>
 <h2 id="ch5">第5章 传输层</h2>
 <h3>5.1 传输层提供的服务</h3>
@@ -1068,7 +1100,9 @@
 <h4>5.2.2 UDP检验和</h4>
 <ul><li>检验范围包括：<strong>伪首部 + UDP首部 + 数据</strong></li>
 <li>伪首部包含：源IP、目的IP、协议号、UDP长度</li>
-<li>与IP首部检验和不同，UDP检验和是可选的（但IPv6强制）</li></ul>
+<li>与IP首部检验和不同，UDP检验和是可选的（但IPv6强制）</li>
+<li>计算采用<strong>16位反码求和再取反</strong>；若UDP数据部分为奇数字节，末尾补0参与计算但不发送</li>
+<li>伪首部只参与检验和计算，不会真正封装进UDP数据报</li></ul>
 <hr>
 <h3>5.3 TCP ⭐⭐⭐</h3>
 <h4>5.3.1 TCP的特点</h4>
@@ -1131,7 +1165,9 @@
 <ul><li>接收方通过<strong>窗口字段</strong>告知发送方自己的接收缓存剩余大小</li>
 <li>发送方发送窗口 = min(拥塞窗口, 接收窗口)</li>
 <li><strong>零窗口</strong>：接收方窗口为0，发送方暂停发送</li>
-<li>发送方定时发送<strong>零窗口探测报文</strong>（避免死锁）</li></ul>
+<li>发送方定时发送<strong>零窗口探测报文</strong>（避免死锁）</li>
+<li><strong>持续计时器</strong>用于触发零窗口探测，避免窗口更新报文丢失后双方永久等待</li>
+<li><strong>糊涂窗口综合征</strong>：接收方一次只通告很小窗口或发送方一次只发很小报文，会造成效率很低；可通过等待足够窗口、Nagle算法等缓解</li></ul>
 <blockquote>⚠️ 注意区分传输层TCP流量控制和数据链路层流量控制！</blockquote>
 <h4>5.3.6 TCP拥塞控制 ⭐⭐⭐</h4>
 <p><strong>拥塞控制四种算法</strong>：</p>
@@ -1165,7 +1201,12 @@
 <li><strong>TCP拥塞控制</strong>四种算法的综合运用</li>
 <li><strong>端口号</strong>记忆：HTTP(80)、HTTPS(443)、DNS(53)、SMTP(25)、FTP(21/20)</li>
 <li><strong>流量控制 vs 拥塞控制</strong>的区别</li>
-<li>TCP序号和确认号的计算</li></ol>
+<li>TCP序号和确认号的计算</li>
+<li>UDP/TCP检验和都要考虑伪首部，IP首部检验和只检验IP首部</li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="network-exam-types.html#s11">查看本章常考题型 →</a>
+    <a class="chapter-exam-link" href="network-exam-types.html#s13a">UDP校验和/流控专题 →</a>
+</div>
 <hr>
 <h2 id="ch6">第6章 应用层</h2>
 <h3>6.1 网络应用模型</h3>
@@ -1249,7 +1290,12 @@
 <p><strong>⭐ SMTP特点</strong>：</p>
 <ul><li>只能发送7位ASCII码文本</li>
 <li>使用MIME扩展支持多媒体</li>
-<li>使用命令/响应方式交互</li></ul>
+<li>使用命令/响应方式交互</li>
+<li>SMTP是<strong>推协议</strong>，用于用户代理/邮件服务器发送邮件及服务器之间转发邮件；POP3、IMAP是<strong>拉协议</strong>，用于用户读取邮件</li></ul>
+<p><strong>电子邮件传输流程</strong>：</p>
+<pre><code>发送方UA → 发送方邮件服务器 → 接收方邮件服务器 → 接收方UA
+        SMTP              SMTP                POP3/IMAP</code></pre>
+<blockquote>⚠️ 易错点：SMTP负责“发送/转发”，不能替代POP3或IMAP读取邮件；MIME不是新的邮件传输协议，而是对邮件内容格式的扩展。</blockquote>
 <hr>
 <h3>6.5 万维网（WWW）</h3>
 <h4>6.5.1 万维网的概念与组成结构</h4>
@@ -1310,6 +1356,10 @@ CRLF                        ← 空行
 <li><strong>持久连接 vs 非持久连接</strong>的计算</li>
 <li><strong>SMTP/POP3/IMAP</strong>三协议的区别</li>
 <li><strong>Cookie与Session</strong>的基本原理</li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="network-exam-types.html#s14">查看本章常考题型 →</a>
+    <a class="chapter-exam-link" href="network-exam-types.html#s16a">电子邮件协议专题 →</a>
+</div>
 <hr>
 <blockquote>📚 <strong>参考资料</strong>：《2027年计算机网络考研复习指导》（王道论坛组编）<br>📝 <strong>说明</strong>：本文档严格按照408统考大纲编写，涵盖计算机网络六章全部考点<br>⭐ 标注星号 = 高频考点/重点内容</blockquote>
         </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>常考题型 - 线性代数 - 考研笔记</title>
+    <title>常考题型 - 操作系统 - 考研笔记</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <script src="../assets/js/main.js" defer></script>
     <script>MathJax = {tex: {inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"], ["\\[", "\\]"]], packages: {'[+]': ['physics']}}, options: {ignoreHtmlClass: "no-math"}};</script>
@@ -105,10 +105,13 @@
                 <li><a href="#s3">三、调度算法计算题 ⭐⭐⭐</a></li>
                 <li><a href="#s4">四、PV操作与同步互斥编程题 ⭐⭐⭐</a></li>
                 <li><a href="#s5">五、银行家算法计算题 ⭐⭐⭐</a></li>
+                <li><a href="#s5a">补充：线程模型与死锁检测题 ⭐⭐</a></li>
                 <li><a href="#s6">六、分页地址转换计算题 ⭐⭐⭐</a></li>
                 <li><a href="#s7">七、页面置换算法计算题 ⭐⭐⭐</a></li>
                 <li><a href="#s8">八、虚拟内存综合计算题</a></li>
+                <li><a href="#s8a">补充：动态分区分配题 ⭐⭐</a></li>
                 <li><a href="#s9">九、文件物理结构计算题 ⭐⭐</a></li>
+                <li><a href="#s9a">补充：文件空闲空间管理题 ⭐⭐</a></li>
                 <li><a href="#s10">十、磁盘调度算法计算题 ⭐⭐</a></li>
                 <li><a href="#s11">十一、磁盘访问时间计算题</a></li>
                 <li><a href="#s12">十二、文件目录与链接综合题</a></li>
@@ -241,17 +244,38 @@ P3: P(s3); ...; V(done3);</code></pre>
 <li>执行安全性算法，记录安全序列</li>
 <li>对于资源请求，先试探分配，再执行安全性检查</li></ol>
 <h3>典型真题</h3>
-<p><strong>1. 系统资源A=3, B=3, C=2。进程信息如下，判断是否安全。</strong></p>
+<p><strong>1. 系统当前可用资源Available=(3,3,2)。进程信息如下，判断是否安全。</strong></p>
 <div class="table-wrapper"><table><tr class="table-header"><th>进程</th><th>Max(A,B,C)</th><th>Allocation</th><th>Need</th></tr>
 <tr><td>P0</td><td>(7,5,3)</td><td>(0,1,0)</td><td>(7,4,3)</td></tr>
 <tr><td>P1</td><td>(3,2,2)</td><td>(2,0,0)</td><td>(1,2,2)</td></tr>
 <tr><td>P2</td><td>(9,0,2)</td><td>(3,0,2)</td><td>(6,0,0)</td></tr>
 <tr><td>P3</td><td>(2,2,2)</td><td>(2,1,1)</td><td>(0,1,1)</td></tr>
 <tr><td>P4</td><td>(4,3,3)</td><td>(0,0,2)</td><td>(4,3,1)</td></tr></table></div>
-<blockquote>Available = (3,3,2) - (0+2+3+2+0, 1+0+0+1+0, 0+0+2+1+2) = (3,3,2) - (7,2,5)<br>Wait—need to recalculate. Actually Available = 总资源 - ΣAllocation<br>但从Allocation求和来看，(7,2,5)大于可用(3,3,2)，说明初始数据有问题或需要注意。</blockquote>
+<blockquote>安全序列可为：P1 → P3 → P4 → P0 → P2。<br>Work变化：(3,3,2)→(5,3,2)→(7,4,3)→(7,4,5)→(7,5,5)→(10,5,7)，所以系统安全。</blockquote>
 <p><strong>2. P1请求资源(1,0,2)，能否分配？</strong></p>
 <blockquote>检查Request ≤ Need[P1]? (1,0,2) ≤ (1,2,2)? ✓<br>检查Request ≤ Available? (1,0,2) ≤ (3,3,2)? ✓<br>试探分配后执行安全性检查...得出安全序列则批准</blockquote>
 <p><strong>涉及知识点</strong>：2.4.2 死锁避免（银行家算法）</p>
+<hr>
+<h2 id="s5a">补充：线程模型与死锁检测题 ⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>比较用户级线程、内核级线程、多对一/一对一/多对多模型</li>
+<li>判断线程阻塞是否会导致整个进程阻塞</li>
+<li>给定资源分配矩阵，判断是否存在死锁</li></ul>
+<h3>线程模型速查</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>模型</th><th>优点</th><th>缺点</th></tr>
+<tr><td>用户级线程</td><td>切换快，不需进入内核</td><td>一个线程阻塞可能导致整个进程阻塞</td></tr>
+<tr><td>内核级线程</td><td>可多核并行，一个线程阻塞不影响其他线程</td><td>创建、撤销、切换开销较大</td></tr>
+<tr><td>多对一</td><td>用户态管理，效率高</td><td>不能真正并行</td></tr>
+<tr><td>一对一</td><td>并发性好</td><td>内核线程数量多，开销大</td></tr>
+<tr><td>多对多</td><td>折中，灵活</td><td>实现复杂</td></tr></table></div>
+<h3>死锁检测算法</h3>
+<pre><code>Work = Available
+Finish[i] = (Allocation[i] == 0)
+寻找 Request[i] <= Work 且 Finish[i] == false 的进程Pi
+若找到：Work += Allocation[i], Finish[i] = true
+循环结束后 Finish[i] == false 的进程即死锁进程</code></pre>
+<p><strong>易错点</strong>：死锁检测关注当前请求Request，而银行家算法关注最大需求Need；二者表格很像，但含义不同。</p>
+<p><strong>涉及知识点</strong>：2.1 线程、2.4 死锁检测</p>
 <hr>
 <h2 id="s6">六、分页地址转换计算题 ⭐⭐⭐</h2>
 <h3>题型特征</h3>
@@ -293,8 +317,8 @@ P3: P(s3); ...; V(done3);</code></pre>
 <p><strong>CLOCK</strong>：循环扫描，访问位0的换出</p>
 <h3>典型真题</h3>
 <p><strong>1. 访问序列：1,2,3,4,1,2,5,1,2,3,4,5。分配3个页框。求FIFO和LRU的缺页次数。</strong></p>
-<blockquote><strong>FIFO (3页框)</strong>：<br>1✓, 2✓, 3✓, 4✓(换1), 1✓(换2), 2✓(换3), 5✓(换4), 1✓(换1), 2✓(换2), 3✓(换5), 4✓(换1), 5✓(换2)<br>缺页：所有都缺 → <strong>12次</strong></blockquote>
-<blockquote><strong>LRU (3页框)</strong>：<br>1✓, 2✓, 3✓, 4✓(换1), 1✓(换2), 2✓(换3), 5✓(换4), 1✓(换5), 2✓(换1), 3✓(换2), 4✓(换3), 5✓(换4)<br>仔细计算：缺页约<strong>10-11次</strong></blockquote>
+<blockquote><strong>FIFO (3页框)</strong>：<br>前3次装入1、2、3；访问4换出1；访问1换出2；访问2换出3；访问5换出4；随后1、2命中；访问3换出1；访问4换出2；访问5命中。<br>缺页次数 = <strong>9次</strong></blockquote>
+<blockquote><strong>LRU (3页框)</strong>：<br>1缺, 2缺, 3缺, 4缺(换1), 1缺(换2), 2缺(换3), 5缺(换4), 1命中, 2命中, 3缺(换5), 4缺(换1), 5缺(换2)<br>缺页次数 = <strong>10次</strong></blockquote>
 <p><strong>2. FIFO算法中Belady异常的含义是？举例说明。</strong></p>
 <blockquote>Belady异常：<strong>增加页框数反而导致缺页次数增加</strong><br>例：序列1,2,3,4,1,2,5,1,2,3,4,5<br>3页框：9次缺页；4页框：<strong>10次</strong>（反而增多！）</blockquote>
 <p><strong>3. 改进型CLOCK算法，四类页面的淘汰优先级？</strong></p>
@@ -316,6 +340,24 @@ P3: P(s3); ...; V(done3);</code></pre>
 <blockquote>EAT = 0.9 × (20+100) + 0.1 × (20+100+100)<br>= 0.9 × 120 + 0.1 × 220<br>= 108 + 22 = <strong>130ns</strong></blockquote>
 <p><strong>涉及知识点</strong>：3.2 虚拟内存管理</p>
 <hr>
+<h2 id="s8a">补充：动态分区分配题 ⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>给定空闲分区表和作业大小，判断首次适应/最佳适应/最坏适应的分配结果</li>
+<li>判断内存回收后如何合并空闲区</li>
+<li>辨析内部碎片和外部碎片</li></ul>
+<h3>算法速查</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>算法</th><th>选择规则</th><th>常见结论</th></tr>
+<tr><td>首次适应 FF</td><td>从低地址开始找第一个足够大的分区</td><td>速度快，低地址碎片多</td></tr>
+<tr><td>邻近适应 NF</td><td>从上次查找结束处继续找</td><td>分布较均匀，可能破坏大分区</td></tr>
+<tr><td>最佳适应 BF</td><td>找满足要求的最小空闲分区</td><td>容易产生最多小碎片</td></tr>
+<tr><td>最坏适应 WF</td><td>找最大的空闲分区</td><td>保留小分区，破坏大分区</td></tr></table></div>
+<h3>回收合并规则</h3>
+<ul><li>上邻空闲：与上邻合并，起始地址取上邻起始地址。</li>
+<li>下邻空闲：与下邻合并，起始地址不变。</li>
+<li>上下邻都空闲：三者合并为一个更大的空闲分区。</li>
+<li>上下邻都不空闲：新增一个空闲分区表项。</li></ul>
+<p><strong>涉及知识点</strong>：3.1.2 连续分配管理方式</p>
+<hr>
 <h2 id="s9">九、文件物理结构计算题 ⭐⭐</h2>
 <h3>题型特征</h3>
 <ul><li>给定索引结构参数，计算最大文件大小</li>
@@ -332,6 +374,23 @@ P3: P(s3); ...; V(done3);</code></pre>
 <p><strong>1. 块大小4KB，块号4B（32位）。Unix混合索引（10直接+1间接+1二级间接+1三级间接），最大文件多大？</strong></p>
 <blockquote>每索引块可存块号数 = 4KB/4B = 1024个<br>直接：10 × 4KB = 40KB<br>一级间接：1024 × 4KB = 4MB<br>二级间接：1024² × 4KB = 4GB<br>三级间接：1024³ × 4KB = 4TB<br><strong>总共 ≈ 4TB + 4GB + 4MB + 40KB ≈ 4TB</strong></blockquote>
 <p><strong>涉及知识点</strong>：4.1.3 文件的物理结构（索引分配）</p>
+<hr>
+<h2 id="s9a">补充：文件空闲空间管理题 ⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>计算位示图大小、块号对应的字号和位号</li>
+<li>比较空闲表法、空闲链表法、位示图法、成组链接法</li>
+<li>判断不同分配方式下适合的空闲空间管理方法</li></ul>
+<h3>核心公式</h3>
+<pre><code>位示图大小 = 磁盘块数 / 8 字节
+字号 = 块号 / 每字位数
+位号 = 块号 % 每字位数</code></pre>
+<h3>方法对比</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>方法</th><th>特点</th><th>适用</th></tr>
+<tr><td>空闲表法</td><td>记录连续空闲区起始块号和块数</td><td>连续分配</td></tr>
+<tr><td>空闲链表法</td><td>空闲块逐个链接</td><td>分配单块方便，找连续块慢</td></tr>
+<tr><td>位示图法</td><td>一位表示一个磁盘块状态</td><td>空间省，易找连续块</td></tr>
+<tr><td>成组链接法</td><td>空闲块分组保存，组间链接</td><td>Unix常用</td></tr></table></div>
+<p><strong>涉及知识点</strong>：4.2.3 文件系统实现</p>
 <hr>
 <h2 id="s10">十、磁盘调度算法计算题 ⭐⭐</h2>
 <h3>题型特征</h3>

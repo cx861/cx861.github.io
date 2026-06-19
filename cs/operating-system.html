@@ -235,6 +235,9 @@
 <li><strong>中断与异常</strong>的区分</li>
 <li><strong>宏内核与微内核</strong>的设计哲学对比</li>
 <li><strong>操作系统引导过程</strong>的完整步骤</li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="os-exam-types.html#s1">查看本章常考题型 →</a>
+</div>
 <hr>
 <h2 id="ch2">第2章 进程与线程</h2>
 <h3>2.1 进程与线程简介</h3>
@@ -360,6 +363,11 @@
 <tr><td><strong>用户级线程（ULT）</strong></td><td>线程库实现，内核不知道线程存在</td><td>切换快（不需CPU模式切换），可定制调度</td><td>一个线程阻塞导致整个进程阻塞</td></tr>
 <tr><td><strong>内核级线程（KLT）</strong></td><td>内核直接支持线程管理</td><td>一个线程阻塞不影响其他，多核可并行</td><td>切换开销大（需模式切换）</td></tr>
 <tr><td><strong>多对多模型</strong></td><td>多个ULT映射到多个KLT</td><td>折中方案，克服二者缺点</td><td>实现复杂</td></tr></table></div>
+<p><strong>线程模型补充</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>模型</th><th>映射关系</th><th>特点</th></tr>
+<tr><td>多对一</td><td>多个用户线程映射到一个内核线程</td><td>切换快，但一个线程阻塞会阻塞整个进程，不能多核并行</td></tr>
+<tr><td>一对一</td><td>一个用户线程映射到一个内核线程</td><td>并行性好，一个线程阻塞不影响其他线程，但创建和切换开销大</td></tr>
+<tr><td>多对多</td><td>多个用户线程映射到多个内核线程</td><td>兼顾并发和开销，实现复杂</td></tr></table></div>
 <p><strong>线程库</strong>：</p>
 <ul><li>POSIX Pthreads：用户级或内核级</li>
 <li>Windows Threads：内核级</li>
@@ -533,6 +541,11 @@ Reader:                             Writer:
 <p><strong>4. 吸烟者问题</strong></p>
 <ul><li>一个供应者 + 三个吸烟者</li>
 <li>PV操作确保正确配对</li></ul>
+<p><strong>经典同步题建模模板</strong>：</p>
+<ol><li>先找互斥资源：缓冲区、共享变量、筷子、数据库等，通常设 <code>mutex=1</code>。</li>
+<li>再找同步顺序：谁先发生、谁等待谁，用同步信号量表示“事件是否发生”。</li>
+<li>资源计数信号量初值等于可用资源数，例如空缓冲区 <code>empty=n</code>、满缓冲区 <code>full=0</code>。</li>
+<li>P操作通常先申请资源信号量，再申请互斥信号量；V操作反向释放。</li></ol>
 <h4>2.3.5 管程（Monitor）</h4>
 <div class="table-wrapper"><table><tr class="table-header"><th>要点</th><th>说明</th></tr>
 <tr><td><strong>定义</strong></td><td>由一组数据及定义在其上的操作组成的软件模块</td></tr>
@@ -579,6 +592,13 @@ Reader:                             Writer:
 <p><strong>检测</strong>：资源分配图</p>
 <ul><li>若能完全化简（消去所有边）→ 无死锁</li>
 <li>若不能完全化简 → 有死锁，剩余边即死锁进程</li></ul>
+<p><strong>死锁检测算法</strong>（多资源实例）：</p>
+<pre><code>Work = Available
+Finish[i] = (Allocation[i] == 0)
+循环寻找 Request[i] <= Work 且 Finish[i] == false 的进程：
+    Work += Allocation[i]
+    Finish[i] = true
+最终 Finish[i] == false 的进程处于死锁</code></pre>
 <p><strong>解除方法</strong>：</p>
 <div class="table-wrapper"><table><tr class="table-header"><th>方法</th><th>说明</th></tr>
 <tr><td>资源剥夺</td><td>挂起某些进程，剥夺其资源给其他进程</td></tr>
@@ -591,6 +611,9 @@ Reader:                             Writer:
 <li><strong>调度算法</strong>的周转时间、等待时间计算</li>
 <li><strong>银行家算法</strong>的安全性检查</li>
 <li><strong>死锁预防/避免/检测</strong>三种策略的区别</li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="os-exam-types.html#s2">查看本章常考题型 →</a>
+</div>
 <hr>
 <h2 id="ch3">第3章 内存管理</h2>
 <h3>3.1 内存管理概念</h3>
@@ -637,6 +660,10 @@ Reader:                             Writer:
 <p><strong>动态分区的数据结构</strong>：</p>
 <ul><li>空闲分区表：每个空闲分区一个表项</li>
 <li>空闲分区链：双向链表组织空闲分区</li></ul>
+<p><strong>动态分区易错点</strong>：</p>
+<ul><li>动态分区没有内部碎片，但会产生外部碎片。</li>
+<li>最佳适应不是“整体最好”，它容易留下大量很小的外部碎片。</li>
+<li>内存紧缩可解决外部碎片，但需要移动作业并修改重定位信息，开销大。</li></ul>
 <h4>3.1.3 非连续分配管理方式 ⭐⭐</h4>
 <p><strong>1. 基本分页存储管理</strong></p>
 <p><strong>分页的基本概念</strong>：</p>
@@ -742,7 +769,8 @@ Reader:                             Writer:
 <tr><td>优点</td><td>LRU的近似，开销小，常用</td></tr>
 <tr><td>用途</td><td>实际操作系统广泛使用</td></tr></table></div>
 <p><strong>改进型CLOCK算法</strong>：同时考虑访问位A和修改位M</p>
-<ul><li>优先淘汰 (0,0) > (0,1) > (1,0) > (1,1)</li></ul>
+<ul><li>优先淘汰 (0,0) > (0,1) > (1,0) > (1,1)</li>
+<li>第一轮找 (0,0)，不修改访问位；第二轮找 (0,1)，并将扫描过页面访问位清0；若未找到则重复。</li></ul>
 <p><strong>5. 最少使用（LFU）</strong></p>
 <p>| 策略 | 淘汰访问次数最少的页面 |</p>
 <p><strong>⭐ 算法对比</strong>：</p>
@@ -778,6 +806,9 @@ Reader:                             Writer:
 <li><strong>Belady异常</strong>的现象和原因</li>
 <li><strong>多级页表</strong>的结构和目的</li>
 <li><strong>TLB（快表）</strong>的作用</li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="os-exam-types.html#s6">查看本章常考题型 →</a>
+</div>
 <hr>
 <h2 id="ch4">第4章 文件管理</h2>
 <h3>4.1 文件系统基础</h3>
@@ -895,6 +926,10 @@ I/O控制（设备驱动 + 中断处理）
 <p><strong>⭐ 位图法计算</strong>：</p>
 <pre><code>位图大小 = 磁盘总块数 / 8 字节
 块号对应的位图位置：第 (块号/8) 字节，第 (块号%8) 位</code></pre>
+<p><strong>空闲空间管理易错点</strong>：</p>
+<ul><li>空闲表法适合连续分配，便于寻找连续空闲块。</li>
+<li>空闲链表法分配单块简单，但不便快速找到连续空闲块。</li>
+<li>成组链接法把多个空闲块号集中存入一组，组尾再链接下一组，是Unix常用方法。</li></ul>
 <h4>4.2.4 文件共享</h4>
 <div class="table-wrapper"><table><tr class="table-header"><th>方式</th><th>实现</th><th>特点</th></tr>
 <tr><td><strong>基于索引节点的共享（硬链接）</strong></td><td>多个目录项指向同一inode</td><td>引用计数，删除时减1</td></tr>
@@ -907,6 +942,9 @@ I/O控制（设备驱动 + 中断处理）
 <li><strong>文件系统层次结构</strong>和各层功能</li>
 <li><strong>空闲空间管理</strong>的位图法计算</li>
 <li>文件打开过程（open()系统调用全过程）</li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="os-exam-types.html#s9">查看本章常考题型 →</a>
+</div>
 <hr>
 <h2 id="ch5">第5章 输入/输出（I/O）管理</h2>
 <h3>5.1 I/O管理概述</h3>
@@ -1000,6 +1038,8 @@ Ta：总访问时间
 Ts：寻道时间（磁头移动到指定磁道）← 占比最大
 Tr：旋转延迟（扇区旋转到磁头下）← 平均转半圈
 Tt：传输时间（数据读写）</code></pre>
+<ul><li>平均旋转延迟通常取旋转一周时间的一半。</li>
+<li>磁盘调度主要优化寻道时间，不能直接消除旋转延迟和传输时间。</li></ul>
 <p><strong>⭐ 磁盘调度算法</strong>：</p>
 <div class="table-wrapper"><table><tr class="table-header"><th>算法</th><th>策略</th><th>优点</th><th>缺点</th></tr>
 <tr><td><strong>FCFS</strong></td><td>按请求顺序服务</td><td>公平简单</td><td>性能差，磁头来回移动</td></tr>
@@ -1040,6 +1080,9 @@ Tt：传输时间（数据读写）</code></pre>
 <li><strong>磁盘访问时间</strong>的组成</li>
 <li><strong>SPOOLing系统</strong>的原理</li>
 <li>SSD的特性（写前擦除、写放大、磨损均衡）</li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="os-exam-types.html#s13">查看本章常考题型 →</a>
+</div>
 <hr>
 <blockquote>📚 <strong>参考资料</strong>：《2027年操作系统考研复习指导》（王道论坛组编）<br>📝 <strong>说明</strong>：本文档严格按照408统考大纲编写，涵盖操作系统五章全部考点<br>⭐ 标注星号 = 高频考点/重点内容</blockquote>
         </div>
