@@ -179,7 +179,22 @@ $$\lim_{n\to\infty}\sum_{k=1}^{n}\frac{b-a}{n}f\left(a+\frac{(b-a)k}{n}\right) =
 <p><strong>关联知识点</strong></p>
 <ul><li>奇函数：$f(-x)=-f(x)$；偶函数：$f(-x)=f(x)$</li><li>周期函数：$f(x+T)=f(x)$，最小正周期</li><li>有界函数：$\exists M>0,\;|f(x)|\leq M,\;\forall x\in D$</li><li>反函数：$y=f(x)\Leftrightarrow x=f^{-1}(y)$，定义域值域互换</li></ul>
 <hr>
-
+<h3>题型14：Stolz 定理求数列极限（数一提高）</h3>
+<p><strong>适用场景</strong>：数列极限为 $\frac{\infty}{\infty}$ 型，尤其是分子分母都是累加和、幂次和、阶乘对数等形式。</p>
+<p><strong>定理形式</strong>：若 $y_n$ 严格递增且 $y_n\to+\infty$，并且 $\lim\limits_{n\to\infty}\dfrac{x_n-x_{n-1}}{y_n-y_{n-1}}=A$，则 $\lim\limits_{n\to\infty}\dfrac{x_n}{y_n}=A$。</p>
+<p><strong>典型例题</strong></p>
+<ul><li>$\lim\limits_{n\to\infty}\dfrac{1^p+2^p+\cdots+n^p}{n^{p+1}}$</li><li>$\lim\limits_{n\to\infty}\dfrac{\ln(n!)}{n\ln n}$</li><li>$\lim\limits_{n\to\infty}\dfrac{a_1+a_2+\cdots+a_n}{n}$（Cesaro 平均思想）</li></ul>
+<p><strong>步骤</strong>：确认分母单调趋于无穷 → 作差降阶 → 求差商极限 → 回到原极限。</p>
+<div class="highlight-box"><p><strong>易错：</strong>Stolz 不是所有数列比值都能用，分母必须趋于无穷且具备单调性；差商极限不存在时不能强行套用。</p></div>
+<hr>
+<h3>题型15：递推数列极限的精细分类</h3>
+<table><tr><th>递推类型</th><th>典型形式</th><th>处理方法</th></tr>
+<tr><td>不动点型</td><td>$x_{n+1}=f(x_n)$</td><td>先解 $A=f(A)$，再证单调有界或压缩</td></tr>
+<tr><td>嵌套根式</td><td>$x_{n+1}=\sqrt{a+x_n}$</td><td>归纳证明有界，作差或用函数单调性判单调</td></tr>
+<tr><td>牛顿迭代</td><td>$x_{n+1}=\frac12(x_n+\frac{a}{x_n})$</td><td>常证明 $x_n\geq\sqrt a$ 且单调下降</td></tr>
+<tr><td>线性递推</td><td>$x_{n+1}=ax_n+b$</td><td>求通项或平移到 $y_{n+1}=ay_n$</td></tr>
+</table>
+<p><strong>检查清单</strong>：候选极限是否唯一？初值是否保证递推有意义？取极限后得到的根是否符合已证范围？</p>
 <h2 id="ch2">第二章 导数与微分</h2>
 <h3>题型1：导数定义的应用（求导数值/判定可导性）</h3>
 <p><strong>典型例题</strong></p>
@@ -280,7 +295,7 @@ $$\frac{dy}{dx}=\frac{1}{f'(y)},\qquad \frac{d^2y}{dx^2}=-\frac{f''(y)}{[f'(y)]^
 <hr>
 <h2 id="ch3">第三章 微分中值定理及导数的应用</h2>
 <h3>题型1：罗尔定理的直接应用 — 证明 $\exists\xi:\;f'(\xi)=0$</h3>
-<p><strong>典型例题</strong>：$f\in C[a,b]\cap D(a,b),\;f(a)=f(b)=0$，证明 $\exists\xi\in(a_b):f'(\xi)=0$</p>
+<p><strong>典型例题</strong>：$f\in C[a,b]\cap D(a,b),\;f(a)=f(b)=0$，证明 $\exists\xi\in(a,b):f'(\xi)=0$</p>
 <p><strong>关联定理</strong>：罗尔定理 — 若 $f$ 在 $[a,b]$ 连续、$(a,b)$ 可导且端点值相等，则 $\exists\xi\in(a,b):\;f'(\xi)=0$</p>
 <hr>
 <h3>题型2：构造辅助函数 + 罗尔定理（核心难点）</h3>
@@ -517,7 +532,24 @@ $$S = 2\pi\int_a^b y\sqrt{1+(y')^2}dx\quad(\text{绕 }x\text{轴})$$
 <p><strong>证明工具箱</strong></p>
 <ul><li>变限积分函数构造（引入 $F(x)=\int_a^x f(t)dt$）</li><li>中值定理（积分中值定理、微分中值定理）</li><li>Cauchy-Schwarz 不等式：$\left(\int fg\right)^2 \leq \int f^2 \int g^2$</li><li>单调性：构造辅助函数，求导判断符号</li></ul>
 <hr>
-
+<h3>题型8：反常积分的极限比较与瑕点拆分</h3>
+<p><strong>极限比较判别</strong>：若 $f(x),g(x)\geq0$，且 $\lim\dfrac{f(x)}{g(x)}=c$，$0<c<+\infty$，则 $\int f$ 与 $\int g$ 同敛散。</p>
+<table><tr><th>位置</th><th>常用等价基准</th><th>判定</th></tr>
+<tr><td>$x\to+\infty$</td><td>$\dfrac{1}{x^p}$</td><td>$p>1$ 收敛</td></tr>
+<tr><td>$x\to+\infty$</td><td>$\dfrac{1}{x(\ln x)^p}$</td><td>$p>1$ 收敛</td></tr>
+<tr><td>$x\to0^+$</td><td>$\dfrac{1}{x^p}$</td><td>$p<1$ 收敛</td></tr>
+<tr><td>$x\to a$ 瑕点</td><td>$\dfrac{1}{|x-a|^p}$</td><td>$p<1$ 收敛</td></tr></table>
+<p><strong>内部瑕点处理</strong>：若 $c\in(a,b)$ 是瑕点，必须拆成 $\int_a^c f(x)dx+\int_c^b f(x)dx$，两边都收敛才收敛。</p>
+<p><strong>绝对收敛</strong>：若 $\int |f(x)|dx$ 收敛，则 $\int f(x)dx$ 收敛；振荡型积分可先判绝对收敛，不行再考虑 Dirichlet/Abel。</p>
+<hr>
+<h3>题型9：定积分证明题模板（等式/不等式）</h3>
+<table><tr><th>题目特征</th><th>优先工具</th><th>操作</th></tr>
+<tr><td>含 $\int_a^x f(t)dt$</td><td>变限积分函数</td><td>设 $F(x)$ 后求导，转为函数单调性或零点问题</td></tr>
+<tr><td>证明 $\int fg$ 型不等式</td><td>Cauchy-Schwarz</td><td>$(\int fg)^2\leq\int f^2\int g^2$</td></tr>
+<tr><td>被积函数有上下界</td><td>积分放缩</td><td>由 $m\leq f\leq M$ 得 $m(b-a)\leq\int_a^b f\leq M(b-a)$</td></tr>
+<tr><td>连续函数积分等于某值</td><td>积分中值定理</td><td>$\int_a^b f(x)dx=f(\xi)(b-a)$</td></tr>
+<tr><td>含 $f(a+b-x)$</td><td>区间再现</td><td>与原积分相加或相减</td></tr></table>
+<p><strong>易错：</strong>构造变限积分函数后，要检查端点初值；证明不等式时先明确等号成立条件。</p>
 <h2 id="ch6">第六章 常微分方程</h2>
 <h3>题型1：一阶微分方程的识别与求解</h3>
 <p><strong>方程类型的快速识别</strong></p>
@@ -544,7 +576,7 @@ $$\lambda^2+p\lambda+q=0\quad\Rightarrow\quad \lambda_{1,2}=\frac{-p\pm\sqrt{p^2
 <p><strong>典型例题</strong>：$y''+y=xe^x$、$y''+y=\sin x$、$y''-5y'+6y=xe^{2x}$</p>
 <hr>
 <h3>题型4：可降阶的高阶微分方程</h3>
-<table><tr><th>类型</th><th>方程形式</th><th>降阶方法</th></tr><tr><td>I 型（缺 $y$）</td><td>$y''=f(x,y')$</td><td>令 $p=y'$，则 $y''=p'$，化为关于 $xp$ 的一阶方程</td></tr><tr><td>II 型（缺 $x$）</td><td>$y''=f(y,y')$</td><td>令 $p(y)=y'$，则 $y''=p\frac{dp}{dy}$</td></tr><tr><td>III 型</td><td>$y^{(n)}=f(x)$</td><td>直接积分 $n$ 次</td></tr></table>
+<table><tr><th>类型</th><th>方程形式</th><th>降阶方法</th></tr><tr><td>I 型（缺 $y$）</td><td>$y''=f(x,y')$</td><td>令 $p=y'$，则 $y''=p'$，化为关于 $x,p$ 的一阶方程</td></tr><tr><td>II 型（缺 $x$）</td><td>$y''=f(y,y')$</td><td>令 $p(y)=y'$，则 $y''=p\frac{dp}{dy}$</td></tr><tr><td>III 型</td><td>$y^{(n)}=f(x)$</td><td>直接积分 $n$ 次</td></tr></table>
 <hr>
 <h3>题型5：微分方程应用题（建模求解）</h3>
 <p><strong>典型场景</strong></p>
@@ -666,7 +698,19 @@ $$\frac{\partial f}{\partial\mathbf{l}} = \nabla f \cdot \mathbf{l} = f_x\cos\al
 
 $$f(x_0+h,y_0+k)=f(x_0,y_0)+(hf_x+kf_y)+\frac{1}{2!}(h^2f_{xx}+2hkf_{xy}+k^2f_{yy})+\cdots$$
 <hr>
-
+<h3>题型10：连续、偏导存在、可微的判定链</h3>
+<p><strong>核心关系</strong>：偏导连续 $\Rightarrow$ 可微 $\Rightarrow$ 连续；可微 $\Rightarrow$ 偏导存在。反向一般不成立。</p>
+<table><tr><th>已知条件</th><th>能否推出</th><th>常见考法</th></tr>
+<tr><td>偏导数存在</td><td>不能推出连续/可微</td><td>给分段函数，沿坐标轴偏导存在但换路径不连续</td></tr>
+<tr><td>连续</td><td>不能推出偏导存在</td><td>尖点、绝对值型函数</td></tr>
+<tr><td>可微</td><td>能推出连续和偏导存在</td><td>用定义 $\Delta z=A\Delta x+B\Delta y+o(\rho)$</td></tr>
+<tr><td>偏导连续</td><td>能推出可微</td><td>最常用充分条件</td></tr></table>
+<p><strong>典型步骤</strong>：先查函数值连续性 → 再求偏导 → 若需判可微，计算 $\Delta z-f_x\Delta x-f_y\Delta y$ 是否为 $o(\rho)$。</p>
+<p><strong>反例意识</strong>：多元函数中“沿所有直线极限相同”仍不能证明极限存在，必要时尝试 $y=kx^2$、$y=x^\alpha$ 或极坐标夹逼。</p>
+<hr>
+<h3>题型11：闭区域上多元函数最值（含边界）</h3>
+<ol><li>求区域内部驻点：$f_x=f_y=0$。</li><li>逐段处理边界：代入边界方程化为一元函数，或用拉格朗日乘数法。</li><li>检查角点、端点、不可导点。</li><li>把所有候选点函数值列表比较，得到最大值和最小值。</li></ol>
+<p><strong>易错：</strong>拉格朗日乘数法只处理约束边界上的候选点，闭区域最值还必须比较内部点和边界端点。</p>
 <h2 id="ch8">第八章 二重积分</h2>
 <h3>题型1：直角坐标系下二重积分的计算</h3>
 <p><strong>区域类型</strong></p>
@@ -703,7 +747,7 @@ $$\iint_D f(x,y)dxdy = \iint_D f(r\cos\theta,r\sin\theta)r\,dr\,d\theta$$
 2. 按 $X$ 型/$Y$ 型重新描述 $D$
 3. 写出新次序的积分限
 
-<strong>典型例题</strong>：$\int_0^1 dy\int_y^{\sqrt{y} f(x,y)dx$ 交换为 $\int_0^1 dx\int_{x^2}^{x} f(x,y)dy$
+<strong>典型例题</strong>：$\int_0^1 dy\int_y^{\sqrt{y}} f(x,y)dx$ 交换为 $\int_0^1 dx\int_{x^2}^{x} f(x,y)dy$
 
 <strong>为什么交换？</strong> 原次序内层积分无法求出（或很复杂），交换后可能简化甚至变成可分离变量形式
 
@@ -735,6 +779,14 @@ $$\iint_D f(x,y)dxdy = \iint_D f(r\cos\theta,r\sin\theta)r\,dr\,d\theta$$
 <tr><td>质心（形心）</td><td>$\bar{x}=\frac{M_y}{M}=\frac{\iint_D x\rho\,d\sigma}{\iint_D\rho\,d\sigma}$，$\bar{y}=\frac{M_x}{M}$</td></tr>
 <tr><td>转动惯量</td><td>$I_x=\iint_D y^2\rho\,d\sigma$，$I_y=\iint_D x^2\rho\,d\sigma$，$I_O=I_x+I_y$</td></tr></table>
 <hr>
+<h3>题型7：复杂区域拆分与含绝对值/最值函数的二重积分</h3>
+<p><strong>常见触发信号</strong>：区域边界分段、被积函数含 $|x-y|$、$\max\{x,y\}$、$\min\{x,y\}$、分段函数或取整函数。</p>
+<ol><li>先画区域 $D$，标出所有边界交点。</li><li>找分界线：绝对值零点、两个表达式相等处、分段函数切换线。</li><li>用分界线把 $D$ 切成若干简单 $X$ 型或 $Y$ 型区域。</li><li>每块内去掉绝对值/最大最小符号，再分别积分。</li></ol>
+<p><strong>典型例题</strong>：$\iint_D |x-y|d\sigma$，其中 $D=[0,1]\times[0,1]$；$\iint_D \max\{x,y\}d\sigma$。</p>
+<hr>
+<h3>题型8：二重积分的轮换对称与均分技巧</h3>
+<ul><li>若 $D$ 关于 $y=x$ 对称，则 $\iint_D f(x,y)d\sigma=\iint_D f(y,x)d\sigma$。</li><li>若需要求 $\iint_D x^2d\sigma$，且 $D$ 关于 $x,y$ 轮换对称，可用 $\iint_D x^2d\sigma=\iint_D y^2d\sigma=\frac12\iint_D(x^2+y^2)d\sigma$。</li><li>圆域、扇形、正方形、由 $x,y$ 对称方程围成的区域，优先检查轮换对称。</li></ul>
+<p><strong>易错：</strong>只有区域和积分元素对称还不够，被积函数也要配合变换；不能把关于 $x$ 轴对称和关于 $y=x$ 对称混用。</p>
 <h2 id="ch9">第九章 向量代数与空间解析几何（仅数一）</h2>
 <h3>题型1：向量的基本运算</h3>
 <p><strong>运算公式</strong></p>
@@ -985,6 +1037,25 @@ $$\text{旋度：rot }\mathbf{F} = \nabla\times\mathbf{F} = \begin{vmatrix}\math
 
 </ul>
 <hr>
+<h3>题型8：三重积分区域定限专题</h3>
+<table><tr><th>方法</th><th>形式</th><th>适用场景</th></tr>
+<tr><td>投影法（先一后二）</td><td>$\iiint_\Omega f dv=\iint_D dxdy\int_{z_1(x,y)}^{z_2(x,y)} f dz$</td><td>上下曲面容易写，投影区域清楚</td></tr>
+<tr><td>截面法（先二后一）</td><td>$\iiint_\Omega f dv=\int_a^b dt\iint_{D_t} f dA$</td><td>截面是圆、矩形、三角形等规则图形</td></tr>
+<tr><td>柱坐标</td><td>$x=r\cos\theta,y=r\sin\theta,dv=rdrd\theta dz$</td><td>圆柱、圆锥、旋转体、含 $x^2+y^2$</td></tr>
+<tr><td>球坐标</td><td>$x=r\sin\varphi\cos\theta,y=r\sin\varphi\sin\theta,z=r\cos\varphi$</td><td>球、球冠、球锥组合、含 $x^2+y^2+z^2$</td></tr></table>
+<p><strong>定限顺序口诀</strong>：先画投影或截面，再定外层范围；内层变量一定是“从进入区域到离开区域”。</p>
+<p><strong>易错：</strong>柱坐标别漏 $r$，球坐标别漏 $r^2\sin\varphi$；球坐标中 $\varphi$ 是与正 $z$ 轴的夹角。</p>
+<hr>
+<h3>题型9：曲线曲面积分方向性与补线补面</h3>
+<table><tr><th>对象</th><th>是否与方向有关</th><th>换向影响</th></tr>
+<tr><td>第一类曲线积分 $\int_L fds$</td><td>无关</td><td>不变</td></tr>
+<tr><td>第二类曲线积分 $\int_L Pdx+Qdy+Rdz$</td><td>有关</td><td>变号</td></tr>
+<tr><td>第一类曲面积分 $\iint_S fdS$</td><td>无关</td><td>不变</td></tr>
+<tr><td>第二类曲面积分 $\iint_S Pdydz+Qdzdx+Rdxdy$</td><td>有关</td><td>变号</td></tr></table>
+<p><strong>补线法</strong>：开曲线 $L$ 补成闭曲线 $L+C$，用格林公式算闭合积分，再减去补线 $C$ 上的积分。</p>
+<p><strong>补面法</strong>：开口曲面 $S$ 补成闭曲面 $S+S_0$，用高斯公式算闭曲面通量，再减去补面 $S_0$ 通量。</p>
+<p><strong>右手法则</strong>：斯托克斯公式中，右手四指沿边界正向弯曲，大拇指指向曲面正法向。</p>
+<div class="highlight-box"><p><strong>易错：</strong>补线/补面后要统一方向。补面方向应取闭曲面的外侧，若直接计算方向相反，结果要取负。</p></div>
 <h2 id="ch12">第十二章 多元积分学的物理应用（仅数一）</h2>
 <h3>题型1：体积计算汇总</h3>
 <table><tr><th>方法</th><th>公式</th><th>适用</th></tr><tr><td>二重积分</td><td>$V=\iint_D f(x,y)d\sigma$</td><td>曲顶柱体</td></tr><tr><td>三重积分</td><td>$V=\iiint_\Omega dv$</td><td>一般空间区域</td></tr><tr><td>截面法</td><td>$V=\int_a^b A(z)dz$（$A(z)$ 为截面积）</td><td>截面易求</td></tr><tr><td>柱壳法</td><td>$V=2\pi\int_a^b x\cdot h(x)dx$</td><td>旋转体</td></tr><tr><td>圆盘法</td><td>$V=\pi\int_a^b [f(x)]^2 dx$</td><td>旋转体</td></tr></table>

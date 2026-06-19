@@ -363,6 +363,34 @@ a_{n1} & a_{n2} & \cdots & a_{nn}
 <li><strong>Sylvester不等式</strong>：<span class="math-inline">$r(A) + r(B) - n \leq r(AB) \leq \min(r(A), r(B))$</span></li>
 </ul>
 <p><strong>求秩的方法</strong>：将矩阵通过初等行变换化为<strong>行阶梯形</strong>，非零行数即秩。</p>
+
+<hr>
+<h3 id="七矩阵高频补充专题">七、矩阵高频补充专题</h3>
+<h4 id="71-伴随矩阵的秩分类">7.1 伴随矩阵的秩分类</h4>
+<table>
+<tr><th>A 的秩</th><th>A* 的秩</th><th>结论</th></tr>
+<tr><td>r(A)=n</td><td>r(A*)=n</td><td>A 可逆，A* 也可逆</td></tr>
+<tr><td>r(A)=n-1</td><td>r(A*)=1</td><td>A* 非零但秩为 1</td></tr>
+<tr><td>r(A)&lt;n-1</td><td>r(A*)=0</td><td>A*=O</td></tr>
+</table>
+<blockquote>⚠️ <strong>常考提醒</strong>：伴随矩阵题不要只套 <span class="math-inline">$A^*=|A|A^{-1}$</span>，这个公式只适用于 A 可逆的情况；A 不可逆时要优先看秩分类。</blockquote>
+
+<h4 id="72-秩的常用补充结论">7.2 秩的常用补充结论</h4>
+<ul>
+<li><span class="math-inline">$r(A)=r(A^T)=r(A^TA)=r(AA^T)$</span></li>
+<li>若 <span class="math-inline">$A_{m\times n}B_{n\times s}=O$</span>，则 <span class="math-inline">$r(A)+r(B)\leq n$</span></li>
+<li>若 A 列满秩，则 <span class="math-inline">$Ax=0$</span> 仅有零解；若 A 行满秩，则 <span class="math-inline">$Ax=b$</span> 对任意 b 有解。</li>
+<li>分块对角矩阵的秩等于各对角块秩之和；分块三角矩阵在对角块可逆时可用初等变换化简。</li>
+</ul>
+
+<h4 id="73-矩阵方程">7.3 矩阵方程</h4>
+<table>
+<tr><th>形式</th><th>可解条件/解法</th></tr>
+<tr><td><span class="math-inline">$AX=B$</span></td><td>A 可逆时 <span class="math-inline">$X=A^{-1}B$</span></td></tr>
+<tr><td><span class="math-inline">$XA=B$</span></td><td>A 可逆时 <span class="math-inline">$X=BA^{-1}$</span></td></tr>
+<tr><td><span class="math-inline">$AXB=C$</span></td><td>A、B 均可逆时 <span class="math-inline">$X=A^{-1}CB^{-1}$</span></td></tr>
+<tr><td>抽象矩阵方程</td><td>先移项、因式分解，再注意矩阵乘法顺序不能随意交换</td></tr>
+</table>
 <hr>
 <h2 id="ch3">第三章 向量</h2>
 <h3 id="本章考点考试大纲要求">本章考点（考试大纲要求）</h3>
@@ -550,6 +578,21 @@ a_{n1} & a_{n2} & \cdots & a_{nn}
 <p>两方程组 <span class="math-inline">$Ax = 0$</span> 和 <span class="math-inline">$Bx = 0$</span> 的公共解，即 <span class="math-inline">$\begin{pmatrix} A \\ B \end{pmatrix}x = 0$</span> 的解。</p>
 <h4 id="42-同解">4.2 同解</h4>
 <p>两方程组 <span class="math-inline">$Ax = 0$</span> 和 <span class="math-inline">$Bx = 0$</span> <strong>同解</strong> <span class="math-inline">$\iff$</span> <span class="math-inline">$r(A) = r(B) = r\begin{pmatrix} A \\ B \end{pmatrix}$</span></p>
+
+<hr>
+<h3 id="五含参数线性方程组讨论流程">五、含参数线性方程组讨论流程</h3>
+<ol>
+<li>先对增广矩阵 <span class="math-inline">$(A,b)$</span> 做初等行变换，尽量化为阶梯形。</li>
+<li>找出会导致主元为 0 的参数值，将参数分成若干情况。</li>
+<li>分别比较 <span class="math-inline">$r(A)$</span> 与 <span class="math-inline">$r(A,b)$</span>。</li>
+<li>若有解，再比较 <span class="math-inline">$r(A)$</span> 与未知量个数 n，判断唯一解或无穷多解。</li>
+</ol>
+<table>
+<tr><th>秩关系</th><th>结论</th></tr>
+<tr><td><span class="math-inline">$r(A)&lt;r(A,b)$</span></td><td>无解</td></tr>
+<tr><td><span class="math-inline">$r(A)=r(A,b)=n$</span></td><td>唯一解</td></tr>
+<tr><td><span class="math-inline">$r(A)=r(A,b)&lt;n$</span></td><td>无穷多解，自由变量个数为 <span class="math-inline">$n-r(A)$</span></td></tr>
+</table>
 <hr>
 <h2 id="ch5">第五章 特征值与特征向量</h2>
 <h3 id="本章考点考试大纲要求">本章考点（考试大纲要求）</h3>
@@ -627,6 +670,24 @@ a_{n1} & a_{n2} & \cdots & a_{nn}
 <li>将所有特征向量单位化</li>
 <li>以标准正交向量为列构成正交矩阵Q</li>
 </ol>
+
+<hr>
+<h3 id="四特征值高频补充专题">四、特征值高频补充专题</h3>
+<h4 id="41-代数重数与几何重数">4.1 代数重数与几何重数</h4>
+<p>若 <span class="math-inline">$\lambda$</span> 是 A 的 k 重特征值，则 k 称为代数重数；对应线性无关特征向量个数为 <span class="math-inline">$n-r(\lambda E-A)$</span>，称为几何重数。</p>
+<ul>
+<li>几何重数 <span class="math-inline">$\leq$</span> 代数重数。</li>
+<li>A 可对角化 <span class="math-inline">$\iff$</span> 每个特征值的几何重数都等于代数重数。</li>
+<li>若 A 有 n 个互异特征值，则必可对角化。</li>
+</ul>
+
+<h4 id="42-矩阵多项式与cayley-hamilton定理">4.2 矩阵多项式与 Cayley-Hamilton 定理</h4>
+<ul>
+<li>若 <span class="math-inline">$A\alpha=\lambda\alpha$</span>，则 <span class="math-inline">$f(A)\alpha=f(\lambda)\alpha$</span>。</li>
+<li>若 A 可对角化，<span class="math-inline">$A=P\Lambda P^{-1}$</span>，则 <span class="math-inline">$f(A)=P f(\Lambda) P^{-1}$</span>。</li>
+<li><strong>Cayley-Hamilton 定理</strong>：A 满足自己的特征方程，即若 <span class="math-inline">$p(\lambda)=|\lambda E-A|$</span>，则 <span class="math-inline">$p(A)=O$</span>。</li>
+<li>求 <span class="math-inline">$A^n$</span> 时，可用特征方程把高次幂降为低次幂组合。</li>
+</ul>
 <hr>
 <h2 id="ch6">第六章 二次型</h2>
 <h3 id="本章考点考试大纲要求">本章考点（考试大纲要求）</h3>
@@ -699,6 +760,26 @@ a_{n1} & a_{n2} & \cdots & a_{nn}
 <li><strong>半正定</strong>：<span class="math-inline">$f(x) \geq 0$</span> <span class="math-inline">$\iff$</span> 特征值全 <span class="math-inline">$\geq$</span> 0</li>
 <li><strong>不定</strong>：<span class="math-inline">$f(x)$</span> 既可取正值也可取负值</li>
 </ul>
+
+<hr>
+<h3 id="五二次型高频辨析">五、二次型高频辨析</h3>
+<h4 id="51-正定半正定负定不定对比">5.1 正定、半正定、负定、不定对比</h4>
+<table>
+<tr><th>类型</th><th>特征值判定</th><th>惯性指数</th><th>备注</th></tr>
+<tr><td>正定</td><td>全 > 0</td><td>p=n</td><td>顺序主子式全 > 0</td></tr>
+<tr><td>负定</td><td>全 < 0</td><td>q=n</td><td>奇数阶顺序主子式 < 0，偶数阶 > 0</td></tr>
+<tr><td>半正定</td><td>全 ≥ 0</td><td>q=0</td><td>不能只用顺序主子式全 ≥ 0 判定</td></tr>
+<tr><td>不定</td><td>既有正又有负</td><td>p>0 且 q>0</td><td>可取正值也可取负值</td></tr>
+</table>
+
+<h4 id="52-等价相似合同对比">5.2 等价、相似、合同对比</h4>
+<table>
+<tr><th>关系</th><th>形式</th><th>主要不变量</th><th>常见章节</th></tr>
+<tr><td>等价</td><td><span class="math-inline">$B=PAQ$</span></td><td>秩</td><td>矩阵、向量组、方程组</td></tr>
+<tr><td>相似</td><td><span class="math-inline">$B=P^{-1}AP$</span></td><td>特征值、特征多项式、迹、行列式、秩</td><td>特征值与对角化</td></tr>
+<tr><td>合同</td><td><span class="math-inline">$B=C^TAC$</span></td><td>秩、正负惯性指数、正定性</td><td>二次型</td></tr>
+</table>
+<blockquote>⚠️ <strong>辨析：</strong>相似不一定合同，合同也不一定相似；实对称矩阵讨论二次型时优先看合同与惯性指数。</blockquote>
 <hr>
 <blockquote><strong>本文档覆盖全书六大章节全部核心知识点，建议结合教材例题和《基础过关660题》同步练习巩固。</strong></blockquote>
         </div>

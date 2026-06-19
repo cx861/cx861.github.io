@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -143,6 +143,10 @@
                 <li><a href="#题型30-二次型的最值问题与几何应用">　　题型30：二次型的最值问题与几何应用</a></li>
                 <li><a href="#综合题型">综合题型</a></li>
                 <li><a href="#题型31-跨章节综合题-高频">　　题型31：跨章节综合题（高频！）</a></li>
+                <li><a href="#题型32-伴随矩阵秩分类">　　题型32：伴随矩阵秩分类</a></li>
+                <li><a href="#题型33-矩阵多项式与高次幂">　　题型33：矩阵多项式与高次幂</a></li>
+                <li><a href="#题型34-可对角化重根判定">　　题型34：可对角化重根判定</a></li>
+                <li><a href="#题型35-等价相似合同辨析">　　题型35：等价/相似/合同辨析</a></li>
                 <li><a href="#考试策略与答题规范">考试策略与答题规范</a></li>
                 <li><a href="#考试时间分配建议">　　考试时间分配建议</a></li>
                 <li><a href="#线代部分在整卷中的典型位置">　　线代部分在整卷中的典型位置</a></li>
@@ -160,7 +164,8 @@
 <tr><td>第三章 向量</td><td>6种</td><td>线性相关性判定、求极大无关组、求秩、线性表示、正交化、正交矩阵</td></tr>
 <tr><td>第四章 线性方程组</td><td>5种</td><td>解的判定、求基础解系、求通解、含参方程组、公共解同解</td></tr>
 <tr><td>第五章 特征值与特征向量</td><td>5种</td><td>求特征值特征向量、对角化、相似判定、实对称矩阵对角化、特征值应用</td></tr>
-<tr><td>第六章 二次型</td><td>5种</td><td>写二次型矩阵、化标准形（正交变换/配方法）、正定性判定、合同判定、最值问题</td></tr></table></div>
+<tr><td>第六章 二次型</td><td>5种</td><td>写二次型矩阵、化标准形（正交变换/配方法）、正定性判定、合同判定、最值问题</td></tr>
+<tr><td>综合题型</td><td>5种</td><td>跨章节综合、伴随矩阵秩分类、矩阵多项式、重根对角化、等价/相似/合同辨析</td></tr></table></div>
 <hr>
 <h2 id="第一章-行列式-常考题型">第一章 行列式 —— 常考题型</h2>
 <h3 id="题型1-行列式概念与性质题">题型1：行列式概念与性质题</h3>
@@ -250,17 +255,17 @@
 <p><strong>典型考法</strong>：已知 <span class="math-inline">$|A|$</span> 的值，求 <span class="math-inline">$|A^*|, |A^{-1}|, |3A^T|, |A^*B|$</span> 等表达式的值。</p>
 <p><strong>核心公式速查</strong>：</p>
 <div class="table-wrapper"><table><tr class="table-header"><th>表达式</th><th>结果</th><th>条件</th></tr>
-<tr><td><span class="math-inline">$\|A^T\|$</span></td><td><span class="math-inline">$\|A\|$</span></td><td>恒成立</td></tr>
-<tr><td><span class="math-inline">$\|kA\|$</span></td><td><span class="math-inline">$k^n\|A\|$</span></td><td>A为n阶方阵</td></tr>
-<tr><td><span class="math-inline">$\|A^{-1}\|$</span></td><td><span class="math-inline">$1/\|A\|$</span></td><td>A可逆</td></tr>
-<tr><td><span class="math-inline">$\|A^*\|$</span></td><td><span class="math-inline">$\|A\|^{n-1}$</span></td><td>A为n阶方阵(n≥2)</td></tr>
-<tr><td><span class="math-inline">$\|AB\|$</span></td><td><span class="math-inline">$\|A\|\cdot\|B\|$</span></td><td>A和B为同阶方阵</td></tr>
-<tr><td><span class="math-inline">$\|A+B\|$</span></td><td>≠ <span class="math-inline">$\|A\|+\|B\|$</span></td><td>一般不相等！</td></tr></table></div>
+<tr><td><span class="math-inline">$|A^T|$</span></td><td><span class="math-inline">$|A|$</span></td><td>恒成立</td></tr>
+<tr><td><span class="math-inline">$|kA|$</span></td><td><span class="math-inline">$k^n|A|$</span></td><td>A为n阶方阵</td></tr>
+<tr><td><span class="math-inline">$|A^{-1}|$</span></td><td><span class="math-inline">$1/|A|$</span></td><td>A可逆</td></tr>
+<tr><td><span class="math-inline">$|A^*|$</span></td><td><span class="math-inline">$|A|^{n-1}$</span></td><td>A为n阶方阵(n≥2)</td></tr>
+<tr><td><span class="math-inline">$|AB|$</span></td><td><span class="math-inline">$|A|\cdot|B|$</span></td><td>A和B为同阶方阵</td></tr>
+<tr><td><span class="math-inline">$|A+B|$</span></td><td>≠ <span class="math-inline">$|A|+|B|$</span></td><td>一般不相等！</td></tr></table></div>
 <p><strong>易错警示</strong>：</p>
 <ul>
-<li><span class="math-inline">$\|A+B\| \neq \|A\| + \|B\|$</span>（常见陷阱）</li>
-<li><span class="math-inline">$\|kA\| = k^n\|A\|$</span>，不要漏了幂次n</li>
-<li><span class="math-inline">$\|A\| = 0 \iff A$</span> 不可逆 <span class="math-inline">$\iff r(A) < n \iff Ax = 0$</span> 有非零解</li>
+<li><span class="math-inline">$|A+B| \neq |A| + |B|$</span>（常见陷阱）</li>
+<li><span class="math-inline">$|kA| = k^n|A|$</span>，不要漏了幂次n</li>
+<li><span class="math-inline">$|A| = 0 \iff A$</span> 不可逆 <span class="math-inline">$\iff r(A) < n \iff Ax = 0$</span> 有非零解</li>
 </ul>
 <hr>
 <h3 id="题型5-克拉默法则应用">题型5：克拉默法则应用</h3>
@@ -325,7 +330,7 @@
 </ol>
 <p><strong>解法对比</strong>：</p>
 <div class="table-wrapper"><table><tr class="table-header"><th>方法</th><th>适用场景</th><th>公式/步骤</th></tr>
-<tr><td><strong>伴随矩阵法</strong></td><td>2阶或3阶</td><td><span class="math-inline">$A^{-1} = \frac{1}{\|A\|}A^*$</span>；二阶：<span class="math-inline">$\begin{pmatrix} a & b \\ c & d \end{pmatrix}^{-1} = \frac{1}{ad-bc}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$</span></td></tr>
+<tr><td><strong>伴随矩阵法</strong></td><td>2阶或3阶</td><td><span class="math-inline">$A^{-1} = \frac{1}{|A|}A^*$</span>；二阶：<span class="math-inline">$\begin{pmatrix} a & b \\ c & d \end{pmatrix}^{-1} = \frac{1}{ad-bc}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$</span></td></tr>
 <tr><td><strong>初等变换法</strong></td><td>一般情况</td><td><span class="math-inline">$(A \mid E) \xrightarrow{\text{行变换}} (E \mid A^{-1})$</span></td></tr>
 <tr><td><strong>分块对角法</strong></td><td>分块对角阵</td><td><span class="math-inline">$A^{-1} = \text{diag}(A_1^{-1}, A_2^{-1}, \cdots)$</span></td></tr>
 <tr><td><strong>定义法</strong></td><td>抽象矩阵</td><td>找B使 <span class="math-inline">$AB = BA = E$</span></td></tr></table></div>
@@ -827,6 +832,48 @@ Ax = b ──┤ ┌── r(A) = r(A,b) &lt; n → 无穷多解
 <li><strong>选择工具</strong>：选择最合适的工具（秩判定、特征值、对角化等）</li>
 <li><strong>分步求解</strong>：将复杂问题分解为独立步骤</li>
 </ol>
+
+<hr>
+<h3 id="题型32-伴随矩阵秩分类">题型32：伴随矩阵秩分类</h3>
+<p><strong>难度</strong>：★★★★☆ | <strong>题型</strong>：选择题/填空题</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>A 的秩</th><th>A* 的秩</th><th>常见结论</th></tr>
+<tr><td><span class="math-inline">$r(A)=n$</span></td><td><span class="math-inline">$r(A^*)=n$</span></td><td>A 与 A* 均可逆</td></tr>
+<tr><td><span class="math-inline">$r(A)=n-1$</span></td><td><span class="math-inline">$r(A^*)=1$</span></td><td>A* 非零，且每列均为 <span class="math-inline">$Ax=0$</span> 的解</td></tr>
+<tr><td><span class="math-inline">$r(A)&lt;n-1$</span></td><td><span class="math-inline">$r(A^*)=0$</span></td><td><span class="math-inline">$A^*=O$</span></td></tr>
+</table></div>
+<p><strong>易错</strong>：<span class="math-inline">$A^*=|A|A^{-1}$</span> 只适合 A 可逆；A 不可逆时必须用秩分类。</p>
+
+<hr>
+<h3 id="题型33-矩阵多项式与高次幂">题型33：矩阵多项式与高次幂</h3>
+<p><strong>难度</strong>：★★★★☆ | <strong>题型</strong>：填空题/解答题</p>
+<ol>
+<li><strong>对角化法</strong>：若 <span class="math-inline">$A=P\Lambda P^{-1}$</span>，则 <span class="math-inline">$A^n=P\Lambda^nP^{-1}$</span>，<span class="math-inline">$f(A)=P f(\Lambda)P^{-1}$</span>。</li>
+<li><strong>Cayley-Hamilton 降幂</strong>：由特征方程 <span class="math-inline">$p(\lambda)=0$</span> 得 <span class="math-inline">$p(A)=O$</span>，把高次幂化成低次幂。</li>
+<li><strong>特征向量法</strong>：若 <span class="math-inline">$A\alpha=\lambda\alpha$</span>，则 <span class="math-inline">$f(A)\alpha=f(\lambda)\alpha$</span>。</li>
+</ol>
+<p><strong>典型例题</strong>：已知 <span class="math-inline">$A^2-3A+2E=O$</span>，求 <span class="math-inline">$A^n$</span> 或 <span class="math-inline">$A^{-1}$</span>；已知 A 可对角化，求 <span class="math-inline">$A^{2026}$</span>。</p>
+
+<hr>
+<h3 id="题型34-可对角化重根判定">题型34：可对角化重根判定</h3>
+<p><strong>难度</strong>：★★★★☆ | <strong>题型</strong>：选择题/解答题</p>
+<p><strong>判定核心</strong>：对每个 k 重特征值 <span class="math-inline">$\lambda$</span>，必须有 <span class="math-inline">$n-r(\lambda E-A)=k$</span>，即几何重数等于代数重数。</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>情况</th><th>结论</th></tr>
+<tr><td>有 n 个互不相同的特征值</td><td>必可对角化</td></tr>
+<tr><td>实对称矩阵</td><td>必可正交对角化</td></tr>
+<tr><td>存在重特征值</td><td>必须检查对应特征向量个数</td></tr>
+<tr><td>某个 k 重特征值只有少于 k 个线性无关特征向量</td><td>不可对角化</td></tr>
+</table></div>
+<p><strong>易错</strong>：特征值个数少于 n 并不一定不可对角化，关键看重根对应的特征向量个数。</p>
+
+<hr>
+<h3 id="题型35-等价相似合同辨析">题型35：等价/相似/合同辨析</h3>
+<p><strong>难度</strong>：★★★★☆ | <strong>题型</strong>：选择题/填空题</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>关系</th><th>形式</th><th>不变量</th><th>常见判断</th></tr>
+<tr><td>等价</td><td><span class="math-inline">$B=PAQ$</span></td><td>秩</td><td>同型矩阵秩相同即等价</td></tr>
+<tr><td>相似</td><td><span class="math-inline">$B=P^{-1}AP$</span></td><td>特征值、特征多项式、迹、行列式、秩</td><td>特征值相同不一定相似</td></tr>
+<tr><td>合同</td><td><span class="math-inline">$B=C^TAC$</span></td><td>秩、正负惯性指数、正定性</td><td>实对称矩阵看惯性指数</td></tr>
+</table></div>
+<p><strong>速记</strong>：等价看秩，相似看特征，合同看惯性。</p>
 <hr>
 <h2 id="考试策略与答题规范">考试策略与答题规范</h2>
 <h3 id="考试时间分配建议">考试时间分配建议</h3>

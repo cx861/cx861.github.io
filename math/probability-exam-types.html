@@ -159,6 +159,19 @@
 <li>分段函数的单调性需分段处理</li>
 <li>$Y=X^2$ 型：先求 $F_Y(y)=P(X^2\leq y)=P(-\sqrt{y}\leq X\leq \sqrt{y})$（注意 $y\geq 0$）</li>
 </ul>
+<hr>
+
+<h3>题型4：非单调变换与分支求和</h3>
+<p><strong>关联公式</strong></p>
+<p>若 $Y=g(X)$，方程 $y=g(x)$ 有有限个根 $x_i$，则</p>
+$$
+f_Y(y)=\sum_i\frac{f_X(x_i)}{|g'(x_i)|}
+$$
+<p><strong>解题要点</strong></p>
+<ul>
+<li>先写出 $Y$ 的取值范围，再找所有满足 $g(x)=y$ 的分支</li>
+<li>$X^2$、$|X|$、三角函数变换都容易漏分支</li>
+</ul>
 
 <!-- ============ 第3章 ============ -->
 <h2 id="ch3">第3章 多维随机变量及其分布</h2>
@@ -220,6 +233,34 @@
 <li>二维均匀的概率 = 几何度量比（面积比）</li>
 <li>判断 $(X,Y)$ 是否服从二维正态：需验证联合密度是否具有二维正态的标准形式</li>
 </ul>
+<hr>
+
+<h3>题型5：二维随机变量变换与 Jacobian</h3>
+<p><strong>关联公式</strong></p>
+$$
+f_{U,V}(u,v)=f_{X,Y}(x(u,v),y(u,v))\left|\frac{\partial(x,y)}{\partial(u,v)}\right|
+$$
+<p><strong>解题要点</strong></p>
+<ul>
+<li>先求反变换 $x=x(u,v),y=y(u,v)$，再求反变换的 Jacobian 绝对值</li>
+<li>最后一定要由原支持区域推出 $(u,v)$ 的取值范围</li>
+<li>若变换不是一一对应，需要按分支求和</li>
+</ul>
+<hr>
+
+<h3>题型6：顺序统计量与样本极值</h3>
+<p><strong>关联公式</strong></p>
+<ul>
+<li>$F_{X_{(n)}}(x)=[F(x)]^n$</li>
+<li>$F_{X_{(1)}}(x)=1-[1-F(x)]^n$</li>
+<li>$f_{X_{(k)}}(x)=\dfrac{n!}{(k-1)!(n-k)!}[F(x)]^{k-1}[1-F(x)]^{n-k}f(x)$</li>
+</ul>
+<p><strong>解题要点</strong></p>
+<ul>
+<li>最大值用“所有样本都不超过 $x$”</li>
+<li>最小值用“至少一个不超过 $x$”的补事件</li>
+<li>样本极差、寿命系统题常与最大值/最小值结合</li>
+</ul>
 
 <!-- ============ 第4章 ============ -->
 <h2 id="ch4">第4章 随机变量的数字特征</h2>
@@ -267,6 +308,34 @@ $$
 <li>用于估计概率的下界/上界（不需知道分布的具体形式）</li>
 <li>只要求 $E(X),D(X)$ 存在</li>
 </ul>
+<hr>
+
+<h3>题型4：条件期望、全期望与全方差</h3>
+<p><strong>关联公式</strong></p>
+<ul>
+<li>$E(Y)=E[E(Y|X)]$</li>
+<li>$D(Y)=E[D(Y|X)]+D[E(Y|X)]$</li>
+</ul>
+<p><strong>解题要点</strong></p>
+<ul>
+<li>题目若有“先随机选一种情形，再在该情形下抽样”，优先考虑条件期望</li>
+<li>全方差适合拆成“组内波动 + 组间波动”</li>
+<li>计算时先固定条件变量，再对条件变量求期望</li>
+</ul>
+<hr>
+
+<h3>题型5：独立、不相关与二维正态特例</h3>
+<p><strong>关联结论</strong></p>
+<ul>
+<li>独立 $\Rightarrow$ 不相关</li>
+<li>不相关 $\nRightarrow$ 独立</li>
+<li>二维正态分布中，不相关 $\iff$ 独立</li>
+</ul>
+<p><strong>解题要点</strong></p>
+<ul>
+<li>判独立看联合分布是否可分解，判不相关看 $\mathrm{Cov}(X,Y)$</li>
+<li>遇到二维正态，只需看 $\rho$ 是否为 $0$</li>
+</ul>
 
 <!-- ============ 第5章 ============ -->
 <h2 id="ch5">第5章 大数定律与中心极限定理</h2>
@@ -294,6 +363,20 @@ $$
 <ul>
 <li>$n$ 较大时，用正态分布近似二项分布（求 $P(a\leq X\leq b)$）</li>
 <li>连续修正（可选）：$P(a\leq X\leq b)\approx\Phi\left(\dfrac{b+0.5-np}{\sqrt{np(1-p)}}\right)-\Phi\left(\dfrac{a-0.5-np}{\sqrt{np(1-p)}}\right)$</li>
+</ul>
+<hr>
+
+<h3>题型3：二项分布的正态近似与连续性修正</h3>
+<p><strong>关联方法</strong></p>
+<ul>
+<li>$X\sim B(n,p)$，当 $n$ 较大时，$X\approx N(np,np(1-p))$</li>
+<li>$P(a\leq X\leq b)$ 修正为 $P(a-0.5<X<b+0.5)$</li>
+</ul>
+<p><strong>解题要点</strong></p>
+<ul>
+<li>先算 $\mu=np,\;\sigma=\sqrt{np(1-p)}$，再标准化</li>
+<li>求“至少”“至多”时尤其注意端点是否包含</li>
+<li>若 $p$ 很小且 $np$ 适中，也可先考虑泊松近似</li>
 </ul>
 
 <!-- ============ 第6章 ============ -->
@@ -377,7 +460,22 @@ $$
 </ul>
 <hr>
 
-<h3>题型3：估计量的无偏性、有效性、一致性判定</h3>
+<h3>题型3：参数支持集含未知参数的 MLE</h3>
+<p><strong>常见模型</strong></p>
+<ul>
+<li>$U(0,\theta)$：似然函数含约束 $\theta\geq X_{(n)}$，通常 $\hat{\theta}=X_{(n)}$</li>
+<li>$U(\theta,\theta+1)$：似然函数含约束 $X_{(n)}-1\leq\theta\leq X_{(1)}$</li>
+<li>截断型密度：先写指标函数，再看似然关于参数的单调性</li>
+</ul>
+<p><strong>解题要点</strong></p>
+<ul>
+<li>先写样本取值约束，再求最大值位置</li>
+<li>不要直接对含参数支持集的密度求导</li>
+<li>若可行参数区间是一段区间，检查似然在区间内的单调性</li>
+</ul>
+<hr>
+
+<h3>题型4：估计量的无偏性、有效性、一致性判定</h3>
 <p><strong>关联定义</strong></p>
 <ul>
 <li>无偏：$E(\hat{\theta})=\theta$</li>
@@ -391,7 +489,7 @@ $$
 </ul>
 <hr>
 
-<h3>题型4：正态总体参数的区间估计</h3>
+<h3>题型5：正态总体参数的区间估计</h3>
 <p><strong>关联公式</strong></p>
 <ul>
 <li>$\sigma$ 已知：$\overline{X}\pm z_{\alpha/2}\dfrac{\sigma}{\sqrt{n}}$</li>
@@ -403,6 +501,21 @@ $$
 <li>先判断：单总体 vs 双总体；$\sigma$ 已知 vs 未知</li>
 <li>置信水平 $1-\alpha$ 对应 $z_{\alpha/2}$（如 $95\%$ 对应 $z_{0.025}=1.96$）</li>
 </ul>
+<hr>
+
+<h3>题型6：区间估计统计量选型</h3>
+<p><strong>选型规则</strong></p>
+<ul>
+<li>估计均值且 $\sigma$ 已知：用 $Z$</li>
+<li>估计均值且 $\sigma$ 未知、总体正态：用 $t$</li>
+<li>估计单总体方差：用 $\chi^2$</li>
+<li>估计两总体方差比：用 $F$</li>
+</ul>
+<p><strong>解题要点</strong></p>
+<ul>
+<li>先判断单总体/双总体，再判断方差已知/未知</li>
+<li>双总体均值差若方差未知，题目通常会说明等方差或要求先判断</li>
+</ul>
 
 <!-- ============ 第8章 ============ -->
 <h2 id="ch8">第8章 假设检验</h2>
@@ -411,7 +524,7 @@ $$
 <p><strong>关联概念</strong></p>
 <ul>
 <li>第一类错误（弃真）：$\alpha=P(\text{拒绝}H_0|H_0\text{为真})$</li>
-<li>第二类错误（取伪）：$\beta=P(\text{接受}H_0|H_0\text{为假})$</li>
+<li>第二类错误（取伪）：$\beta=P(\text{不拒绝}H_0|H_0\text{为假})$</li>
 </ul>
 <p><strong>解题要点</strong></p>
 <ul>
@@ -450,13 +563,27 @@ $$
 <h3>题型4：置信区间与假设检验的对偶关系</h3>
 <p><strong>关联原理</strong></p>
 <ul>
-<li>置信水平 $1-\alpha$ 的置信区间 = 显著性水平 $\alpha$ 的接受域</li>
-<li>若 $\mu_0\in(\hat{\theta}_1,\hat{\theta}_2)$，则接受 $H_0:\mu=\mu_0$</li>
+<li>置信水平 $1-\alpha$ 的置信区间 = 显著性水平 $\alpha$ 的不拒绝域</li>
+<li>若 $\mu_0\in(\hat{\theta}_1,\hat{\theta}_2)$，则不拒绝 $H_0:\mu=\mu_0$</li>
 </ul>
 <p><strong>解题要点</strong></p>
 <ul>
 <li>利用对偶关系，可以用置信区间直接回答假设检验问题</li>
 <li>单侧置信下限/上限对应单侧假设检验</li>
+</ul>
+<hr>
+
+<h3>题型5：检验统计量选择与 $p$ 值判断</h3>
+<p><strong>选型规则</strong></p>
+<ul>
+<li>均值检验：$\sigma$ 已知用 $Z$，$\sigma$ 未知且正态总体用 $t$</li>
+<li>方差检验：单总体用 $\chi^2$，两总体方差比用 $F$</li>
+<li>备择假设决定拒绝域方向：$>$ 右尾，$<$ 左尾，$\neq$ 双尾</li>
+</ul>
+<p><strong>$p$ 值判断</strong></p>
+<ul>
+<li>$p\leq\alpha$：拒绝 $H_0$</li>
+<li>$p>\alpha$：不拒绝 $H_0$</li>
 </ul>
 
 <!-- ============ 综合题型 ============ -->
@@ -477,7 +604,7 @@ $$
 <p><strong>关联知识点</strong>：$t$ 分布、$\chi^2$ 分布、矩估计/MLE、置信区间、假设检验步骤</p>
 
 <hr>
-<blockquote><strong>文档说明</strong>：基于王式安《复习全书基础篇·概率论学习册》题型体系整理，共覆盖 <strong>8 章 26 个题型 + 3 个综合题型</strong>。适用数学一考生。题型编号与学习册保持一致，可直接对照复习。</blockquote>
+<blockquote><strong>文档说明</strong>：基于王式安《复习全书基础篇·概率论学习册》题型体系整理并按数一复习补充，共覆盖 <strong>8 章 37 个题型 + 3 个综合题型</strong>。适用数学一考生，可直接对照知识库复习。</blockquote>
 
 </div></div>
 
