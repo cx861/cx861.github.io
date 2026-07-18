@@ -293,6 +293,17 @@
     }
   };
 
+  /* ====== 回到顶部按钮 ====== */
+  const BackToTop = {
+    init() {
+      const btn = document.getElementById('backTop');
+      if (!btn) return;
+      window.addEventListener('scroll', () => {
+        btn.classList.toggle('visible', window.scrollY > 300);
+      }, { passive: true });
+    }
+  };
+
   /* ====== 初始化 ====== */
   document.addEventListener('DOMContentLoaded', () => {
     ThemeManager.init();
@@ -302,6 +313,7 @@
     RippleEffect.init();
     TiltCards.init();
     TocSidebar.init();
+    BackToTop.init();
 
     document.querySelectorAll('.theme-toggle').forEach(btn => {
       btn.addEventListener('click', () => ThemeManager.toggle());
