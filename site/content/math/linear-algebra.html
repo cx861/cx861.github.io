@@ -1,0 +1,731 @@
+<!-- Page Header -->
+    <div class="page-header math">
+        <h1>🔢 线性代数</h1>
+        <div class="breadcrumb"><a href="../index.html">首页</a> / <a href="../knowledge-base.html">知识库</a> / 线性代数</div>
+        <p style="margin-top: 0.5rem; opacity: 0.75;">编著：李永乐 | 适用：数学一/二/三 | 来源：金榜时代考研数学</p>
+    </div>
+
+    <div class="container" id="main-content">
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>目录</h3>
+            <ul>
+                <li><a href="#ch1">第一章 行列式</a></li>
+                <li><a href="#ch2">第二章 矩阵</a></li>
+                <li><a href="#ch3">第三章 向量</a></li>
+                <li><a href="#ch4">第四章 线性方程组</a></li>
+                <li><a href="#ch5">第五章 特征值与特征向量</a></li>
+                <li><a href="#ch6">第六章 二次型</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-card">
+<h2 id="ch1">第一章 行列式</h2>
+<h3 id="本章考点考试大纲要求">本章考点（考试大纲要求）</h3>
+<ol>
+<li>行列式的概念和基本性质</li>
+<li>行列式按行（列）展开定理</li>
+<li>线性方程组的克拉默（Cramer）法则</li>
+</ol>
+<hr>
+<h3 id="一行列式的概念">一、行列式的概念</h3>
+<h4 id="11-定义">1.1 定义</h4>
+<p><strong>n阶行列式</strong>是一个数，它是所有取自不同行不同列的n个元素乘积的代数和。</p>
+<div class="math-block">$$|A| = \begin{vmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{vmatrix} = \sum_{j_1j_2\cdots j_n} (-1)^{\tau(j_1j_2\cdots j_n)} a_{1j_1}a_{2j_2}\cdots a_{nj_n}$$</div>
+<p>其中 <span class="math-inline">$\tau(j_1j_2\cdots j_n)$</span> 为排列 <span class="math-inline">$j_1j_2\cdots j_n$</span> 的逆序数。</p>
+<h4 id="12-排列与逆序">1.2 排列与逆序</h4>
+<ul>
+<li><strong>n级排列</strong>：由1,2,...,n构成的有序数组，共有 <span class="math-inline">$n!$</span> 个</li>
+<li><strong>逆序</strong>：一个排列中，大的数排在小的数之前，构成一个逆序</li>
+<li><strong>逆序数</strong> <span class="math-inline">$\tau(j_1j_2\cdots j_n)$</span>：排列中逆序的总数</li>
+<li><strong>奇排列</strong>：逆序数为奇数；<strong>偶排列</strong>：逆序数为偶数</li>
+<li><strong>符号确定</strong>：偶排列取正号，奇排列取负号</li>
+</ul>
+<h4 id="13-二阶与三阶行列式">1.3 二阶与三阶行列式</h4>
+<ul>
+<li><strong>二阶行列式</strong>（对角线法则）： $$\begin{vmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{vmatrix} = a_{11}a_{22} - a_{12}a_{21}$$</li>
+</ul>
+<ul>
+<li><strong>三阶行列式</strong>（对角线法则）： $$\begin{vmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{vmatrix} = a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32} - a_{13}a_{22}a_{31} - a_{12}a_{21}a_{33} - a_{11}a_{23}a_{32}$$</li>
+</ul>
+<blockquote>⚠️ <strong>注意</strong>：对角线法仅适用于二阶和三阶行列式，四阶及以上不适用！</blockquote>
+<h4 id="14-转置行列式">1.4 转置行列式</h4>
+<p>将行列式 <span class="math-inline">$|A|$</span> 的行列互换得到 <span class="math-inline">$|A^T|$</span>，称为转置行列式。</p>
+<hr>
+<h3 id="二行列式的性质7条核心性质">二、行列式的性质（7条核心性质）</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>性质</th><th>内容</th><th>说明</th></tr>
+<tr><td><strong>性质1</strong></td><td><span class="math-inline">$|A^T| = |A|$</span></td><td>转置后值不变，行列对等</td></tr>
+<tr><td><strong>性质2</strong></td><td>两行（列）互换，行列式变号</td><td>推论：两行（列）相同→值为0</td></tr>
+<tr><td><strong>性质3</strong></td><td>某行（列）公因子可提取到行列式外</td><td>推论①：某行为全0→值为0；推论②：两行成比例→值为0</td></tr>
+<tr><td><strong>性质4</strong></td><td>某行（列）为两元素之和，可拆成两行列式之和</td><td>拆分性质</td></tr>
+<tr><td><strong>性质5</strong></td><td>某行（列）的k倍加到另一行（列），值不变</td><td>倍加变换，恒等变形核心方法</td></tr></table></div>
+<h4 id="重要推论">重要推论</h4>
+<ol>
+<li>行列式中两行（列）元素对应相等 → <span class="math-inline">$|A| = 0$</span></li>
+<li>行列式中两行（列）元素对应成比例 → <span class="math-inline">$|A| = 0$</span></li>
+<li>某行（列）全为0 → <span class="math-inline">$|A| = 0$</span></li>
+<li><span class="math-inline">$|kA| = k^n|A|$</span>（n为阶数）</li>
+<li><span class="math-inline">$|AB| = |A|\cdot|B|$</span></li>
+<li><span class="math-inline">$|A^{-1}| = 1/|A|$</span>（若A可逆）</li>
+<li><span class="math-inline">$|A^*| = |A|^{n-1}$</span></li>
+</ol>
+<hr>
+<h3 id="三行列式按行列展开公式">三、行列式按行（列）展开公式</h3>
+<h4 id="31-余子式与代数余子式">3.1 余子式与代数余子式</h4>
+<ul>
+<li><strong>余子式 <span class="math-inline">$M_{ij}$</span></strong>：划去 <span class="math-inline">$a_{ij}$</span> 所在行和列，剩余元素构成的 <span class="math-inline">$n-1$</span> 阶行列式</li>
+<li><strong>代数余子式 <span class="math-inline">$A_{ij}$</span></strong>：<span class="math-inline">$A_{ij} = (-1)^{i+j} M_{ij}$</span></li>
+</ul>
+<h4 id="32-展开定理">3.2 展开定理</h4>
+<p><strong>定理1.1（按行/列展开）</strong>：</p>
+<p>按第 <span class="math-inline">$i$</span> 行展开：<span class="math-inline">$|A| = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in} = \sum_{k=1}^{n} a_{ik}A_{ik}$</span></p>
+<p>按第 <span class="math-inline">$j$</span> 列展开：<span class="math-inline">$|A| = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj} = \sum_{k=1}^{n} a_{kj}A_{kj}$</span></p>
+<p><strong>定理1.2（异行乘代数余子式）</strong>：</p>
+<p><span class="math-inline">$\sum_{k=1}^{n} a_{ik}A_{jk} = 0 \quad (i \neq j)$</span></p>
+<p><span class="math-inline">$\sum_{k=1}^{n} a_{ki}A_{kj} = 0 \quad (i \neq j)$</span></p>
+<h4 id="33-特殊行列式的值">3.3 特殊行列式的值</h4>
+<p><strong>(1) 上/下三角行列式</strong>：等于主对角线元素的乘积</p>
+<div class="math-block">$$\begin{vmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ 0 & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & a_{nn} \end{vmatrix} = a_{11}a_{22}\cdots a_{nn}$$</div>
+<p><strong>(2) 副对角线行列式</strong>：</p>
+<div class="math-block">$$\begin{vmatrix} a_{11} & \cdots & a_{1,n-1} & a_{1n} \\ a_{21} & \cdots & a_{2,n-1} & 0 \\ \vdots & & \vdots & \vdots \\ a_{n1} & \cdots & 0 & 0 \end{vmatrix} = (-1)^{\frac{n(n-1)}{2}} a_{1n}a_{2,n-1}\cdots a_{n1}$$</div>
+<p><strong>(3) 拉普拉斯展开式</strong>：</p>
+<p>若A为m阶方阵，B为n阶方阵，则： $$\begin{vmatrix} A & O \\ O & B \end{vmatrix} = |A|\cdot|B|, \quad \begin{vmatrix} O & A \\ B & O \end{vmatrix} = (-1)^{mn}|A|\cdot|B|$$</p>
+<p><strong>(4) 范德蒙行列式</strong>：</p>
+<div class="math-block">$$V_n = \begin{vmatrix} 1 & 1 & \cdots & 1 \\ x_1 & x_2 & \cdots & x_n \\ x_1^2 & x_2^2 & \cdots & x_n^2 \\ \vdots & \vdots & \ddots & \vdots \\ x_1^{n-1} & x_2^{n-1} & \cdots & x_n^{n-1} \end{vmatrix} = \prod_{1 \leq i < j \leq n} (x_j - x_i)$$</div>
+<hr>
+<h3 id="四克拉默cramer法则">四、克拉默（Cramer）法则</h3>
+<p><strong>定理1.3</strong>：对于n个方程n个未知量的非齐次线性方程组 <span class="math-inline">$Ax = b$</span>：</p>
+<ul>
+<li>若 <span class="math-inline">$|A| \neq 0$</span>，则方程组有<strong>唯一解</strong>：<span class="math-inline">$x_i = \frac{|A_i|}{|A|}$</span>（i = 1,2,...,n）</li>
+<li>其中 <span class="math-inline">$|A_i|$</span> 是将 <span class="math-inline">$|A|$</span> 的第i列替换为常数项列b所得的行列式</li>
+</ul>
+<p><strong>推论</strong>：对于齐次线性方程组 <span class="math-inline">$Ax = 0$</span>：</p>
+<ul>
+<li>若 <span class="math-inline">$|A| \neq 0$</span>，则方程组<strong>仅有零解</strong></li>
+<li>若方程组<strong>有非零解</strong>，则必有 <span class="math-inline">$|A| = 0$</span></li>
+</ul>
+<blockquote>⚠️ <strong>注意</strong>：<span class="math-inline">$|A| = 0$</span> 时，齐次方程组必有非零解；非齐次方程组则可能无解或有无穷多解。</blockquote>
+<hr>
+<h3 id="五行列式计算的核心方法">五、行列式计算的核心方法</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>方法</th><th>适用场景</th><th>要点</th></tr>
+<tr><td><strong>定义法</strong></td><td>元素中0较多的行列式</td><td>直接使用完全展开式</td></tr>
+<tr><td><strong>三角化法</strong></td><td>一般行列式</td><td>利用倍加变换化为上三角</td></tr>
+<tr><td><strong>降阶法（展开法）</strong></td><td>某行（列）0较多的行列式</td><td>按含0多的行（列）展开</td></tr>
+<tr><td><strong>递推法</strong></td><td>具有递推结构的行列式</td><td>建立 <span class="math-inline">$D_n$</span> 与 <span class="math-inline">$D_{n-1}$</span> 的关系</td></tr>
+<tr><td><strong>数学归纳法</strong></td><td>范德蒙等特殊结构</td><td>先猜再证</td></tr>
+<tr><td><strong>加边法</strong></td><td>各行（列）和相等</td><td>增加一行一列简化计算</td></tr></table></div>
+<hr>
+<h2 id="ch2">第二章 矩阵</h2>
+<h3 id="本章考点考试大纲要求">本章考点（考试大纲要求）</h3>
+<ol>
+<li>矩阵的概念（单位阵、数量阵、对角阵、三角阵、对称阵、反对称阵及其性质）</li>
+<li>矩阵的线性运算、乘法、方阵的幂、方阵乘积的行列式</li>
+<li>矩阵的转置、逆矩阵的概念和性质、矩阵可逆的充要条件</li>
+<li>伴随矩阵</li>
+<li>矩阵的初等变换、初等矩阵</li>
+<li>矩阵的秩</li>
+<li>矩阵的等价</li>
+<li>分块矩阵及其运算</li>
+</ol>
+<hr>
+<h3 id="一矩阵的概念及运算">一、矩阵的概念及运算</h3>
+<h4 id="11-矩阵的概念">1.1 矩阵的概念</h4>
+<ul>
+<li><strong><span class="math-inline">$m \times n$</span> 矩阵</strong>：<span class="math-inline">$A = (a_{ij})_{m \times n}$</span>，m行n列</li>
+<li><strong>n阶方阵</strong>：<span class="math-inline">$m = n$</span> 时的矩阵</li>
+<li><strong>零矩阵</strong>：所有元素为0，记为 <span class="math-inline">$O$</span></li>
+<li><strong>同型矩阵</strong>：行数和列数分别相等的两个矩阵</li>
+<li><strong>矩阵相等</strong>：同型且对应位置元素全相等</li>
+</ul>
+<h4 id="12-矩阵的运算">1.2 矩阵的运算</h4>
+<p><strong>(1) 加法与数乘</strong></p>
+<ul>
+<li>加法（同型矩阵）：<span class="math-inline">$A + B = (a_{ij} + b_{ij})_{m \times n}$</span></li>
+<li>数乘：<span class="math-inline">$kA = (ka_{ij})_{m \times n}$</span></li>
+</ul>
+<p><strong>运算律</strong>：</p>
+<ul>
+<li><span class="math-inline">$A + B = B + A$</span>（交换律）</li>
+<li><span class="math-inline">$(A + B) + C = A + (B + C)$</span>（结合律）</li>
+<li><span class="math-inline">$A + O = A$</span></li>
+<li><span class="math-inline">$A + (-A) = O$</span></li>
+<li><span class="math-inline">$(k+l)A = kA + lA$</span></li>
+<li><span class="math-inline">$k(A + B) = kA + kB$</span></li>
+<li><span class="math-inline">$(kl)A = k(lA)$</span></li>
+</ul>
+<p><strong>(2) 矩阵乘法</strong></p>
+<p>若 <span class="math-inline">$A$</span> 为 <span class="math-inline">$m \times s$</span> 矩阵，<span class="math-inline">$B$</span> 为 <span class="math-inline">$s \times n$</span> 矩阵，则乘积 <span class="math-inline">$C = AB$</span> 为 <span class="math-inline">$m \times n$</span> 矩阵：</p>
+<div class="math-block">$$c_{ij} = \sum_{k=1}^{s} a_{ik}b_{kj} = a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots + a_{is}b_{sj}$$</div>
+<p><strong>运算律</strong>：</p>
+<ul>
+<li><span class="math-inline">$(AB)C = A(BC)$</span>（结合律）</li>
+<li><span class="math-inline">$A(B + C) = AB + AC$</span>（左分配律）</li>
+<li><span class="math-inline">$(A + B)C = AC + BC$</span>（右分配律）</li>
+<li><span class="math-inline">$(kA)B = A(kB) = k(AB)$</span></li>
+</ul>
+<blockquote>⚠️ <strong>核心注意</strong>：矩阵乘法<strong>不满足交换律</strong>！<span class="math-inline">$AB \neq BA$</span>（一般不相等）  ⚠️ <span class="math-inline">$AB = O$</span> 不能推出 <span class="math-inline">$A = O$</span> 或 <span class="math-inline">$B = O$</span>  ⚠️ <span class="math-inline">$AB = AC$</span> 且 <span class="math-inline">$A \neq O$</span> 不能推出 <span class="math-inline">$B = C$</span>（消去律不成立）</blockquote>
+<p><strong>(3) 方阵的幂</strong></p>
+<ul>
+<li><span class="math-inline">$A^0 = E$</span>（零次幂定义为单位阵）</li>
+<li><span class="math-inline">$A^k = A \cdot A \cdots A$</span>（k个相乘）</li>
+<li><span class="math-inline">$A^k \cdot A^l = A^{k+l}$</span></li>
+<li><span class="math-inline">$(A^k)^l = A^{kl}$</span></li>
+</ul>
+<blockquote>⚠️ <span class="math-inline">$(AB)^k \neq A^k B^k$</span>（一般情况，除非A、B可交换）</blockquote>
+<p><strong>(4) 矩阵的转置</strong></p>
+<p><span class="math-inline">$A^T = (a_{ji})_{n \times m}$</span></p>
+<p><strong>性质</strong>：</p>
+<ul>
+<li><span class="math-inline">$(A^T)^T = A$</span></li>
+<li><span class="math-inline">$(A + B)^T = A^T + B^T$</span></li>
+<li><span class="math-inline">$(kA)^T = kA^T$</span></li>
+<li><span class="math-inline">$(AB)^T = B^T A^T$</span></li>
+<li><span class="math-inline">$|A^T| = |A|$</span>（若A为方阵）</li>
+</ul>
+<p><strong>(5) 矩阵多项式</strong></p>
+<p>设 <span class="math-inline">$f(x) = a_mx^m + \cdots + a_1x + a_0$</span>，则 <span class="math-inline">$f(A) = a_mA^m + \cdots + a_1A + a_0E$</span></p>
+<h4 id="13-常见矩阵">1.3 常见矩阵</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>矩阵类型</th><th>定义</th><th>性质</th></tr>
+<tr><td><strong>单位阵 <span class="math-inline">$E_n$</span></strong></td><td>主对角元为1，其余为0</td><td><span class="math-inline">$AE = EA = A$</span></td></tr>
+<tr><td><strong>数量阵 <span class="math-inline">$kE$</span></strong></td><td>主对角元全为k</td><td>与任意同阶方阵可交换</td></tr>
+<tr><td><strong>对角阵 <span class="math-inline">$\Lambda$</span></strong></td><td>非主对角元全为0</td><td><span class="math-inline">$\Lambda^n$</span> = 各对角元n次幂</td></tr>
+<tr><td><strong>上三角阵</strong></td><td>主对角线以下为0</td><td>同阶上三角阵的积仍为上三角</td></tr>
+<tr><td><strong>下三角阵</strong></td><td>主对角线以上为0</td><td>同阶下三角阵的积仍为下三角</td></tr>
+<tr><td><strong>对称阵</strong></td><td><span class="math-inline">$A^T = A$</span></td><td><span class="math-inline">$(A^k)^T = A^k$</span></td></tr>
+<tr><td><strong>反对称阵</strong></td><td><span class="math-inline">$A^T = -A$</span></td><td>主对角元必为0</td></tr></table></div>
+<hr>
+<h3 id="二伴随矩阵与可逆矩阵">二、伴随矩阵与可逆矩阵</h3>
+<h4 id="21-伴随矩阵">2.1 伴随矩阵</h4>
+<p><strong>定义</strong>：<span class="math-inline">$A^* = (A_{ji})_{n \times n}$</span>，即代数余子式构成的矩阵的转置。</p>
+<p><strong>核心公式</strong>： $$A A^* = A^* A = |A| E$$</p>
+<p><strong>重要性质</strong>：</p>
+<ul>
+<li>若 <span class="math-inline">$A$</span> 可逆，则 <span class="math-inline">$A^* = |A| A^{-1}$</span></li>
+<li><span class="math-inline">$|A^*| = |A|^{n-1}$</span>（<span class="math-inline">$n \geq 2$</span>）</li>
+<li><span class="math-inline">$(A^*)^* = |A|^{n-2}A$</span>（<span class="math-inline">$n \geq 3$</span>）</li>
+<li><span class="math-inline">$(kA)^* = k^{n-1}A^*$</span></li>
+<li><span class="math-inline">$(A^*)^T = (A^T)^*$</span></li>
+<li><span class="math-inline">$(AB)^* = B^* A^*$</span></li>
+<li>若 <span class="math-inline">$A$</span> 可逆，则 <span class="math-inline">$(A^*)^{-1} = \frac{A}{|A|}$</span></li>
+</ul>
+<h4 id="22-可逆矩阵非奇异矩阵满秩矩阵">2.2 可逆矩阵（非奇异矩阵/满秩矩阵）</h4>
+<p><strong>定义</strong>：对于n阶方阵A，若存在n阶方阵B使 <span class="math-inline">$AB = BA = E$</span>，则称A可逆，B为A的逆矩阵，记作 <span class="math-inline">$A^{-1} = B$</span>。</p>
+<p><strong>可逆的充要条件</strong>（以下各条等价）：</p>
+<ol>
+<li><span class="math-inline">$|A| \neq 0$</span></li>
+<li><span class="math-inline">$r(A) = n$</span>（满秩）</li>
+<li>A的行（列）向量组线性无关</li>
+<li>A的特征值全不为0</li>
+<li><span class="math-inline">$Ax = 0$</span> 仅有零解</li>
+<li>A可表示为初等矩阵的乘积</li>
+<li>A等价于单位阵E</li>
+</ol>
+<p><strong>逆矩阵的性质</strong>：</p>
+<ul>
+<li><span class="math-inline">$(A^{-1})^{-1} = A$</span></li>
+<li><span class="math-inline">$(kA)^{-1} = \frac{1}{k}A^{-1}$</span>（<span class="math-inline">$k \neq 0$</span>）</li>
+<li><span class="math-inline">$(AB)^{-1} = B^{-1}A^{-1}$</span></li>
+<li><span class="math-inline">$(A^T)^{-1} = (A^{-1})^T$</span></li>
+<li><span class="math-inline">$|A^{-1}| = \frac{1}{|A|}$</span></li>
+</ul>
+<p><strong>求逆矩阵的方法</strong>：</p>
+<ol>
+<li><strong>伴随矩阵法</strong>：<span class="math-inline">$A^{-1} = \frac{1}{|A|}A^*$</span>（适合二阶/三阶）</li>
+<li><strong>初等变换法</strong>：<span class="math-inline">$(A \mid E) \xrightarrow{\text{行变换}} (E \mid A^{-1})$</span></li>
+<li><strong>分块矩阵法</strong>：利用分块对角阵的逆</li>
+</ol>
+<hr>
+<h3 id="三初等变换与初等矩阵">三、初等变换与初等矩阵</h3>
+<h4 id="31-初等变换">3.1 初等变换</h4>
+<p>三种初等行（列）变换：</p>
+<ol>
+<li><strong>对换变换</strong>：互换两行（列）</li>
+<li><strong>倍乘变换</strong>：某行（列）乘以非零常数k</li>
+<li><strong>倍加变换</strong>：某行（列）的k倍加到另一行（列）</li>
+</ol>
+<h4 id="32-初等矩阵">3.2 初等矩阵</h4>
+<p>对单位阵进行一次初等变换得到的矩阵。</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>初等矩阵</th><th>来源</th><th>逆矩阵</th></tr>
+<tr><td><span class="math-inline">$E_{ij}$</span></td><td>互换i,j两行</td><td><span class="math-inline">$E_{ij}^{-1} = E_{ij}$</span></td></tr>
+<tr><td><span class="math-inline">$E_i(k)$</span></td><td>第i行乘k</td><td><span class="math-inline">$E_i(k)^{-1} = E_i(\frac{1}{k})$</span></td></tr>
+<tr><td><span class="math-inline">$E_{ij}(k)$</span></td><td>第j行的k倍加到第i行</td><td><span class="math-inline">$E_{ij}(k)^{-1} = E_{ij}(-k)$</span></td></tr></table></div>
+<p><strong>核心结论</strong>：</p>
+<ul>
+<li>左乘初等矩阵 → 对应行变换</li>
+<li>右乘初等矩阵 → 对应列变换</li>
+<li>可逆矩阵可分解为有限个初等矩阵的乘积</li>
+</ul>
+<h4 id="33-矩阵的等价">3.3 矩阵的等价</h4>
+<p>若A经过有限次初等变换变成B，则称A与B等价，记作 <span class="math-inline">$A \cong B$</span>。</p>
+<p><strong>标准形</strong>：任何 <span class="math-inline">$m \times n$</span> 矩阵A等价于 <span class="math-inline">$\begin{pmatrix} E_r & O \\ O & O \end{pmatrix}$</span>，其中 <span class="math-inline">$r = r(A)$</span>。</p>
+<hr>
+<h3 id="四分块矩阵">四、分块矩阵</h3>
+<h4 id="41-分块运算">4.1 分块运算</h4>
+<div class="math-block">$$A = \begin{pmatrix} A_{11} & A_{12} \\ A_{21} & A_{22} \end{pmatrix}, \quad B = \begin{pmatrix} B_{11} & B_{12} \\ B_{21} & B_{22} \end{pmatrix}$$</div>
+<ul>
+<li><strong>加法</strong>：对应子块相加（同型分块）</li>
+<li><strong>数乘</strong>：每个子块乘以该数</li>
+<li><strong>乘法</strong>：按矩阵乘法规则以子块为元素运算</li>
+<li><strong>转置</strong>：子块自身转置且子块位置转置</li>
+</ul>
+<h4 id="42-分块对角阵">4.2 分块对角阵</h4>
+<div class="math-block">$$A = \begin{pmatrix} A_1 & & \\ & A_2 & \\ & & \ddots \\ & & & A_k \end{pmatrix}$$</div>
+<ul>
+<li><span class="math-inline">$|A| = |A_1| \cdot |A_2| \cdots |A_k|$</span></li>
+<li>若各 <span class="math-inline">$A_i$</span> 可逆，则 <span class="math-inline">$A^{-1} = \begin{pmatrix} A_1^{-1} & & \\ & A_2^{-1} & \\ & & \ddots \end{pmatrix}$</span></li>
+</ul>
+<h4 id="43-分块三角阵">4.3 分块三角阵</h4>
+<div class="math-block">$$\begin{pmatrix} A & C \\ O & B \end{pmatrix}^{-1} = \begin{pmatrix} A^{-1} & -A^{-1}CB^{-1} \\ O & B^{-1} \end{pmatrix}$$</div>
+<hr>
+<h3 id="五方阵的行列式">五、方阵的行列式</h3>
+<p>若A、B为n阶方阵，则：</p>
+<ul>
+<li><span class="math-inline">$|AB| = |A| \cdot |B|$</span></li>
+<li><span class="math-inline">$|kA| = k^n|A|$</span></li>
+<li><span class="math-inline">$|A^{-1}| = \frac{1}{|A|}$</span></li>
+<li><span class="math-inline">$|A^*| = |A|^{n-1}$</span></li>
+<li><span class="math-inline">$|A^T| = |A|$</span></li>
+</ul>
+<hr>
+<h3 id="六矩阵的秩">六、矩阵的秩</h3>
+<p><strong>定义</strong>：矩阵A的非零子式的最高阶数称为秩，记作 <span class="math-inline">$r(A)$</span>。</p>
+<p><strong>性质</strong>：</p>
+<ul>
+<li><span class="math-inline">$0 \leq r(A_{m \times n}) \leq \min(m, n)$</span></li>
+<li><span class="math-inline">$r(A^T) = r(A)$</span></li>
+<li><span class="math-inline">$r(kA) = r(A)$</span>（<span class="math-inline">$k \neq 0$</span>）</li>
+<li><span class="math-inline">$r(A + B) \leq r(A) + r(B)$</span></li>
+<li><span class="math-inline">$r(AB) \leq \min(r(A), r(B))$</span></li>
+<li>若 <span class="math-inline">$P, Q$</span> 可逆，则 <span class="math-inline">$r(PAQ) = r(PA) = r(AQ) = r(A)$</span></li>
+<li><span class="math-inline">$\max(r(A), r(B)) \leq r(A, B) \leq r(A) + r(B)$</span></li>
+<li><span class="math-inline">$r\begin{pmatrix} A & O \\ O & B \end{pmatrix} = r(A) + r(B)$</span></li>
+<li><strong>Sylvester不等式</strong>：<span class="math-inline">$r(A) + r(B) - n \leq r(AB) \leq \min(r(A), r(B))$</span></li>
+</ul>
+<p><strong>求秩的方法</strong>：将矩阵通过初等行变换化为<strong>行阶梯形</strong>，非零行数即秩。</p>
+
+<hr>
+<h3 id="七矩阵高频补充专题">七、矩阵高频补充专题</h3>
+<h4 id="71-伴随矩阵的秩分类">7.1 伴随矩阵的秩分类</h4>
+<table>
+<tr><th>A 的秩</th><th>A* 的秩</th><th>结论</th></tr>
+<tr><td>r(A)=n</td><td>r(A*)=n</td><td>A 可逆，A* 也可逆</td></tr>
+<tr><td>r(A)=n-1</td><td>r(A*)=1</td><td>A* 非零但秩为 1</td></tr>
+<tr><td>r(A)&lt;n-1</td><td>r(A*)=0</td><td>A*=O</td></tr>
+</table>
+<blockquote>⚠️ <strong>常考提醒</strong>：伴随矩阵题不要只套 <span class="math-inline">$A^*=|A|A^{-1}$</span>，这个公式只适用于 A 可逆的情况；A 不可逆时要优先看秩分类。</blockquote>
+
+<h4 id="72-秩的常用补充结论">7.2 秩的常用补充结论</h4>
+<ul>
+<li><span class="math-inline">$r(A)=r(A^T)=r(A^TA)=r(AA^T)$</span></li>
+<li>若 <span class="math-inline">$A_{m\times n}B_{n\times s}=O$</span>，则 <span class="math-inline">$r(A)+r(B)\leq n$</span></li>
+<li>若 A 列满秩，则 <span class="math-inline">$Ax=0$</span> 仅有零解；若 A 行满秩，则 <span class="math-inline">$Ax=b$</span> 对任意 b 有解。</li>
+<li>分块对角矩阵的秩等于各对角块秩之和；分块三角矩阵在对角块可逆时可用初等变换化简。</li>
+</ul>
+
+<h4 id="73-矩阵方程">7.3 矩阵方程</h4>
+<table>
+<tr><th>形式</th><th>可解条件/解法</th></tr>
+<tr><td><span class="math-inline">$AX=B$</span></td><td>A 可逆时 <span class="math-inline">$X=A^{-1}B$</span></td></tr>
+<tr><td><span class="math-inline">$XA=B$</span></td><td>A 可逆时 <span class="math-inline">$X=BA^{-1}$</span></td></tr>
+<tr><td><span class="math-inline">$AXB=C$</span></td><td>A、B 均可逆时 <span class="math-inline">$X=A^{-1}CB^{-1}$</span></td></tr>
+<tr><td>抽象矩阵方程</td><td>先移项、因式分解，再注意矩阵乘法顺序不能随意交换</td></tr>
+</table>
+<hr>
+<h2 id="ch3">第三章 向量</h2>
+<h3 id="本章考点考试大纲要求">本章考点（考试大纲要求）</h3>
+<ol>
+<li>向量的概念</li>
+<li>向量的线性组合与线性表示</li>
+<li>向量组的线性相关与线性无关</li>
+<li>向量组的极大线性无关组</li>
+<li>等价向量组</li>
+<li>向量组的秩与矩阵的秩之间的关系</li>
+<li>向量空间及其相关概念（n维向量空间的基和维数、基变换、坐标变换）</li>
+<li>向量的内积</li>
+<li>线性无关向量组的正交规范化方法</li>
+<li>正交矩阵及其性质</li>
+</ol>
+<hr>
+<h3 id="一向量的概念与向量组">一、向量的概念与向量组</h3>
+<h4 id="11-基本概念">1.1 基本概念</h4>
+<ul>
+<li><strong>n维向量</strong>：<span class="math-inline">$\alpha = (a_1, a_2, \cdots, a_n)$</span></li>
+<li><strong>零向量</strong>：所有分量均为0</li>
+<li><strong>向量组</strong>：若干个同维向量的集合</li>
+</ul>
+<h4 id="12-线性组合与线性表示">1.2 线性组合与线性表示</h4>
+<p><strong>线性组合</strong>：给定向量组 <span class="math-inline">$\alpha_1, \alpha_2, \cdots, \alpha_m$</span>，表达式 <span class="math-inline">$k_1\alpha_1 + k_2\alpha_2 + \cdots + k_m\alpha_m$</span> 称为向量组的一个<strong>线性组合</strong>。</p>
+<p><strong>线性表示</strong>：若向量 <span class="math-inline">$\beta$</span> 可表示为 <span class="math-inline">$\beta = k_1\alpha_1 + k_2\alpha_2 + \cdots + k_m\alpha_m$</span>，则称 <span class="math-inline">$\beta$</span> 可由 <span class="math-inline">$\alpha_1, \alpha_2, \cdots, \alpha_m$</span> <strong>线性表示</strong>。</p>
+<p><strong>判定方法</strong>：<span class="math-inline">$\beta$</span> 可由 <span class="math-inline">$\alpha_1, \cdots, \alpha_m$</span> 线性表示 <span class="math-inline">$\iff$</span> 非齐次方程组 <span class="math-inline">$x_1\alpha_1 + \cdots + x_m\alpha_m = \beta$</span> 有解 <span class="math-inline">$\iff$</span> <span class="math-inline">$r(\alpha_1, \cdots, \alpha_m) = r(\alpha_1, \cdots, \alpha_m, \beta)$</span></p>
+<hr>
+<h3 id="二线性相关与线性无关">二、线性相关与线性无关</h3>
+<h4 id="21-定义">2.1 定义</h4>
+<ul>
+<li><strong>线性相关</strong>：存在一组<strong>不全为0</strong>的数 <span class="math-inline">$k_1, k_2, \cdots, k_m$</span>，使 <span class="math-inline">$k_1\alpha_1 + k_2\alpha_2 + \cdots + k_m\alpha_m = 0$</span></li>
+<li><strong>线性无关</strong>：仅有 <span class="math-inline">$k_1 = k_2 = \cdots = k_m = 0$</span> 时上式成立</li>
+</ul>
+<h4 id="22-重要定理与性质">2.2 重要定理与性质</h4>
+<ol>
+<li><strong>单个向量</strong>：零向量线性相关，非零向量线性无关</li>
+<li><strong>两个向量</strong>：线性相关 <span class="math-inline">$\iff$</span> 对应分量成比例</li>
+<li><strong>含零向量</strong>的向量组必定线性相关</li>
+<li><strong>向量个数超过维数</strong>：n+1个n维向量必定线性相关</li>
+<li><strong>部分相关→整体相关</strong>：若部分向量线性相关，则整体线性相关</li>
+<li><strong>整体无关→部分无关</strong>：若整体线性无关，则任意部分线性无关</li>
+<li><strong>判定定理</strong>：<span class="math-inline">$\alpha_1, \cdots, \alpha_m$</span> 线性相关 <span class="math-inline">$\iff$</span> <span class="math-inline">$r(\alpha_1, \cdots, \alpha_m) < m$</span> <span class="math-inline">$\iff$</span> 以这些向量为列构成的矩阵的秩小于m</li>
+<li><strong>替换定理</strong>：若 <span class="math-inline">$\alpha_1, \cdots, \alpha_r$</span> 线性无关且可由 <span class="math-inline">$\beta_1, \cdots, \beta_s$</span> 线性表示，则 <span class="math-inline">$r \leq s$</span></li>
+</ol>
+<hr>
+<h3 id="三极大线性无关组与秩">三、极大线性无关组与秩</h3>
+<h4 id="31-极大线性无关组">3.1 极大线性无关组</h4>
+<p>向量组 <span class="math-inline">$T$</span> 的一个部分组 <span class="math-inline">$\alpha_1, \cdots, \alpha_r$</span> 满足：</p>
+<ol>
+<li><span class="math-inline">$\alpha_1, \cdots, \alpha_r$</span> 线性无关</li>
+<li>T中任意向量均可由它们线性表示</li>
+</ol>
+<p>则称为<strong>极大线性无关组</strong>（最大无关组）。</p>
+<h4 id="32-向量组的秩">3.2 向量组的秩</h4>
+<p>极大线性无关组所含向量的个数称为向量组的<strong>秩</strong>。</p>
+<p><strong>性质</strong>：</p>
+<ul>
+<li>向量组的秩 = 以这些向量为列构成的矩阵的秩</li>
+<li><strong>等价向量组有相同的秩</strong>（反之不一定成立）</li>
+<li>向量组与它的极大线性无关组等价</li>
+</ul>
+<h4 id="33-向量组等价">3.3 向量组等价</h4>
+<p>若向量组(I)中每个向量均可由向量组(II)线性表示，且反之亦然，则称两向量组<strong>等价</strong>。</p>
+<p><strong>判定</strong>：向量组等价 <span class="math-inline">$\iff$</span> 两矩阵行（列）等价 <span class="math-inline">$\iff$</span> <span class="math-inline">$r(I) = r(II) = r(I, II)$</span></p>
+<hr>
+<h3 id="四向量空间">四、向量空间</h3>
+<h4 id="41-基本概念">4.1 基本概念</h4>
+<ul>
+<li><strong>向量空间</strong>：对向量加法和数乘封闭的非空向量集合</li>
+<li><strong>基</strong>：向量空间中线性无关且可张成整个空间的最大向量组</li>
+<li><strong>维数 dim V</strong>：基中所含向量的个数</li>
+<li><strong>坐标</strong>：向量在给定基下的系数</li>
+</ul>
+<h4 id="42-基变换与坐标变换">4.2 基变换与坐标变换</h4>
+<p>若有两组基 <span class="math-inline">$(\alpha_1, \cdots, \alpha_n)$</span> 和 <span class="math-inline">$(\beta_1, \cdots, \beta_n)$</span>，且 <span class="math-inline">$(\beta_1, \cdots, \beta_n) = (\alpha_1, \cdots, \alpha_n)C$</span>，其中C为过渡矩阵（可逆），则坐标变换公式为：</p>
+<div class="math-block">$$x_{旧} = C \cdot x_{新}$$</div>
+<h4 id="43-内积">4.3 内积</h4>
+<ul>
+<li><strong>定义</strong>：<span class="math-inline">$(\alpha, \beta) = a_1b_1 + a_2b_2 + \cdots + a_nb_n$</span></li>
+<li><strong>向量的长度</strong>：<span class="math-inline">$\|\alpha\| = \sqrt{(\alpha, \alpha)}$</span></li>
+<li><strong>单位向量</strong>：<span class="math-inline">$\|\alpha\| = 1$</span></li>
+<li><strong>正交</strong>：<span class="math-inline">$(\alpha, \beta) = 0$</span></li>
+</ul>
+<p><strong>内积性质</strong>：</p>
+<ul>
+<li><span class="math-inline">$(\alpha, \beta) = (\beta, \alpha)$</span>（对称性）</li>
+<li><span class="math-inline">$(k\alpha, \beta) = k(\alpha, \beta)$</span>（齐次性）</li>
+<li><span class="math-inline">$(\alpha + \beta, \gamma) = (\alpha, \gamma) + (\beta, \gamma)$</span>（分配性）</li>
+<li><span class="math-inline">$(\alpha, \alpha) \geq 0$</span>，等号仅当 <span class="math-inline">$\alpha = 0$</span> 成立（正定性）</li>
+</ul>
+<hr>
+<h3 id="五施密特正交化与正交矩阵">五、施密特正交化与正交矩阵</h3>
+<h4 id="51-施密特正交化">5.1 施密特正交化</h4>
+<p>将线性无关组 <span class="math-inline">$\alpha_1, \alpha_2, \cdots, \alpha_m$</span> 化为<strong>正交向量组</strong>：</p>
+<div class="math-block">$$\beta_1 = \alpha_1$$</div>
+<div class="math-block">$$\beta_2 = \alpha_2 - \frac{(\alpha_2, \beta_1)}{(\beta_1, \beta_1)}\beta_1$$</div>
+<div class="math-block">$$\beta_3 = \alpha_3 - \frac{(\alpha_3, \beta_1)}{(\beta_1, \beta_1)}\beta_1 - \frac{(\alpha_3, \beta_2)}{(\beta_2, \beta_2)}\beta_2$$</div>
+<p>一般地：<span class="math-inline">$\beta_k = \alpha_k - \sum_{i=1}^{k-1} \frac{(\alpha_k, \beta_i)}{(\beta_i, \beta_i)}\beta_i$</span></p>
+<p>再<strong>单位化</strong>：<span class="math-inline">$e_i = \frac{\beta_i}{\|\beta_i\|}$</span>，即得<strong>标准正交基</strong>。</p>
+<h4 id="52-正交矩阵">5.2 正交矩阵</h4>
+<p><strong>定义</strong>：实方阵A满足 <span class="math-inline">$A^T A = AA^T = E$</span>（即 <span class="math-inline">$A^{-1} = A^T$</span>）</p>
+<p><strong>充要条件</strong>（以下各条等价）：</p>
+<ol>
+<li><span class="math-inline">$A^T A = E$</span></li>
+<li>A的列（行）向量组是标准正交向量组</li>
+<li><span class="math-inline">$|A| = \pm 1$</span></li>
+</ol>
+<p><strong>性质</strong>：</p>
+<ul>
+<li>正交矩阵的逆仍为正交矩阵</li>
+<li>两正交矩阵的积仍为正交矩阵</li>
+<li>正交矩阵作用于向量不改变其长度</li>
+</ul>
+<hr>
+<h2 id="ch4">第四章 线性方程组</h2>
+<h3 id="本章考点考试大纲要求">本章考点（考试大纲要求）</h3>
+<ol>
+<li>线性方程组的克拉默（Cramer）法则</li>
+<li>齐次线性方程组有非零解的充要条件</li>
+<li>非齐次线性方程组有解的充要条件</li>
+<li>线性方程组解的性质和解的结构</li>
+<li>齐次线性方程组的基础解系和通解</li>
+<li>非齐次线性方程组的通解</li>
+<li>用初等行变换求解线性方程组</li>
+</ol>
+<hr>
+<h3 id="一线性方程组的表示">一、线性方程组的表示</h3>
+<p>线性方程组有三种等价表示形式：</p>
+<ol>
+<li><strong>一般形式</strong>：<span class="math-inline">$\begin{cases} a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\ \cdots \\ a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = b_m \end{cases}$</span></li>
+</ol>
+<ol>
+<li><strong>矩阵形式</strong>：<span class="math-inline">$Ax = b$</span>，其中 <span class="math-inline">$A = (a_{ij})_{m \times n}$</span>，<span class="math-inline">$x = (x_1, \cdots, x_n)^T$</span>，<span class="math-inline">$b = (b_1, \cdots, b_m)^T$</span></li>
+</ol>
+<ol>
+<li><strong>向量形式</strong>：<span class="math-inline">$x_1\alpha_1 + x_2\alpha_2 + \cdots + x_n\alpha_n = b$</span>，其中 <span class="math-inline">$\alpha_j$</span> 为A的列向量</li>
+</ol>
+<hr>
+<h3 id="二齐次线性方程组-ax--0">二、齐次线性方程组 <span class="math-inline">$Ax = 0$</span></h3>
+<h4 id="21-解的存在性">2.1 解的存在性</h4>
+<ul>
+<li><strong>仅有零解</strong> <span class="math-inline">$\iff$</span> <span class="math-inline">$r(A) = n$</span>（列满秩）<span class="math-inline">$\iff$</span> 列向量组线性无关</li>
+<li><strong>有非零解</strong> <span class="math-inline">$\iff$</span> <span class="math-inline">$r(A) < n$</span> <span class="math-inline">$\iff$</span> 列向量组线性相关</li>
+<li>若 <span class="math-inline">$m < n$</span>（方程数小于未知量数），必有非零解</li>
+</ul>
+<h4 id="22-解的性质">2.2 解的性质</h4>
+<p>齐次方程组解向量的任意线性组合仍是解。</p>
+<h4 id="23-基础解系与通解">2.3 基础解系与通解</h4>
+<p>若 <span class="math-inline">$r(A) = r < n$</span>，则：</p>
+<ul>
+<li><strong>基础解系</strong>：<span class="math-inline">$n - r$</span> 个线性无关的解向量 <span class="math-inline">$\xi_1, \xi_2, \cdots, \xi_{n-r}$</span>，可表示所有解</li>
+<li><strong>通解</strong>：<span class="math-inline">$x = k_1\xi_1 + k_2\xi_2 + \cdots + k_{n-r}\xi_{n-r}$</span>（<span class="math-inline">$k_i$</span> 为任意常数）</li>
+<li><strong>解空间的维数</strong>：<span class="math-inline">$\dim N(A) = n - r(A)$</span></li>
+</ul>
+<p><strong>求解基础解系的方法</strong>：</p>
+<ol>
+<li>对系数矩阵A进行行变换，化为行最简形</li>
+<li>确定自由未知量</li>
+<li>令自由未知量依次取 <span class="math-inline">$(1,0,\cdots,0)^T, (0,1,\cdots,0)^T, \cdots$</span>，求对应的解</li>
+</ol>
+<hr>
+<h3 id="三非齐次线性方程组-ax--b">三、非齐次线性方程组 <span class="math-inline">$Ax = b$</span></h3>
+<h4 id="31-解的存在性判定">3.1 解的存在性判定</h4>
+<p>方程组有解（相容） <span class="math-inline">$\iff$</span> <span class="math-inline">$r(A) = r(A, b)$</span>（系数矩阵秩 = 增广矩阵秩）</p>
+<ul>
+<li><span class="math-inline">$r(A) = r(A, b) = n$</span>：有<strong>唯一解</strong></li>
+<li><span class="math-inline">$r(A) = r(A, b) < n$</span>：有<strong>无穷多解</strong></li>
+<li><span class="math-inline">$r(A) < r(A, b)$</span>：<strong>无解</strong>（不相容）</li>
+</ul>
+<h4 id="32-解的结构">3.2 解的结构</h4>
+<p>若 <span class="math-inline">$\eta^*$</span> 是 <span class="math-inline">$Ax = b$</span> 的一个<strong>特解</strong>，<span class="math-inline">$\xi_1, \cdots, \xi_{n-r}$</span> 是对应齐次方程 <span class="math-inline">$Ax = 0$</span> 的<strong>基础解系</strong>，则非齐次方程的通解为：</p>
+<div class="math-block">$$x = \eta^* + k_1\xi_1 + k_2\xi_2 + \cdots + k_{n-r}\xi_{n-r}$$</div>
+<p>即：<strong>非齐次通解 = 非齐次特解 + 齐次通解</strong></p>
+<h4 id="33-解的性质">3.3 解的性质</h4>
+<ol>
+<li>若非齐次方程两解之差，则是对应齐次方程的解</li>
+<li>若非齐次方程的解加齐次方程的解，仍是非齐次方程的解</li>
+<li><span class="math-inline">$\eta_1, \eta_2$</span> 为非齐次解，则 <span class="math-inline">$\frac{\eta_1 + \eta_2}{2}$</span> 也是非齐次解</li>
+<li><span class="math-inline">$k_1\eta_1 + k_2\eta_2$</span> 为非齐次解 <span class="math-inline">$\iff$</span> <span class="math-inline">$k_1 + k_2 = 1$</span></li>
+</ol>
+<hr>
+<h3 id="四公共解与同解">四、公共解与同解</h3>
+<h4 id="41-公共解">4.1 公共解</h4>
+<p>两方程组 <span class="math-inline">$Ax = 0$</span> 和 <span class="math-inline">$Bx = 0$</span> 的公共解，即 <span class="math-inline">$\begin{pmatrix} A \\ B \end{pmatrix}x = 0$</span> 的解。</p>
+<h4 id="42-同解">4.2 同解</h4>
+<p>两方程组 <span class="math-inline">$Ax = 0$</span> 和 <span class="math-inline">$Bx = 0$</span> <strong>同解</strong> <span class="math-inline">$\iff$</span> <span class="math-inline">$r(A) = r(B) = r\begin{pmatrix} A \\ B \end{pmatrix}$</span></p>
+
+<hr>
+<h3 id="五含参数线性方程组讨论流程">五、含参数线性方程组讨论流程</h3>
+<ol>
+<li>先对增广矩阵 <span class="math-inline">$(A,b)$</span> 做初等行变换，尽量化为阶梯形。</li>
+<li>找出会导致主元为 0 的参数值，将参数分成若干情况。</li>
+<li>分别比较 <span class="math-inline">$r(A)$</span> 与 <span class="math-inline">$r(A,b)$</span>。</li>
+<li>若有解，再比较 <span class="math-inline">$r(A)$</span> 与未知量个数 n，判断唯一解或无穷多解。</li>
+</ol>
+<table>
+<tr><th>秩关系</th><th>结论</th></tr>
+<tr><td><span class="math-inline">$r(A)&lt;r(A,b)$</span></td><td>无解</td></tr>
+<tr><td><span class="math-inline">$r(A)=r(A,b)=n$</span></td><td>唯一解</td></tr>
+<tr><td><span class="math-inline">$r(A)=r(A,b)&lt;n$</span></td><td>无穷多解，自由变量个数为 <span class="math-inline">$n-r(A)$</span></td></tr>
+</table>
+<hr>
+<h2 id="ch5">第五章 特征值与特征向量</h2>
+<h3 id="本章考点考试大纲要求">本章考点（考试大纲要求）</h3>
+<ol>
+<li>矩阵的特征值和特征向量的概念与性质</li>
+<li>相似矩阵的概念与性质</li>
+<li>矩阵可相似对角化的充要条件及相似对角矩阵的求法</li>
+<li>实对称矩阵的特征值、特征向量及其相似对角矩阵</li>
+</ol>
+<hr>
+<h3 id="一特征值与特征向量">一、特征值与特征向量</h3>
+<h4 id="11-定义">1.1 定义</h4>
+<p>设A为n阶方阵，若存在数 <span class="math-inline">$\lambda$</span> 和非零向量 <span class="math-inline">$x$</span>，使 <span class="math-inline">$Ax = \lambda x$</span>，则称 <span class="math-inline">$\lambda$</span> 为A的<strong>特征值</strong>，<span class="math-inline">$x$</span> 为A对应于 <span class="math-inline">$\lambda$</span> 的<strong>特征向量</strong>。</p>
+<h4 id="12-特征方程与特征多项式">1.2 特征方程与特征多项式</h4>
+<p>由 <span class="math-inline">$Ax = \lambda x$</span> 得 <span class="math-inline">$(\lambda E - A)x = 0$</span>，该齐次方程组有非零解的条件： $$|\lambda E - A| = 0$$</p>
+<p>展开得到关于 <span class="math-inline">$\lambda$</span> 的n次多项式，称为<strong>特征多项式</strong>： $$f(\lambda) = |\lambda E - A| = \lambda^n - \text{tr}(A)\lambda^{n-1} + \cdots + (-1)^n|A|$$</p>
+<h4 id="13-特征值与特征向量的求法">1.3 特征值与特征向量的求法</h4>
+<ol>
+<li>解特征方程 <span class="math-inline">$|\lambda E - A| = 0$</span>，得特征值 <span class="math-inline">$\lambda_1, \lambda_2, \cdots, \lambda_n$</span></li>
+<li>对每个 <span class="math-inline">$\lambda_i$</span>，解齐次方程组 <span class="math-inline">$(\lambda_i E - A)x = 0$</span>，其非零解即为 <span class="math-inline">$\lambda_i$</span> 对应的特征向量</li>
+</ol>
+<h4 id="14-特征值的重要性质">1.4 特征值的重要性质</h4>
+<ul>
+<li><span class="math-inline">$\sum_{i=1}^{n} \lambda_i = \text{tr}(A)$</span>（迹 = 主对角元素之和）</li>
+<li><span class="math-inline">$\prod_{i=1}^{n} \lambda_i = |A|$</span></li>
+<li>若 <span class="math-inline">$\lambda$</span> 是A的特征值，则：</li>
+<li><span class="math-inline">$k\lambda$</span> 是 <span class="math-inline">$kA$</span> 的特征值</li>
+<li><span class="math-inline">$\lambda^k$</span> 是 <span class="math-inline">$A^k$</span> 的特征值</li>
+<li><span class="math-inline">$\frac{1}{\lambda}$</span> 是 <span class="math-inline">$A^{-1}$</span> 的特征值（A可逆时）</li>
+<li><span class="math-inline">$\frac{|A|}{\lambda}$</span> 是 <span class="math-inline">$A^*$</span> 的特征值（A可逆时）</li>
+<li><span class="math-inline">$f(\lambda)$</span> 是 <span class="math-inline">$f(A)$</span> 的特征值（<span class="math-inline">$f$</span> 为多项式）</li>
+<li>不同特征值对应的特征向量<strong>线性无关</strong></li>
+<li>属于同一特征值的特征向量，其任意非零线性组合仍是该特征值的特征向量</li>
+</ul>
+<hr>
+<h3 id="二相似矩阵与对角化">二、相似矩阵与对角化</h3>
+<h4 id="21-相似矩阵">2.1 相似矩阵</h4>
+<p><strong>定义</strong>：若存在可逆矩阵 <span class="math-inline">$P$</span>，使 <span class="math-inline">$B = P^{-1}AP$</span>，则称A与B<strong>相似</strong>，记作 <span class="math-inline">$A \sim B$</span>。</p>
+<p><strong>相似不变量</strong>：相似矩阵具有相同的：</p>
+<ul>
+<li>特征多项式与特征值</li>
+<li>行列式</li>
+<li>迹</li>
+<li>秩</li>
+</ul>
+<blockquote>⚠️ 反之不成立：特征值相同不一定相似！</blockquote>
+<h4 id="22-矩阵可对角化的条件">2.2 矩阵可对角化的条件</h4>
+<p>A可对角化 <span class="math-inline">$\iff$</span> 存在可逆矩阵 <span class="math-inline">$P$</span>，使 <span class="math-inline">$P^{-1}AP = \Lambda = \text{diag}(\lambda_1, \cdots, \lambda_n)$</span></p>
+<p><strong>充要条件</strong>：A有n个线性无关的特征向量。</p>
+<p><strong>充分条件</strong>（以下条件之一即可）：</p>
+<ol>
+<li>A有n个<strong>互不相同</strong>的特征值</li>
+<li>A是<strong>实对称矩阵</strong>（必然可对角化）</li>
+<li>对A的每个k重特征值 <span class="math-inline">$\lambda$</span>，<span class="math-inline">$r(\lambda E - A) = n - k$</span></li>
+</ol>
+<h4 id="23-对角化的步骤">2.3 对角化的步骤</h4>
+<ol>
+<li>求出A的所有特征值 <span class="math-inline">$\lambda_1, \lambda_2, \cdots, \lambda_n$</span></li>
+<li>对每个特征值求特征向量</li>
+<li>以特征向量为列构成P，对应的特征值构成对角阵 <span class="math-inline">$\Lambda$</span></li>
+</ol>
+<hr>
+<h3 id="三实对称矩阵">三、实对称矩阵</h3>
+<h4 id="31-实对称矩阵的特征">3.1 实对称矩阵的特征</h4>
+<ul>
+<li>实对称矩阵的特征值<strong>全是实数</strong></li>
+<li>实对称矩阵<strong>属于不同特征值的特征向量必正交</strong></li>
+<li>实对称矩阵<strong>必可正交对角化</strong>：存在正交矩阵Q使 <span class="math-inline">$Q^{-1}AQ = Q^T AQ = \Lambda$</span></li>
+</ul>
+<h4 id="32-正交对角化步骤">3.2 正交对角化步骤</h4>
+<ol>
+<li>求特征值 <span class="math-inline">$\lambda_1, \lambda_2, \cdots, \lambda_n$</span></li>
+<li>对每个特征值求特征向量</li>
+<li>对属于同一特征值的特征向量施密特正交化</li>
+<li>将所有特征向量单位化</li>
+<li>以标准正交向量为列构成正交矩阵Q</li>
+</ol>
+
+<hr>
+<h3 id="四特征值高频补充专题">四、特征值高频补充专题</h3>
+<h4 id="41-代数重数与几何重数">4.1 代数重数与几何重数</h4>
+<p>若 <span class="math-inline">$\lambda$</span> 是 A 的 k 重特征值，则 k 称为代数重数；对应线性无关特征向量个数为 <span class="math-inline">$n-r(\lambda E-A)$</span>，称为几何重数。</p>
+<ul>
+<li>几何重数 <span class="math-inline">$\leq$</span> 代数重数。</li>
+<li>A 可对角化 <span class="math-inline">$\iff$</span> 每个特征值的几何重数都等于代数重数。</li>
+<li>若 A 有 n 个互异特征值，则必可对角化。</li>
+</ul>
+
+<h4 id="42-矩阵多项式与cayley-hamilton定理">4.2 矩阵多项式与 Cayley-Hamilton 定理</h4>
+<ul>
+<li>若 <span class="math-inline">$A\alpha=\lambda\alpha$</span>，则 <span class="math-inline">$f(A)\alpha=f(\lambda)\alpha$</span>。</li>
+<li>若 A 可对角化，<span class="math-inline">$A=P\Lambda P^{-1}$</span>，则 <span class="math-inline">$f(A)=P f(\Lambda) P^{-1}$</span>。</li>
+<li><strong>Cayley-Hamilton 定理</strong>：A 满足自己的特征方程，即若 <span class="math-inline">$p(\lambda)=|\lambda E-A|$</span>，则 <span class="math-inline">$p(A)=O$</span>。</li>
+<li>求 <span class="math-inline">$A^n$</span> 时，可用特征方程把高次幂降为低次幂组合。</li>
+</ul>
+<hr>
+<h2 id="ch6">第六章 二次型</h2>
+<h3 id="本章考点考试大纲要求">本章考点（考试大纲要求）</h3>
+<ol>
+<li>二次型及其矩阵表示</li>
+<li>用正交变换化二次型为标准形</li>
+<li>用配方法化二次型为标准形</li>
+<li>二次型的标准形和规范形</li>
+<li>惯性定理</li>
+<li>正定二次型与正定矩阵</li>
+</ol>
+<hr>
+<h3 id="一二次型及其标准形">一、二次型及其标准形</h3>
+<h4 id="11-定义">1.1 定义</h4>
+<p>n元<strong>二次型</strong>： $$f(x_1, x_2, \cdots, x_n) = \sum_{i=1}^{n}\sum_{j=1}^{n} a_{ij}x_i x_j = x^T A x$$</p>
+<p>其中A为<strong>对称矩阵</strong>（<span class="math-inline">$A^T = A$</span>），称为二次型 <span class="math-inline">$f$</span> 的<strong>矩阵</strong>。</p>
+<h4 id="12-二次型的矩阵表示">1.2 二次型的矩阵表示</h4>
+<p>将二次型写成矩阵形式的关键：交叉项系数平分。即 <span class="math-inline">$a_{ij}x_ix_j + a_{ji}x_jx_i$</span> 写成 <span class="math-inline">$2a_{ij}x_ix_j$</span> 时，矩阵中 <span class="math-inline">$a_{ij} = a_{ji} = \frac{\text{系数}}{2}$</span>。</p>
+<h4 id="13-线性变换与合同">1.3 线性变换与合同</h4>
+<p><strong>线性变换</strong>：<span class="math-inline">$x = Cy$</span>，则 <span class="math-inline">$f = x^T A x = y^T (C^T A C) y$</span></p>
+<p>若C可逆，称 <span class="math-inline">$C^T A C$</span> 与A<strong>合同</strong>，记作 <span class="math-inline">$A \simeq B$</span>。</p>
+<p><strong>合同不变量</strong>：秩、正定性、正负惯性指数。</p>
+<hr>
+<h3 id="二化二次型为标准形">二、化二次型为标准形</h3>
+<h4 id="21-正交变换法适用于任何二次型">2.1 正交变换法（适用于任何二次型）</h4>
+<p>通过正交变换 <span class="math-inline">$x = Qy$</span>（Q正交），使： $$f = \lambda_1 y_1^2 + \lambda_2 y_2^2 + \cdots + \lambda_n y_n^2$$</p>
+<p>其中 <span class="math-inline">$\lambda_i$</span> 为A的特征值。</p>
+<p><strong>步骤</strong>：求A的特征值与特征向量 → 施密特正交化 → 单位化 → 构造正交矩阵Q</p>
+<h4 id="22-配方法">2.2 配方法</h4>
+<p>通过完全平方配方，将二次型化为平方和形式。</p>
+<p><strong>步骤</strong>：</p>
+<ol>
+<li>若含平方项 <span class="math-inline">$x_i^2$</span>，先配方消去含 <span class="math-inline">$x_i$</span> 的所有交叉项</li>
+<li>若不含平方项但有交叉项 <span class="math-inline">$x_ix_j$</span>，先作变换设 <span class="math-inline">$x_i = y_i + y_j, x_j = y_i - y_j$</span></li>
+</ol>
+<h4 id="23-合同变换法">2.3 合同变换法</h4>
+<p>对 <span class="math-inline">$(A \mid E)$</span> 同时进行行变换和列变换（对称操作），化为对角阵。</p>
+<hr>
+<h3 id="三惯性定理与规范形">三、惯性定理与规范形</h3>
+<h4 id="31-惯性定理">3.1 惯性定理</h4>
+<p>二次型的标准形中，正项个数p和负项个数q是唯一的（与变换方法无关）。</p>
+<ul>
+<li><strong>正惯性指数 p</strong>：标准形中正平方项的个数</li>
+<li><strong>负惯性指数 q</strong>：标准形中负平方项的个数</li>
+<li><strong>符号差</strong>：<span class="math-inline">$p - q$</span></li>
+<li><span class="math-inline">$p + q = r(A)$</span>（秩）</li>
+</ul>
+<h4 id="32-规范形">3.2 规范形</h4>
+<p>通过非退化线性变换，二次型可化为唯一规范形： $$f = z_1^2 + z_2^2 + \cdots + z_p^2 - z_{p+1}^2 - \cdots - z_r^2$$ 其中 <span class="math-inline">$r = r(A)$</span>。</p>
+<h4 id="33-两个二次型合同的条件">3.3 两个二次型合同的条件</h4>
+<p>A与B合同 <span class="math-inline">$\iff$</span> 有相同的正惯性指数和负惯性指数 <span class="math-inline">$\iff$</span> 秩相同且符号差相同。</p>
+<hr>
+<h3 id="四正定二次型与正定矩阵">四、正定二次型与正定矩阵</h3>
+<h4 id="41-定义">4.1 定义</h4>
+<p>若对任意 <span class="math-inline">$x \neq 0$</span>，恒有 <span class="math-inline">$f(x) = x^T A x > 0$</span>，则称 <span class="math-inline">$f$</span> 为<strong>正定二次型</strong>，A为<strong>正定矩阵</strong>。</p>
+<h4 id="42-正定的充要条件以下各条等价">4.2 正定的充要条件（以下各条等价）</h4>
+<ol>
+<li><span class="math-inline">$f$</span> 的标准形中所有系数 > 0（正惯性指数 <span class="math-inline">$p = n$</span>）</li>
+<li>A的特征值全部 > 0</li>
+<li>A的所有顺序主子式 > 0</li>
+<li>A合同于单位阵E</li>
+<li>存在可逆矩阵C使 <span class="math-inline">$A = C^T C$</span></li>
+</ol>
+<h4 id="43-顺序主子式判别法">4.3 顺序主子式判别法</h4>
+<p>A正定 <span class="math-inline">$\iff$</span> 所有顺序主子式 <span class="math-inline">$D_k > 0$</span>（<span class="math-inline">$k = 1, 2, \cdots, n$</span>）：</p>
+<div class="math-block">$$D_1 = a_{11} > 0, \quad D_2 = \begin{vmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{vmatrix} > 0, \quad \cdots, \quad D_n = |A| > 0$$</div>
+<h4 id="44-其他定性">4.4 其他定性</h4>
+<ul>
+<li><strong>负定</strong>：<span class="math-inline">$f(x) < 0$</span>（<span class="math-inline">$\forall x \neq 0$</span>）<span class="math-inline">$\iff$</span> 特征值全 < 0 <span class="math-inline">$\iff$</span> 奇数阶顺序主子式 < 0，偶数阶 > 0</li>
+<li><strong>半正定</strong>：<span class="math-inline">$f(x) \geq 0$</span> <span class="math-inline">$\iff$</span> 特征值全 <span class="math-inline">$\geq$</span> 0</li>
+<li><strong>不定</strong>：<span class="math-inline">$f(x)$</span> 既可取正值也可取负值</li>
+</ul>
+
+<hr>
+<h3 id="五二次型高频辨析">五、二次型高频辨析</h3>
+<h4 id="51-正定半正定负定不定对比">5.1 正定、半正定、负定、不定对比</h4>
+<table>
+<tr><th>类型</th><th>特征值判定</th><th>惯性指数</th><th>备注</th></tr>
+<tr><td>正定</td><td>全 > 0</td><td>p=n</td><td>顺序主子式全 > 0</td></tr>
+<tr><td>负定</td><td>全 < 0</td><td>q=n</td><td>奇数阶顺序主子式 < 0，偶数阶 > 0</td></tr>
+<tr><td>半正定</td><td>全 ≥ 0</td><td>q=0</td><td>不能只用顺序主子式全 ≥ 0 判定</td></tr>
+<tr><td>不定</td><td>既有正又有负</td><td>p>0 且 q>0</td><td>可取正值也可取负值</td></tr>
+</table>
+
+<h4 id="52-等价相似合同对比">5.2 等价、相似、合同对比</h4>
+<table>
+<tr><th>关系</th><th>形式</th><th>主要不变量</th><th>常见章节</th></tr>
+<tr><td>等价</td><td><span class="math-inline">$B=PAQ$</span></td><td>秩</td><td>矩阵、向量组、方程组</td></tr>
+<tr><td>相似</td><td><span class="math-inline">$B=P^{-1}AP$</span></td><td>特征值、特征多项式、迹、行列式、秩</td><td>特征值与对角化</td></tr>
+<tr><td>合同</td><td><span class="math-inline">$B=C^TAC$</span></td><td>秩、正负惯性指数、正定性</td><td>二次型</td></tr>
+</table>
+<blockquote>⚠️ <strong>辨析：</strong>相似不一定合同，合同也不一定相似；实对称矩阵讨论二次型时优先看合同与惯性指数。</blockquote>
+<hr>
+<blockquote><strong>本文档覆盖全书六大章节全部核心知识点，建议结合教材例题和《基础过关660题》同步练习巩固。</strong></blockquote>
+        </div>
+    </div>

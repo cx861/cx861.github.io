@@ -3,46 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="概率论与数理统计的个人复习笔记与知识整理，服务于考研备考、回顾和查漏补缺。">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eef3f4">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d171c">
     <title>概率论与数理统计 - 考研笔记</title>
+    <link rel="canonical" href="https://cx861.github.io/math/probability.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="考研笔记">
+    <meta property="og:title" content="概率论与数理统计 - 考研笔记">
+    <meta property="og:description" content="概率论与数理统计的个人复习笔记与知识整理，服务于考研备考、回顾和查漏补缺。">
+    <meta property="og:url" content="https://cx861.github.io/math/probability.html">
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/study-archive.css">
     <script src="../assets/js/main.js" defer></script>
-    <script>MathJax = {tex: {inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"], ["\\[", "\\]"]], packages: {'[+]': ['physics']}}, options: {ignoreHtmlClass: "no-math"}};</script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+<script>MathJax = {tex: {inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"], ["\\[", "\\]"]], packages: {'[+]': ['physics']}}, options: {ignoreHtmlClass: "no-math"}};</script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main-content">跳到内容</a>
-<div id="scroll-progress"></div>
+<div id="scroll-progress" aria-hidden="true"></div>
 
-    <!-- Navigation Bar -->
-    <nav class="site-nav">
-        <div class="site-nav-inner">
-            <span class="nav-logo">考研笔记</span>
-            <a href="../index.html">首页</a>
-            <a href="../knowledge-base.html" class="active">知识库</a>
-            <a href="../notes.html">个人笔记</a>
-            <a href="../mistakes.html">错题本</a>
-            <a href="../exam-types.html">常考题型及解法</a>
-            <div class="nav-controls">
-                <button class="theme-toggle" aria-label="切换深色/浅色模式"><span class="theme-toggle-icon">🌙</span></button>
-                <button class="hamburger" aria-label="菜单" aria-expanded="false">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
+<nav class="site-nav" aria-label="主导航">
+    <div class="site-nav-inner">
+        <a class="nav-logo" href="../index.html">考研笔记</a>
+        <a href="../index.html">首页</a>
+        <a href="../knowledge-base.html" class="active" aria-current="page">知识库</a>
+        <a href="../notes.html">个人笔记</a>
+        <a href="../mistakes.html">错题本</a>
+        <a href="../exam-types.html">常考题型及解法</a>
+        <div class="nav-controls">
+            <button class="theme-toggle" type="button" aria-label="切换深色/浅色模式"><span class="theme-toggle-icon">🌙</span></button>
+            <button class="hamburger" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="mobile-menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
-    </nav>
+    </div>
+</nav>
 
 <!-- 移动端菜单 -->
-<div class="mobile-nav-overlay"></div>
-<div class="mobile-menu" role="dialog" aria-label="导航菜单">
+<div class="mobile-nav-overlay" aria-hidden="true"></div>
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="导航菜单" aria-hidden="true" inert>
     <a href="../index.html">首页</a>
-    <a href="../knowledge-base.html">知识库</a>
+    <a href="../knowledge-base.html" class="active" aria-current="page">知识库</a>
     <a href="../notes.html">个人笔记</a>
     <a href="../mistakes.html">错题本</a>
     <a href="../exam-types.html">常考题型及解法</a>
-    <button class="menu-theme-toggle"><span class="menu-theme-icon">🌙</span> 切换深色/浅色模式</button>
+    <button class="menu-theme-toggle" type="button"><span class="menu-theme-icon">🌙</span> 切换深色/浅色模式</button>
 </div>
 
-    <!-- Page Header -->
+<main>
+<!-- Page Header -->
     <div class="page-header math">
         <h1>🧮 概率论与数理统计</h1>
         <div class="breadcrumb"><a href="../index.html">首页</a> / <a href="../knowledge-base.html">知识库</a> / 概率论与数理统计</div>
@@ -216,8 +231,8 @@
             <p><strong>常见连续型分布</strong></p>
             <table>
             <tr><th>分布名称</th><th>记号</th><th>概率密度 $f(x)$</th><th>期望</th><th>方差</th></tr>
-            <tr><td>均匀分布</td><td>$X \sim U(a,b)$</td><td>$f(x)=\dfrac{1}{b-a},\;a<x<b$</td><td>$\dfrac{a+b}{2}$</td><td>$\dfrac{(b-a)^2}{12}$</td></tr>
-            <tr><td>指数分布</td><td>$X \sim E(\lambda)$</td><td>$f(x)=\lambda e^{-\lambda x},\;x>0$</td><td>$\dfrac{1}{\lambda}$</td><td>$\dfrac{1}{\lambda^2}$</td></tr>
+            <tr><td>均匀分布</td><td>$X \sim U(a,b)$</td><td>$f(x)=\dfrac{1}{b-a},\;a&lt;x&lt;b$</td><td>$\dfrac{a+b}{2}$</td><td>$\dfrac{(b-a)^2}{12}$</td></tr>
+            <tr><td>指数分布</td><td>$X \sim E(\lambda)$</td><td>$f(x)=\lambda e^{-\lambda x},\;x&gt;0$</td><td>$\dfrac{1}{\lambda}$</td><td>$\dfrac{1}{\lambda^2}$</td></tr>
             <tr><td>正态分布</td><td>$X \sim N(\mu,\sigma^2)$</td><td>$f(x)=\dfrac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$</td><td>$\mu$</td><td>$\sigma^2$</td></tr>
             <tr><td>标准正态分布</td><td>$X \sim N(0,1)$</td><td>$\varphi(x)=\dfrac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}$</td><td>$0$</td><td>$1$</td></tr>
             </table>
@@ -657,13 +672,14 @@
             </table>
         </div>
     </div>
+</main>
 
-    <div class="site-footer">
-        <p>&copy; 2026 cx861 | 考研笔记 | <a href="https://github.com/cx861">GitHub</a></p>
-    </div>
+<footer class="site-footer">
+    <p>&copy; 2026 cx861 | 考研笔记 | <a href="https://github.com/cx861">GitHub</a></p>
+</footer>
 
-    <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-    <script>
+<button class="back-top" id="backTop" type="button" aria-label="返回页面顶部" title="返回顶部">↑</button>
+<script>
     const backTop = document.getElementById('backTop');
     window.addEventListener('scroll', () => {
         backTop.classList.toggle('visible', window.scrollY > 300);

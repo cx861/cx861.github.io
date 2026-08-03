@@ -31,3 +31,20 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Python ###
+__pycache__/
+*.py[cod]
+.venv/
+
+### Local browser QA artifacts ###
+output/
+
+### AI workspace data ###
+.workbuddy/
+
+### Temporary render directory ###
+tmp_docx_render/
+
+### Generated preview build ###
+/dist/

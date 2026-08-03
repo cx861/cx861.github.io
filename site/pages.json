@@ -1,0 +1,286 @@
+{
+  "version": 1,
+  "site": {
+    "name": "考研笔记",
+    "url": "https://cx861.github.io",
+    "description": "个人使用的考研知识库，系统整理数学、408 计算机、英语和政治复习笔记。"
+  },
+  "pages": [
+    {
+      "path": "cs/computer-network.html",
+      "title": "计算机网络 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "cs/computer-org-exam-types.html",
+      "title": "常考题型 - 计算机组成原理 - 考研笔记",
+      "active_nav": "exam-types",
+      "footer_hidden": false
+    },
+    {
+      "path": "cs/computer-organization.html",
+      "title": "计算机组成原理 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "cs/data-structure-exam-types.html",
+      "title": "常考题型 - 数据结构 - 考研笔记",
+      "active_nav": "exam-types",
+      "footer_hidden": false
+    },
+    {
+      "path": "cs/data-structure.html",
+      "title": "数据结构 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "cs/network-exam-types.html",
+      "title": "常考题型 - 计算机网络 - 考研笔记",
+      "active_nav": "exam-types",
+      "footer_hidden": false
+    },
+    {
+      "path": "cs/operating-system.html",
+      "title": "操作系统 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "cs/os-exam-types.html",
+      "title": "常考题型 - 操作系统 - 考研笔记",
+      "active_nav": "exam-types",
+      "footer_hidden": false
+    },
+    {
+      "path": "cs/software-process.html",
+      "title": "软件过程与项目管理 - 期末复习要点",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "english/cet6-listening.html",
+      "title": "英语六级 - 听力 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "english/cet6-reading.html",
+      "title": "英语六级 - 阅读 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "english/cet6-translation.html",
+      "title": "英语六级 - 翻译 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "english/cet6-writing.html",
+      "title": "英语六级 - 写作 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "english/cloze.html",
+      "title": "英语完形填空 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "english/grammar.html",
+      "title": "考研英语真题语法篇 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": true
+    },
+    {
+      "path": "english/methods.html",
+      "title": "考研英语真题方法篇 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": true
+    },
+    {
+      "path": "english/reading.html",
+      "title": "英语阅读理解 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "english/sentence-analysis.html",
+      "title": "长难句 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "english/sentence.html",
+      "title": "考研英语真题长难句篇 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": true
+    },
+    {
+      "path": "english/solution-methods.html",
+      "title": "解题方法 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "english/translation.html",
+      "title": "英语翻译 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "english/vocabulary.html",
+      "title": "考研英语词汇 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": true
+    },
+    {
+      "path": "english/writing.html",
+      "title": "考研英语高分写作 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": true
+    },
+    {
+      "path": "exam-types.html",
+      "title": "常考题型及解法 - 考研笔记",
+      "active_nav": "exam-types",
+      "footer_hidden": false
+    },
+    {
+      "path": "index.html",
+      "title": "考研笔记 - cx861",
+      "active_nav": "index",
+      "footer_hidden": false
+    },
+    {
+      "path": "knowledge-base.html",
+      "title": "知识库 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "math/calculus.html",
+      "title": "高等数学 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "math/exam-types.html",
+      "title": "常考题型 - 高等数学 - 考研笔记",
+      "active_nav": "exam-types",
+      "footer_hidden": false
+    },
+    {
+      "path": "math/linear-algebra-exam-types.html",
+      "title": "常考题型 - 线性代数 - 考研笔记",
+      "active_nav": "exam-types",
+      "footer_hidden": true
+    },
+    {
+      "path": "math/linear-algebra.html",
+      "title": "线性代数 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "math/probability-exam-types.html",
+      "title": "常考题型 - 概率论与数理统计 - 考研笔记",
+      "active_nav": "exam-types",
+      "footer_hidden": false
+    },
+    {
+      "path": "math/probability.html",
+      "title": "概率论与数理统计 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": false
+    },
+    {
+      "path": "mistakes.html",
+      "title": "错题本 - 考研笔记",
+      "active_nav": "mistakes",
+      "footer_hidden": false
+    },
+    {
+      "path": "notes.html",
+      "title": "个人笔记 - 考研笔记",
+      "active_nav": "notes",
+      "footer_hidden": false
+    },
+    {
+      "path": "politics/history-exam-types.html",
+      "title": "史纲常见题型与解题方法 - 考研笔记",
+      "active_nav": "exam-types",
+      "footer_hidden": true
+    },
+    {
+      "path": "politics/history.html",
+      "title": "中国近现代史纲要 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": true
+    },
+    {
+      "path": "politics/maoism-exam-types.html",
+      "title": "毛中特常见题型与解题方法 - 考研笔记",
+      "active_nav": "exam-types",
+      "footer_hidden": true
+    },
+    {
+      "path": "politics/maoism.html",
+      "title": "毛泽东思想和中特理论概论 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": true
+    },
+    {
+      "path": "politics/marxism-exam-types.html",
+      "title": "马原常见题型与解题方法 - 考研笔记",
+      "active_nav": "exam-types",
+      "footer_hidden": true
+    },
+    {
+      "path": "politics/marxism.html",
+      "title": "马克思主义基本原理 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": true
+    },
+    {
+      "path": "politics/morality-exam-types.html",
+      "title": "思修常见题型与解题方法 - 考研笔记",
+      "active_nav": "exam-types",
+      "footer_hidden": true
+    },
+    {
+      "path": "politics/morality.html",
+      "title": "思想道德与法治 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": true
+    },
+    {
+      "path": "politics/policy-exam-types.html",
+      "title": "形势与政策常见题型与解题方法 - 考研笔记",
+      "active_nav": "exam-types",
+      "footer_hidden": true
+    },
+    {
+      "path": "politics/policy.html",
+      "title": "形势与政策以及当代世界经济与政治 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": true
+    },
+    {
+      "path": "politics/xi-thought-exam-types.html",
+      "title": "习思想常见题型与解题方法 - 考研笔记",
+      "active_nav": "exam-types",
+      "footer_hidden": true
+    },
+    {
+      "path": "politics/xi-thought.html",
+      "title": "习近平新时代中国特色社会主义思想概论 - 考研笔记",
+      "active_nav": "knowledge-base",
+      "footer_hidden": true
+    }
+  ]
+}

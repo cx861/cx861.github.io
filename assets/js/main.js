@@ -78,20 +78,28 @@
 
   /* ====== 移动端汉堡菜单 ====== */
   const MobileNav = {
-    overlay: null, menu: null, hamburger: null, isOpen: false,
+    overlay: null,
+    menu: null,
+    hamburger: null,
+    previousFocus: null,
+    isOpen: false,
 
     init() {
       this.overlay = document.querySelector('.mobile-nav-overlay');
       this.menu = document.querySelector('.mobile-menu');
       this.hamburger = document.querySelector('.hamburger');
       if (!this.hamburger || !this.menu || !this.overlay) return;
+      this.menu.setAttribute('aria-hidden', 'true');
+      this.menu.setAttribute('inert', '');
       this.hamburger.addEventListener('click', () => this.toggle());
       this.overlay.addEventListener('click', () => this.close());
       this.menu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => this.close());
+        link.addEventListener('click', () => this.close(false));
       });
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && this.isOpen) this.close();
+        if (!this.isOpen) return;
+        if (e.key === 'Escape') this.close();
+        if (e.key === 'Tab') this._trapFocus(e);
       });
     },
 
@@ -99,20 +107,54 @@
 
     open() {
       this.isOpen = true;
+      this.previousFocus = document.activeElement;
       this.hamburger.classList.add('active');
       this.hamburger.setAttribute('aria-expanded', 'true');
+      this.hamburger.setAttribute('aria-label', '关闭导航菜单');
       this.overlay.classList.add('active');
       this.menu.classList.add('active');
+      this.menu.removeAttribute('inert');
+      this.menu.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      const firstControl = this.menu.querySelector('a, button');
+      if (firstControl) {
+        window.setTimeout(() => {
+          if (this.isOpen) firstControl.focus();
+        }, 50);
+      }
     },
 
-    close() {
+    close(restoreFocus = true) {
+      if (!this.isOpen) return;
       this.isOpen = false;
       this.hamburger.classList.remove('active');
       this.hamburger.setAttribute('aria-expanded', 'false');
+      this.hamburger.setAttribute('aria-label', '打开导航菜单');
       this.overlay.classList.remove('active');
       this.menu.classList.remove('active');
+      this.menu.setAttribute('aria-hidden', 'true');
+      this.menu.setAttribute('inert', '');
       document.body.style.overflow = '';
+      if (restoreFocus && this.previousFocus instanceof HTMLElement) {
+        this.previousFocus.focus();
+      }
+      this.previousFocus = null;
+    },
+
+    _trapFocus(event) {
+      const controls = Array.from(
+        this.menu.querySelectorAll('a[href], button:not([disabled])')
+      );
+      if (controls.length === 0) return;
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
   };
 
@@ -202,23 +244,24 @@
   const TocSidebar = {
     KEY: 'kaoyan-toc-collapsed',
     tocEl: null,
+    toggleButton: null,
+    mobileQuery: null,
 
     init() {
       this.tocEl = document.querySelector('.toc');
       if (!this.tocEl) return;
+      this.mobileQuery = Media.query('(max-width: 768px)');
 
-      // 1. 注入折叠按钮和头部行
-      this._injectHeader();
-      // 2. 恢复折叠状态
+      if (!this._injectHeader()) return;
       this._restoreState();
-      // 3. 滚动高亮
       this._initScrollSpy();
+      Media.onChange(this.mobileQuery, () => this._restoreState());
     },
 
     _injectHeader() {
-      const title = this.tocEl.querySelector('h3');
-      const ul = this.tocEl.querySelector('ul');
-      if (!title || !ul) return;
+      const title = this.tocEl.querySelector('h3, .toc-header');
+      const list = this.tocEl.querySelector('ul, .toc-list');
+      if (!title || !list) return false;
 
       // 创建头部行
       const header = document.createElement('div');
@@ -231,33 +274,55 @@
       // 创建折叠按钮
       const toggle = document.createElement('button');
       toggle.className = 'toc-toggle';
-      toggle.setAttribute('aria-label', '折叠目录');
+      toggle.type = 'button';
+      toggle.setAttribute('aria-controls', 'page-toc-content');
       toggle.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l5 5 5-5"/></svg>';
       toggle.addEventListener('click', () => this._toggle());
+      this.toggleButton = toggle;
 
       header.appendChild(toggle);
 
       // 创建滚动容器包裹列表
       const scrollWrap = document.createElement('div');
       scrollWrap.className = 'toc-scroll';
-      ul.remove();
-      scrollWrap.appendChild(ul);
+      scrollWrap.id = 'page-toc-content';
+      list.remove();
+      scrollWrap.appendChild(list);
 
       // 重组结构
       this.tocEl.innerHTML = '';
       this.tocEl.appendChild(header);
       this.tocEl.appendChild(scrollWrap);
+      return true;
     },
 
     _toggle() {
-      const collapsed = this.tocEl.classList.toggle('collapsed');
-      SafeStorage.set(this.KEY, collapsed ? '1' : '0');
+      const collapsed = !this.tocEl.classList.contains('collapsed');
+      this._setCollapsed(collapsed);
+      SafeStorage.set(this._storageKey(), collapsed ? '1' : '0');
     },
 
     _restoreState() {
-      if (SafeStorage.get(this.KEY) === '1') {
-        this.tocEl.classList.add('collapsed');
-      }
+      const saved = SafeStorage.get(this._storageKey());
+      const collapsed = saved === null ? this._isMobile() : saved === '1';
+      this._setCollapsed(collapsed);
+    },
+
+    _setCollapsed(collapsed) {
+      this.tocEl.classList.toggle('collapsed', collapsed);
+      this.toggleButton.setAttribute('aria-expanded', String(!collapsed));
+      this.toggleButton.setAttribute(
+        'aria-label',
+        collapsed ? '展开章节目录' : '折叠章节目录'
+      );
+    },
+
+    _isMobile() {
+      return Boolean(this.mobileQuery && this.mobileQuery.matches);
+    },
+
+    _storageKey() {
+      return `${this.KEY}-${this._isMobile() ? 'mobile' : 'desktop'}`;
     },
 
     _initScrollSpy() {
@@ -271,25 +336,45 @@
           const target = document.getElementById(href.slice(1));
           if (target) headings.push({ link, target });
         }
+        link.addEventListener('click', () => {
+          if (this._isMobile()) {
+            this._setCollapsed(true);
+            SafeStorage.set(this._storageKey(), '1');
+          }
+        });
       });
       if (headings.length === 0) return;
 
       let ticking = false;
+      const updateCurrentChapter = () => {
+        let current = null;
+        const scrollPos = window.scrollY + 120;
+        headings.forEach(({ link, target }) => {
+          if (target.offsetTop <= scrollPos) current = link;
+        });
+        links.forEach(link => link.classList.remove('active-chapter'));
+        if (current) current.classList.add('active-chapter');
+        ticking = false;
+      };
       window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            let current = null;
-            const scrollPos = window.scrollY + 120;
-            headings.forEach(({ link, target }) => {
-              if (target.offsetTop <= scrollPos) current = link;
-            });
-            links.forEach(l => l.classList.remove('active-chapter'));
-            if (current) current.classList.add('active-chapter');
-            ticking = false;
-          });
-          ticking = true;
-        }
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(updateCurrentChapter);
       }, { passive: true });
+      updateCurrentChapter();
+    }
+  };
+
+  /* ====== 跳到正文 ====== */
+  const SkipToContent = {
+    init() {
+      const link = document.querySelector('.skip-link');
+      const target = document.getElementById('main-content');
+      if (!link || !target) return;
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+      link.addEventListener('click', () => {
+        requestAnimationFrame(() => target.focus({ preventScroll: true }));
+      });
     }
   };
 
@@ -298,6 +383,9 @@
     init() {
       const btn = document.getElementById('backTop');
       if (!btn) return;
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
       window.addEventListener('scroll', () => {
         btn.classList.toggle('visible', window.scrollY > 300);
       }, { passive: true });
@@ -313,6 +401,7 @@
     RippleEffect.init();
     TiltCards.init();
     TocSidebar.init();
+    SkipToContent.init();
     BackToTop.init();
 
     document.querySelectorAll('.theme-toggle').forEach(btn => {

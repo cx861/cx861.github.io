@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="${description}">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eef3f4">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d171c">
+    <title>${title}</title>
+    <link rel="canonical" href="${canonical_url}">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="${site_name}">
+    <meta property="og:title" content="${title}">
+    <meta property="og:description" content="${description}">
+    <meta property="og:url" content="${canonical_url}">
+    <link rel="icon" href="${asset_prefix}assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="${asset_prefix}assets/css/style.css">
+    <link rel="stylesheet" href="${asset_prefix}assets/css/study-archive.css">
+    <script src="${asset_prefix}assets/js/main.js" defer></script>
+${resource_hints}
+${extra_head}
+</head>
+<body>
+<a class="skip-link" href="#main-content">跳到内容</a>
+<div id="scroll-progress" aria-hidden="true"></div>
+
+${navigation}
+
+<main>
+${page_content}
+</main>
+
+<footer class="site-footer"${footer_attributes}>
+    <p>&copy; 2026 cx861 | 考研笔记 | <a href="https://github.com/cx861">GitHub</a></p>
+</footer>
+
+<button class="back-top" id="backTop" type="button" aria-label="返回页面顶部" title="返回顶部">↑</button>
+${extra_body_end}
+</body>
+</html>

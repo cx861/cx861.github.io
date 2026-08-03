@@ -1,0 +1,583 @@
+<div class="page-header cs">
+        <h1>🌐 计算机网络 常考题型与解法</h1>
+        <div class="breadcrumb"><a href="../index.html">首页</a> / <a href="../exam-types.html">常考题型及解法</a> / 计算机网络</div>
+    </div>
+
+    <div class="container" id="main-content">
+        <div class="toc">
+            <h3>章节导航</h3>
+            <ul>
+                <li><a href="#s1">一、计算机网络性能指标与时延计算题</a></li>
+                <li><a href="#s2">二、奈奎斯特与香农定理计算题</a></li>
+                <li><a href="#s3">三、编码与调制波形识别题</a></li>
+                <li><a href="#s4">四、CRC循环冗余码计算题</a></li>
+                <li><a href="#s5">五、ARQ协议窗口与信道利用率</a></li>
+                <li><a href="#s6">六、CSMA/CD冲突检测计算题</a></li>
+                <li><a href="#s6a">补充、交换机自学习、VLAN与广播域题</a></li>
+                <li><a href="#s7">七、IP分片计算题 ⭐⭐⭐</a></li>
+                <li><a href="#s8">八、子网划分与CIDR计算题 ⭐⭐⭐</a></li>
+                <li><a href="#s9">九、ARP与分组转发综合题</a></li>
+                <li><a href="#s10">十、路由协议比较题（RIP/OSPF/BGP）</a></li>
+                <li><a href="#s10a">补充、NAT/DHCP/ICMP综合题</a></li>
+                <li><a href="#s11">十一、TCP三次握手与四次挥手 ⭐⭐⭐</a></li>
+                <li><a href="#s12">十二、TCP拥塞控制计算题 ⭐⭐⭐</a></li>
+                <li><a href="#s13">十三、TCP序号与确认号计算题</a></li>
+                <li><a href="#s13a">补充、UDP校验和与TCP流量控制题</a></li>
+                <li><a href="#s14">十四、DNS查询过程题</a></li>
+                <li><a href="#s15">十五、FTP双连接理解题</a></li>
+                <li><a href="#s16">十六、HTTP综合题</a></li>
+                <li><a href="#s16a">补充、电子邮件协议辨析题</a></li>
+                <li><a href="#s17">十七、综合应用题（跨章节）</a></li>
+                <li><a href="#s18">附录：408计算机网络高频考点分布</a></li>
+            </ul>
+        </div>
+
+        <div class="content-card">
+<blockquote>来源：《2027王道考研·计算机网络》<br>覆盖408统考计算机网络高频题型及解题策略</blockquote>
+<hr>
+<h2 id="s1">一、计算机网络性能指标与时延计算题</h2>
+<h3>题型特征</h3>
+<ul><li>选择题：给定场景，计算总时延、发送时延、传播时延</li>
+<li>综合分析：结合分组交换/电路交换，比较时延</li>
+<li><strong>408统考几乎每年必考</strong></li></ul>
+<h3>核心解法</h3>
+<h4>1. 总时延计算</h4>
+<pre><code>总时延 = 发送时延 + 传播时延 + 处理时延 + 排队时延
+发送时延 = 数据帧长度(bit) / 发送速率(bit/s)
+传播时延 = 信道长度(m) / 传播速率(m/s)</code></pre>
+<h4>2. 分组交换流水线计算 ⭐</h4>
+<pre><code>总时间 = 第一个分组到达时间 + (m-1)×每段发送时延
+或：总时间 = (m + k - 1) × T
+
+其中：m = 报文大小 / 每分组数据大小
+     k = 链路段数
+     T = 每段链路的发送时延(最大发送时延)</code></pre>
+<h4>3. 电路交换 vs 分组交换</h4>
+<pre><code>电路交换总时间 = 连接建立时延 + 报文大小/带宽 + 连接释放时延
+分组交换总时间 = 第一个分组到达时间 + 后续分组流水发送时间</code></pre>
+<h3>典型真题</h3>
+<p><strong>1. [2010统考] 主机A和B之间链路带宽100Mb/s，传播时延5ms。A向B发送1500B分组，B立即回复64B确认帧。求A从发送到收到确认的总时间。</strong></p>
+<blockquote><strong>解</strong>：发送时延 = 1500×8/100M = 0.12ms；确认发送时延 = 64×8/100M = 0.00512ms<br>总时间 = 0.12 + 5 + 0.00512 + 5 = <strong>10.125ms</strong></blockquote>
+<p><strong>2. [2013统考] 分组交换网络，H1→H2经过两段链路。带宽100Mb/s，时延带宽积1000b。发送1MB文件，分组1000B。求最少时间。</strong></p>
+<blockquote><strong>解</strong>：m = 1MB/1000B = 1000组，k = 2段<br>每段发送时延 T = 1000×8/100M = 0.08ms<br>时延带宽积 = 传播时延×带宽 = 1000b → 传播时延 = 1000/100M = 0.01ms<br>总时间 = (m+k-1)T + 2×传播时延 = (1000+1)×0.08 + 2×0.01 = <strong>80.10ms</strong></blockquote>
+<p><strong>3. [2023统考] 2段链路带宽100Mb/s，时延带宽积1000b，H1向H2发1MB文件，分组1000B。</strong></p>
+<blockquote><strong>解</strong>：分组数 m = 1MB/1000B = 1000, k=2, T=80μs<br>总时延 = (m+k-1)T = 1001×80μs = 80.08ms<br>两段链路的传播时延 = 1000b/100Mb/s×2 = 0.02ms<br>总时间 ≈ <strong>80.10ms</strong>（若无其他时延则为 80.08ms）</blockquote>
+<p><strong>涉及知识点</strong>：1.1.6 计算机网络的性能指标、1.1.4 电路交换/报文交换/分组交换</p>
+<hr>
+<h2 id="s2">二、奈奎斯特与香农定理计算题</h2>
+<h3>题型特征</h3>
+<ul><li>给出信道带宽、信号状态数或信噪比，求最大数据传输速率</li>
+<li>综合题：同时给出无噪声和有噪声条件，需取最小值</li>
+<li>选择题高频出现</li></ul>
+<h3>核心公式</h3>
+<pre><code>⭐ 奈奎斯特定理（无噪声）：最大速率 = 2W × log₂V
+⭐ 香农定理（有噪声）：最大速率 = W × log₂(1 + S/N)
+   分贝转换：S/N(dB) = 10 × log₁₀(S/N)
+   例：30dB → S/N = 1000
+
+实际最大速率 = min(奈氏极限, 香农极限)</code></pre>
+<h3>解题步骤</h3>
+<ol><li><strong>仅知带宽W和状态数V</strong> → 用奈奎斯特：<code>2W × log₂V</code></li>
+<li><strong>仅知带宽W和信噪比S/N</strong> → 用香农：<code>W × log₂(1+S/N)</code></li>
+<li><strong>两者都给出</strong> → 分别计算，取较小值</li>
+<li><strong>注意单位</strong>：带宽Hz，速率bit/s；码元速率(Baud)与比特率不同</li></ol>
+<h3>典型真题</h3>
+<p><strong>1. 信道带宽4kHz，信噪比30dB，求最大数据传输速率。</strong></p>
+<blockquote>S/N(dB)=30 → S/N=1000<br>香农：C = 4000 × log₂(1+1000) ≈ 4000 × 10 = <strong>40kb/s</strong></blockquote>
+<p><strong>2. 带宽3kHz，无噪声，采用QAM-64调制（V=64），求最大速率。</strong></p>
+<blockquote>奈氏：C = 2 × 3000 × log₂64 = 6000 × 6 = <strong>36kb/s</strong></blockquote>
+<p><strong>3. 带宽4000Hz，信噪比127，二进制信号。求最大速率。</strong></p>
+<blockquote>香农：C = 4000 × log₂(1+127) = 4000 × 7 = 28000b/s<br>奈氏（V=2）：C = 2 × 4000 × log₂2 = 8000b/s<br>取 min(28000, 8000) = <strong>8000b/s</strong></blockquote>
+<p><strong>4. 带宽20MHz，信噪比1001。先求原极限，再带宽翻倍、信噪比到10001后求提升倍数。</strong></p>
+<blockquote>原：香农=20M×log₂1002≈200Mb/s，奈氏若32QAM=2×20M×5=200Mb/s，极限200Mb/s<br>新：香农=40M×log₂10002≈520Mb/s，奈氏=2×40M×5=400Mb/s，极限400Mb/s<br>提升：400/200 = <strong>2倍</strong></blockquote>
+<p><strong>涉及知识点</strong>：2.1.2 信道的极限容量</p>
+<hr>
+<h2 id="s3">三、编码与调制波形识别题</h2>
+<h3>题型特征</h3>
+<ul><li>给出波形图，判断编码方式</li>
+<li>给出编码方式，画出波形</li>
+<li>计算码元速率、比特率关系</li></ul>
+<h3>核心知识</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>编码方式</th><th>判断特征</th></tr>
+<tr><td><strong>NRZ</strong></td><td>无跳变，高=1低=0</td></tr>
+<tr><td><strong>曼彻斯特</strong></td><td>每个码元中间<strong>必定跳变</strong>，高→低=1/低→高=0</td></tr>
+<tr><td><strong>差分曼彻斯特</strong></td><td>码元中间跳变；码元<strong>开始处</strong>有跳变=0，无跳变=1</td></tr>
+<tr><td><strong>NRZI</strong></td><td>电平反转=0，不变=1</td></tr></table></div>
+<p><strong>⚠️ 关键区分</strong>：</p>
+<ul><li>曼彻斯特看<strong>码元中间跳变方向</strong></li>
+<li>差分曼彻斯特看<strong>码元开始处有无跳变</strong>（中间必定跳变用于同步）</li></ul>
+<h3>计算公式</h3>
+<pre><code>比特率(bit/s) = 波特率(Baud) × log₂V
+其中 V = 信号可取的离散值个数
+
+QAM：V = 振幅数 × 相位数
+每个码元携带比特数 = log₂V</code></pre>
+<h3>典型真题</h3>
+<p><strong>1. 4个相位，每个相位4种幅度QAM，带宽3kHz。求最大速率。</strong></p>
+<blockquote>V = 4×4 = 16，log₂16 = 4<br>奈氏：2 × 3000 × 4 = <strong>24kb/s</strong></blockquote>
+<p><strong>2. 给出曼彻斯特编码波形，求对应比特串。</strong></p>
+<blockquote>高→低表示1，低→高表示0：观察跳变方向<br>答案可能为 <strong>00110110</strong> 或 <strong>11001001</strong>（取决于约定）</blockquote>
+<p><strong>3. 16种变化状态的信号，采样率8Hz。求最大数据传输速率。</strong></p>
+<blockquote>每个信号携带 log₂16 = 4 比特<br>最大速率 = 8 × 4 = <strong>32b/s</strong></blockquote>
+<p><strong>涉及知识点</strong>：2.1.3 编码与调制</p>
+<hr>
+<h2 id="s4">四、CRC循环冗余码计算题</h2>
+<h3>题型特征</h3>
+<ul><li>给出待发送数据和生成多项式，求CRC检验码</li>
+<li>给出接收数据，判断是否有差错</li></ul>
+<h3>解题步骤</h3>
+<pre><code>1. 将生成多项式转为二进制：G(x)=x³+x+1 → 1011
+   生成多项式阶数 r = 最高次数
+
+2. 在数据尾部添加 r 个 0
+
+3. 用模2除法（异或）除以生成多项式对应二进制
+
+4. 得到的 r 位余数即为CRC检验码
+
+5. 将余数替换步骤2中添加的 0
+
+6. 验证：接收方用同一G(x)除接收数据，余数为0则无误</code></pre>
+<h3>模2除法规则</h3>
+<ul><li>被除数最高位为1：商1，除数与被除数异或</li>
+<li>被除数最高位为0：商0，除数用0（即无操作）</li>
+<li>最终余数位数 < 除数位数</li></ul>
+<h3>典型真题</h3>
+<p><strong>1. 待发送数据101001，G(x)=x³+x²+1（即1101）。求CRC码。</strong></p>
+<blockquote>r=3，数据尾部加3个0：101001000<br>101001000 ÷ 1101 （模2除法）<br>余数 = <strong>001</strong>，发送数据 = <strong>101001001</strong></blockquote>
+<p><strong>涉及知识点</strong>：3.3.1 循环冗余码(CRC)</p>
+<hr>
+<h2 id="s5">五、ARQ协议窗口与信道利用率</h2>
+<h3>题型特征</h3>
+<ul><li>计算发送窗口、信道利用率</li>
+<li>比较停止-等待、GBN、SR的效率</li>
+<li>选择题/计算题均有</li></ul>
+<h3>核心公式</h3>
+<pre><code>⭐ 信道利用率 U = (WT × 发送时延) / (发送时延 + 2×传播时延)
+                = (WT × 发送时延) / RTT_effective
+
+⭐ 最大吞吐量 = U × 带宽 = WT / RTT × 每帧大小
+
+GBN窗口最大 = 2^n - 1（n为序号比特数）
+SR窗口最大 = 2^(n-1)</code></pre>
+<h3>解题要点</h3>
+<p><strong>停止-等待</strong>：WT=1，利用率很低</p>
+<p><strong>GBN</strong>：WT > 1，WR=1，累积确认</p>
+<p><strong>SR</strong>：WT = WR，各自缓冲</p>
+<p><strong>Pipelining计算</strong>：</p>
+<ul><li>首帧发送后，在收到ACK前可连续发 WT 帧</li>
+<li>若 WT×发送时延 ≥ RTT → 信道利用率可达100%</li></ul>
+<h3>典型真题</h3>
+<p><strong>1. 帧长1000B，带宽1Mb/s，传播时延270ms，双向确认。求停止-等待协议的信道利用率。</strong></p>
+<blockquote>发送时延 = 1000×8/1M = 8ms<br>RTT_effective = 8 + 270×2 = 548ms（忽略确认帧发送时延）<br>U = 8/548 ≈ <strong>1.46%</strong></blockquote>
+<p><strong>2. 同上题，为使利用率达到50%，发送窗口应为多少？</strong></p>
+<blockquote>WT × 8 / (8+540) ≥ 0.5 → WT ≥ 34.25 → <strong>至少35帧</strong></blockquote>
+<p><strong>3. 序号3比特（0~7），分别求GBN和SR的最大发送窗口。</strong></p>
+<blockquote>GBN：WT_max = 2³ - 1 = <strong>7</strong><br>SR：WT_max = 2^(3-1) = <strong>4</strong></blockquote>
+<p><strong>涉及知识点</strong>：3.4 流量控制与可靠传输机制</p>
+<hr>
+<h2 id="s6">六、CSMA/CD冲突检测计算题</h2>
+<h3>题型特征</h3>
+<ul><li>给定网络参数，计算争用期、最短帧长</li>
+<li>判断冲突是否发生</li></ul>
+<h3>核心公式</h3>
+<pre><code>⭐ 争用期（冲突窗口）= 2τ（τ=端到端传播时延）
+⭐ 最短帧长 = 数据传输速率 × 争用期
+
+截断二进制指数退避：
+    第k次重传（k≤10），退避时间 = r × 争用期
+    r ∈ {0, 1, 2, ..., min(2^k-1, 1023)}
+    最大重传16次</code></pre>
+<h3>解题要点</h3>
+<ol><li>发送帧长 < 最短帧长 → 冲突无法检测（帧已发完）</li>
+<li>冲突发生时间 ≤ τ（第一比特到达前）</li>
+<li>检测到冲突后，发送方发送<strong>人为干扰信号（Jam）</strong></li></ol>
+<h3>典型真题</h3>
+<p><strong>1. 1km电缆，数据传输速率1Gb/s，传播速率200m/μs。求最短帧长。</strong></p>
+<blockquote>τ = 1000/200 = 5μs，争用期 = 2τ = 10μs<br>最短帧长 = 1Gb/s × 10μs = <strong>10000bit = 1250B</strong></blockquote>
+<p><strong>2. 以太网速率10Mb/s，争用期51.2μs。站A和B同时发送，A在第5次重传时发送成功。</strong></p>
+<blockquote>A前4次失败，第5次成功<br>第5次退避：k=5，r ∈ {0,...,31}，随机选取<br>若A选r最小而B冲突，A成功</blockquote>
+<p><strong>涉及知识点</strong>：3.5.2 随机访问介质访问控制（CSMA/CD）</p>
+<hr>
+<h2 id="s6a">补充、交换机自学习、VLAN与广播域题</h2>
+<h3>题型特征</h3>
+<ul><li>给出交换机初始转发表和若干帧，判断学习、转发、泛洪或丢弃</li>
+<li>给出网络拓扑，计算冲突域和广播域数量</li>
+<li>考查Access/Trunk端口、802.1Q标签和VLAN间通信方式</li></ul>
+<h3>核心解法</h3>
+<pre><code>交换机处理帧：
+1. 先学习源MAC：源MAC → 入端口
+2. 再查目的MAC：
+   查不到：除入端口外泛洪
+   查到且出端口不同：转发
+   查到且出端口相同：丢弃
+
+冲突域/广播域：
+Hub：不隔离冲突域，不隔离广播域
+交换机：每个端口一个冲突域，默认不隔离广播域
+路由器：隔离广播域，也隔离冲突域
+VLAN：逻辑隔离广播域</code></pre>
+<h3>典型题</h3>
+<p><strong>1. 交换机空表，A在1口向B发送帧，B在2口。交换机如何处理？</strong></p>
+<blockquote>先学习 <strong>A→1口</strong>；由于不知道B在哪个端口，向除1口外所有端口泛洪。B响应后，交换机再学习 <strong>B→2口</strong>。</blockquote>
+<p><strong>2. 一台24口交换机划分3个VLAN，每个VLAN有8台主机。共有多少广播域？</strong></p>
+<blockquote>每个VLAN是一个广播域，因此共有 <strong>3个广播域</strong>。交换机端口一般各自形成冲突域，因此最多可看作24个冲突域。</blockquote>
+<p><strong>3. 两台交换机之间需要承载VLAN 10和VLAN 20，应使用什么端口？</strong></p>
+<blockquote>使用<strong>Trunk端口</strong>，通过802.1Q标签区分不同VLAN；接终端主机通常使用Access端口。</blockquote>
+<p><strong>涉及知识点</strong>：3.6.4 VLAN、3.8.2 以太网交换机</p>
+<hr>
+<h2 id="s7">七、IP分片计算题 ⭐⭐⭐</h2>
+<h3>题型特征（408热门考点）</h3>
+<ul><li>给出原始IP数据报大小、MTU，求分片后的片偏移、MF标志、总长度</li>
+<li>给出若干分片信息，求原始数据报大小</li></ul>
+<h3>核心规则</h3>
+<pre><code>⚠️ 片偏移以 8 字节为单位！
+⚠️ 除最后一片外，每片数据部分长度必须是 8 字节的整数倍！
+
+片偏移 = 该片数据第一个字节在原始数据中的位置 / 8
+每片最大数据长度 = MTU - 首部长度（且为8的倍数）
+每片总长度 = 首部长度 + 片数据长度
+MF标志：最后一片=0，其他片=1</code></pre>
+<h3>解题步骤</h3>
+<ol><li>计算可用的数据部分长度：MTU - 首部长度（通常20B）</li>
+<li>取小于等于且能被8整除的最大值（如 1480B = 185×8）</li>
+<li>计算分片数：⌈总数据/每片数据⌉</li>
+<li>计算每片的片偏移：(片号-1)×每片数据/8</li></ol>
+<h3>典型真题</h3>
+<p><strong>1. IP数据报总长4000B，首部20B，MTU=1500B。求各分片信息。</strong></p>
+<blockquote>原始数据 = 4000-20 = 3980B<br>每片最大数据 = 1500-20 = 1480B（且为8倍数）<br><br>| 片号 | 总长度 | 片偏移 | MF | 数据量 |<br>|------|--------|--------|-----|--------|<br>| 1 | 1500 | 0 | 1 | 1480 |<br>| 2 | 1500 | 1480/8=185 | 1 | 1480 |<br>| 3 | 1060 | 2960/8=370 | 0 | 1020 |</blockquote>
+<p><strong>2. 收到一个IP分片：MF=0，片偏移=800，数据长度200B。求原始数据报大小。</strong></p>
+<blockquote>MF=0说明是最后一片<br>片偏移=800 → 该片数据起始字节 = 800×8 = 6400B<br>总数据量 = 6400 + 200 = <strong>6600B</strong><br>若首部20B，总长 = <strong>6620B</strong></blockquote>
+<p><strong>涉及知识点</strong>：4.2.1 IPv4分组、4.2.2 IPv4地址</p>
+<hr>
+<h2 id="s8">八、子网划分与CIDR计算题 ⭐⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>给定IP地址范围，划分子网</li>
+<li>CIDR聚合/超网计算</li>
+<li>路由表最长前缀匹配</li>
+<li>网络地址、广播地址、可用IP范围计算</li></ul>
+<h3>核心操作</h3>
+<pre><code>⭐ 网络地址 = IP地址 &amp; 子网掩码
+⭐ 广播地址 = 网络地址 | (~子网掩码)（低32位部分取反）
+⭐ 可用IP范围 = 网络地址+1 ~ 广播地址-1
+⭐ 子网数 = 2^n（n为借位比特数）
+⭐ 每子网主机数 = 2^(32-前缀长度) - 2</code></pre>
+<h3>CIDR路由聚合</h3>
+<pre><code>取各网络号的共同前缀位：
+例：192.168.1.0/24 和 192.168.2.0/24
+    → 192.168.0.0/22（取前22位相同部分）</code></pre>
+<h3>解题步骤</h3>
+<p><strong>子网划分</strong>：</p>
+<ol><li>确定需要多少子网（或每子网需要多少主机），算出借位数</li>
+<li>写出新的子网掩码</li>
+<li>计算每子网的网络地址和可用范围</li></ol>
+<p><strong>路由聚合</strong>：</p>
+<ol><li>写出二进制形式</li>
+<li>找共同前缀</li>
+<li>取共同部分作为聚合后地址，前缀长度为共同位数</li></ol>
+<h3>典型真题</h3>
+<p><strong>1. IP：192.168.1.10/26，求网络地址、广播地址、可用IP数。</strong></p>
+<blockquote>子网掩码：255.255.255.192<br>网络地址 = 192.168.1.10 & 255.255.255.192 = <strong>192.168.1.0</strong><br>广播地址 = 192.168.1.0 + (64-1) = <strong>192.168.1.63</strong><br>可用IP = 64 - 2 = <strong>62个</strong>（192.168.1.1 ~ 192.168.1.62）</blockquote>
+<p><strong>2. 路由表中有 172.16.0.0/18 和 172.16.64.0/18，能否聚合？</strong></p>
+<blockquote>172.16.0.0/18：172.16.00|000000.0<br>172.16.64.0/18：172.16.01|000000.0<br>前17位相同，聚合为 <strong>172.16.0.0/17</strong></blockquote>
+<p><strong>3. 最长前缀匹配：目的IP 192.168.1.5，路由表有 192.168.0.0/20 和 192.168.1.0/24，走哪条？</strong></p>
+<blockquote>192.168.1.5 & /20 → 192.168.0.0，匹配<br>192.168.1.5 & /24 → 192.168.1.0，匹配<br><strong>选前缀最长的 /24 路由</strong></blockquote>
+<p><strong>涉及知识点</strong>：4.2.2 IPv4地址（分类、子网划分、CIDR）</p>
+<hr>
+<h2 id="s9">九、ARP与分组转发综合题</h2>
+<h3>题型特征</h3>
+<ul><li>给定网络拓扑，描述ARP的工作过程</li>
+<li>路由表查表转发过程</li></ul>
+<h3>核心要点</h3>
+<p><strong>⭐ ARP四种场景</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>场景</th><th>请求谁的MAC</th></tr>
+<tr><td>同一网络，主机→主机</td><td>目的主机的MAC</td></tr>
+<tr><td>不同网络，主机→主机</td><td><strong>默认网关（路由器）的MAC</strong></td></tr>
+<tr><td>路由器→主机</td><td>目的主机的MAC</td></tr>
+<tr><td>路由器→路由器</td><td>下一跳路由器的MAC</td></tr></table></div>
+<p><strong>路由表转发</strong>：</p>
+<ol><li>提取目的IP</li>
+<li>与路由表逐条匹配（目的IP & 子网掩码 == 网络地址？）</li>
+<li>多条匹配→最长前缀匹配</li>
+<li>无匹配→默认路由或丢弃</li></ol>
+<h3>典型真题</h3>
+<p><strong>1. 主机A(192.168.1.1/24)向主机B(10.0.0.1/8)发送数据，A的ARP请求是什么？</strong></p>
+<blockquote>A和B不在同一网络，A需先将数据发给默认网关<br>ARP请求：<strong>默认网关的IP对应的MAC地址</strong>（非B的MAC）</blockquote>
+<p><strong>2. 路由器收到目的IP=192.168.5.17的分组，路由表如下。走哪条？</strong></p>
+<pre><code>192.168.0.0/16  → R1（匹配）
+192.168.5.0/24  → R2（匹配）
+0.0.0.0/0       → R3（默认，匹配）</code></pre>
+<blockquote>三条都匹配，选前缀最长的：<strong>/24 → R2</strong></blockquote>
+<p><strong>涉及知识点</strong>：4.2.5 地址解析协议(ARP)、4.2.4 网络层转发分组的过程</p>
+<hr>
+<h2 id="s10">十、路由协议比较题（RIP/OSPF/BGP）</h2>
+<h3>题型特征</h3>
+<ul><li>选择题：比较三种路由协议的特点</li>
+<li>给出场景，选择合适的路由协议</li></ul>
+<h3>快速对照表</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>维度</th><th>RIP</th><th>OSPF</th><th>BGP</th></tr>
+<tr><td><strong>类型</strong></td><td>IGP</td><td>IGP</td><td>EGP</td></tr>
+<tr><td><strong>算法</strong></td><td>距离向量(DV)</td><td>链路状态(LS)</td><td>路径向量(PV)</td></tr>
+<tr><td><strong>度量</strong></td><td>跳数（≤15）</td><td>代价（带宽相关）</td><td>路径属性/策略</td></tr>
+<tr><td><strong>协议层次</strong></td><td>应用层</td><td>网络层</td><td>应用层</td></tr>
+<tr><td><strong>传输/封装</strong></td><td>UDP 520端口</td><td>IP协议号89</td><td>TCP 179端口</td></tr>
+<tr><td><strong>更新方式</strong></td><td>周期性（30s）广播全部路由</td><td>触发更新，洪泛LSA</td><td>增量更新</td></tr>
+<tr><td><strong>收敛速度</strong></td><td>慢</td><td>快</td><td>慢</td></tr>
+<tr><td><strong>适用范围</strong></td><td>小型网络</td><td>中大型网络</td><td>AS之间（全球）</td></tr>
+<tr><td><strong>环路防护</strong></td><td>水平分割、毒性反转</td><td>天然无环路（SPF算法）</td><td>路径向量防环</td></tr></table></div>
+<h3>典型真题</h3>
+<p><strong>1. 以下哪个协议使用UDP传输？</strong></p>
+<blockquote><strong>RIP</strong>（UDP 520）；OSPF直接封装在IP中；BGP使用TCP</blockquote>
+<p><strong>2. 关于OSPF的说法，正确的是？</strong></p>
+<blockquote>OSPF是链路状态协议，使用Dijkstra算法，收敛快<br>OSPF支持区域划分，区域0为骨干区域<br>OSPF报文直接封装在IP数据报中（协议号89）</blockquote>
+<p><strong>3. 最大跳数限制是由哪个协议引入的？</strong></p>
+<blockquote><strong>RIP</strong>（最大15跳，16=不可达）</blockquote>
+<p><strong>涉及知识点</strong>：4.4 路由算法与路由协议</p>
+<hr>
+<h2 id="s10a">补充、NAT/DHCP/ICMP综合题</h2>
+<h3>题型特征</h3>
+<ul><li>给出内网主机访问公网的过程，判断NAT表项和地址/端口变化</li>
+<li>考查DHCP四步交互、源/目的IP和UDP端口</li>
+<li>判断哪些情况发送或不发送ICMP差错报文</li></ul>
+<h3>核心速记</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>专题</th><th>必会点</th><th>易错点</th></tr>
+<tr><td><strong>NAT/NAPT</strong></td><td>私有IP/端口 ↔ 公网IP/端口</td><td>转换后需重算IP首部和TCP/UDP检验和</td></tr>
+<tr><td><strong>DHCP</strong></td><td>DORA：Discover、Offer、Request、ACK</td><td>客户端端口68，服务器端口67；初始请求常用广播</td></tr>
+<tr><td><strong>ICMP</strong></td><td>封装在IP中，用于差错报告和询问</td><td>ICMP差错报文出错、多播/广播、非首片分片不再发差错报告</td></tr></table></div>
+<h3>典型题</h3>
+<p><strong>1. 内网主机10.0.0.2:5000经NAT访问公网服务器1.1.1.1:80，NAT公网地址为202.1.1.1。NAT表可能是什么？</strong></p>
+<blockquote>可建立映射：<strong>10.0.0.2:5000 ↔ 202.1.1.1:某公网端口</strong>。外出报文源地址/端口被替换，返回报文再按NAT表还原。</blockquote>
+<p><strong>2. DHCP客户机刚启动时还没有IP地址，Discover报文常见源/目的IP是什么？</strong></p>
+<blockquote>源IP常为 <strong>0.0.0.0</strong>，目的IP为 <strong>255.255.255.255</strong>；UDP源端口68，目的端口67。</blockquote>
+<p><strong>3. IP分片的第二片在传输中出错，路由器是否发送ICMP差错报告？</strong></p>
+<blockquote>不发送。对<strong>第一个分片以外</strong>的后续分片，不发送ICMP差错报告。</blockquote>
+<p><strong>涉及知识点</strong>：4.2.3 NAT、4.2.6 DHCP、4.2.7 ICMP</p>
+<hr>
+<h2 id="s11">十一、TCP三次握手与四次挥手 ⭐⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>选择题：判断TCP连接/释放过程中各报文段的标志位和序号</li>
+<li>计算SYN、ACK、seq、ack的值</li></ul>
+<h3>三次握手过程</h3>
+<pre><code>客户                           服务器
+  |------SYN, seq=x------------&gt;|  (SYN-SENT → LISTEN)
+  |                              |  (SYN-RCVD)
+  |&lt;-----SYN+ACK, seq=y, ack=x+1| 
+  |                              |
+  |------ACK, seq=x+1, ack=y+1-&gt;|  (ESTABLISHED)
+  |                              |  (ESTABLISHED)</code></pre>
+<h3>四次挥手过程</h3>
+<pre><code>客户                           服务器
+  |------FIN, seq=u------------&gt;|  (FIN-WAIT-1)
+  |&lt;-----ACK, seq=v, ack=u+1----|  (CLOSE-WAIT)
+  |  (FIN-WAIT-2)                |
+  |&lt;-----FIN, seq=w, ack=u+1----|  (LAST-ACK)
+  |------ACK, seq=u+1, ack=w+1-&gt;|  (TIME-WAIT)
+  |  (等待2MSL后CLOSED)          |  (CLOSED)</code></pre>
+<h3>⚠️ 易错点</h3>
+<ol><li><strong>SYN和FIN各消耗一个序号</strong>（即使不含数据也占序号）</li>
+<li>连接建立时的第三次握手ACK不消耗序号（若不带数据）</li>
+<li><strong>TIME-WAIT = 2MSL</strong>（最长报文段寿命），约为2分钟</li>
+<li>为什么握手三次、挥手四次？<ul><li>握手：服务器SYN和ACK可合并（第二次）</li><li>挥手：服务器收到FIN后可能还有数据要发，ACK和FIN需分开发</li></ul></li></ol>
+<h3>典型真题</h3>
+<p><strong>1. 主机A向B发送连接请求，SYN=1，seq=100。B同意连接，应回复什么？</strong></p>
+<blockquote><strong>SYN=1，ACK=1，seq=y（任意初始值），ack=101（100+1）</strong></blockquote>
+<p><strong>2. TIME-WAIT状态的作用？</strong></p>
+<blockquote>① 确保最后一个ACK能到达服务器（若丢失服务器可重发FIN）<br>② 让旧连接的所有报文在网络中消失</blockquote>
+<p><strong>涉及知识点</strong>：5.3.3 TCP连接管理</p>
+<hr>
+<h2 id="s12">十二、TCP拥塞控制计算题 ⭐⭐⭐</h2>
+<h3>题型特征</h3>
+<ul><li>给出cwnd变化曲线图，分析拥塞控制行为</li>
+<li>计算各时间点cwnd、ssthresh的值</li>
+<li>判断何时发生超时、何时发生3个重复ACK</li></ul>
+<h3>核心行为</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>事件</th><th>cwnd变化</th><th>ssthresh变化</th><th>后续阶段</th></tr>
+<tr><td>初始</td><td>1</td><td>初始值（通常16等）</td><td>慢开始</td></tr>
+<tr><td>慢开始中（每RTT）</td><td>×2</td><td>不变</td><td>慢开始</td></tr>
+<tr><td>cwnd≥ssthresh</td><td>线性+1/RTT</td><td>不变</td><td>拥塞避免</td></tr>
+<tr><td><strong>超时</strong></td><td>→1</td><td>=cwnd/2</td><td>慢开始</td></tr>
+<tr><td><strong>3个重复ACK</strong></td><td>=ssthresh=cwnd/2</td><td>=cwnd/2</td><td>快恢复→拥塞避免</td></tr></table></div>
+<h3>⚠️ 关键区分</h3>
+<ul><li><strong>超时</strong>：cwnd骤降为1，ssthresh=cwnd/2</li>
+<li><strong>3个重复ACK</strong>：cwnd只降为一半（ssthresh值），更温和</li></ul>
+<h3>解题步骤</h3>
+<p>分析cwnd曲线图时：</p>
+<ol><li>看增长模式：指数=慢开始，线性=拥塞避免</li>
+<li>看骤降点：降为1=超时；降为一半=3个重复ACK</li>
+<li>标记每次事件后的ssthresh值</li></ol>
+<h3>典型真题</h3>
+<p><strong>1. cwnd从1开始指数增长到16后线性增长到24，然后骤降为1。发生了什么？</strong></p>
+<blockquote>指数增长→慢开始（ssthresh至少16）<br>线性增长→拥塞避免<br>cwnd=24时骤降到1→<strong>发生超时</strong><br>新的 ssthresh = 24/2 = <strong>12</strong><br>之后从1重新慢开始</blockquote>
+<p><strong>2. cwnd=16，收到3个重复ACK后，cwnd和ssthresh为多少？</strong></p>
+<blockquote>ssthresh = cwnd/2 = <strong>8</strong><br>cwnd = ssthresh = <strong>8</strong>（快恢复）<br>之后线性增长（拥塞避免）</blockquote>
+<p><strong>涉及知识点</strong>：5.3.6 TCP拥塞控制</p>
+<hr>
+<h2 id="s13">十三、TCP序号与确认号计算题</h2>
+<h3>题型特征</h3>
+<ul><li>给定TCP连接的初始序号和已传输数据量，计算当前seq和ack</li></ul>
+<h3>计算规则</h3>
+<pre><code>⭐ seq = 本报文段数据第一个字节的序号
+⭐ ack = 对方初始序号 + 已收到对方数据字节数 + 1（若SYN/FIN）
+⭐ SYN和FIN各消耗一个序号
+⭐ 纯ACK报文（无数据）不消耗序号</code></pre>
+<h3>典型真题</h3>
+<p><strong>1. 主机A发起连接：SYN=1，seq=100。建立连接后A发送200B数据。求B回复的确认号。</strong></p>
+<blockquote>连接建立消耗1个序号（SYN），seq从101开始<br>A发送200B，占用seq 101~300<br>B确认号 = 301（期望下一个字节）</blockquote>
+<p><strong>2. A的seq=100，向B发送300B。B的seq=200，向A发送200B并捎带确认。求B报文的seq和ack。</strong></p>
+<blockquote>B的seq = 200（B自己的初始序号，假设未发过数据）<br>B的ack = 100 + 300 = <strong>400</strong>（确认收到A的300B）<br>若B还发送了200B数据，则下次A的ack = 200 + 200 = 400</blockquote>
+<p><strong>涉及知识点</strong>：5.3.2 TCP报文段、5.3.3 TCP连接管理</p>
+<hr>
+<h2 id="s13a">补充、UDP校验和与TCP流量控制题</h2>
+<h3>题型特征</h3>
+<ul><li>判断UDP/TCP检验和覆盖范围，与IP首部检验和区别</li>
+<li>给出接收窗口rwnd、拥塞窗口cwnd，求实际发送窗口</li>
+<li>考查零窗口、持续计时器、零窗口探测报文和糊涂窗口综合征</li></ul>
+<h3>核心规则</h3>
+<pre><code>UDP检验和覆盖：伪首部 + UDP首部 + 数据
+TCP检验和覆盖：伪首部 + TCP首部 + 数据
+IP首部检验和：只检验IP首部
+
+TCP实际发送窗口 = min(rwnd, cwnd)
+rwnd用于流量控制：保护接收方
+cwnd用于拥塞控制：保护网络</code></pre>
+<h3>典型题</h3>
+<p><strong>1. UDP检验和计算时，伪首部是否会被发送？</strong></p>
+<blockquote>不会。伪首部只参与检验和计算，用来把源/目的IP、协议号、UDP长度纳入差错检测。</blockquote>
+<p><strong>2. rwnd=12KB，cwnd=8KB，发送方最多还能发送多少未确认数据？</strong></p>
+<blockquote>发送窗口取两者较小值：<strong>min(12KB, 8KB)=8KB</strong>。</blockquote>
+<p><strong>3. 接收方通告零窗口后，窗口更新报文丢失怎么办？</strong></p>
+<blockquote>发送方启动持续计时器，超时后发送<strong>零窗口探测报文</strong>，避免双方永久等待。</blockquote>
+<p><strong>涉及知识点</strong>：5.2.2 UDP检验和、5.3.5 TCP流量控制</p>
+<hr>
+<h2 id="s14">十四、DNS查询过程题</h2>
+<h3>题型特征</h3>
+<ul><li>描述DNS域名解析的完整过程</li>
+<li>区分递归查询和迭代查询</li>
+<li>知道各级域名服务器的作用</li></ul>
+<h3>DNS解析流程</h3>
+<pre><code>主机                    本地DNS         根DNS         com DNS       example.com DNS
+ |--www.example.com?----&gt;|
+ |                       |--www.example.com?-----&gt;|
+ |                       |&lt;----com DNS地址---------|
+ |                       |
+ |                       |--www.example.com?---------------.-&gt;|
+ |                       |&lt;----example.com DNS地址-----------|
+ |                       |
+ |                       |--www.example.com?-----------------------&gt;|
+ |                       |&lt;----1.2.3.4------------------------------|
+ |&lt;-----1.2.3.4----------|</code></pre>
+<blockquote>主机→本地DNS：<strong>递归查询</strong><br>本地DNS→各级服务器：<strong>迭代查询</strong></blockquote>
+<h3>典型真题</h3>
+<p><strong>1. 用户在浏览器输入www.example.com，简述DNS解析过程。</strong></p>
+<blockquote>① 浏览器查本地DNS缓存<br>② 查hosts文件<br>③ 向本地域名服务器递归查询<br>④ 本地DNS向根DNS迭代查询→得.com DNS地址<br>⑤ 向.com DNS查询→得example.com DNS地址<br>⑥ 向example.com DNS查询→得IP地址<br>⑦ 返回IP给浏览器</blockquote>
+<p><strong>2. DNS使用什么传输层协议？</strong></p>
+<blockquote>一般使用<strong>UDP 53端口</strong><br>当响应超过512字节或区域传送时使用TCP 53端口</blockquote>
+<p><strong>涉及知识点</strong>：6.2 域名系统(DNS)</p>
+<hr>
+<h2 id="s15">十五、FTP双连接理解题</h2>
+<h3>题型特征</h3>
+<ul><li>区分FTP的控制连接和数据连接</li>
+<li>端口号辨析</li></ul>
+<h3>核心知识</h3>
+<pre><code>⭐ FTP使用两条TCP连接：
+    控制连接：服务器21端口，传输命令，保持整个会话
+    数据连接：服务器20端口(PORT)或协商端口(PASV)，每次传输数据时建立</code></pre>
+<div class="table-wrapper"><table><tr class="table-header"><th>模式</th><th>数据连接建立方式</th></tr>
+<tr><td><strong>主动PORT</strong></td><td>服务器从20端口主动连接客户端</td></tr>
+<tr><td><strong>被动PASV</strong></td><td>客户端连接服务器协商的随机端口</td></tr></table></div>
+<h3>典型真题</h3>
+<p><strong>1. FTP传输文件时，控制连接使用的端口是？</strong></p>
+<blockquote>服务器<strong>21端口</strong>（控制连接始终是21）</blockquote>
+<p><strong>2. 为什么FTP需要两条连接？</strong></p>
+<blockquote>控制连接用于传输命令（维持会话状态），数据连接用于传输文件数据<br>分离控制与数据，允许在传输数据同时发送控制命令（如中断传输）</blockquote>
+<p><strong>涉及知识点</strong>：6.3 文件传输协议(FTP)</p>
+<hr>
+<h2 id="s16">十六、HTTP综合题</h2>
+<h3>题型特征</h3>
+<ul><li>HTTP请求/响应报文格式</li>
+<li>持久连接与非持久连接的时间计算</li>
+<li>状态码辨析</li></ul>
+<h3>核心知识</h3>
+<p><strong>HTTP请求报文格式</strong>：</p>
+<pre><code>GET /index.html HTTP/1.1          ← 请求行
+Host: www.example.com              ← 首部行
+Connection: keep-alive
+                                    ← 空行
+                                    ← 实体（可选）</code></pre>
+<p><strong>关键状态码</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>码</th><th>含义</th></tr>
+<tr><td>200</td><td>OK</td></tr>
+<tr><td>301</td><td>永久重定向</td></tr>
+<tr><td>302</td><td>临时重定向</td></tr>
+<tr><td>304</td><td>未修改（使用缓存）</td></tr>
+<tr><td>404</td><td>未找到</td></tr>
+<tr><td>500</td><td>服务器内部错误</td></tr></table></div>
+<p><strong>持久连接与非持久连接</strong>：</p>
+<pre><code>非持久HTTP/1.0：每个对象需要一个TCP连接
+  RTT开销 = 2RTT × 对象数
+  
+持久HTTP/1.1：一个TCP连接传输多个对象
+  RTT开销 = 2RTT（建立连接）+ 对象传输时间</code></pre>
+<h3>典型真题</h3>
+<p><strong>1. 一个HTML页面包含8个小图片。HTTP/1.0非持久连接需要多少次RTT？</strong></p>
+<blockquote>HTML页面：2RTT（建立+请求）<br>8个图片：各需2RTT = 16RTT<br>总计：<strong>18RTT</strong>（串行）/ 部分可并行</blockquote>
+<p><strong>2. HTTP/1.1持久连接（非流水线）获取同上页面需要多少RTT？</strong></p>
+<blockquote>TCP连接：1RTT（三次握手前1.5RTT）<br>HTML：1RTT<br>8图片：各1RTT（非流水线需等前一个返回）= 8RTT<br>总计：<strong>约10.5RTT</strong></blockquote>
+<p><strong>3. HTTP响应状态码404表示什么？</strong></p>
+<blockquote><strong>Not Found</strong> - 请求的资源未找到</blockquote>
+<p><strong>涉及知识点</strong>：6.5.2 超文本传输协议(HTTP)</p>
+<hr>
+<h2 id="s16a">补充、电子邮件协议辨析题</h2>
+<h3>题型特征</h3>
+<ul><li>区分SMTP、POP3、IMAP、MIME的作用和端口</li>
+<li>给出邮件收发过程，判断哪一段使用哪个协议</li>
+<li>考查“推/拉协议”、邮件服务器和用户代理的职责</li></ul>
+<h3>核心对照</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>协议/扩展</th><th>作用</th><th>传输层/端口</th><th>关键词</th></tr>
+<tr><td><strong>SMTP</strong></td><td>发送邮件、服务器间转发</td><td>TCP 25</td><td>推协议、命令/响应</td></tr>
+<tr><td><strong>POP3</strong></td><td>从服务器下载邮件</td><td>TCP 110</td><td>拉协议、离线阅读</td></tr>
+<tr><td><strong>IMAP</strong></td><td>在线管理服务器邮件</td><td>TCP 143</td><td>拉协议、多终端同步</td></tr>
+<tr><td><strong>MIME</strong></td><td>扩展邮件内容格式</td><td>-</td><td>支持中文、图片、附件等非ASCII内容</td></tr></table></div>
+<h3>典型题</h3>
+<p><strong>1. 用户A把邮件发到自己的邮件服务器，再转发到用户B的邮件服务器，使用什么协议？</strong></p>
+<blockquote>两段通常都使用<strong>SMTP</strong>。</blockquote>
+<p><strong>2. 用户B从邮件服务器读取邮件，可使用哪些协议？</strong></p>
+<blockquote>可使用<strong>POP3</strong>或<strong>IMAP</strong>。POP3偏下载，IMAP偏服务器端管理与多终端同步。</blockquote>
+<p><strong>3. SMTP只能直接传7位ASCII文本，如何发送图片附件？</strong></p>
+<blockquote>使用<strong>MIME</strong>扩展，对非ASCII内容和附件进行描述与编码。</blockquote>
+<p><strong>涉及知识点</strong>：6.4 电子邮件</p>
+<hr>
+<h2 id="s17">十七、综合应用题（跨章节）</h2>
+<h3>题型特征</h3>
+<ul><li>综合多章知识点的大型场景题</li>
+<li>需要计算+分析+描述</li></ul>
+<h3>常见综合场景</h3>
+<p><strong>场景1：文件传输全过程分析</strong></p>
+<blockquote>涉及：DNS解析 → TCP连接建立 → HTTP请求 → IP路由转发 → 数据链路层封装</blockquote>
+<p><strong>场景2：网络拓扑分析与故障排查</strong></p>
+<blockquote>涉及：IP地址规划、子网划分、路由表配置、ARP过程、交换机工作原理</blockquote>
+<p><strong>典型提问点</strong>：</p>
+<ul><li>主机间能否通信？（检查IP地址是否在同一子网）</li>
+<li>数据包的源/目的IP和MAC在各段的变化</li>
+<li>路由器如何转发？走哪条路由？</li></ul>
+<h3>解题要点</h3>
+<ol><li><strong>IP与MAC在各段的变化</strong>：<ul><li>IP地址：从源到目的不变（除非经过NAT）</li><li>MAC地址：每经过一个路由器就变化（改为下一跳的MAC）</li></ul></li></ol>
+<ol><li><strong>数据在各层的封装</strong>：</li></ol>
+<pre><code>   应用层：HTTP报文
+   传输层：TCP报文段（端口号）
+   网络层：IP数据报（IP地址）
+   数据链路层：帧（MAC地址）
+   物理层：比特流</code></pre>
+<hr>
+<h2 id="s18">附录：408计算机网络高频考点分布</h2>
+<div class="table-wrapper"><table><tr class="table-header"><th>章节</th><th>重要度</th><th>常考题型</th><th>近五年出现频次</th></tr>
+<tr><td>第1章 体系结构</td><td>★★★</td><td>时延计算、分层结构</td><td>高</td></tr>
+<tr><td>第2章 物理层</td><td>★★</td><td>奈氏/香农定理、编码</td><td>中</td></tr>
+<tr><td>第3章 数据链路层</td><td>★★★★</td><td>CRC、CSMA/CD、滑动窗口、交换机、VLAN</td><td>高</td></tr>
+<tr><td>第4章 网络层</td><td>★★★★★</td><td>IP分片、子网划分、ARP、NAT/DHCP/ICMP、路由协议</td><td>极高</td></tr>
+<tr><td>第5章 传输层</td><td>★★★★★</td><td>TCP拥塞控制、连接管理、序号确认号、流量控制、UDP校验和</td><td>极高</td></tr>
+<tr><td>第6章 应用层</td><td>★★★</td><td>DNS、HTTP、FTP、电子邮件</td><td>中高</td></tr></table></div>
+<hr>
+<blockquote>📚 <strong>参考资料</strong>：《2027年计算机网络考研复习指导》（王道论坛组编）<br>⭐ 标注星号 = 高频考点/必考题型<br>📝 <strong>解题原则</strong>：理解原理 → 记忆公式 → 精准计算 → 细致推导</blockquote>
+        </div>
+    </div>

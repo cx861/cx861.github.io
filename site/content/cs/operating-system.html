@@ -1,0 +1,1047 @@
+<!-- Page Header -->
+    <div class="page-header cs">
+        <h1>💻 操作系统</h1>
+        <div class="breadcrumb"><a href="../index.html">首页</a> / <a href="../knowledge-base.html">知识库</a> / 操作系统</div>
+    </div>
+
+    <div class="container" id="main-content">
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>目录</h3>
+            <ul>
+                <li><a href="#ch1">第1章 计算机系统概述</a></li>
+                <li><a href="#ch2">第2章 进程与线程</a></li>
+                <li><a href="#ch3">第3章 内存管理</a></li>
+                <li><a href="#ch4">第4章 文件管理</a></li>
+                <li><a href="#ch5">第5章 输入/输出（I/O）管理</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-card">
+<blockquote>来源：《2027王道考研·操作系统》高清版<br>共5章，涵盖408统考操作系统全部考点</blockquote>
+<hr>
+<h2 id="ch1">第1章 计算机系统概述</h2>
+<h3>1.1 操作系统的基本概念</h3>
+<h4>1.1.1 操作系统的概念</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>术语</th><th>定义</th><th>关键理解</th></tr>
+<tr><td><strong>操作系统（OS）</strong></td><td>控制和管理整个计算机系统的硬件与软件资源，合理地组织、调度计算机的工作与资源的分配，进而为用户和其他软件提供方便接口与环境的最基本的<strong>系统软件</strong></td><td>OS是系统软件中最基本的部分，是用户与计算机硬件之间的桥梁</td></tr></table></div>
+<h4>1.1.2 操作系统的功能和目标</h4>
+<p><strong>⭐ 操作系统的四大核心功能</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>功能</th><th>说明</th></tr>
+<tr><td><strong>处理机管理</strong></td><td>在多道程序环境下，合理分配和回收处理机资源，控制进程的执行</td></tr>
+<tr><td><strong>存储器管理</strong></td><td>内存的分配与回收、地址转换、内存保护、内存扩充（虚拟存储）</td></tr>
+<tr><td><strong>设备管理</strong></td><td>管理各类I/O设备，完成用户I/O请求，实现设备分配、缓冲管理等</td></tr>
+<tr><td><strong>文件管理</strong></td><td>文件的存储、检索、共享和保护，提供"按名存取"功能</td></tr></table></div>
+<p><strong>操作系统的三个角色（接口作用）</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>角色</th><th>说明</th></tr>
+<tr><td><strong>资源管理者</strong></td><td>管理处理机、存储器、设备、文件等系统资源</td></tr>
+<tr><td><strong>用户接口</strong></td><td>提供命令接口（联机/脱机）和程序接口（系统调用）</td></tr>
+<tr><td><strong>扩充机器</strong></td><td>将裸机改造成功能更强、使用更方便的虚拟机</td></tr></table></div>
+<p><strong>⭐ 三类用户接口</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>接口类型</th><th>说明</th><th>特点</th></tr>
+<tr><td><strong>联机用户接口（命令行接口）</strong></td><td>用户输入命令，系统立即解释执行</td><td>交互式，适用于实时场景</td></tr>
+<tr><td><strong>脱机用户接口（作业控制语言）</strong></td><td>批处理系统中使用作业说明书</td><td>用户不实时干预</td></tr>
+<tr><td><strong>图形用户接口（GUI）</strong></td><td>图标、菜单、对话框代替文本命令</td><td>易用性强，降低使用门槛</td></tr>
+<tr><td><strong>程序接口（系统调用）</strong></td><td>供应用程序调用的接口</td><td>程序通过系统调用请求OS服务</td></tr></table></div>
+<p><strong>操作系统对资源的扩充</strong>：</p>
+<ul><li>将裸机（bare machine）覆盖上I/O设备管理软件 → 功能更强的虚拟机</li>
+<li>用户无需关心底层硬件细节</li></ul>
+<h4>1.1.3 操作系统的特征 ⭐</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>特征</th><th>定义</th><th>关键理解</th></tr>
+<tr><td><strong>并发（Concurrency）</strong></td><td>两个或多个事件在<strong>同一时间间隔内</strong>发生</td><td>宏观上同时，微观上交替执行。⚠️与并行区分：并行是同一时刻同时执行</td></tr>
+<tr><td><strong>共享（Sharing）</strong></td><td>系统中的资源可供多个并发执行的进程共同使用</td><td>两种方式：互斥共享（打印机）、同时访问（磁盘）</td></tr>
+<tr><td><strong>虚拟（Virtual）</strong></td><td>通过某种技术将一个物理实体变为若干个逻辑上的对应物</td><td>时分复用（虚拟处理机）、空分复用（虚拟存储器）</td></tr>
+<tr><td><strong>异步（Asynchronism）</strong></td><td>进程以不可预知的速度向前推进</td><td>并发导致异步性，需同步机制保障</td></tr></table></div>
+<p><strong>⚠️ 并发与并行</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>概念</th><th>含义</th><th>条件</th></tr>
+<tr><td><strong>并发</strong></td><td>同一时间间隔内多个事件发生</td><td>单核也可以（交替执行）</td></tr>
+<tr><td><strong>并行</strong></td><td>同一时刻多个事件同时发生</td><td>需要多核硬件支持</td></tr></table></div>
+<p><strong>并发与共享的关系</strong>：</p>
+<ul><li>并发和共享是操作系统<strong>最基本的两个特征</strong></li>
+<li>二者互为存在条件：资源共享以进程并发为条件，进程并发以资源共享为管理对象</li>
+<li>没有并发和共享，就谈不上虚拟和异步</li></ul>
+<hr>
+<h3>1.2 操作系统发展历程</h3>
+<h4>1.2.1 手工操作阶段</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>特征</th><th>说明</th></tr>
+<tr><td>人工操作</td><td>用户独占全机，CPU等待人工操作</td></tr>
+<tr><td>脱机I/O</td><td>用外围机控制I/O，缓解人机速度矛盾</td></tr>
+<tr><td>缺点</td><td>CPU和I/O速度不匹配，资源利用率极低</td></tr></table></div>
+<h4>1.2.2 批处理阶段</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>系统类型</th><th>特征</th><th>优点</th><th>缺点</th></tr>
+<tr><td><strong>单道批处理</strong></td><td>内存中仅一道作业，监督程序(Monitor)控制作业自动过渡</td><td>缓解人机矛盾，提高资源利用率</td><td>CPU大量时间等待I/O</td></tr>
+<tr><td><strong>多道批处理</strong></td><td>内存中同时存放多道作业，CPU交替执行</td><td>CPU利用率大幅提升，系统吞吐量增加</td><td>无交互能力，作业周转时间长</td></tr></table></div>
+<p><strong>多道程序的关键技术</strong>：中断技术 + DMA技术</p>
+<h4>1.2.3 分时操作系统</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>特征</th><th>说明</th></tr>
+<tr><td><strong>时间片轮转</strong></td><td>CPU按时间片轮流为各终端用户服务</td></tr>
+<tr><td><strong>交互性</strong></td><td>用户通过终端与系统直接交互</td></tr>
+<tr><td><strong>多路性</strong></td><td>多个用户同时使用一台主机</td></tr>
+<tr><td><strong>独立性</strong></td><td>每个用户感觉独占计算机</td></tr>
+<tr><td><strong>及时性</strong></td><td>系统对用户请求及时响应</td></tr></table></div>
+<h4>1.2.4 实时操作系统</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>类型</th><th>场景</th><th>核心要求</th></tr>
+<tr><td><strong>硬实时</strong></td><td>工业控制、武器系统</td><td>必须在绝对截止时间内完成</td></tr>
+<tr><td><strong>软实时</strong></td><td>视频播放、在线交易</td><td>偶尔超时可以接受</td></tr></table></div>
+<p><strong>实时OS与分时OS的比较</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>特性</th><th>分时OS</th><th>实时OS</th></tr>
+<tr><td>交互性</td><td>强交互</td><td>有限交互</td></tr>
+<tr><td>可靠性</td><td>一般</td><td>极高</td></tr>
+<tr><td>响应时间</td><td>秒级</td><td>ms/μs级</td></tr>
+<tr><td>目标</td><td>公平服务多用户</td><td>及时响应外部事件</td></tr></table></div>
+<h4>1.2.5 其他操作系统类型</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>类型</th><th>特点</th><th>应用场景</th></tr>
+<tr><td><strong>网络OS</strong></td><td>实现网络通信和资源共享</td><td>计算机网络</td></tr>
+<tr><td><strong>分布式OS</strong></td><td>多台计算机协同工作，对用户透明（统一视图）</td><td>分布式系统</td></tr>
+<tr><td><strong>微机OS</strong></td><td>单用户单任务(MS-DOS)→单用户多任务(Windows)→多用户多任务(UNIX/Linux)</td><td>个人计算机</td></tr></table></div>
+<hr>
+<h3>1.3 操作系统的运行环境</h3>
+<h4>1.3.1 操作系统内核</h4>
+<p><strong>内核的组成</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>分类</th><th>功能</th><th>具体内容</th></tr>
+<tr><td><strong>支撑功能</strong></td><td>为内核其他模块提供基础服务</td><td>中断处理、时钟管理、原语操作</td></tr>
+<tr><td><strong>资源管理功能</strong></td><td>管理各类系统资源</td><td>进程管理、存储器管理、设备管理</td></tr></table></div>
+<p><strong>原语的特性</strong>：原子操作，执行期间不允许被中断（关中断实现）</p>
+<h4>1.3.2 处理机的双重工作模式 ⭐</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>模式</th><th>特点</th><th>切换方式</th></tr>
+<tr><td><strong>内核态（管态/核心态）</strong></td><td>执行特权指令，访问所有资源</td><td>用户态→内核态：通过<strong>中断/异常/系统调用</strong>（访管指令）</td></tr>
+<tr><td><strong>用户态（目态）</strong></td><td>只能执行非特权指令，访问受限</td><td>内核态→用户态：通过<strong>修改PSW</strong>（程序状态字）</td></tr></table></div>
+<p><strong>⚠️ 特权指令</strong>：只能在核心态执行的指令（I/O指令、关中断、置PSW等）</p>
+<p><strong>⚠️ 访管指令</strong>：用户态切换到核心态的唯一合法途径（非特权指令，用户态可执行）</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>概念</th><th>切换原因</th><th>说明</th></tr>
+<tr><td><strong>中断（外中断）</strong></td><td>CPU外部事件（I/O完成、时钟）</td><td>与当前指令无关</td></tr>
+<tr><td><strong>异常（内中断/陷入）</strong></td><td>CPU内部事件（非法指令、除0）</td><td>与当前指令有关</td></tr>
+<tr><td><strong>系统调用（访管）</strong></td><td>用户程序主动请求OS服务</td><td>自愿性，通过访管指令实现</td></tr></table></div>
+<h4>1.3.3 中断和异常的概念 ⭐</h4>
+<p><strong>中断的分类</strong>：</p>
+<pre><code>中断/异常
+├── 外中断（中断）
+│   ├── 可屏蔽中断（INTR）
+│   └── 不可屏蔽中断（NMI）
+└── 内中断（异常）
+    ├── 故障（Fault）：可恢复，如缺页
+    ├── 陷阱（Trap）：有意设置，如断点
+    ├── 终止（Abort）：不可恢复，如硬件故障
+    └── 系统调用：程序主动请求</code></pre>
+<p><strong>中断处理过程</strong>：</p>
+<ol><li>关中断（禁止响应更高级中断）</li>
+<li>保存断点（PC/PSW压栈）</li>
+<li>引出中断服务程序（通过中断向量表）</li>
+<li>保存现场（寄存器等）</li>
+<li>执行中断服务程序</li>
+<li>恢复现场</li>
+<li>开中断并返回</li></ol>
+<p><strong>中断向量表</strong>：存放各中断服务程序的入口地址</p>
+<h4>1.3.4 系统调用 ⭐</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>要点</th><th>说明</th></tr>
+<tr><td><strong>定义</strong></td><td>操作系统提供给用户程序的接口，用户通过系统调用请求系统服务</td></tr>
+<tr><td><strong>实现</strong></td><td>通过访管指令（或syscall/sysenter）从用户态陷入内核态</td></tr>
+<tr><td><strong>与库函数的区别</strong></td><td>库函数可能封装了系统调用，也可能不需要（如strlen）</td></tr></table></div>
+<p><strong>常见系统调用分类</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>类别</th><th>典型系统调用</th></tr>
+<tr><td><strong>进程控制</strong></td><td>fork(), exit(), wait(), exec()</td></tr>
+<tr><td><strong>文件操作</strong></td><td>open(), read(), write(), close(), lseek()</td></tr>
+<tr><td><strong>设备管理</strong></td><td>ioctl(), read(), write()</td></tr>
+<tr><td><strong>信息维护</strong></td><td>getpid(), time(), sleep()</td></tr>
+<tr><td><strong>通信</strong></td><td>pipe(), shmget(), msgget()</td></tr></table></div>
+<hr>
+<h3>1.4 操作系统结构</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>结构类型</th><th>特点</th><th>优点</th><th>缺点</th><th>代表</th></tr>
+<tr><td><strong>分层结构</strong></td><td>系统分为若干层，每层仅依赖下层</td><td>易于调试和验证</td><td>效率低，层数定义困难</td><td>THE系统</td></tr>
+<tr><td><strong>模块化结构</strong></td><td>系统按功能划分为独立模块</td><td>灵活，可动态加载</td><td>模块间调用复杂</td><td>大多数现代OS</td></tr>
+<tr><td><strong>宏内核</strong></td><td>内核提供全部系统功能</td><td>高性能</td><td>庞大复杂，内核崩溃影响全局</td><td>Linux, Windows</td></tr>
+<tr><td><strong>微内核</strong></td><td>内核仅保留最基本功能，其他在用户态</td><td>可靠性高，易扩展</td><td>频繁切换，性能低</td><td>Minix, QNX, Mach</td></tr>
+<tr><td><strong>外核（Exokernel）</strong></td><td>内核仅负责资源隔离和保护，资源管理由应用程序决定</td><td>极高灵活性</td><td>复杂，不易实现</td><td>MIT Exokernel</td></tr></table></div>
+<p><strong>宏内核 vs 微内核对比 ⭐</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>对比维度</th><th>宏内核</th><th>微内核</th></tr>
+<tr><td>功能分布</td><td>内核实现全部OS功能</td><td>内核仅实现进程通信、地址空间、调度等基本功能</td></tr>
+<tr><td>运行态</td><td>大部分在内核态</td><td>大部分服务在用户态</td></tr>
+<tr><td>性能</td><td>高（函数调用）</td><td>较低（消息传递IPC开销）</td></tr>
+<tr><td>可靠性</td><td>某模块崩溃影响全局</td><td>某服务崩溃不影响内核</td></tr>
+<tr><td>扩展性</td><td>较差</td><td>好（服务可动态加载）</td></tr>
+<tr><td>典型系统</td><td>Linux, Windows, Unix</td><td>QNX, Minix, Mach</td></tr></table></div>
+<hr>
+<h3>1.5 操作系统引导</h3>
+<p><strong>⭐ 操作系统引导（Boot）过程</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>步骤</th><th>操作</th><th>说明</th></tr>
+<tr><td>①</td><td>ROM中的BIOS自检</td><td>激活CPU，检查硬件</td></tr>
+<tr><td>②</td><td>BIOS读取MBR（主引导记录）</td><td>MBR位于磁盘0号扇区</td></tr>
+<tr><td>③</td><td>执行MBR中的引导程序</td><td>找到活动分区</td></tr>
+<tr><td>④</td><td>加载分区引导记录（PBR）</td><td>活动分区的第一个扇区</td></tr>
+<tr><td>⑤</td><td>执行PBR中的引导加载程序</td><td>如GRUB、LILO</td></tr>
+<tr><td>⑥</td><td>加载OS内核到内存</td><td>-</td></tr>
+<tr><td>⑦</td><td>内核初始化，创建init进程</td><td>PID=1</td></tr></table></div>
+<p><strong>MBR结构</strong>：</p>
+<ul><li>主引导程序（446B）+ 分区表（64B，4个分区项）+ 结束标志（55AA，2B）</li>
+<li>共512B（一个扇区）</li></ul>
+<hr>
+<h3>1.6 虚拟机</h3>
+<div class="table-wrapper"><table><tr class="table-header"><th>类型</th><th>特点</th><th>实现方式</th><th>代表</th></tr>
+<tr><td><strong>第一类VMM</strong></td><td>直接运行在硬件上，效率高</td><td>VMM直接管理硬件资源</td><td>VMware ESXi, KVM, Xen</td></tr>
+<tr><td><strong>第二类VMM</strong></td><td>运行在宿主操作系统上</td><td>通过宿主OS间接管理硬件</td><td>VMware Workstation, VirtualBox</td></tr></table></div>
+<p><strong>虚拟化的关键技术</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>技术</th><th>说明</th></tr>
+<tr><td><strong>CPU虚拟化</strong></td><td>将特权指令陷入VMM处理（Intel VT-x/AMD-V）</td></tr>
+<tr><td><strong>内存虚拟化</strong></td><td>维护客户物理地址→宿主机地址映射（影子页表/EPT）</td></tr>
+<tr><td><strong>I/O虚拟化</strong></td><td>设备模拟、半虚拟化或直接分配</td></tr></table></div>
+<hr>
+<h3>1.7 本章疑难点</h3>
+<ol><li><strong>并发与并行的区别</strong>：408高频考点</li>
+<li><strong>内核态与用户态的切换</strong>时机和方式</li>
+<li><strong>系统调用的执行过程</strong>：从用户态→内核态→返回的全流程</li>
+<li><strong>中断与异常</strong>的区分</li>
+<li><strong>宏内核与微内核</strong>的设计哲学对比</li>
+<li><strong>操作系统引导过程</strong>的完整步骤</li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="os-exam-types.html#s1">查看本章常考题型 →</a>
+</div>
+<hr>
+<h2 id="ch2">第2章 进程与线程</h2>
+<h3>2.1 进程与线程简介</h3>
+<h4>2.1.1 进程的概念和特征</h4>
+<p><strong>进程的概念</strong>：</p>
+<ul><li>在多道程序环境下，为描述和控制程序的并发行为，引入<strong>进程（Process）</strong></li>
+<li>进程 = 程序的一次执行过程</li></ul>
+<p><strong>⭐ 进程实体（进程映像）</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>组成部分</th><th>说明</th></tr>
+<tr><td><strong>程序段</strong></td><td>被执行的程序代码</td></tr>
+<tr><td><strong>数据段</strong></td><td>程序运行时使用的数据（全局变量等）</td></tr>
+<tr><td><strong>PCB（进程控制块）</strong></td><td>操作系统管理进程的数据结构，进程存在的唯一标志</td></tr></table></div>
+<p><strong>进程的特征</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>特征</th><th>说明</th></tr>
+<tr><td><strong>动态性</strong></td><td>进程是程序的一次执行过程（最基本的特征）</td></tr>
+<tr><td><strong>并发性</strong></td><td>多个进程可同时存在于内存，并发执行</td></tr>
+<tr><td><strong>独立性</strong></td><td>进程是独立运行、独立获取资源的单位</td></tr>
+<tr><td><strong>异步性</strong></td><td>进程按不可预知的速度执行</td></tr>
+<tr><td><strong>结构性</strong></td><td>每个进程由程序段、数据段、PCB构成</td></tr></table></div>
+<p><strong>⭐ 进程与程序的区别</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>比较</th><th>进程</th><th>程序</th></tr>
+<tr><td>本质</td><td>动态的执行过程</td><td>静态的指令集合</td></tr>
+<tr><td>生命周期</td><td>暂时的（创建→撤销）</td><td>永久的（存储在磁盘）</td></tr>
+<tr><td>对应关系</td><td>一个程序可对应多个进程</td><td>一次进程只能执行一个程序</td></tr>
+<tr><td>组成</td><td>程序段+数据段+PCB</td><td>仅指令和数据</td></tr></table></div>
+<h4>2.1.2 进程的状态与转换 ⭐</h4>
+<p><strong>⭐ 五种基本状态</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>状态</th><th>说明</th><th>特点</th></tr>
+<tr><td><strong>创建态（New）</strong></td><td>进程正在被创建，尚未就绪</td><td>分配PCB、初始化</td></tr>
+<tr><td><strong>就绪态（Ready）</strong></td><td>获得除CPU之外的所有资源，等待CPU调度</td><td>多个就绪进程排成就绪队列</td></tr>
+<tr><td><strong>运行态（Running）</strong></td><td>进程正在CPU上执行</td><td>单核系统最多一个进程处于运行态</td></tr>
+<tr><td><strong>阻塞态（Blocked/Waiting）</strong></td><td>等待某一事件（I/O完成、信号等）而暂停</td><td>主动放弃CPU，多个阻塞队列</td></tr>
+<tr><td><strong>终止态（Terminated）</strong></td><td>进程执行结束，等待资源回收</td><td>释放资源，撤销PCB</td></tr></table></div>
+<p><strong>⭐ 状态转换图</strong>：</p>
+<pre><code>  创建态 ──→ 就绪态 ──→ 运行态 ──→ 终止态
+               ↑         ↓    
+               └── 阻塞态 ←┘</code></pre>
+<div class="table-wrapper"><table><tr class="table-header"><th>转换</th><th>触发条件</th></tr>
+<tr><td>创建→就绪</td><td>系统完成进程创建工作</td></tr>
+<tr><td>就绪→运行</td><td>进程被调度程序选中</td></tr>
+<tr><td>运行→就绪</td><td>时间片用完，或被更高优先级进程抢占</td></tr>
+<tr><td>运行→阻塞</td><td>进程请求某事件（I/O、等待信号）而主动阻塞</td></tr>
+<tr><td>阻塞→就绪</td><td>等待的事件发生（I/O完成）</td></tr>
+<tr><td>运行→终止</td><td>进程执行完毕或被强制终止</td></tr></table></div>
+<blockquote>⚠️ 注意：<strong>没有</strong>运行→就绪和阻塞→运行、就绪→阻塞的直接转换！</blockquote>
+<p><strong>挂起状态（补充）</strong>：</p>
+<ul><li>就绪挂起/阻塞挂起：将进程映像换出到外存</li>
+<li>引入原因：负载调节、用户需求、父进程请求等</li></ul>
+<h4>2.1.3 进程的组织与控制</h4>
+<p><strong>PCB（进程控制块）的内容</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>分类</th><th>内容</th></tr>
+<tr><td><strong>进程标识信息</strong></td><td>PID（进程ID）、PPID（父进程ID）、UID（用户ID）</td></tr>
+<tr><td><strong>处理机状态信息</strong></td><td>通用寄存器、PC（程序计数器）、PSW（程序状态字）</td></tr>
+<tr><td><strong>进程调度信息</strong></td><td>进程状态、优先级、调度参数、事件</td></tr>
+<tr><td><strong>进程控制信息</strong></td><td>程序和数据地址、同步通信机制、资源清单、链接指针</td></tr></table></div>
+<p><strong>PCB的组织方式</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>方式</th><th>说明</th></tr>
+<tr><td><strong>线性表</strong></td><td>所有PCB组织在一张表中，简单但查找慢</td></tr>
+<tr><td><strong>索引表</strong></td><td>同状态PCB在一张索引表中，查找快</td></tr>
+<tr><td><strong>链表</strong></td><td>PCB按状态链入不同队列，灵活</td></tr></table></div>
+<p><strong>⭐ 进程的创建与终止</strong>：</p>
+<p><strong>创建过程</strong>：</p>
+<ol><li>申请空白PCB</li>
+<li>为新进程分配资源</li>
+<li>初始化PCB</li>
+<li>将PCB插入就绪队列</li></ol>
+<p><strong>终止过程</strong>：</p>
+<ol><li>根据PID检索PCB</li>
+<li>终止进程及其子孙进程</li>
+<li>归还资源给父进程或系统</li>
+<li>撤销PCB</li></ol>
+<p><strong>引起创建的事件</strong>：用户登录、作业调度、提供服务、应用请求</p>
+<p><strong>引起终止的事件</strong>：正常结束、异常结束、外界干预（kill）</p>
+<p><strong>进程切换</strong>：</p>
+<ol><li>保存处理机上下文（PC、寄存器等）</li>
+<li>更新当前进程PCB</li>
+<li>将PCB移入相应队列（就绪/阻塞）</li>
+<li>选择新进程执行</li>
+<li>更新内存管理数据结构</li>
+<li>恢复新进程的处理机上下文</li></ol>
+<blockquote>⚠️ 进程切换有开销！需要保存和恢复大量上下文</blockquote>
+<h4>2.1.4 进程间通信（IPC）⭐</h4>
+<p><strong>⭐ 四种IPC方式</strong>：</p>
+<p><strong>1. 共享内存（Shared Memory）</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>特点</th><th>说明</th></tr>
+<tr><td>原理</td><td>在内存中开辟一块共享区域，多个进程可直接读写</td></tr>
+<tr><td>速度</td><td><strong>最快</strong>（无需系统调用中转数据）</td></tr>
+<tr><td>同步</td><td>需要额外的同步机制（信号量等）</td></tr>
+<tr><td>步骤</td><td>创建共享内存段→映射到进程地址空间→读写→解除映射</td></tr></table></div>
+<p><strong>2. 消息传递（Message Passing）</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>特点</th><th>说明</th></tr>
+<tr><td>原理</td><td>进程间通过发送/接收消息进行通信</td></tr>
+<tr><td>实现</td><td>send()/receive()原语</td></tr>
+<tr><td>分类</td><td>直接通信（指定进程名）vs 间接通信（通过信箱/端口）</td></tr>
+<tr><td>同步</td><td>阻塞send/非阻塞send × 阻塞receive/非阻塞receive</td></tr></table></div>
+<p><strong>3. 管道（Pipe）</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>类型</th><th>特点</th><th>方向</th><th>关系</th></tr>
+<tr><td><strong>匿名管道</strong></td><td>临时、半双工</td><td>单向</td><td>父子进程</td></tr>
+<tr><td><strong>命名管道（FIFO）</strong></td><td>持久、有文件名</td><td>可双向</td><td>任意进程</td></tr></table></div>
+<p><strong>4. 信号（Signal）</strong></p>
+<ul><li>异步通信方式</li>
+<li>用于通知进程发生了某事件</li>
+<li>如：SIGINT(Ctrl+C)、SIGKILL、SIGCHLD</li></ul>
+<h4>2.1.5 线程的基本概念 ⭐</h4>
+<p><strong>引入线程的目的</strong>：</p>
+<ul><li>减少进程并发执行时的时空开销</li>
+<li>进程作为资源分配单位，线程作为CPU调度单位</li>
+<li><strong>同一进程的多个线程共享进程的资源</strong></li></ul>
+<p><strong>⭐ 线程与进程的比较</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>比较维度</th><th>进程</th><th>线程</th></tr>
+<tr><td><strong>调度</strong></td><td>传统OS中进程是调度和资源分配的基本单位</td><td><strong>引入线程后，线程是调度的基本单位，进程是资源分配的基本单位</strong></td></tr>
+<tr><td><strong>资源</strong></td><td>拥有独立的地址空间和资源</td><td>共享所属进程的资源（地址空间、文件等）；</td></tr>
+<tr><td><strong>并发性</strong></td><td>进程间可并发</td><td>同进程多线程可并发，不同进程线程也可并发</td></tr>
+<tr><td><strong>系统开销</strong></td><td>创建/切换开销大（需要分配/回收资源）</td><td>创建/切换开销小（只需保存少量寄存器）</td></tr>
+<tr><td><strong>独立性</strong></td><td>独立性强，一个进程崩溃不影响其他</td><td>独立性弱，一个线程崩溃可能影响整个进程</td></tr>
+<tr><td><strong>通信</strong></td><td>需要IPC机制</td><td>可直接读写进程数据段通信</td></tr></table></div>
+<p><strong>线程的属性</strong>：</p>
+<ul><li>每个线程有独立的线程ID、寄存器、栈、线程控制块（TCB）</li>
+<li>同进程多线程共享：代码段、数据段、堆、打开的文件、信号处理程序</li>
+<li>线程不具备独立的地址空间</li></ul>
+<h4>2.1.6 线程的实现方式</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>实现方式</th><th>说明</th><th>优点</th><th>缺点</th></tr>
+<tr><td><strong>用户级线程（ULT）</strong></td><td>线程库实现，内核不知道线程存在</td><td>切换快（不需CPU模式切换），可定制调度</td><td>一个线程阻塞导致整个进程阻塞</td></tr>
+<tr><td><strong>内核级线程（KLT）</strong></td><td>内核直接支持线程管理</td><td>一个线程阻塞不影响其他，多核可并行</td><td>切换开销大（需模式切换）</td></tr>
+<tr><td><strong>多对多模型</strong></td><td>多个ULT映射到多个KLT</td><td>折中方案，克服二者缺点</td><td>实现复杂</td></tr></table></div>
+<p><strong>线程模型补充</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>模型</th><th>映射关系</th><th>特点</th></tr>
+<tr><td>多对一</td><td>多个用户线程映射到一个内核线程</td><td>切换快，但一个线程阻塞会阻塞整个进程，不能多核并行</td></tr>
+<tr><td>一对一</td><td>一个用户线程映射到一个内核线程</td><td>并行性好，一个线程阻塞不影响其他线程，但创建和切换开销大</td></tr>
+<tr><td>多对多</td><td>多个用户线程映射到多个内核线程</td><td>兼顾并发和开销，实现复杂</td></tr></table></div>
+<p><strong>线程库</strong>：</p>
+<ul><li>POSIX Pthreads：用户级或内核级</li>
+<li>Windows Threads：内核级</li>
+<li>Java Threads：通常基于宿主OS线程</li></ul>
+<hr>
+<h3>2.2 CPU调度</h3>
+<h4>2.2.1 调度的基本概念</h4>
+<p><strong>调度的层次</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>层次</th><th>别名</th><th>频率</th><th>功能</th></tr>
+<tr><td><strong>高级调度（作业调度）</strong></td><td>长程调度</td><td>低（几分钟）</td><td>从外存后备队列选择作业调入内存</td></tr>
+<tr><td><strong>中级调度（内存调度）</strong></td><td>中程调度</td><td>中等</td><td>挂起/激活进程，调节内存负载</td></tr>
+<tr><td><strong>低级调度（进程调度）</strong></td><td>短程调度</td><td>高（几十ms）</td><td>从就绪队列选择进程分配CPU</td></tr></table></div>
+<p><strong>不能进行进程调度的情况</strong>：</p>
+<ol><li>处理中断过程中</li>
+<li>进程处于操作系统内核程序临界区中</li>
+<li>其他完全屏蔽中断的原子操作过程</li></ol>
+<h4>2.2.2 调度的目标（评价指标）</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>指标</th><th>定义</th><th>说明</th></tr>
+<tr><td><strong>CPU利用率</strong></td><td>CPU忙碌时间/总时间</td><td>越高越好</td></tr>
+<tr><td><strong>系统吞吐量</strong></td><td>单位时间完成的作业数</td><td>越高越好</td></tr>
+<tr><td><strong>周转时间</strong></td><td>作业完成时间 - 提交时间</td><td>越短越好</td></tr>
+<tr><td><strong>带权周转时间</strong></td><td>周转时间/运行时间</td><td>越接近1越好</td></tr>
+<tr><td><strong>等待时间</strong></td><td>进程在就绪队列等待的时间</td><td>越短越好</td></tr>
+<tr><td><strong>响应时间</strong></td><td>从提交到首次响应的时间</td><td>越短越好（交互系统重要）</td></tr></table></div>
+<h4>2.2.3 调度算法 ⭐⭐⭐</h4>
+<p><strong>⭐ 六种经典调度算法</strong>：</p>
+<p><strong>1. 先来先服务（FCFS）</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>属性</th><th>说明</th></tr>
+<tr><td>策略</td><td>按作业到达顺序调度</td></tr>
+<tr><td>类型</td><td>非抢占式</td></tr>
+<tr><td>优点</td><td>公平、简单</td></tr>
+<tr><td>缺点</td><td>短作业可能等长作业很久（对短作业不利）</td></tr>
+<tr><td>适用</td><td>批处理系统</td></tr></table></div>
+<p><strong>2. 短作业优先（SJF/SPF）</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>属性</th><th>说明</th></tr>
+<tr><td>策略</td><td>选择估计运行时间最短的作业/进程</td></tr>
+<tr><td>类型</td><td>可抢占（SRTF）或非抢占</td></tr>
+<tr><td>优点</td><td>平均周转时间最短</td></tr>
+<tr><td>缺点</td><td>长作业可能饥饿；需预知运行时间</td></tr>
+<tr><td>证明</td><td>SJF对平均周转时间是最优的</td></tr></table></div>
+<p><strong>3. 高响应比优先（HRRN）⭐</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>属性</th><th>说明</th></tr>
+<tr><td>公式</td><td><strong>响应比 = (等待时间 + 要求服务时间) / 要求服务时间 = 1 + 等待时间/服务时间</strong></td></tr>
+<tr><td>策略</td><td>选择响应比最高的进程</td></tr>
+<tr><td>优点</td><td>兼顾短作业和长作业，不会饥饿</td></tr>
+<tr><td>缺点</td><td>每次调度需计算响应比，开销大</td></tr></table></div>
+<p><strong>4. 时间片轮转（RR）⭐</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>属性</th><th>说明</th></tr>
+<tr><td>策略</td><td>就绪队列FCFS，每个进程分配固定时间片</td></tr>
+<tr><td>类型</td><td>抢占式（时间片用完抢占）</td></tr>
+<tr><td>时间片选择</td><td>太大→退化为FCFS；太小→频繁切换开销大</td></tr>
+<tr><td>适用</td><td>分时系统</td></tr>
+<tr><td>⚠️</td><td>时间片应略大于典型交互时间</td></tr></table></div>
+<p><strong>5. 优先级调度</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>属性</th><th>说明</th></tr>
+<tr><td>策略</td><td>选择优先级最高的进程</td></tr>
+<tr><td>类型</td><td>可抢占或非抢占</td></tr>
+<tr><td>优先级</td><td>静态优先级 vs 动态优先级</td></tr>
+<tr><td>问题</td><td>低优先级进程可能饥饿→用<strong>老化</strong>（aging）解决</td></tr></table></div>
+<p><strong>6. 多级反馈队列（MFQ）⭐</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>要点</th><th>说明</th></tr>
+<tr><td>结构</td><td>多个就绪队列，优先级递减，时间片递增</td></tr>
+<tr><td>策略</td><td>新进程进入最高优先级队列；用完时间片降至下一级；高优先级队列非空时不调度低优先级</td></tr>
+<tr><td>优点</td><td>兼顾各类进程，自适应性强</td></tr>
+<tr><td>特点</td><td>综合了FCFS、RR、优先级调度的优点</td></tr></table></div>
+<p><strong>⭐ 调度算法总结对比</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>算法</th><th>抢占</th><th>饥饿</th><th>适用</th></tr>
+<tr><td>FCFS</td><td>❌</td><td>无</td><td>批处理</td></tr>
+<tr><td>SJF</td><td>可选</td><td>长作业可能</td><td>批处理、实时</td></tr>
+<tr><td>HRRN</td><td>❌</td><td>无</td><td>批处理</td></tr>
+<tr><td>RR</td><td>✅</td><td>无</td><td>分时</td></tr>
+<tr><td>优先级</td><td>可选</td><td>可能</td><td>各类系统</td></tr>
+<tr><td>MFQ</td><td>✅</td><td>低优先级可能（需老化）</td><td>通用OS</td></tr></table></div>
+<hr>
+<h3>2.3 同步与互斥 ⭐⭐⭐</h3>
+<h4>2.3.1 基本概念</h4>
+<p><strong>临界资源</strong>：一次仅允许一个进程使用的资源（如打印机、共享变量）</p>
+<p><strong>临界区（Critical Section）</strong>：访问临界资源的那段代码</p>
+<p><strong>⭐ 同步机制应遵循的四个原则</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>原则</th><th>说明</th></tr>
+<tr><td><strong>空闲让进</strong></td><td>临界区空闲时，允许一个进程立即进入</td></tr>
+<tr><td><strong>忙则等待</strong></td><td>已有进程在临界区时，其他进程必须等待</td></tr>
+<tr><td><strong>有限等待</strong></td><td>等待进入临界区的进程在有限时间内必须被允许进入（不能饥饿）</td></tr>
+<tr><td><strong>让权等待</strong></td><td>不能进入临界区的进程应释放CPU（不能忙等）</td></tr></table></div>
+<h4>2.3.2 实现互斥的方法</h4>
+<p><strong>1. 软件方法</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>方法</th><th>思想</th><th>问题</th></tr>
+<tr><td><strong>单标志法</strong></td><td>两个进程轮流进入临界区</td><td>违背"空闲让进"</td></tr>
+<tr><td><strong>双标志先检查法</strong></td><td>进入前先检查对方标志</td><td>可能同时进入（检查与修改不原子）</td></tr>
+<tr><td><strong>双标志后检查法</strong></td><td>先设自己标志再检查对方</td><td>可能互相谦让（活锁）</td></tr>
+<tr><td><strong>Peterson算法</strong></td><td>flag[2] + turn变量组合</td><td>正确但只适用于两个进程</td></tr></table></div>
+<p><strong>2. 硬件方法</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>方法</th><th>说明</th></tr>
+<tr><td><strong>关中断</strong></td><td>进入临界区前关中断，出临界区开中断（仅单CPU）</td></tr>
+<tr><td><strong>Test-and-Set(TS)指令</strong></td><td>硬件原子指令</td></tr>
+<tr><td><strong>Swap（Exchange）指令</strong></td><td>硬件原子指令</td></tr></table></div>
+<blockquote>⚠️ 硬件方法的缺点：忙等（不让权）、可能饥饿、可能死锁</blockquote>
+<h4>2.3.3 信号量机制 ⭐⭐⭐</h4>
+<p><strong>1. 整型信号量</strong></p>
+<pre><code>wait(S):              // P操作
+    while (S &lt;= 0);   // 忙等
+    S--;
+
+signal(S):            // V操作
+    S++;</code></pre>
+<p><strong>2. 记录型信号量（非忙等）⭐</strong></p>
+<pre><code>typedef struct {
+    int value;           // 资源数
+    struct process *L;   // 等待队列
+} semaphore;
+
+void wait(semaphore S) {    // P操作
+    S.value--;
+    if (S.value &lt; 0) {
+        block(S.L);         // 阻塞自己（非忙等）
+    }
+}
+
+void signal(semaphore S) {  // V操作
+    S.value++;
+    if (S.value &lt;= 0) {
+        wakeup(S.L);        // 唤醒一个等待进程
+    }
+}</code></pre>
+<blockquote>⚠️ P操作：先减后判断；V操作：先加后判断<br>⚠️ S.value的绝对值 = 等待队列中的进程数</blockquote>
+<p><strong>信号量的含义</strong>：</p>
+<ul><li><code>S.value &gt; 0</code>：表示当前可用资源数</li>
+<li><code>S.value = 0</code>：表示无可用资源且无等待进程</li>
+<li><code>S.value &lt; 0</code>：|S.value| = 等待进程数</li></ul>
+<h4>2.3.4 经典同步问题 ⭐⭐⭐</h4>
+<p><strong>1. 生产者-消费者问题</strong></p>
+<pre><code>semaphore mutex = 1;    // 互斥访问缓冲区
+semaphore empty = n;    // 空缓冲区数
+semaphore full = 0;     // 满缓冲区数
+
+Producer:                           Consumer:
+    while(1) {                          while(1) {
+        produce an item;                    P(full);
+        P(empty);                           P(mutex);
+        P(mutex);                           take an item from buffer;
+        add item to buffer;                 V(mutex);
+        V(mutex);                           V(empty);
+        V(full);                            consume the item;
+    }                                   }</code></pre>
+<blockquote>⚠️ <strong>P操作的顺序至关重要</strong>：P(empty)和P(mutex)不能颠倒，否则可能死锁！<br>应先P资源信号量，再P互斥信号量</blockquote>
+<p><strong>2. 读者-写者问题</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>策略</th><th>描述</th></tr>
+<tr><td>读者优先</td><td>只要有读者在读，新读者可直接进入（写者可能饿死）</td></tr>
+<tr><td>写者优先</td><td>有写者等待时，新读者需等待（读者可能饿死）</td></tr>
+<tr><td>公平竞争</td><td>按请求顺序服务</td></tr></table></div>
+<pre><code>// 读者优先
+semaphore rw_mutex = 1;  // 读写互斥
+semaphore mutex = 1;     // 互斥访问count
+int reader_count = 0;    // 读者计数
+
+Reader:                             Writer:
+    P(mutex);                           P(rw_mutex);
+    reader_count++;                     writing...
+    if (reader_count == 1)              V(rw_mutex);
+        P(rw_mutex);  // 第一个读者锁写
+    V(mutex);
+    reading...
+    P(mutex);
+    reader_count--;
+    if (reader_count == 0)
+        V(rw_mutex);  // 最后一个读者释放写
+    V(mutex);</code></pre>
+<p><strong>3. 哲学家进餐问题</strong></p>
+<ul><li>5个哲学家围坐圆桌，5根筷子</li>
+<li>防止死锁的方法：最多4人同时拿筷子、奇数先左后右/偶数先右后左、一次拿两根</li></ul>
+<p><strong>4. 吸烟者问题</strong></p>
+<ul><li>一个供应者 + 三个吸烟者</li>
+<li>PV操作确保正确配对</li></ul>
+<p><strong>经典同步题建模模板</strong>：</p>
+<ol><li>先找互斥资源：缓冲区、共享变量、筷子、数据库等，通常设 <code>mutex=1</code>。</li>
+<li>再找同步顺序：谁先发生、谁等待谁，用同步信号量表示“事件是否发生”。</li>
+<li>资源计数信号量初值等于可用资源数，例如空缓冲区 <code>empty=n</code>、满缓冲区 <code>full=0</code>。</li>
+<li>P操作通常先申请资源信号量，再申请互斥信号量；V操作反向释放。</li></ol>
+<h4>2.3.5 管程（Monitor）</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>要点</th><th>说明</th></tr>
+<tr><td><strong>定义</strong></td><td>由一组数据及定义在其上的操作组成的软件模块</td></tr>
+<tr><td><strong>特点</strong></td><td>每次仅允许一个进程进入管程（自动实现互斥）</td></tr>
+<tr><td><strong>条件变量</strong></td><td>提供wait()和signal()操作，用于进程同步等待</td></tr>
+<tr><td><strong>优点</strong></td><td>程序员不需显式编写PV操作，降低同步复杂度</td></tr></table></div>
+<hr>
+<h3>2.4 死锁 ⭐⭐⭐</h3>
+<h4>2.4.1 死锁的概念</h4>
+<p><strong>死锁（Deadlock）</strong>：多个进程因竞争资源而造成的一种僵局，若无外力作用，这些进程都将无法向前推进</p>
+<p><strong>⭐ 死锁产生的四个必要条件</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>条件</th><th>说明</th></tr>
+<tr><td><strong>互斥条件</strong></td><td>资源一次只能被一个进程使用</td></tr>
+<tr><td><strong>不剥夺条件</strong></td><td>进程已获得的资源在使用完前不能被剥夺</td></tr>
+<tr><td><strong>请求并保持条件</strong></td><td>进程已持有资源，又请求新资源但被阻塞，对已持有资源不释放</td></tr>
+<tr><td><strong>环路等待条件</strong></td><td>存在进程-资源的循环等待链</td></tr></table></div>
+<blockquote>⚠️ 四个条件必须同时满足才会产生死锁</blockquote>
+<h4>2.4.2 死锁的处理策略</h4>
+<p><strong>1. 死锁预防（Prevention）</strong>——破坏四个必要条件之一</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>破坏条件</th><th>方法</th><th>缺点</th></tr>
+<tr><td>破坏互斥</td><td>允许资源共享（如SPOOLing）</td><td>不适用于所有资源</td></tr>
+<tr><td>破坏不剥夺</td><td>请求新资源失败时释放已持有资源</td><td>实现复杂，代价大</td></tr>
+<tr><td>破坏请求保持</td><td>一次性分配所有所需资源</td><td>资源利用率低，可能饥饿</td></tr>
+<tr><td>破坏环路等待</td><td><strong>资源有序分配法</strong>：按编号顺序申请</td><td>限制灵活性，可能增加等待</td></tr></table></div>
+<p><strong>2. 死锁避免（Avoidance）</strong>——银行家算法</p>
+<p><strong>安全状态</strong>：存在一种进程执行顺序，使所有进程都能顺利执行完毕</p>
+<p><strong>不安全状态 ≠ 死锁状态</strong>，但不安全状态可能导致死锁</p>
+<p><strong>⭐ 银行家算法</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>数据结构</th><th>含义</th></tr>
+<tr><td>Available[m]</td><td>每种资源的可用数量</td></tr>
+<tr><td>Max[n][m]</td><td>各进程对各资源的最大需求</td></tr>
+<tr><td>Allocation[n][m]</td><td>各进程已分配的各资源数量</td></tr>
+<tr><td>Need[n][m]</td><td>各进程还需要的各资源数量 = Max - Allocation</td></tr></table></div>
+<p><strong>安全性算法</strong>：</p>
+<ol><li>Work = Available; Finish = [false, ...]</li>
+<li>找满足 Finish[i]=false 且 Need[i] ≤ Work 的进程</li>
+<li>若找到：Work += Allocation[i]; Finish[i] = true; 重复2</li>
+<li>若所有Finish[i]=true → 系统处于安全状态</li></ol>
+<p><strong>资源请求算法</strong>：</p>
+<ul><li>若 Request[i] ≤ Need[i] 且 Request[i] ≤ Available</li>
+<li>尝试分配：Available -= Request; Allocation += Request; Need -= Request</li>
+<li>执行安全性算法，安全则正式分配，不安全则恢复</li></ul>
+<p><strong>3. 死锁检测与解除</strong></p>
+<p><strong>检测</strong>：资源分配图</p>
+<ul><li>若能完全化简（消去所有边）→ 无死锁</li>
+<li>若不能完全化简 → 有死锁，剩余边即死锁进程</li></ul>
+<p><strong>死锁检测算法</strong>（多资源实例）：</p>
+<pre><code>Work = Available
+Finish[i] = (Allocation[i] == 0)
+循环寻找 Request[i] <= Work 且 Finish[i] == false 的进程：
+    Work += Allocation[i]
+    Finish[i] = true
+最终 Finish[i] == false 的进程处于死锁</code></pre>
+<p><strong>解除方法</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>方法</th><th>说明</th></tr>
+<tr><td>资源剥夺</td><td>挂起某些进程，剥夺其资源给其他进程</td></tr>
+<tr><td>进程撤销</td><td>终止涉及死锁的进程（全部或逐个）</td></tr>
+<tr><td>进程回退</td><td>回退到死锁前的检查点</td></tr></table></div>
+<hr>
+<h3>2.5 本章疑难点</h3>
+<ol><li><strong>进程状态转换</strong>的触发条件辨析</li>
+<li><strong>PV操作</strong>的经典问题（生产者-消费者、读者-写者、哲学家进餐）</li>
+<li><strong>调度算法</strong>的周转时间、等待时间计算</li>
+<li><strong>银行家算法</strong>的安全性检查</li>
+<li><strong>死锁预防/避免/检测</strong>三种策略的区别</li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="os-exam-types.html#s2">查看本章常考题型 →</a>
+</div>
+<hr>
+<h2 id="ch3">第3章 内存管理</h2>
+<h3>3.1 内存管理概念</h3>
+<h4>3.1.1 内存管理的基本概念</h4>
+<p><strong>内存管理的主要功能</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>功能</th><th>说明</th></tr>
+<tr><td><strong>地址转换</strong></td><td>逻辑地址→物理地址的转换（MMU完成）</td></tr>
+<tr><td><strong>内存分配与回收</strong></td><td>为进程分配内存，进程结束后回收</td></tr>
+<tr><td><strong>存储保护</strong></td><td>确保进程不越界访问其他进程内存</td></tr>
+<tr><td><strong>内存共享</strong></td><td>允许多进程共享同一物理内存区域</td></tr>
+<tr><td><strong>内存扩充</strong></td><td>通过虚拟存储技术使进程可使用超过物理内存的地址空间</td></tr></table></div>
+<p><strong>⭐ 逻辑地址与物理地址</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>概念</th><th>说明</th></tr>
+<tr><td><strong>逻辑地址（虚拟地址）</strong></td><td>程序使用的地址，从0开始编址</td></tr>
+<tr><td><strong>物理地址</strong></td><td>内存单元的实际地址</td></tr>
+<tr><td><strong>地址转换（重定位）</strong></td><td>将逻辑地址转换为物理地址</td></tr></table></div>
+<p><strong>程序的链接</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>链接方式</th><th>说明</th></tr>
+<tr><td><strong>静态链接</strong></td><td>程序运行前将各目标模块链接成完整可执行文件</td></tr>
+<tr><td><strong>装入时动态链接</strong></td><td>边装入边链接</td></tr>
+<tr><td><strong>运行时动态链接</strong></td><td>用到某模块时才链接（如DLL）</td></tr></table></div>
+<p><strong>程序的装入</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>装入方式</th><th>说明</th><th>地址转换时机</th></tr>
+<tr><td><strong>绝对装入</strong></td><td>按绝对地址装入（单道程序）</td><td>编译时</td></tr>
+<tr><td><strong>可重定位装入（静态重定位）</strong></td><td>装入时一次性转换所有地址</td><td>装入时</td></tr>
+<tr><td><strong>动态运行时装入（动态重定位）</strong></td><td>运行时通过重定位寄存器转换</td><td>运行时</td></tr></table></div>
+<h4>3.1.2 连续分配管理方式</h4>
+<p><strong>1. 单一连续分配</strong></p>
+<ul><li>内存分为系统区和用户区，一次仅一道用户程序</li>
+<li>最简单，利用率极低</li></ul>
+<p><strong>2. 固定分区分配</strong></p>
+<ul><li>内存划分为若干固定大小的分区</li>
+<li>每个分区装入一道程序</li>
+<li>问题：内部碎片</li></ul>
+<p><strong>3. 动态分区分配 ⭐</strong></p>
+<ul><li>根据进程实际需要动态分配内存</li></ul>
+<p><strong>⭐ 四种分配算法</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>算法</th><th>策略</th><th>优点</th><th>缺点</th></tr>
+<tr><td><strong>首次适应（First Fit）</strong></td><td>从低地址找第一个满足大小的空闲分区</td><td>简单快速</td><td>低地址产生小碎片</td></tr>
+<tr><td><strong>最佳适应（Best Fit）</strong></td><td>找大小最接近的空闲分区</td><td>保留大块空闲分区</td><td>产生最多外部碎片</td></tr>
+<tr><td><strong>最差适应（Worst Fit）</strong></td><td>找最大的空闲分区</td><td>碎片较均匀</td><td>大块连续空间被破坏</td></tr>
+<tr><td><strong>邻近适应（Next Fit）</strong></td><td>从上次分配位置开始找（循环首次适应）</td><td>分布均匀</td><td>高地址大块空间可能被分割</td></tr></table></div>
+<p><strong>内存回收</strong>：回收区与相邻空闲分区合并（上邻/下邻/上下邻）</p>
+<p><strong>动态分区的数据结构</strong>：</p>
+<ul><li>空闲分区表：每个空闲分区一个表项</li>
+<li>空闲分区链：双向链表组织空闲分区</li></ul>
+<p><strong>动态分区易错点</strong>：</p>
+<ul><li>动态分区没有内部碎片，但会产生外部碎片。</li>
+<li>最佳适应不是“整体最好”，它容易留下大量很小的外部碎片。</li>
+<li>内存紧缩可解决外部碎片，但需要移动作业并修改重定位信息，开销大。</li></ul>
+<h4>3.1.3 非连续分配管理方式 ⭐⭐</h4>
+<p><strong>1. 基本分页存储管理</strong></p>
+<p><strong>分页的基本概念</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>概念</th><th>说明</th></tr>
+<tr><td><strong>页面（Page）</strong></td><td>将进程的逻辑地址空间划分为固定大小的块</td></tr>
+<tr><td><strong>页框（Frame/物理块）</strong></td><td>将物理内存划分为同样大小的块</td></tr>
+<tr><td><strong>页面大小</strong></td><td>通常为4KB（2^12B），必须是2的幂次</td></tr></table></div>
+<p><strong>⭐ 逻辑地址结构</strong>：</p>
+<pre><code>| 页号P | 页内偏移W |
+页号P = 逻辑地址 / 页面大小
+页内偏移W = 逻辑地址 % 页面大小</code></pre>
+<p><strong>⭐ 地址转换过程</strong>：</p>
+<pre><code>物理地址 = 页框号 × 页面大小 + 页内偏移
+
+步骤：
+1. 根据页号P查页表，得页框号F
+2. 物理地址 = F × 页面大小 + W
+3. 若页面不在内存（缺页），触发缺页中断</code></pre>
+<p><strong>⭐ 页表</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>概念</th><th>说明</th></tr>
+<tr><td>每个进程一张页表</td></tr>
+<tr><td>页表项包含：页框号 + 状态位(在/不在内存) + 访问位 + 修改位 + 保护位</td></tr></table></div>
+<p><strong>页表大小计算</strong>：</p>
+<ul><li>页表项数 = 进程地址空间大小 / 页面大小</li>
+<li>页表大小 = 页表项数 × 每项字节数</li></ul>
+<p><strong>2. 基本分段存储管理</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>要点</th><th>说明</th></tr>
+<tr><td><strong>分段</strong></td><td>按程序逻辑结构划分（如代码段、数据段、栈段）</td></tr>
+<tr><td><strong>段长不固定</strong></td><td>每段有独立的逻辑意义和不同长度</td></tr>
+<tr><td><strong>地址结构</strong></td><td><code>段号S | 段内偏移W</code></td></tr>
+<tr><td><strong>优点</strong></td><td>符合用户视角，易于共享和保护</td></tr></table></div>
+<p><strong>逻辑地址 → 物理地址</strong>：</p>
+<ol><li>根据段号S查段表，得段基址和段长</li>
+<li>检查段内偏移W < 段长</li>
+<li>物理地址 = 段基址 + W</li></ol>
+<p><strong>3. 段页式存储管理</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>要点</th><th>说明</th></tr>
+<tr><td><strong>原理</strong></td><td>先分段，每段再分页</td></tr>
+<tr><td><strong>地址结构</strong></td><td><code>段号S | 页号P | 页内偏移W</code></td></tr>
+<tr><td><strong>地址转换</strong></td><td>段表→页表→物理地址（三次访存）</td></tr>
+<tr><td><strong>优点</strong></td><td>兼具分段的逻辑性和分页的不产生外部碎片的优点</td></tr></table></div>
+<p><strong>⭐ 分页与分段的对比</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>对比维度</th><th>分页</th><th>分段</th></tr>
+<tr><td>划分依据</td><td>固定大小（物理）</td><td>逻辑结构</td></tr>
+<tr><td>长度</td><td>固定</td><td>可变</td></tr>
+<tr><td>地址维度</td><td>一维（连续线性）</td><td>二维（段名+偏移）</td></tr>
+<tr><td>共享/保护</td><td>困难（页为物理单位）</td><td>容易（段为逻辑单位）</td></tr>
+<tr><td>碎片</td><td>内部碎片（页内）</td><td>外部碎片（段间）</td></tr>
+<tr><td>对用户</td><td>透明</td><td>可见</td></tr></table></div>
+<hr>
+<h3>3.2 虚拟内存管理 ⭐⭐⭐</h3>
+<h4>3.2.1 虚拟内存的基本概念</h4>
+<p><strong>⭐ 虚拟内存的特征</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>特征</th><th>说明</th></tr>
+<tr><td><strong>多次性</strong></td><td>作业无需一次性全部装入内存，可分多次调入</td></tr>
+<tr><td><strong>对换性</strong></td><td>作业运行中可将暂不用的部分换出到外存</td></tr>
+<tr><td><strong>虚拟性</strong></td><td>从逻辑上扩充内存容量，使用户看到的内存大于实际物理内存</td></tr></table></div>
+<p><strong>虚拟内存的实现基础</strong>：</p>
+<ul><li>基于<strong>程序局部性原理</strong>（时间局部性 + 空间局部性）</li>
+<li>依赖页表/段表中的状态位判断是否在内存</li></ul>
+<h4>3.2.2 请求分页管理方式</h4>
+<p><strong>⭐ 请求分页的页表项</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>字段</th><th>说明</th></tr>
+<tr><td>页框号</td><td>页面在内存中的物理页框号</td></tr>
+<tr><td>状态位（存在位）</td><td>该页是否在内存中</td></tr>
+<tr><td>访问字段（引用位）</td><td>记录最近被访问次数/时间</td></tr>
+<tr><td>修改位（脏位）</td><td>页面在内存中是否被修改过</td></tr>
+<tr><td>外存地址</td><td>该页在外存中的地址</td></tr></table></div>
+<p><strong>缺页中断处理流程</strong>：</p>
+<ol><li>检查页表，发现状态位=0（不在内存）</li>
+<li>向CPU发缺页中断</li>
+<li>操作系统查找是否有空闲页框</li>
+<li>若有空闲→从外存调入页面→更新页表→返回</li>
+<li>若无空闲→选择替换页面(若被修改则写回)→调入需要的页面</li></ol>
+<p><strong>⭐ 有效访问时间（EAT）</strong>：</p>
+<pre><code>EAT = (1-p) × 内存访问时间 + p × 缺页处理时间
+其中 p 为缺页率</code></pre>
+<h4>3.2.3 页面置换算法 ⭐⭐⭐</h4>
+<p><strong>⭐ 五种页面置换算法</strong>：</p>
+<p><strong>1. 最佳置换算法（OPT）⭐</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>特征</th><th>说明</th></tr>
+<tr><td>策略</td><td>淘汰以后永不使用或最长时间不再访问的页面</td></tr>
+<tr><td>特点</td><td><strong>无法实现</strong>，用作理论对比基准</td></tr>
+<tr><td>意义</td><td>衡量其他算法的性能上限</td></tr></table></div>
+<p><strong>2. 先进先出（FIFO）</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>特征</th><th>说明</th></tr>
+<tr><td>策略</td><td>淘汰最先调入内存的页面</td></tr>
+<tr><td>优点</td><td>实现简单</td></tr>
+<tr><td>缺点</td><td>性能差，可能出现<strong>Belady异常</strong>（分配页框增多，缺页率反而上升）</td></tr></table></div>
+<p><strong>3. 最近最久未使用（LRU）⭐</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>特征</th><th>说明</th></tr>
+<tr><td>策略</td><td>淘汰最近最长时间未被访问的页面</td></tr>
+<tr><td>依据</td><td>程序的局部性原理（过去不用的将来也不太可能用）</td></tr>
+<tr><td>优点</td><td>性能好，接近OPT</td></tr>
+<tr><td>缺点</td><td>需要硬件支持（寄存器或栈），开销大</td></tr></table></div>
+<p><strong>LRU实现方式</strong>：</p>
+<ul><li><strong>寄存器法</strong>：为每页配置移位寄存器，定时右移，访问时最高位置1（时钟算法用）</li>
+<li><strong>栈法</strong>：用栈记录页面访问顺序，栈底=最久未用</li></ul>
+<p><strong>4. 时钟置换算法（CLOCK / NRU）⭐</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>特征</th><th>说明</th></tr>
+<tr><td>策略</td><td>循环扫描页面，检查访问位A：A=1→清0；A=0→换出</td></tr>
+<tr><td>别名</td><td>最近未使用算法（NRU）</td></tr>
+<tr><td>优点</td><td>LRU的近似，开销小，常用</td></tr>
+<tr><td>用途</td><td>实际操作系统广泛使用</td></tr></table></div>
+<p><strong>改进型CLOCK算法</strong>：同时考虑访问位A和修改位M</p>
+<ul><li>优先淘汰 (0,0) > (0,1) > (1,0) > (1,1)</li>
+<li>第一轮找 (0,0)，不修改访问位；第二轮找 (0,1)，并将扫描过页面访问位清0；若未找到则重复。</li></ul>
+<p><strong>5. 最少使用（LFU）</strong></p>
+<p>| 策略 | 淘汰访问次数最少的页面 |</p>
+<p><strong>⭐ 算法对比</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>算法</th><th>Belady异常</th><th>开销</th><th>性能</th></tr>
+<tr><td>OPT</td><td>无</td><td>-</td><td>最优（理论）</td></tr>
+<tr><td>FIFO</td><td><strong>有</strong></td><td>小</td><td>差</td></tr>
+<tr><td>LRU</td><td>无</td><td>大</td><td>好</td></tr>
+<tr><td>CLOCK</td><td>无</td><td>小</td><td>较好</td></tr></table></div>
+<h4>3.2.4 页面分配策略</h4>
+<p><strong>分配策略</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>策略</th><th>说明</th></tr>
+<tr><td><strong>固定分配</strong></td><td>每个进程分配固定数量的页框</td></tr>
+<tr><td><strong>可变分配</strong></td><td>根据进程运行情况动态调整页框数</td></tr>
+<tr><td><strong>全局置换</strong></td><td>可从所有进程的页框中选一个换出（动态+全局）</td></tr>
+<tr><td><strong>局部置换</strong></td><td>只能从该进程自己的页框中选择换出</td></tr></table></div>
+<p><strong>常见组合</strong>：</p>
+<ul><li>固定分配局部置换</li>
+<li>可变分配全局置换</li>
+<li>可变分配局部置换</li></ul>
+<p><strong>⭐ 工作集模型</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>概念</th><th>说明</th></tr>
+<tr><td><strong>工作集</strong></td><td>进程在过去 Δ 时间内访问的页面集合</td></tr>
+<tr><td><strong>目的</strong></td><td>根据工作集大小分配页框数</td></tr>
+<tr><td><strong>抖动预防</strong></td><td>当所有进程工作集和 > 物理内存时，可能发生抖动</td></tr></table></div>
+<p><strong>抖动（Thrashing）</strong>：</p>
+<ul><li>频繁的页面置换导致CPU利用率急剧下降</li>
+<li>原因：并发进程数过多，每个进程分配的页框太少</li></ul>
+<hr>
+<h3>3.3 本章疑难点</h3>
+<ol><li><strong>分页地址转换</strong>：页号、页框号、页内偏移的计算</li>
+<li><strong>页表大小</strong>的计算</li>
+<li><strong>页面置换算法</strong>：FIFO、LRU、CLOCK缺页次数计算</li>
+<li><strong>Belady异常</strong>的现象和原因</li>
+<li><strong>多级页表</strong>的结构和目的</li>
+<li><strong>TLB（快表）</strong>的作用</li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="os-exam-types.html#s6">查看本章常考题型 →</a>
+</div>
+<hr>
+<h2 id="ch4">第4章 文件管理</h2>
+<h3>4.1 文件系统基础</h3>
+<h4>4.1.1 文件的基本概念</h4>
+<p><strong>文件的定义</strong>：</p>
+<ul><li>文件是存储空间中所保存的信息</li>
+<li>每个文件关联有用于分类和索引的信息（元数据）</li>
+<li>系统为文件设置访问控制信息</li></ul>
+<p><strong>⭐ 文件属性</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>属性</th><th>说明</th></tr>
+<tr><td><strong>名称</strong></td><td>文件的唯一标识（用户可见）</td></tr>
+<tr><td><strong>标识符</strong></td><td>文件系统内部的唯一编号（用户不可见）</td></tr>
+<tr><td><strong>类型</strong></td><td>普通文件、目录文件、设备文件等</td></tr>
+<tr><td><strong>位置</strong></td><td>指向文件存储位置的指针</td></tr>
+<tr><td><strong>大小</strong></td><td>文件的字节数</td></tr>
+<tr><td><strong>保护</strong></td><td>访问控制信息（读、写、执行权限）</td></tr>
+<tr><td><strong>时间</strong></td><td>创建时间、最后修改时间、最后访问时间</td></tr></table></div>
+<p><strong>文件操作</strong>：建立(create)、删除(delete)、打开(open)、关闭(close)、读(read)、写(write)</p>
+<p><strong>⭐ 文件类型</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>类型</th><th>说明</th></tr>
+<tr><td>普通文件</td><td>存储用户数据（源程序、可执行文件、文档等）</td></tr>
+<tr><td>目录文件</td><td>包含目录项的文件（管理文件系统的组织结构）</td></tr>
+<tr><td>设备文件</td><td>将I/O设备抽象为文件（Unix/Linux）</td></tr></table></div>
+<h4>4.1.2 文件的逻辑结构</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>结构</th><th>说明</th><th>存取方式</th></tr>
+<tr><td><strong>无结构文件（流式文件）</strong></td><td>文件为字节序列</td><td>顺序存取</td></tr>
+<tr><td><strong>有结构文件（记录式文件）</strong></td><td>文件由记录组成</td><td>顺序/随机/按键存取</td></tr></table></div>
+<p><strong>有结构文件的组织形式</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>组织方式</th><th>特点</th></tr>
+<tr><td>顺序文件</td><td>记录按序排列，定长和变长</td></tr>
+<tr><td>索引文件</td><td>建立索引表，按索引查找记录</td></tr>
+<tr><td>索引顺序文件</td><td>顺序+索引，分组的顺序文件中每组建立索引</td></tr>
+<tr><td>直接文件（散列文件）</td><td>通过散列函数将键值映射为记录地址</td></tr></table></div>
+<h4>4.1.3 文件的物理结构 ⭐⭐</h4>
+<p><strong>⭐ 四种物理结构</strong>：</p>
+<p><strong>1. 连续分配</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>特征</th><th>说明</th></tr>
+<tr><td>实现</td><td>每个文件占用连续的磁盘块</td></tr>
+<tr><td>目录项</td><td>起始块号 + 文件块数</td></tr>
+<tr><td>优点</td><td>顺序存取快（只需一次寻道），支持随机存取</td></tr>
+<tr><td>缺点</td><td>外部碎片，文件大小变化困难</td></tr></table></div>
+<p><strong>2. 链接分配</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>类型</th><th>实现</th><th>目录项</th><th>优点</th><th>缺点</th></tr>
+<tr><td><strong>隐式链接</strong></td><td>每块末尾保留下一块指针</td><td>起始+末尾块号</td><td>无外部碎片</td><td>随机存取慢，指针占用空间，指针丢失影响大</td></tr>
+<tr><td><strong>显式链接（FAT）</strong></td><td>将所有块指针集中存放于FAT表中</td><td>起始块号</td><td>随机存取快</td><td>FAT需常驻内存，表很大</td></tr></table></div>
+<p><strong>3. 索引分配</strong></p>
+<div class="table-wrapper"><table><tr class="table-header"><th>特征</th><th>说明</th></tr>
+<tr><td>实现</td><td>每个文件有一个索引块，存放所有数据块指针</td></tr>
+<tr><td>目录项</td><td>索引块号</td></tr>
+<tr><td>优点</td><td>支持随机存取，无外部碎片</td></tr>
+<tr><td>缺点</td><td>索引块占用额外空间</td></tr></table></div>
+<p><strong>⭐ 索引分配的三种方案</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>方案</th><th>说明</th><th>适用</th></tr>
+<tr><td><strong>直接索引</strong></td><td>索引块直接存放数据块指针</td><td>小文件</td></tr>
+<tr><td><strong>一级间接索引</strong></td><td>索引块→一级索引块→数据块</td><td>中等文件</td></tr>
+<tr><td><strong>多级间接索引</strong></td><td>索引→二级索引→三级索引...</td><td>大文件</td></tr>
+<tr><td><strong>混合索引</strong></td><td>结合直接+间接索引</td><td>Unix/Linux (inode)</td></tr></table></div>
+<p><strong>Unix inode混合索引</strong>（10直接 + 1一级间接 + 1二级间接 + 1三级间接）</p>
+<h4>4.1.4 文件保护</h4>
+<p><strong>访问控制</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>方法</th><th>说明</th></tr>
+<tr><td><strong>访问控制矩阵</strong></td><td>二维矩阵[用户×文件]，存文件访问权限</td></tr>
+<tr><td><strong>访问控制列表(ACL)</strong></td><td>每文件关联一个用户权限列表</td></tr>
+<tr><td><strong>精简访问控制</strong></td><td>用户分类：Owner/Group/Other × Read/Write/Execute</td></tr></table></div>
+<p><strong>Unix文件权限</strong>：<code>rwxrwxrwx</code>（3组，每组3位）= 9位权限位</p>
+<hr>
+<h3>4.2 目录与文件</h3>
+<h4>4.2.1 目录的基本概念</h4>
+<p><strong>目录结构的演进</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>结构</th><th>特点</th><th>缺点</th></tr>
+<tr><td><strong>单级目录</strong></td><td>全部文件在一个目录中</td><td>命名冲突，查找困难</td></tr>
+<tr><td><strong>两级目录</strong></td><td>主文件目录(MFD) + 用户文件目录(UFD)</td><td>用户间不共享</td></tr>
+<tr><td><strong>树形目录</strong></td><td>多级层次结构</td><td>路径名可能过长</td></tr>
+<tr><td><strong>无环图目录</strong></td><td>允许共享（硬链接），禁止环路</td><td>删除时需引用计数</td></tr></table></div>
+<p><strong>⭐ 树形目录操作</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>操作</th><th>说明</th></tr>
+<tr><td>创建目录</td><td>mkdir</td></tr>
+<tr><td>删除目录</td><td>rmdir（空目录）/ rm -rf</td></tr>
+<tr><td>改变目录</td><td>cd</td></tr>
+<tr><td>显示目录</td><td>ls/dir</td></tr></table></div>
+<p><strong>目录项</strong>的内容：文件名 + 文件控制块（FCB）/索引节点指针</p>
+<h4>4.2.2 硬链接与软链接（符号链接）⭐</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>特征</th><th><strong>硬链接（Hard Link）</strong></th><th><strong>软链接（Symbolic Link）</strong></th></tr>
+<tr><td>本质</td><td>多个目录项指向同一个索引节点(inode)</td><td>特殊文件，内容是目标文件的路径名</td></tr>
+<tr><td>跨文件系统</td><td>❌ 不可以</td><td>✅ 可以</td></tr>
+<tr><td>跨主机</td><td>❌</td><td>✅（路径有效时）</td></tr>
+<tr><td>原文件删除</td><td>硬链接仍可访问（引用计数>0）</td><td>符号链接失效（悬空链接）</td></tr>
+<tr><td>创建命令</td><td><code>ln source target</code></td><td><code>ln -s source target</code></td></tr>
+<tr><td>inode</td><td>与目标文件相同</td><td>与目标文件不同（新inode）</td></tr></table></div>
+<h4>4.2.3 文件系统实现</h4>
+<p><strong>⭐ 文件系统层次结构</strong>：</p>
+<pre><code>用户程序
+    ↓
+逻辑文件系统（文件、目录管理）
+    ↓
+文件组织模块（逻辑块→物理块映射）
+    ↓
+基本文件系统（向设备驱动发命令）
+    ↓
+I/O控制（设备驱动 + 中断处理）
+    ↓
+磁盘</code></pre>
+<p><strong>⭐ 文件的实现</strong>：</p>
+<p><strong>1. 文件的打开与关闭</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>数据结构</th><th>说明</th></tr>
+<tr><td><strong>系统打开文件表</strong></td><td>整个系统一张，记录所有打开的文件</td></tr>
+<tr><td><strong>进程打开文件表</strong></td><td>每进程一张，指向系统打开文件表条目</td></tr>
+<tr><td><strong>文件描述符(fd)</strong></td><td>进程打开文件表的索引（0=stdin, 1=stdout, 2=stderr）</td></tr></table></div>
+<p><strong>2. 空闲空间管理</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>方法</th><th>实现</th><th>特点</th></tr>
+<tr><td><strong>空闲表法</strong></td><td>连续分配，类似动态分区管理</td><td>适用连续分配</td></tr>
+<tr><td><strong>空闲链表法</strong></td><td>空闲块链成链表</td><td>分配简单，但效率低</td></tr>
+<tr><td><strong>位图法（位示图）</strong></td><td>每个磁盘块对应一个二进制位：0=空闲，1=已用</td><td>空间效率好，易找连续块</td></tr>
+<tr><td><strong>成组链接法</strong></td><td>空闲块分组，链式+索引结合</td><td>Unix系统采用</td></tr></table></div>
+<p><strong>⭐ 位图法计算</strong>：</p>
+<pre><code>位图大小 = 磁盘总块数 / 8 字节
+块号对应的位图位置：第 (块号/8) 字节，第 (块号%8) 位</code></pre>
+<p><strong>空闲空间管理易错点</strong>：</p>
+<ul><li>空闲表法适合连续分配，便于寻找连续空闲块。</li>
+<li>空闲链表法分配单块简单，但不便快速找到连续空闲块。</li>
+<li>成组链接法把多个空闲块号集中存入一组，组尾再链接下一组，是Unix常用方法。</li></ul>
+<h4>4.2.4 文件共享</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>方式</th><th>实现</th><th>特点</th></tr>
+<tr><td><strong>基于索引节点的共享（硬链接）</strong></td><td>多个目录项指向同一inode</td><td>引用计数，删除时减1</td></tr>
+<tr><td><strong>基于符号链接的共享（软链接）</strong></td><td>创建Link型文件，内容为目标路径</td><td>灵活但可能断链</td></tr></table></div>
+<hr>
+<h3>4.3 本章疑难点</h3>
+<ol><li><strong>文件物理结构的优缺点对比</strong>：连续/链接/索引</li>
+<li><strong>混合索引计算</strong>：给定索引块大小和块大小，计算最大文件大小</li>
+<li><strong>硬链接与软链接</strong>的区别</li>
+<li><strong>文件系统层次结构</strong>和各层功能</li>
+<li><strong>空闲空间管理</strong>的位图法计算</li>
+<li>文件打开过程（open()系统调用全过程）</li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="os-exam-types.html#s9">查看本章常考题型 →</a>
+</div>
+<hr>
+<h2 id="ch5">第5章 输入/输出（I/O）管理</h2>
+<h3>5.1 I/O管理概述</h3>
+<h4>5.1.1 I/O设备的分类</h4>
+<p><strong>按信息交换单位分类</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>类型</th><th>特征</th><th>例子</th></tr>
+<tr><td><strong>块设备</strong></td><td>以固定大小数据块为单位，传输速率高，支持随机访问（可寻址）</td><td>磁盘、SSD</td></tr>
+<tr><td><strong>字符设备</strong></td><td>以字符/字节为单位，传输速率低，不可寻址，中断方式</td><td>键盘、打印机</td></tr></table></div>
+<p><strong>按传输速率分类</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>速率</th><th>设备示例</th></tr>
+<tr><td>低速（几~几百B/s）</td><td>键盘、鼠标</td></tr>
+<tr><td>中速（数千~数万B/s）</td><td>激光打印机</td></tr>
+<tr><td>高速（数百KB~数百MB/s）</td><td>磁盘、SSD</td></tr></table></div>
+<h4>5.1.2 I/O控制方式 ⭐</h4>
+<p><strong>⭐ 四种I/O控制方式</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>方式</th><th>CPU介入程度</th><th>数据传送单位</th><th>适用场景</th></tr>
+<tr><td><strong>程序直接控制（轮询）</strong></td><td>CPU全程参与</td><td>字</td><td>简单、低速设备</td></tr>
+<tr><td><strong>中断驱动方式</strong></td><td>每传送一单位数据中断一次</td><td>字</td><td>低速设备</td></tr>
+<tr><td><strong>DMA方式</strong></td><td>仅在开始和结束时介入</td><td>块</td><td>高速块设备</td></tr>
+<tr><td><strong>通道控制方式</strong></td><td>极少介入</td><td>一组块</td><td>大型机</td></tr></table></div>
+<p><strong>⭐ DMA（直接存储器访问）</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>特点</th><th>说明</th></tr>
+<tr><td>基本单位</td><td>数据块</td></tr>
+<tr><td>方向</td><td>内存←→设备，直接传送</td></tr>
+<tr><td>CPU干预</td><td>仅开始和结束时各一次</td></tr>
+<tr><td>优点</td><td>大幅降低CPU负担</td></tr></table></div>
+<p><strong>⭐ DMA与中断的区别</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>比较</th><th>中断方式</th><th>DMA方式</th></tr>
+<tr><td>数据传输</td><td>CPU执行中断程序完成</td><td>DMA控制器直接完成</td></tr>
+<tr><td>CPU干预</td><td>每字/字节中断一次</td><td>每数据块中断一次</td></tr>
+<tr><td>数据流向</td><td>设备→CPU→内存</td><td>设备→内存（不经CPU）</td></tr></table></div>
+<h4>5.1.3 I/O软件层次结构 ⭐</h4>
+<pre><code>用户层I/O软件        ← 用户程序调用库函数
+    ↓
+设备独立性软件       ← 统一接口，逻辑设备→物理设备映射
+    ↓
+设备驱动程序         ← 设备相关，处理具体设备操作
+    ↓
+中断处理程序         ← 处理I/O完成中断
+    ↓
+硬件                ← I/O设备控制器、设备</code></pre>
+<p><strong>各层功能</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>层次</th><th>主要功能</th></tr>
+<tr><td><strong>用户层I/O</strong></td><td>库函数（printf/scanf）、SPOOLing系统</td></tr>
+<tr><td><strong>设备独立性软件</strong></td><td>设备命名、设备保护、缓冲管理、设备分配、差错处理、逻辑→物理设备映射</td></tr>
+<tr><td><strong>设备驱动程序</strong></td><td>设备寄存器操作、启动设备、将上层命令转为设备指令</td></tr>
+<tr><td><strong>中断处理程序</strong></td><td>保存现场、识别中断源、调用相应处理程序</td></tr></table></div>
+<p><strong>SPOOLing系统（假脱机技术）</strong>：</p>
+<ul><li>将独占设备改造为共享设备（如打印机共享）</li>
+<li>在磁盘上开辟输入井和输出井</li>
+<li>进程的输出先写入磁盘输出井，再由SPOOLing进程逐个打印</li></ul>
+<hr>
+<h3>5.2 设备独立性软件</h3>
+<h4>5.2.1 缓冲区管理 ⭐</h4>
+<p><strong>引入缓冲的目的</strong>：</p>
+<ul><li>缓和CPU与I/O设备的速度不匹配</li>
+<li>减少对CPU的中断频率</li>
+<li>提高CPU和I/O设备的并行性</li></ul>
+<p><strong>⭐ 缓冲区类型</strong>：</p>
+<p><strong>1. 单缓冲</strong></p>
+<pre><code>处理时间 = max(C, T) + M
+其中 C=CPU处理时间, T=设备输入时间, M=缓冲区→用户区传送时间</code></pre>
+<p><strong>2. 双缓冲</strong></p>
+<pre><code>处理时间 = max(C, T)  ← CPU和设备可并行</code></pre>
+<p><strong>3. 循环缓冲</strong></p>
+<ul><li>多个缓冲区组成循环队列</li>
+<li>三个指针：NextG（取）、NextI（存）、Current</li></ul>
+<p><strong>4. 缓冲池</strong></p>
+<ul><li>系统公用的缓冲区集合</li>
+<li>三种队列：空闲缓冲队列、输入队列、输出队列</li></ul>
+<h4>5.2.2 设备分配与回收</h4>
+<p><strong>设备分配的数据结构</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>结构</th><th>内容</th></tr>
+<tr><td><strong>SDT（系统设备表）</strong></td><td>全系统一张，每设备一个表项</td></tr>
+<tr><td><strong>DCT（设备控制表）</strong></td><td>每设备一张，设备状态、等待队列</td></tr>
+<tr><td><strong>COCT（控制器控制表）</strong></td><td>每控制器一张</td></tr>
+<tr><td><strong>CHCT（通道控制表）</strong></td><td>每通道一张</td></tr></table></div>
+<p><strong>设备分配考虑因素</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>因素</th><th>说明</th></tr>
+<tr><td><strong>设备固有属性</strong></td><td>独占设备、共享设备、虚拟设备</td></tr>
+<tr><td><strong>分配算法</strong></td><td>FCFS、优先级高者优先</td></tr>
+<tr><td><strong>安全性</strong></td><td>安全分配（请求后阻塞）vs 不安全分配（可继续请求）</td></tr></table></div>
+<hr>
+<h3>5.3 磁盘和固态硬盘 ⭐⭐</h3>
+<h4>5.3.1 磁盘结构</h4>
+<p><strong>磁盘地址</strong>：柱面号（磁道号）→ 磁头号（盘面号）→ 扇区号</p>
+<p><strong>磁盘访问时间</strong>：</p>
+<pre><code>⭐ Ta = Ts + Tr + Tt
+
+Ta：总访问时间
+Ts：寻道时间（磁头移动到指定磁道）← 占比最大
+Tr：旋转延迟（扇区旋转到磁头下）← 平均转半圈
+Tt：传输时间（数据读写）</code></pre>
+<ul><li>平均旋转延迟通常取旋转一周时间的一半。</li>
+<li>磁盘调度主要优化寻道时间，不能直接消除旋转延迟和传输时间。</li></ul>
+<p><strong>⭐ 磁盘调度算法</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>算法</th><th>策略</th><th>优点</th><th>缺点</th></tr>
+<tr><td><strong>FCFS</strong></td><td>按请求顺序服务</td><td>公平简单</td><td>性能差，磁头来回移动</td></tr>
+<tr><td><strong>最短寻道时间优先（SSTF）</strong></td><td>选择离当前磁道最近的请求</td><td>寻道时间较短</td><td>可能饥饿（远离的请求总被推迟）</td></tr>
+<tr><td><strong>扫描算法（SCAN/电梯算法）</strong></td><td>磁头单向移动，服务途中请求，到顶后反向</td><td>避免饥饿</td><td>两端请求等待时间长</td></tr>
+<tr><td><strong>循环扫描（C-SCAN）</strong></td><td>单向服务，到顶后快速回起点（返回途中不服务）</td><td>更均匀</td><td>返回时间浪费</td></tr>
+<tr><td><strong>LOOK/C-LOOK</strong></td><td>SCAN/C-SCAN的改进：不到端点就反向</td><td>减少不必要的移动</td><td>-</td></tr></table></div>
+<h4>5.3.2 磁盘管理</h4>
+<p><strong>磁盘格式化</strong>：</p>
+<ul><li><strong>低级格式化（物理格式化）</strong>：划分磁道和扇区</li>
+<li><strong>分区</strong>：将磁盘划分为多个独立区域</li>
+<li><strong>高级格式化（逻辑格式化）</strong>：创建文件系统</li></ul>
+<p><strong>引导块</strong>：分区中存储引导程序（通常在第一块）</p>
+<p><strong>坏块处理</strong>：</p>
+<ul><li>硬件方式：保留备用扇区替换</li>
+<li>软件方式：标记坏块避免使用</li></ul>
+<h4>5.3.3 固态硬盘（SSD）</h4>
+<div class="table-wrapper"><table><tr class="table-header"><th>特征</th><th>说明</th></tr>
+<tr><td><strong>基本单元</strong></td><td>闪存芯片（NAND Flash）</td></tr>
+<tr><td><strong>读写单位</strong></td><td>页（Page，4KB~16KB）</td></tr>
+<tr><td><strong>擦除单位</strong></td><td>块（Block，多个Page）</td></tr>
+<tr><td><strong>特点</strong></td><td>无寻道时间，随机访问快，但写前需擦除</td></tr>
+<tr><td><strong>写放大</strong></td><td>实际写入量 > 用户要求写入量</td></tr>
+<tr><td><strong>磨损均衡</strong></td><td>均匀使用各块，延长寿命</td></tr></table></div>
+<p><strong>SSD vs HDD</strong>：</p>
+<div class="table-wrapper"><table><tr class="table-header"><th>比较</th><th>SSD</th><th>HDD</th></tr>
+<tr><td>读写速度</td><td>快</td><td>慢</td></tr>
+<tr><td>随机访问</td><td>极快</td><td>慢（需寻道）</td></tr>
+<tr><td>功耗</td><td>低</td><td>高</td></tr>
+<tr><td>噪音</td><td>无</td><td>有</td></tr>
+<tr><td>寿命</td><td>有限（擦写次数）</td><td>较长</td></tr>
+<tr><td>价格</td><td>较高</td><td>较低</td></tr></table></div>
+<hr>
+<h3>5.4 本章疑难点</h3>
+<ol><li><strong>I/O控制方式</strong>的演变和对比（程序查询→中断→DMA→通道）</li>
+<li><strong>单缓冲/双缓冲</strong>的处理时间计算</li>
+<li><strong>磁盘调度算法</strong>的寻道距离计算</li>
+<li><strong>磁盘访问时间</strong>的组成</li>
+<li><strong>SPOOLing系统</strong>的原理</li>
+<li>SSD的特性（写前擦除、写放大、磨损均衡）</li></ol>
+<div class="chapter-actions">
+    <a class="chapter-exam-link" href="os-exam-types.html#s13">查看本章常考题型 →</a>
+</div>
+<hr>
+<blockquote>📚 <strong>参考资料</strong>：《2027年操作系统考研复习指导》（王道论坛组编）<br>📝 <strong>说明</strong>：本文档严格按照408统考大纲编写，涵盖操作系统五章全部考点<br>⭐ 标注星号 = 高频考点/重点内容</blockquote>
+        </div>
+    </div>

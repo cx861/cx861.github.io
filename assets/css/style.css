@@ -4,8 +4,6 @@
    原则: 大胆≠花哨 · 戏剧化≠混乱 · 每一个选择都有意图
    =========================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap');
-
 /* ===== Reset & Base ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -2602,5 +2600,62 @@ mjx-container::-webkit-scrollbar,
   .content-card table:has(tr:first-child > :nth-child(2):last-child) {
     width: 100%;
     min-width: 0;
+  }
+}
+
+/* =====================================================================
+   阶段 5：阅读与导航可用性
+   ===================================================================== */
+.mobile-menu {
+  visibility: hidden;
+  transition: right 0.4s var(--ease-out-expo), visibility 0s linear 0.4s;
+}
+
+.mobile-menu.active {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+#main-content:focus {
+  outline: none;
+}
+
+.toc.collapsed .toc-header {
+  display: none;
+}
+
+.toc.collapsed .toc-toggle svg {
+  transform: rotate(0);
+}
+
+.toc:not(.collapsed) .toc-toggle svg {
+  transform: rotate(180deg);
+}
+
+.toc-toggle:focus-visible,
+.theme-toggle:focus-visible,
+.hamburger:focus-visible,
+.menu-theme-toggle:focus-visible,
+.back-top:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+  .toc.collapsed .toc-header {
+    display: block;
+  }
+
+  .toc.collapsed .toc-header-row::after {
+    content: '点击展开';
+  }
+
+  .toc:not(.collapsed) .toc-header-row::after {
+    content: '点击收起';
+    margin-left: auto;
+    color: var(--text-muted);
+    font-size: 0.76rem;
+    opacity: 0.7;
+    white-space: nowrap;
   }
 }
