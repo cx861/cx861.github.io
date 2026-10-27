@@ -15,12 +15,14 @@
                 <li><a href="#ch4">第4章 网络层</a></li>
                 <li><a href="#ch5">第5章 传输层</a></li>
                 <li><a href="#ch6">第6章 应用层</a></li>
-            </ul>
+            <li><a href="#review-checkpoints">附录：分层计算与协议边界自测</a></li>
+<li><a href="#stage2-network">阶段 2：计算机网络推演与计算专项</a></li>
+</ul>
         </div>
 
         <!-- Main Content -->
         <div class="content-card">
-<blockquote>来源：《2027王道考研·计算机网络》高清版<br>共6章，涵盖408统考计算机网络全部考点</blockquote>
+<blockquote>资料说明：原稿书目标签与对应页码尚未逐条核验，按旧笔记框架保留；本页阶段 2 题目均为自编。复习范围以目标年度正式考试大纲为准。</blockquote>
 <hr>
 <h2 id="ch1">第1章 计算机网络体系结构</h2>
 <h3>1.1 计算机网络概述</h3>
@@ -74,7 +76,7 @@
 <tr><td><strong>原理</strong></td><td>将报文分割成若干较小的分组，每个分组独立进行存储转发</td></tr>
 <tr><td><strong>优点</strong></td><td>时延小、灵活性高、适合突发式数据通信、线路利用率高</td></tr>
 <tr><td><strong>缺点</strong></td><td>分组可能失序/丢失/重复、有额外控制开销</td></tr>
-<tr><td><strong>关键计算</strong></td><td>分组交换的流水线转发时延 = 第一段发送时延×(跳数) + 后续分组发送时延×(分组数-1)</td></tr></table></div>
+<tr><td><strong>关键计算</strong></td><td>等速链路、等长分组、存储转发且忽略传播/处理/排队时延时，$N$ 个分组经 $k$ 段链路的总时间为 $(k+N-1)L/R$；一般情形须逐段计算。</td></tr></table></div>
 <p><strong>三种交换方式比较</strong>：</p>
 <div class="table-wrapper"><table><tr class="table-header"><th>交换方式</th><th>建立连接</th><th>存储转发</th><th>实时性</th><th>信道利用率</th></tr>
 <tr><td>电路交换</td><td>需要</td><td>无</td><td>最好</td><td>低</td></tr>
@@ -531,7 +533,7 @@
 <p><strong>⭐ 以太网核心特征</strong>：</p>
 <div class="table-wrapper"><table><tr class="table-header"><th>特征</th><th>说明</th></tr>
 <tr><td>拓扑</td><td>逻辑总线型（物理星形）</td></tr>
-<tr><td>介质访问</td><td>CSMA/CD</td></tr>
+<tr><td>介质访问</td><td>共享半双工采用 CSMA/CD；交换式全双工不使用碰撞检测</td></tr>
 <tr><td>编码</td><td>曼彻斯特编码</td></tr>
 <tr><td>帧格式</td><td>DIX Ethernet V2 或 IEEE 802.3</td></tr></table></div>
 <p><strong>以太网MAC帧格式（V2标准）</strong>：</p>
@@ -640,7 +642,7 @@
 <li>查交换表，找目的MAC地址对应端口</li>
 <li>若找到且与接收端口不同→转发到对应端口；若相同→丢弃</li>
 <li>若找不到→向除接收端口外的所有端口广播（泛洪）</li>
-<li>交换表条目有老化时间（默认300秒）</li></ol>
+<li>交换表动态条目有老化时间，具体值由设备与配置决定（教材常举 300 秒）</li></ol>
 <p><strong>交换机转发判定模板</strong>：</p>
 <div class="table-wrapper"><table><tr class="table-header"><th>目的MAC查表结果</th><th>动作</th><th>考试关键词</th></tr>
 <tr><td>查不到</td><td>除入端口外泛洪</td><td>未知单播</td></tr>
@@ -1319,6 +1321,230 @@ CRLF                        ← 空行
     <a class="chapter-exam-link" href="network-exam-types.html#s16a">电子邮件协议专题 →</a>
 </div>
 <hr>
-<blockquote>📚 <strong>参考资料</strong>：《2027年计算机网络考研复习指导》（王道论坛组编）<br>📝 <strong>说明</strong>：本文档严格按照408统考大纲编写，涵盖计算机网络六章全部考点<br>⭐ 标注星号 = 高频考点/重点内容</blockquote>
+<blockquote>📚 <strong>旧稿书目标签（对应页码待核）</strong>：《2027年计算机网络考研复习指导》（王道论坛组编）<br>📝 <strong>说明</strong>：本页按计算机网络六章框架整理；阶段 2 补充典型推演与协议条件，不作为全部考点已逐项审定的声明<br>⭐ 标注星号 = 高频考点/重点内容</blockquote>
+<hr>
+<h2 id="review-checkpoints">附录：分层计算与协议边界自测</h2>
+<p>以下为补充整理与自编例题，适合学完对应章节后闭卷自测。</p>
+
+<h3>一、自编例题：IPv4 子网</h3>
+<p>主机地址 <code>192.168.10.77/26</code>，掩码 <code>255.255.255.192</code>。每个子网有 $2^6=64$ 个地址，77 位于区间 64—127，因此网络地址为 <code>192.168.10.64</code>，广播地址为 <code>192.168.10.127</code>，传统普通子网可用主机地址 65—126，共 62 个。这个减二规则不能直接套到 /31 点到点链路和 /32 主机路由。</p>
+<h3>二、自编例题：TCP 序号与累计确认</h3>
+<p>A 的 SYN 序号为 $1000$，B 确认号为 $1001$。A 从 $1001$ 开始发送 500 B 数据后，B 按序完整收到，确认号为 $1501$。如果下一段 $1501$—$1600$ 丢失，而 $1601$—$1700$ 到达，累计确认号仍为 $1501$；不能把它直接加到 $1701$。</p>
+<p>无数据的纯 ACK 不占序号；SYN 和 FIN 各占一个序号。以上忽略序号回绕、SACK 选项及捎带控制位的其他情况。协议核对：<a href="https://www.rfc-editor.org/rfc/rfc9293.html">RFC 9293，TCP 序号与确认</a>。</p>
+<h3>三、自编例题：存储转发时延</h3>
+<p>一个 1000 B 分组经过三段速率均为 1 Mbit/s 的链路，经过两台存储转发交换设备；每段传播时延 2 ms，忽略处理和排队。每段发送时延 $8000/10^6=8$ ms，总时延 $3\times8+3\times2=30$ ms。</p>
+<p>若连续发送 4 个相同分组且链路可流水工作，最后一个分组到达时间 $30+(4-1)\times8=54$ ms。只有等长分组、等速链路等假设成立时，才可直接使用这个简化式。</p>
+<h3>四、跨层辨析自测</h3>
+<ul><li><strong>跨网段发送时 ARP 找谁？</strong>以太网上先找下一跳网关的 MAC，而不是远端主机的 MAC；无 NAT 等地址转换时，IP 目的地址仍为远端主机。</li><li><strong>流量控制与拥塞控制谁限制发送？</strong>接收窗口约束接收端承受能力，拥塞窗口约束网络负荷。可用发送额度还要从 $\min(rwnd,cwnd)$ 中减去在途未确认数据，并保证单位一致。</li><li><strong>HTTP 无状态是否不能登录？</strong>无状态描述协议的请求语义；应用可以通过 Cookie、会话等机制维护登录状态。</li></ul>
+
+
+<section id="stage2-network">
+<h2>阶段 2：计算机网络 · 推演与计算专项</h2>
+<p><a href="../notes.html#note-network">本课核心笔记</a> · <a href="../mistakes.html#error-network">本课易错题复盘</a></p>
+<p>以下题目均为自编训练，不标注为历年真题。每组先复习适用条件，再独立作答，最后展开解析。编号固定，便于个人笔记和错题本回链。</p>
+<ul>
+<li><a href="#s2-network-m1">发送、传播与存储转发</a></li>
+<li><a href="#s2-network-m2">奈奎斯特与香农容量</a></li>
+<li><a href="#s2-network-m3">透明传输与 CRC 长除法</a></li>
+<li><a href="#s2-network-m4">可靠传输窗口与序号空间</a></li>
+<li><a href="#s2-network-m5">以太网碰撞边界与交换机学习</a></li>
+<li><a href="#s2-network-m6">CIDR、子网边界与 VLSM</a></li>
+<li><a href="#s2-network-m7">最长前缀与 IPv4 分片</a></li>
+<li><a href="#s2-network-m8">距离向量更新与环路</a></li>
+<li><a href="#s2-network-m9">TCP 字节序号、累计确认与发送额度</a></li>
+<li><a href="#s2-network-m10">TCP 拥塞模型与连接释放</a></li>
+<li><a href="#s2-network-m11">DNS 与 HTTP 轮次模型</a></li>
+</ul>
+<section id="s2-network-m1" data-chapter="发送、传播与存储转发">
+<h3>1. 发送、传播与存储转发</h3>
+<p><strong>先记条件：</strong>发送时延 L/R，传播时延 d/v；分组经过多链路时要画出流水传输，不能将每个分组的端到端时延简单累加。</p>
+<article id="s2-network01" data-training="cs408" data-course="network">
+<h4>计算机网络 01｜1500 B 分组经过 10 Mb/s 链路，单向传播 2 ms，忽略其他时延。最后一位何时到达？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>发送时延 1500×8/(10×10⁶)=1.2 ms。</li>
+<li>最后一位在发送完成后还需传播 2 ms，从首位开始发送计，共 3.2 ms。</li>
+</ol><p><strong>易错原因：</strong>把 B 当 bit；认为提高带宽可以同时缩短传播时间。</p><p><strong>检查动作：</strong>分别标出首位出发、末位出发、末位到达三个时刻。</p></details></article>
+<article id="s2-network02" data-training="cs408" data-course="network">
+<h4>计算机网络 02｜3 条链路速率依次 1、2、1 Mb/s，各单向传播 1 ms；3 个 1000 B 分组连续发送，存储转发，无其他流量。最后一包末位何时到达？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>每条发送时延分别 8、4、8 ms；第一包经历三次传播，8+4+8+3=23 ms。</li>
+<li>各包在第 1 链路末端完整到达为 9、17、25 ms；在第 2 链路末端为 14、22、30 ms。</li>
+<li>第 3 链路发送区间为 14～22、22～30、30～38 ms，加传播后到达为 23、31、39 ms；最终 39 ms。</li>
+</ol><p><strong>易错原因：</strong>算成 3×23=69 ms，忽略不同链路可并行处理不同分组；或漏计瓶颈处排队。</p><p><strong>检查动作：</strong>逐链路以 max(本包完整到达,链路空闲) 决定发送开始时刻。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：分组变短是否降低传播时延？答：不改变同一链路的传播时延，但会改变发送、排队及首包完成时刻。</p></details></section>
+<section id="s2-network-m2" data-chapter="奈奎斯特与香农容量">
+<h3>2. 奈奎斯特与香农容量</h3>
+<p><strong>先记条件：</strong>奈奎斯特用于理想无噪声带限信道并给定离散电平；香农的 S/N 需使用线性功率比，dB 必须转换。</p>
+<article id="s2-network03" data-training="cs408" data-course="network">
+<h4>计算机网络 03｜理想无噪声信道带宽 3 kHz，4 种电平，按奈奎斯特公式求最高比特率。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>最高码元率 2B=6000 Baud；每码元承载 log₂4=2 bit。</li>
+<li>最高比特率 2B log₂M=12,000 bit/s=12 kb/s。</li>
+</ol><p><strong>易错原因：</strong>将码元率等同于比特率；或直接将电平数 4 当每码元比特数。</p><p><strong>检查动作：</strong>单位检查：码元/秒×bit/码元=bit/秒。</p></details></article>
+<article id="s2-network04" data-training="cs408" data-course="network">
+<h4>计算机网络 04｜信道带宽 3 kHz，信噪功率比 S/N=15（线性值，不是 15 dB），求香农容量。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>C=B log₂(1+S/N)=3000×log₂16=12,000 bit/s。</li>
+<li>若题给 15 dB，则线性比是 10^(15/10)，代入值不同；本题不能自行改成 dB。</li>
+</ol><p><strong>易错原因：</strong>把 S/N=15 写成 1+10^15，或忘记香农公式中的 1。</p><p><strong>检查动作：</strong>当线性 S/N=0 时容量应为 0；确认 log₂ 的自变量为 16。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：奈奎斯特与香农算出不同上界时取哪个？答：若同一模型同时受两条件限制，不能超过任一上界，取更小者；具体仍看题设假设。</p></details></section>
+<section id="s2-network-m3" data-chapter="透明传输与 CRC 长除法">
+<h3>3. 透明传输与 CRC 长除法</h3>
+<p><strong>先记条件：</strong>比特填充只针对帧数据等规定区域，不对定界标志同样处理；CRC 是模 2 运算，用异或而无借位。</p>
+<article id="s2-network05" data-training="cs408" data-course="network">
+<h4>计算机网络 05｜采用连续 5 个 1 后插入 0 的比特填充，数据比特 01111110 填充后是什么？不填充帧定界标志本身。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>原数据是 0、连续六个 1、0。遇到第五个 1 后插入 0，再发第六个 1。</li>
+<li>输出 011111010，共 9 位；接收方在连续五个 1 后删除规定填充的 0。</li>
+</ol><p><strong>易错原因：</strong>把数据中的 01111110 直接当帧标志发送；或六个 1 后才填充。</p><p><strong>检查动作：</strong>删除输出中第五个连续 1 后的填充 0，应能逐位还原原数据。</p></details></article>
+<article id="s2-network06" data-training="cs408" data-course="network">
+<h4>计算机网络 06｜数据 1101，生成多项式比特为 1011，求 CRC 校验余数与发送码字。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>生成式阶数 3，先补 3 个 0，得 1101000。用异或长除：1101000 XOR 1011000=0110000，再 XOR 0101100=0011100，再 XOR 0010110=0001010，再 XOR 0001011=0000001。</li>
+<li>余数为 001，发送码字 1101|001=1101001；发送码字除以 1011 的余数为 000。</li>
+<li>CRC 余数为 0 表示未检出错误，不证明绝对无错；错误多项式为生成式倍数时可能漏检。</li>
+</ol><p><strong>易错原因：</strong>用普通二进制减法借位；余数不足 3 位时不补前导 0。</p><p><strong>检查动作：</strong>分别验证补零数据的余数和最终码字的零余数。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：生成多项式最高次数 r 与校验位数关系？答：校验余数固定 r 位，不是生成式比特串长度 r+1 位。</p></details></section>
+<section id="s2-network-m4" data-chapter="可靠传输窗口与序号空间">
+<h3>4. 可靠传输窗口与序号空间</h3>
+<p><strong>先记条件：</strong>GBN 接收窗口为 1；本组 SR 采用对称收发窗口。利用率问题先声明 ACK 耗时、传播 RTT 与重传假设。</p>
+<article id="s2-network07" data-training="cs408" data-course="network">
+<h4>计算机网络 07｜序号字段 3 bit，求 GBN 最大发送窗口与对称 SR 最大窗口。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>序号空间 2³=8；GBN 为避免新旧一轮混淆，发送窗口最大 8−1=7。</li>
+<li>对称 SR 需 2W≤8，故 W≤4；若收发窗口不相等，应检查两窗口之和的约束，而非套对称公式。</li>
+</ol><p><strong>易错原因：</strong>将 GBN、SR 都写成 8，或把 SR 的发送窗口限制与 GBN 混用。</p><p><strong>检查动作：</strong>画出一轮帧后 ACK 丢失再回绕的场景，验证接收方不会混淆旧重传与新数据。</p></details></article>
+<article id="s2-network08" data-training="cs408" data-course="network">
+<h4>计算机网络 08｜每帧发送 1 ms，双向传播 RTT=20 ms，ACK 发送耗时忽略，无错误。停等利用率多少？若希望连续满速发送，窗口至少多少帧，GBN/SR 至少几位序号？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>一次发送从开始到 ACK 返回为 1+20=21 ms，停等利用率为 1/21≈4.76%。</li>
+<li>窗口至少 ceil((1+20)/1)=21 帧；GBN 需 2^k−1≥21，k=5。</li>
+<li>对称 SR 需 2^k≥42，k=6。此处 RTT 只含往返传播，不重复包含数据发送。</li>
+</ol><p><strong>易错原因：</strong>把单向传播 20 ms 又乘 2，或把包含发送时间的 RTT 与纯传播 RTT 混用。</p><p><strong>检查动作：</strong>在第 21 ms 首个 ACK 返回前，应有足够帧占满链路；序号位数分别核对 31≥21、64≥42。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：TCP 字节序号能否直接照搬本组按帧编号的 3 bit 计算？答：不能，编号单位与协议机制不同，必须先换成题设模型。</p></details></section>
+<section id="s2-network-m5" data-chapter="以太网碰撞边界与交换机学习">
+<h3>5. 以太网碰撞边界与交换机学习</h3>
+<p><strong>先记条件：</strong>CSMA/CD 针对共享、半双工以太网；现代交换式全双工链路不进行碰撞检测。交换机学习源 MAC，按目的 MAC 转发。</p>
+<article id="s2-network09" data-training="cs408" data-course="network">
+<h4>计算机网络 09｜经典半双工以太网，最小 MAC 帧 64 B（含 FCS，不含前导码），速率 10 Mb/s，忽略其他检测延迟。最短发送时间及允许的往返传播上界？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>64×8/(10×10⁶)=51.2 μs。为在发送期间检测最远端碰撞，发送时间至少覆盖往返传播时间。</li>
+<li>因此本简化模型中往返传播时延上界为 51.2 μs，单向至多 25.6 μs；真实配置还受中继等额外延迟约束。</li>
+</ol><p><strong>易错原因：</strong>把 64 B 的单位错成 bit，或在全双工网络仍套碰撞域最小帧距离推导。</p><p><strong>检查动作：</strong>检查约束方向：网络越长，传播越大，所需最短帧应越长。</p></details></article>
+<article id="s2-network10" data-training="cs408" data-course="network">
+<h4>计算机网络 10｜同一 VLAN 的三端口交换机，转发表空。A 从端口 1 向 B 发帧；B 从端口 2 回复 A；A 后迁移到端口 3 再向 B 发帧。每步学习和转发如何？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>第一帧学习 A→1，未知目的 B，向端口 2、3 泛洪，不发回端口 1。</li>
+<li>第二帧学习 B→2，已知 A→1，仅向端口 1 转发。</li>
+<li>第三帧更新 A→3，目的 B 已知，仅向端口 2 转发。学习依据始终为源地址与入端口。</li>
+</ol><p><strong>易错原因：</strong>用目的地址学习表项；把未知单播直接丢弃；MAC 移动后不更新旧映射。</p><p><strong>检查动作：</strong>每帧先写学习结果，再查目的端口；只在同一 VLAN 范围内泛洪。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：交换机收到目的端口与入端口相同的已知单播会怎样？答：过滤该帧，无需再向该端口发送。</p></details></section>
+<section id="s2-network-m6" data-chapter="CIDR、子网边界与 VLSM">
+<h3>6. CIDR、子网边界与 VLSM</h3>
+<p><strong>先记条件：</strong>IPv4 常规子网主机数按 2^h−2 计算，本组不采用 /31、/32 特例；VLSM 按需求从大到小并对齐网络边界。</p>
+<article id="s2-network11" data-training="cs408" data-course="network">
+<h4>计算机网络 11｜地址 192.168.1.77/27，求网络、广播、可用范围和主机数。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>/27 掩码末字节 224，块长 32；77 落在 64～95 这一块。</li>
+<li>网络 192.168.1.64，广播 192.168.1.95，可用 65～94，共 2⁵−2=30 个。</li>
+</ol><p><strong>易错原因：</strong>把给定地址 77 当网络号；可用主机数不扣网络与广播地址。</p><p><strong>检查动作：</strong>77 AND 224=64；64 是 32 的整数倍，广播是下一网络号减 1。</p></details></article>
+<article id="s2-network12" data-training="cs408" data-course="network">
+<h4>计算机网络 12｜将 192.168.10.0/24 分配给需 100、50、20 台主机的三个子网，给出互不重叠的最小常规子网和剩余地址块。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>100 台需 7 位主机，分配 192.168.10.0/25，主机 .1～.126，广播 .127。</li>
+<li>50 台需 6 位，分配 .128/26，主机 .129～.190，广播 .191；20 台需 5 位，分配 .192/27，主机 .193～.222，广播 .223。</li>
+<li>余下 .224/27，范围 .224～.255；已分配块大小为 128+64+32=224 个地址。</li>
+</ol><p><strong>易错原因：</strong>只按主机数凑连续地址，未按二进制前缀边界对齐；忽略网络与广播需求。</p><p><strong>检查动作：</strong>检查各块首址对块长取模为 0，并核对三块并集没有交叠。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：不同前缀长度的子网可以共享同一个 /24 的地址池吗？答：可以，这就是 VLSM；前提是边界合法且地址范围不重叠。</p></details></section>
+<section id="s2-network-m7" data-chapter="最长前缀与 IPv4 分片">
+<h3>7. 最长前缀与 IPv4 分片</h3>
+<p><strong>先记条件：</strong>转发先最长前缀匹配，再确定下一跳；IPv4 分片偏移以 8 B 为单位，非末片数据长度需为 8 的倍数。</p>
+<article id="s2-network13" data-training="cs408" data-course="network">
+<h4>计算机网络 13｜路由 192.168.0.0/16→R1、192.168.1.0/24→R2、192.168.1.128/25→R3、默认→R4。目的 192.168.1.200 从哪里走？若下一跳与本机同网，ARP 查谁？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>目的同时匹配 /16、/24、/25，选择最长 /25，下一跳 R3。</li>
+<li>以太网封装需 R3 在本链路的 MAC，通过 ARP 查询下一跳 IPv4 地址；不是直接 ARP 远端最终目的。</li>
+<li>普通路由转发时 IP 目的保持最终目的，链路层源/目的 MAC 随每跳重写；此结论不含 NAT 改写。</li>
+</ol><p><strong>易错原因：</strong>按表的先后顺序取首个匹配；将最终 IP 目的与本跳 MAC 目的混同。</p><p><strong>检查动作：</strong>逐个做前缀匹配并标长度，再分开列 IP 目的和以太网目的。</p></details></article>
+<article id="s2-network14" data-training="cs408" data-course="network">
+<h4>计算机网络 14｜IPv4 数据报总长 4020 B，固定首部 20 B、无选项、DF=0，链路 MTU=1500 B。分片总长、偏移、MF 分别是什么？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>原数据 4000 B；每个非末片最大数据 floor((1500−20)/8)×8=1480 B。</li>
+<li>数据分为 1480、1480、1040 B；各片总长 1500、1500、1060 B。</li>
+<li>偏移为 0、1480/8=185、2960/8=370；MF=1、1、0，三片标识相同。IPv6 路由器不按此规则对转发分组分片。</li>
+</ol><p><strong>易错原因：</strong>用总长 1500 计算偏移；各片不加各自首部；把偏移直接写成字节数。</p><p><strong>检查动作：</strong>三片数据之和仍为 4000，非末片数据长度均可被 8 整除。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：IPv4 DF=1 且报文大于下一链路 MTU 时能否强制分片？答：不能，路由器丢弃并按协议条件反馈需要分片的信息。</p></details></section>
+<section id="s2-network-m8" data-chapter="距离向量更新与环路">
+<h3>8. 距离向量更新与环路</h3>
+<p><strong>先记条件：</strong>距离向量用本地链路代价加邻居通告距离，再取最小；通告可能过时，链路失败后的收敛不一定立即完成。</p>
+<article id="s2-network15" data-training="cs408" data-course="network">
+<h4>计算机网络 15｜X 到邻居 Y、Z 的链路代价分别 1、4；Y 通告到 D 为 6，Z 通告到 D 为 2。X 的最优距离和下一跳？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>经 Y 候选距离 1+6=7；经 Z 候选距离 4+2=6。</li>
+<li>取最小为 6，下一跳 Z；不能只比较邻居通告的 6 与 2 而忽略本地链路。</li>
+</ol><p><strong>易错原因：</strong>选最近邻居 Y 就认为到所有目的都更优；或只取邻居向量不加边代价。</p><p><strong>检查动作：</strong>把每条候选完整写为 c(X,N)+D_N(D)。</p></details></article>
+<article id="s2-network16" data-training="cs408" data-course="network">
+<h4>计算机网络 16｜链 A—B—C，各链代价 1。此前 A 到 C 为 2、经 B；BC 断开，B 却收到 A 的旧距离 2。可能产生什么现象？毒性逆转能解决到什么程度？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>B 误以为可经 A 到 C，更新为 3；A 再听到 B 的 3 后更新为 4，双方实际上互相转发。</li>
+<li>距离可逐步增加直到协议规定的无穷值，称计数到无穷。</li>
+<li>若 A 采用毒性逆转，会向其当前下一跳 B 通告到 C 为无穷，可抑制此两节点环；不能据此保证消除所有多节点环。</li>
+</ol><p><strong>易错原因：</strong>认为有拓扑变化时所有节点同时知道；把两节点防环手段当成一般无环证明。</p><p><strong>检查动作：</strong>沿实际下一跳追踪包是否能到 C，而不是只看数值还有限。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：链路状态协议是否只给邻居通告到各目的的估计距离？答：不是，它传播链路状态信息，再基于拓扑计算路径；不要与距离向量混用。</p></details></section>
+<section id="s2-network-m9" data-chapter="TCP 字节序号、累计确认与发送额度">
+<h3>9. TCP 字节序号、累计确认与发送额度</h3>
+<p><strong>先记条件：</strong>ACK 表示下一期望字节序号；本组接收方缓存乱序段、立即回复累计 ACK。发送新数据额度要减掉尚未确认的在途字节。</p>
+<article id="s2-network17" data-training="cs408" data-course="network">
+<h4>计算机网络 17｜接收方期望 4000，依次收到 seq=4000 长 1000，seq=6500 长 500，seq=5000 长 1500 的无 SYN/FIN 数据段。各 ACK？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>第一段覆盖 [4000,5000)，连续数据推进至 5000，回复 ACK=5000。</li>
+<li>第二段覆盖 [6500,7000)，中间 [5000,6500) 缺失，缓存后仍 ACK=5000。</li>
+<li>第三段填补缺口，与缓存数据连成 [4000,7000)，回复 ACK=7000。</li>
+</ol><p><strong>易错原因：</strong>把 ACK 当成最后一个收到字节，少加 1；乱序段到达就直接推进累计 ACK。</p><p><strong>检查动作：</strong>用左闭右开字节区间拼接，只推进从原期望起点连续覆盖的部分。</p></details></article>
+<article id="s2-network18" data-training="cs408" data-course="network">
+<h4>计算机网络 18｜rwnd=6000 B，cwnd=4000 B，未确认在途数据 2500 B。最多再发多少？若累计 ACK 新确认其中 1000 B 且两窗口值保持不变，再发额度多少？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>有效窗口 min(6000,4000)=4000 B；初始可新发 4000−2500=1500 B。</li>
+<li>假设在 ACK 前没有利用这 1500 B 再发，则 ACK 后在途变为 1500 B，可发 4000−1500=2500 B。</li>
+<li>若已经发送过新数据，应把它计入新的在途量，不能仍回答 2500；本问明确先仅接收 ACK。</li>
+</ol><p><strong>易错原因：</strong>用 rwnd+cwnd；或把窗口上限 4000 当成每次都能额外发送的量。</p><p><strong>检查动作：</strong>核对 已在途+本次新发≤min(rwnd,cwnd)，同时注意时间顺序。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：接收窗口主要约束什么，拥塞窗口主要约束什么？答：rwnd 面向接收方缓冲，cwnd 面向网络拥塞；发送必须同时满足。</p></details></section>
+<section id="s2-network-m10" data-chapter="TCP 拥塞模型与连接释放">
+<h3>10. TCP 拥塞模型与连接释放</h3>
+<p><strong>先记条件：</strong>此组按经典按 RTT 简化模型，忽略 ACK 延迟、细分增量等实现细节；SYN/FIN 各占 1 个序号，纯 ACK 不占。</p>
+<article id="s2-network19" data-training="cs408" data-course="network">
+<h4>计算机网络 19｜简化模型：初始 cwnd=1 MSS，ssthresh=8 MSS，慢启动每 RTT 翻倍，达到阈值后每 RTT 加 1 MSS。写前 6 轮窗口。若第 6 轮飞行量为 10 MSS 后超时，如何调整？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>各轮起始窗口为 1、2、4、8、9、10 MSS；到阈值后进入拥塞避免，不再翻倍到 16。</li>
+<li>按本题经典超时规则，ssthresh=max(FlightSize/2,2 MSS)=5 MSS，cwnd 重置为 1 MSS。</li>
+<li>这里依据在途量 10 来设置阈值；不能把三次重复 ACK 的快速恢复规则套到超时，也不等同于所有现代 TCP 实现。</li>
+</ol><p><strong>易错原因：</strong>到达阈值后仍指数增长；或把超时处理写成 cwnd=ssthresh 而不回到慢启动窗口。</p><p><strong>检查动作：</strong>逐轮标注慢启动/拥塞避免；发生事件先分清超时与重复 ACK。</p></details></article>
+<article id="s2-network20" data-training="cs408" data-course="network">
+<h4>计算机网络 20｜正常四段式关闭：A 主动关闭，FIN 的 seq=100；B 先纯 ACK，再发 FIN seq=200；双方无其他数据。对应 ACK 是多少？谁通常进入 TIME_WAIT？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>B 确认 A 的 FIN，ACK=101；该纯 ACK 不消耗 B 的序号。</li>
+<li>B 发 FIN seq=200，A 确认 ACK=201；A 通常进入 TIME_WAIT，按经典模型持续 2MSL。</li>
+<li>等待可支持重传最后确认、使旧报文过期；同时关闭等情形可能有不同状态组合，本题限定普通主动/被动关闭。</li>
+</ol><p><strong>易错原因：</strong>FIN 不计入序号，或把纯 ACK 也当 1 字节推进；把 TIME_WAIT 总归给服务端或客户端。</p><p><strong>检查动作：</strong>分别追踪 A、B 两个方向的序号空间；角色以谁主动关闭判断。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：三次握手中只有 SYN 是否也占序号？答：是，SYN 占 1；带数据段还应另外加数据字节数。</p></details></section>
+<section id="s2-network-m11" data-chapter="DNS 与 HTTP 轮次模型">
+<h3>11. DNS 与 HTTP 轮次模型</h3>
+<p><strong>先记条件：</strong>先说明缓存、串行/并行、连接是否复用、是否计 DNS/TLS、对象传输时长；协议版本不同不能套同一 RTT 数。</p>
+<article id="s2-network21" data-training="cs408" data-course="network">
+<h4>计算机网络 21｜客户端到本地 DNS 一次往返 2 ms；本地 DNS 依次向根、TLD、权威服务器查询，各 RTT 10 ms；缓存空、全部串行、无其他耗时。解析共多久？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>本地解析器对外三次往返共 10+10+10=30 ms。</li>
+<li>加客户端请求到答复的往返 2 ms，总计 32 ms；客户端到本地 DNS 的时延不是每次外部查询都额外计 2 ms。</li>
+</ol><p><strong>易错原因：</strong>把四类服务器理解为客户端分别跑一趟，或默认缓存命中而只算 2 ms。</p><p><strong>检查动作：</strong>画客户端与本地 DNS 的包络时间线，再把三次外部查询嵌入其中。</p></details></article>
+<article id="s2-network22" data-training="cs408" data-course="network">
+<h4>计算机网络 22｜页面含 HTML 和 3 张图片，HTTP/1.1，RTT=50 ms，忽略 DNS/TLS/数据发送与服务器处理，无并行连接。比较非持久串行、持久无流水线、持久并对 3 图流水线的总耗时。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>非持久串行每对象建 TCP 1 RTT、请求响应 1 RTT，共 4×2=8 RTT=400 ms。</li>
+<li>持久无流水线仅首次建连 1 RTT，再四个对象各 1 RTT，共 5 RTT=250 ms。</li>
+<li>持久流水线在 HTML 返回后获知三图，三图请求合并到一轮，共建连 1+HTML 1+三图 1=3 RTT=150 ms。此为理想课堂模型，不代表浏览器总是启用 HTTP/1.1 流水线。</li>
+</ol><p><strong>易错原因：</strong>把 HTML 未收到前就开始请求尚未知 URL 的图片；混入并行连接或 HTTP/2 多路复用假设。</p><p><strong>检查动作：</strong>先写依赖：建连→HTML→图片；只对允许重叠的请求合并轮次。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：HTTP 持久连接是否自动等同于 HTTP/1.1 流水线？答：不是，复用同一连接与在响应前发送后续请求是两件事。</p></details></section>
+<p>核对资料（概念参考，题目数据与解答为本站自编）：<a href="https://www.rfc-editor.org/rfc/rfc9293.html" target="_blank" rel="noopener noreferrer">RFC 9293：TCP</a>；<a href="https://www.rfc-editor.org/rfc/rfc5681.html" target="_blank" rel="noopener noreferrer">RFC 5681：经典 TCP 拥塞控制</a>；<a href="https://www.rfc-editor.org/rfc/rfc791.html" target="_blank" rel="noopener noreferrer">RFC 791：IPv4</a>；<a href="https://www.rfc-editor.org/rfc/rfc9112.html" target="_blank" rel="noopener noreferrer">RFC 9112：HTTP/1.1</a></p>
+</section>
         </div>
     </div>

@@ -76,7 +76,9 @@
                 <li><a href="#ch6">第6章 数理统计的基本概念</a></li>
                 <li><a href="#ch7">第7章 参数估计</a></li>
                 <li><a href="#ch8">第8章 假设检验</a></li>
-            </ul>
+            <li><a href="#review-checkpoints">附录：建模条件与综合自测</a></li>
+<li><a href="#phase1-probability">阶段一：8 章强化与综合自测</a></li>
+</ul>
         </div>
 
         <!-- Main Content -->
@@ -646,7 +648,7 @@
             <li>若 $\mu_0$ 落在 $\mu$ 的 $1-\alpha$ 置信区间内，则不拒绝 $H_0: \mu = \mu_0$（显著性水平 $\alpha$）</li>
             <li>若 $\mu_0$ 不在 $\mu$ 的 $1-\alpha$ 置信区间内，则拒绝 $H_0: \mu = \mu_0$</li>
             </ul>
-            <p>即：<strong>假设检验的不拒绝域 = 置信区间</strong></p>
+            <p>即：<strong>对同一模型和同一显著性水平的双侧检验，置信区间等于所有未被拒绝的参数假设值的集合；样本空间中的不拒绝域与参数空间中的区间不是同一个集合。</strong></p>
             <div class="chapter-actions">
                 <a class="chapter-exam-link" href="probability-exam-types.html#ch8">查看本章常考题型 →</a>
             </div>
@@ -666,11 +668,93 @@
             <tr><td>方差（独立）</td><td>$D(aX+bY)=a^2D(X)+b^2D(Y)$</td></tr>
             <tr><td>协方差</td><td>$\mathrm{Cov}(X,Y)=E(XY)-E(X)E(Y)$</td></tr>
             <tr><td>矩估计</td><td>样本矩 = 总体矩，解方程</td></tr>
-            <tr><td>MLE</td><td>$\frac{d\ln L}{d\theta}=0$</td></tr>
+            <tr><td>MLE</td><td>在参数可行域内最大化 $L(\theta)$；内部驻点、边界与支持集限制均需检查。</td></tr>
             <tr><td>单样本 $t$ 区间</td><td>$\overline{X}\pm t_{\alpha/2}(n-1)\frac{S}{\sqrt{n}}$</td></tr>
             <tr><td>两样本 $t$ 检验</td><td>$T=\frac{\overline{X}-\overline{Y}}{S_w\sqrt{1/n_1+1/n_2}}\sim t(n_1+n_2-2)$</td></tr>
             </table>
-        </div>
+<hr>
+<h2 id="review-checkpoints">附录：建模条件与综合自测</h2>
+<p>以下为补充整理与自编例题，适合学完对应章节后闭卷自测。</p>
+
+<h3>一、先区分互斥、独立与不相关</h3>
+<p>若 $P(A),P(B)&gt;0$ 且互斥，则 $P(AB)=0\ne P(A)P(B)$，所以不独立。独立变量在二阶矩存在时不相关；反向推论需要额外条件，例如二者服从联合二维正态分布。仅知道两个边缘分布都正态仍不够。</p>
+<h3>二、例题：贝叶斯公式的分母怎么列</h3>
+<p><strong>题目：</strong>两台机器甲、乙分别生产总量的 $60\%$、$40\%$，不合格率分别为 $1\%$、$3\%$。随机抽到不合格品，来自乙的概率是多少？</p>
+<ol><li>设 $D$ 为不合格，$B$ 为乙生产；机器来源构成样本空间的划分。</li><li>$P(D)=0.6\times0.01+0.4\times0.03=0.018$。</li><li>$P(B\mid D)=0.4\times0.03/0.018=2/3$。</li></ol>
+<p><strong>易错：</strong>$P(D\mid B)=0.03$ 与 $P(B\mid D)$ 的条件方向相反。</p>
+<h3>三、例题：联合密度先确定支持域</h3>
+<p>已知 $f(x,y)=c$，$0&lt;x&lt;y&lt;1$，其余为零。支持域是面积为 $1/2$ 的三角形，归一化得 $c=2$。对固定 $x$，$y$ 的范围是 $(x,1)$，所以 $f_X(x)=2(1-x)$（$0&lt;x&lt;1$）；对固定 $y$，$x$ 的范围是 $(0,y)$，所以 $f_Y(y)=2y$（$0&lt;y&lt;1$）。</p>
+<p>于是 $E(X)=\int_0^1 2x(1-x)\,dx=1/3$。虽然边缘支持区间都是 $(0,1)$，但联合支持域不是矩形，且在 $x&gt;y$ 处联合密度为零而边缘密度乘积为正，故不独立。</p>
+<h3>四、统计推断的条件清单</h3>
+<ul><li>区分总体方差已知与未知；正态总体、方差未知时，$T=(\bar X-\mu)/(S/\sqrt n)\sim t(n-1)$，其中 $S^2=\sum(X_i-\bar X)^2/(n-1)$，样本独立同分布。</li><li>独立正态两样本且总体方差相等时，才能直接使用合并方差的两样本 $t$ 统计量。</li><li>最大似然估计先写参数空间与支持集，再比较驻点、边界和单调性，不能只解导数等于零。</li><li>“未拒绝原假设”表示证据不足，不能写成“证明原假设正确”；置信度是区间构造方法在重复抽样中的覆盖率。</li></ul>
+<p><strong>自测：</strong>独立同分布样本来自 $U(0,\theta)$（$\theta&gt;0$）。采用 $0\le x\le\theta$ 的密度版本时，似然为 $\theta^{-n}\mathbf1_{\{\theta\ge X_{(n)}\}}$，在可行域单调递减，最大似然估计为 $\hat\theta=X_{(n)}$，不是某个内部驻点。</p>
+<p>概念核对：<a href="https://www.ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2014/resources/readings/">MIT 概率统计阅读资料</a>（条件概率、联合分布与推断）。例题为自编。</p>
+
+
+
+<hr>
+<h2 id="phase1-probability">阶段一：数学一概率统计逐章强化</h2>
+<p>8 个章节单元，16 道自编解析题。分布函数先验单调性与端点，统计推断先验模型、分位数约定和自由度。</p>
+<ul>
+<li><a href="#p1-p01">事件、条件概率与贝叶斯</a></li>
+<li><a href="#p1-p02">分布函数、原子概率与函数分布</a></li>
+<li><a href="#p1-p03">联合密度、条件密度与卷积</a></li>
+<li><a href="#p1-p04">数字特征、协方差与相关性</a></li>
+<li><a href="#p1-p05">大数定律、切比雪夫与中心极限定理</a></li>
+<li><a href="#p1-p06">正态样本与抽样分布</a></li>
+<li><a href="#p1-p07">参数估计：边界、无偏性与区间</a></li>
+<li><a href="#p1-p08">区间与检验：自由度、方向和结论</a></li>
+</ul>
+<section id="p1-p01" data-chapter="ch1"><h3>事件、条件概率与贝叶斯</h3>
+<p><strong>核心知识：</strong>条件概率分母是已知条件的概率；全概率先找互斥完备划分，贝叶斯是由结果反推来源。</p><p><strong>条件与边界：</strong>$P(A\mid B)$ 要求 $P(B)&gt;0$；正概率互斥事件不独立。独立不是“不相交”。</p>
+<article id="p1-p01-basic" data-level="basic"><h4>基础题（自编）</h4><p>$P(A)=0.4,P(B)=0.5,P(A\cup B)=0.7$，判断独立性和互斥性。</p><details><summary>查看完整解析</summary><p>加法公式给 $P(AB)=0.4+0.5-0.7=0.2$，恰等于 $P(A)P(B)$，所以独立；交集概率非零，故不互斥。</p></details></article>
+<article id="p1-p01-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>甲来源占20%、次品率5%，乙占80%、次品率1%。已知抽到次品，来自甲的概率是多少？</p><details><summary>查看完整解析</summary><p>设 $D$ 为次品，$P(D)=0.2(0.05)+0.8(0.01)=0.018$。$P(\text{甲}\mid D)=0.01/0.018=5/9$，不是5%。先验来源比例小，但条件次品率高，后验需同时考虑两因素。</p></details></article>
+<p><strong>反例与易错：</strong>掷一枚公平骰子，事件“点数1”和“点数2”互斥，却不独立，因交集0而概率乘积 $1/36$。</p><details class="phase1-selftest"><summary>闭卷自测：交换条件方向时只交换符号、不改分母可以吗？</summary><p>不可以，条件样本空间改变，须用联合概率和对应分母重算。</p></details>
+<p><a href="#ch1">回到本章知识</a> · <a href="../notes.html#phase1-note-probability">复习建模笔记</a> · <a href="../mistakes.html#error-probability">概率统计错题训练</a></p></section>
+<section id="p1-p02" data-chapter="ch2"><h3>分布函数、原子概率与函数分布</h3>
+<p><strong>核心知识：</strong>分布函数右连续且单调不减；跳跃大小是点概率。变量变换先求值域和单调区间，必要时用分布函数法处理多个原像。</p><p><strong>条件与边界：</strong>$P(X=a)=F(a)-F(a-)$，不能在跳跃点直接把 $F(a)$ 视为点概率；密度只描述连续部分。</p>
+<article id="p1-p02-basic" data-level="basic"><h4>基础题（自编）</h4><p>$F(x)=0$（$x&lt;0$），$F(x)=1/4$（$0\le x&lt;1$），$F(x)=1-\frac34e^{-(x-1)}$（$x\ge1$）。求 $P(X=0),P(X=1),P(X&gt;2)$。</p><details><summary>查看完整解析</summary><p>0处跳跃 $1/4$，故 $P(X=0)=1/4$。1处左右极限均为 $1/4$，故 $P(X=1)=0$。尾概率 $1-F(2)=3/(4e)$。这是离散原子和连续部分混合的分布。</p></details></article>
+<article id="p1-p02-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>$X\sim U(-1,2)$，令 $Y=X^2$，求分布函数。</p><details><summary>查看完整解析</summary><p>$0\le Y&lt;4$。$0\le y&lt;1$ 时事件 $-\sqrt y\le X\le\sqrt y$ 的长度 $2\sqrt y$，所以 $F_Y=2\sqrt y/3$；$1\le y&lt;4$ 时左边截到支持端点 $-1$，长度 $1+\sqrt y$，故 $F_Y=(1+\sqrt y)/3$。$y&lt;0$ 时0，$y\ge4$ 时1。两段在1处都为 $2/3$。</p></details></article>
+<p><strong>反例与易错：</strong>$Y=X^2$ 在跨过0的支持区间上不单调，只取正平方根会漏概率。</p><details class="phase1-selftest"><summary>闭卷自测：连续型变量在某点密度为2，该点概率就是2吗？</summary><p>不是，连续型变量的单点概率仍为0，密度不是点概率。</p></details>
+<p><a href="#ch2">回到本章知识</a> · <a href="../notes.html#phase1-note-probability">复习建模笔记</a> · <a href="../mistakes.html#error-probability">概率统计错题训练</a></p></section>
+<section id="p1-p03" data-chapter="ch3"><h3>联合密度、条件密度与卷积</h3>
+<p><strong>核心知识：</strong>先画联合支持域，固定一个变量读取另一个变量范围；独立时联合密度几乎处处等于边缘密度乘积。和的密度可用卷积。</p><p><strong>条件与边界：</strong>条件密度分母为正；卷积公式的积分区间要同时满足两个密度的支持条件。</p>
+<article id="p1-p03-basic" data-level="basic"><h4>基础题（自编）</h4><p>$f_{X,Y}(x,y)=2$（$0&lt;x&lt;y&lt;1$），求 $f_Y(y)$、$f_{X\mid Y}(x\mid y)$ 和 $E(X\mid Y=y)$。</p><details><summary>查看完整解析</summary><p>固定 $y\in(0,1)$，$x$ 从0到 $y$，故 $f_Y(y)=2y$。条件密度 $2/(2y)=1/y$（$0&lt;x&lt;y$），即 $U(0,y)$，条件均值 $y/2$；其他处条件密度为0。</p></details></article>
+<article id="p1-p03-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>独立 $X,Y\sim U(0,1)$，求 $Z=X+Y$ 的密度。</p><details><summary>查看完整解析</summary><p>卷积为 $\int f_X(x)f_Y(z-x)dx$。需 $0&lt;x&lt;1$ 且 $z-1&lt;x&lt;z$；$0&lt;z&lt;1$ 时交集长度 $z$，$1\le z&lt;2$ 时长度 $2-z$，其他处0。两段面积各 $1/2$，总积分1。</p></details></article>
+<p><strong>反例与易错：</strong>三角形支持域中的变量通常不能仅凭边缘区间相同就当成独立；须检查联合密度或事件概率。</p><details class="phase1-selftest"><summary>闭卷自测：卷积一定从0积到1吗？</summary><p>不一定，范围是两个支持条件的交集，可能随 $z$ 改变而分段。</p></details>
+<p><a href="#ch3">回到本章知识</a> · <a href="../notes.html#phase1-note-probability">复习建模笔记</a> · <a href="../mistakes.html#error-probability">概率统计错题训练</a></p></section>
+<section id="p1-p04" data-chapter="ch4"><h3>数字特征、协方差与相关性</h3>
+<p><strong>核心知识：</strong>期望线性不要求独立；方差展开保留协方差。独立且二阶矩有限则不相关，反向一般不成立；联合正态才可用不相关推出独立。</p><p><strong>条件与边界：</strong>$$\operatorname{Var}(aX+bY)=a^2D(X)+b^2D(Y)+2ab\operatorname{Cov}(X,Y)$$，不要漏交叉项。</p>
+<article id="p1-p04-basic" data-level="basic"><h4>基础题（自编）</h4><p>已知 $$D(X)=4,D(Y)=9,\operatorname{Cov}(X,Y)=-3$$，求 $D(X+2Y)$ 与相关系数。</p><details><summary>查看完整解析</summary><p>$D(X+2Y)=4+4(9)+4(-3)=28$。相关系数 $\rho=-3/(2\cdot3)=-1/2$。协方差是负数时仍需连同系数符号一起代入。</p></details></article>
+<article id="p1-p04-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>$X\sim U(-1,1),Y=X^2$，求协方差并判断独立性。</p><details><summary>查看完整解析</summary><p>$E(X)=0,E(Y)=1/3,E(XY)=E(X^3)=0$，故协方差0。事件 $A=\{X&gt;1/2\}$、$B=\{Y&lt;1/4\}$ 分别概率 $1/4,1/2$，但交集空，$P(AB)=0\ne1/8$，所以不独立。</p></details></article>
+<p><strong>反例与易错：</strong>两个边缘分布均为正态并不保证联合二维正态，不能省略“联合”二字。</p><details class="phase1-selftest"><summary>闭卷自测：计算 $E(X+Y)$ 前必须先证明独立吗？</summary><p>期望存在时不必，线性性本身足够。</p></details>
+<p><a href="#ch4">回到本章知识</a> · <a href="../notes.html#phase1-note-probability">复习建模笔记</a> · <a href="../mistakes.html#error-probability">概率统计错题训练</a></p></section>
+<section id="p1-p05" data-chapter="ch5"><h3>大数定律、切比雪夫与中心极限定理</h3>
+<p><strong>核心知识：</strong>大数定律描述样本均值的概率收敛，中心极限定理描述标准化和的近似分布；切比雪夫给概率界，正态近似给近似值。</p><p><strong>条件与边界：</strong>独立同分布且有限非零方差是常用中心极限定理条件；标准化均值用 $\sigma/\sqrt n$，和用 $\sigma\sqrt n$。</p>
+<article id="p1-p05-basic" data-level="basic"><h4>基础题（自编）</h4><p>独立同分布样本有均值2、方差4，$n=100$。用切比雪夫不等式给出 $P(|\bar X-2|&lt;0.5)$ 的下界。</p><details><summary>查看完整解析</summary><p>$D(\bar X)=4/100$，故 $$P(|\bar X-2|\ge0.5)\le(4/100)/0.25=0.16$$。补事件概率至少 $0.84$。这是保证下界，不是精确概率。</p></details></article>
+<article id="p1-p05-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>$S\sim B(100,1/2)$，用带连续性修正的正态近似求 $P(40\le S\le60)$。给 $\Phi(2.1)=0.9821$。</p><details><summary>查看完整解析</summary><p>均值50、标准差5。离散整数区间近似为连续区间 $[39.5,60.5]$，标准化得 $[-2.1,2.1]$，故概率近似 $2\Phi(2.1)-1=0.9642$。不修正会得到另一近似值，须标清所用口径。</p></details></article>
+<p><strong>反例与易错：</strong>“样本量大”不会把总体本身变成正态；中心极限定理针对标准化和或均值。</p><details class="phase1-selftest"><summary>闭卷自测：切比雪夫下界0.84是否表示真实概率恰为0.84？</summary><p>不是，它只保证不低于这个界。</p></details>
+<p><a href="#ch5">回到本章知识</a> · <a href="../notes.html#phase1-note-probability">复习建模笔记</a> · <a href="../mistakes.html#error-probability">概率统计错题训练</a></p></section>
+<section id="p1-p06" data-chapter="ch6"><h3>正态样本与抽样分布</h3>
+<p><strong>核心知识：</strong>对独立正态样本，$\bar X$ 与无偏样本方差 $S^2$ 独立，$(n-1)S^2/\sigma^2\sim\chi^2(n-1)$；用 $S$ 标准化均值得 $t$ 分布。</p><p><strong>条件与边界：</strong>$S^2=\sum(X_i-\bar X)^2/(n-1)$；这里的精确抽样分布依赖总体正态，不能无条件搬到任意总体。</p>
+<article id="p1-p06-basic" data-level="basic"><h4>基础题（自编）</h4><p>$n=10$、总体方差4，样本独立同分布。求 $E(\bar X),D(\bar X),E(S^2)$。</p><details><summary>查看完整解析</summary><p>$E(\bar X)=\mu,D(\bar X)=4/10=0.4$。按分母 $n-1$ 定义的 $S^2$ 无偏，故 $E(S^2)=4$。这些矩结论不需要正态，但下一题的精确分布需要。</p></details></article>
+<article id="p1-p06-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>$X_1,\ldots,X_8$ 来自 $N(\mu,\sigma^2)$。求 $Q=\sum(X_i-\bar X)^2/\sigma^2$ 的分布、期望、方差，以及 $\sqrt8(\bar X-\mu)/S$ 的分布。</p><details><summary>查看完整解析</summary><p>$Q=7S^2/\sigma^2\sim\chi^2(7)$，故 $E(Q)=7,D(Q)=14$。由于均值与样本方差独立，$\sqrt8(\bar X-\mu)/S\sim t(7)$。自由度损失1源于估计了样本均值。</p></details></article>
+<p><strong>反例与易错：</strong>分母为 $n$ 的样本二阶中心矩，其期望为 $(n-1)\sigma^2/n$，不是无偏样本方差。</p><details class="phase1-selftest"><summary>闭卷自测：把总体均值已知当作未知估计时，平方和自由度为何可能变化？</summary><p>围绕已知真均值的标准化平方和为 $\chi^2(n)$；围绕样本均值则为 $\chi^2(n-1)$。</p></details>
+<p><a href="#ch6">回到本章知识</a> · <a href="../notes.html#phase1-note-probability">复习建模笔记</a> · <a href="../mistakes.html#error-probability">概率统计错题训练</a></p></section>
+<section id="p1-p07" data-chapter="ch7"><h3>参数估计：边界、无偏性与区间</h3>
+<p><strong>核心知识：</strong>矩估计把总体矩与样本矩对应；最大似然在参数可行域内取最大值。无偏性是期望等于参数；置信区间须从枢轴量解不等式。</p><p><strong>条件与边界：</strong>参数空间、支持集和边界都写入似然。以下分位数记为累计概率分位数 $P(T\le t_q)=q$，与上侧分位点记法区分。</p>
+<article id="p1-p07-basic" data-level="basic"><h4>基础题（自编）</h4><p>独立伯努利样本共 $n$ 次、成功 $k$ 次，参数 $p\in[0,1]$。求最大似然估计，含 $k=0,n$。</p><details><summary>查看完整解析</summary><p>似然 $L(p)=p^k(1-p)^{n-k}$。$0&lt;k&lt;n$ 时对数导数 $k/p-(n-k)/(1-p)=0$，得 $p=k/n$，二阶导为负；$k=0$ 时 $(1-p)^n$ 在0最大，$k=n$ 时 $p^n$ 在1最大。统一为 $\hat p=k/n$。</p></details></article>
+<article id="p1-p07-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>样本来自 $U(0,\theta)$（取密度版本 $0\le x\le\theta$），求矩估计、MLE 及 MLE 的无偏修正。</p><details><summary>查看完整解析</summary><p>$E(X)=\theta/2$，故矩估计 $2\bar X$。令 $M=X_{(n)}$，似然为 $$\theta^{-n}\mathbf1_{\{\theta\ge M\}}$$，在可行域递减，MLE 为 $M$。$P(M\le m)=(m/\theta)^n$，积分得 $E(M)=n\theta/(n+1)$，故 $(n+1)M/n$ 无偏。</p></details></article>
+<p><strong>反例与易错：</strong>MLE 不一定无偏，上题最大次序统计量就是有偏估计；无偏也不能单独说明估计精度最好。</p><details class="phase1-selftest"><summary>闭卷自测：正态总体方差未知时，均值双侧区间宽度中的标准误是什么？</summary><p>$S/\sqrt n$，不是 $S^2/n$；再乘 $t_{1-\alpha/2}(n-1)$。</p></details>
+<p><a href="#ch7">回到本章知识</a> · <a href="../notes.html#phase1-note-probability">复习建模笔记</a> · <a href="../mistakes.html#error-probability">概率统计错题训练</a></p></section>
+<section id="p1-p08" data-chapter="ch8"><h3>区间与检验：自由度、方向和结论</h3>
+<p><strong>核心知识：</strong>先写原假设与备择再选统计量和拒绝域。正态均值已知方差用 $Z$，未知用 $t$；方差检验用 $\chi^2$，双总体方差比较用 $F$ 并核对独立正态条件。</p><p><strong>条件与边界：</strong>本节分位数为累计概率分位数。双侧区间的对偶对应同一模型、同一显著性水平的双侧检验，不能直接套到单侧。</p>
+<article id="p1-p08-basic" data-level="basic"><h4>基础题（自编）</h4><p>正态总体方差未知，$n=9,\bar x=5,S=1.5$。给 $t_{0.975}(8)=2.306$，求均值95%双侧区间。</p><details><summary>查看完整解析</summary><p>由 $$(\bar X-\mu)/(S/\sqrt n)\sim t(8)$$，区间为 $5\pm2.306(1.5/3)=5\pm1.153$，即 $[3.847,6.153]$。自由度8，标准误0.5。</p></details></article>
+<article id="p1-p08-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>正态总体方差已知为4，$n=25,\bar x=10.8$。检验 $H_0:\mu=10$ 对 $H_1:\mu&gt;10$，$\alpha=0.05$，给 $z_{0.95}=1.645$。</p><details><summary>查看完整解析</summary><p>在 $H_0$ 下，$Z=(10.8-10)/(2/\sqrt{25})=2$。这是右侧检验，拒绝域 $Z&gt;1.645$，所以拒绝 $H_0$，样本提供均值大于10的统计证据。不能误用双侧临界值或把结论写成无条件确定的事实。</p></details></article>
+<p><strong>反例与易错：</strong>$p=0.08&gt;\alpha=0.05$ 时只能不拒绝原假设，不等于证明其正确，也不是“原假设正确的概率为8%”。</p><details class="phase1-selftest"><summary>闭卷自测：方差未知的两样本合并方差 $t$ 检验还需要什么？</summary><p>独立正态样本且两总体方差相等；自由度为 $n_1+n_2-2$，不能省略等方差前提。</p></details>
+<p><a href="#ch8">回到本章知识</a> · <a href="../notes.html#phase1-note-probability">复习建模笔记</a> · <a href="../mistakes.html#error-probability">概率统计错题训练</a></p></section>
+<p>条件核对参考：<a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm">NIST：正态均值的置信区间与覆盖率</a>。本节题目及解析为自编整理。</p>
+</div>
     </div>
 </main>
 

@@ -17,12 +17,14 @@
                 <li><a href="#第6章-图">第6章 图</a></li>
                 <li><a href="#第7章-查找">第7章 查找</a></li>
                 <li><a href="#第8章-排序">第8章 排序</a></li>
-            </ul>
+            <li><a href="#review-checkpoints">附录：算法前提与手工推演</a></li>
+<li><a href="#stage2-data">阶段 2：数据结构推演与计算专项</a></li>
+</ul>
         </div>
 
         <!-- Main Content -->
         <div class="content-card">
-<blockquote>来源：《2027王道考研·数据结构》高清版 共8章，涵盖408统考数据结构全部考点</blockquote>
+<blockquote>资料说明：原稿书目标签与对应页码尚未逐条核验，按旧笔记框架保留；本页阶段 2 题目均为自编。复习范围以目标年度正式考试大纲为准。</blockquote>
 <hr>
 <h2 id="第1章-绪论">第1章 绪论</h2>
 <h3 id="1-1-数据结构的基本概念">1.1 数据结构的基本概念</h3>
@@ -1029,6 +1031,225 @@
     <a class="chapter-exam-link" href="data-structure-exam-types.html#s9">查看本章常考题型 →</a>
 </div>
 <hr>
-<blockquote><strong>备注</strong>：本文档基于《2027王道考研·数据结构》全书书签结构及知识点体系整理，覆盖408统考数据结构科目全部内容。</blockquote>
+<blockquote><strong>备注</strong>：原稿沿用数据结构八章框架；新增推演训练见阶段 2 专项。章节存在不等于全部考点已逐项审定，书目与页码对应仍待原资料核对。</blockquote>
+<hr>
+<h2 id="review-checkpoints">附录：算法前提与手工推演</h2>
+<p>以下为补充整理与自编例题，适合学完对应章节后闭卷自测。</p>
+
+<h3>一、算法选择先看输入条件</h3>
+<div class="table-wrapper"><table><tr><th>任务</th><th>前提</th><th>易错点</th></tr>
+<tr><td>折半查找</td><td>有序顺序表，可按下标随机访问</td><td>链表不能直接获得同样的随机访问效率；重复关键字要明确找任意位置还是边界。</td></tr>
+<tr><td>Dijkstra</td><td>单源最短路径，边权非负</td><td>含负边时不能套用其贪心正确性；它也不是最小生成树算法。</td></tr>
+<tr><td>拓扑排序</td><td>有向无环图</td><td>输出顶点少于总数说明有环；序列可以不唯一。</td></tr>
+<tr><td>Prim / Kruskal</td><td>无向带权连通图求最小生成树</td><td>负权允许；不连通时只能得到生成森林。</td></tr>
+<tr><td>BFS 最短路</td><td>无权图或边权相同的图</td><td>层数反映边数，不能直接代替任意带权最短距离。</td></tr></table></div>
+<h3>二、自编例题：排序稳定性</h3>
+<p>记录为 $(2,a),(2,b),(1,c)$，按第一个分量排序。一趟直接选择排序把 $(1,c)$ 与首项交换，得到 $(1,c),(2,b),(2,a)$，两个关键字为 $2$ 的记录顺序颠倒，说明直接选择排序不稳定。</p>
+<p>插入排序在移动时只移动严格大于待插关键字的记录，才能保持相等记录顺序；归并排序遇到相等关键字先取左段记录，才能保证稳定。算法名称之外，还要看比较条件。</p>
+<h3>三、自编例题：含重复元素的折半边界</h3>
+<p>有序数组 $[1,2,2,2,4]$，寻找第一个大于等于 $2$ 的位置，采用零基下标和左闭右开区间。</p>
+<pre><code>left = 0; right = n
+while left &lt; right:
+    mid = left + (right - left) // 2
+    if a[mid] &lt; target:
+        left = mid + 1
+    else:
+        right = mid
+# left 是插入位置；判定找到还需 left &lt; n 且 a[left] == target</code></pre>
+<p>区间依次为 $[0,5)\to[0,2)\to[0,1)\to[1,1)$，返回 $1$。循环终止时不能无条件访问 $a[left]$，因为插入位置可能为 $n$。</p>
+<h3>四、闭卷自测</h3>
+<p>含 $n$ 个顶点、$m$ 条边的图，用邻接表遍历全部顶点和边，时间复杂度为 $O(n+m)$；若用邻接矩阵，则为 $O(n^2)$。非连通图需要从尚未访问的顶点继续启动遍历。把“算法名、存储结构、输入前提”一起写入答案。</p>
+
+
+<section id="stage2-data">
+<h2>阶段 2：数据结构 · 推演与计算专项</h2>
+<p><a href="../notes.html#note-data">本课核心笔记</a> · <a href="../mistakes.html#error-data">本课易错题复盘</a></p>
+<p>以下题目均为自编训练，不标注为历年真题。每组先复习适用条件，再独立作答，最后展开解析。编号固定，便于个人笔记和错题本回链。</p>
+<ul>
+<li><a href="#s2-data-m1">复杂度与递归代价</a></li>
+<li><a href="#s2-data-m2">链表操作与指针不变量</a></li>
+<li><a href="#s2-data-m3">栈、循环队列与表达式</a></li>
+<li><a href="#s2-data-m4">压缩存储与 KMP 前缀函数</a></li>
+<li><a href="#s2-data-m5">二叉树还原与 Huffman 代价</a></li>
+<li><a href="#s2-data-m6">BST、AVL 与查找路径</a></li>
+<li><a href="#s2-data-m7">多路查找树与散列探测</a></li>
+<li><a href="#s2-data-m8">图遍历、拓扑与关键路径</a></li>
+<li><a href="#s2-data-m9">最短路径与最小生成树</a></li>
+<li><a href="#s2-data-m10">内排序与外归并</a></li>
+</ul>
+<section id="s2-data-m1" data-chapter="复杂度与递归代价">
+<h3>1. 复杂度与递归代价</h3>
+<p><strong>先记条件：</strong>先明确基本操作、循环边界和规模变量；递归时间、递归栈空间分别计算。</p>
+<article id="s2-data01" data-training="cs408" data-course="data">
+<h4>数据结构 01｜循环 i 从 1 到 n，内层 j 从 i 到 n，每次执行一次加法。求总次数与时间阶。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>第 i 轮有 n−i+1 次；总数为 n+(n−1)+…+1=n(n+1)/2。</li>
+<li>最高次项是 n²/2，故为 Θ(n²)，不是把内层的变化下界忽略后直接写精确 n²。</li>
+</ol><p><strong>易错原因：</strong>把上界 O(n²) 当作精确执行次数。</p><p><strong>检查动作：</strong>用 n=1、2 分别代入，次数应为 1、3。</p></details></article>
+<article id="s2-data02" data-training="cs408" data-course="data">
+<h4>数据结构 02｜n 是 2 的幂，T(1)=1，T(n)=2T(n/2)+n。求精确表达式与递归栈阶。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>每个非叶层总代价为 n，共 log₂n 层；叶节点 n 个，各耗时 1。</li>
+<li>T(n)=n log₂n+n，时间 Θ(n log n)。深度优先顺序执行两个递归分支且每层仅保存常量状态时，递归栈为 Θ(log n)。</li>
+</ol><p><strong>易错原因：</strong>把递归树总节点数当成同时存活的栈帧数；额外数组空间还应另外计算。</p><p><strong>检查动作：</strong>n=4 时 T=12；空间分析先画任一时刻的调用链。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：循环次数 n(n+1)/2 与 O(n²) 是否同一类结论？答：前者为精确次数，后者为渐近上界；描述不同。</p></details></section>
+<section id="s2-data-m2" data-chapter="链表操作与指针不变量">
+<h3>2. 链表操作与指针不变量</h3>
+<p><strong>先记条件：</strong>带头结点的空表是 H.next 为空；头结点不作为数据结点参与反转。释放前先保存后继。</p>
+<article id="s2-data03" data-training="cs408" data-course="data">
+<h4>数据结构 03｜带头结点单链表 H→A→B→C，删除首个数据结点，写出安全操作。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>先确认 H.next 非空；令 q=H.next，保存待删结点。</li>
+<li>执行 H.next=q.next，链变为 H→B→C；最后释放 q。时间 O(1)。</li>
+</ol><p><strong>易错原因：</strong>先释放 A 再读 A.next，造成失效访问；或把头结点 H 误删。</p><p><strong>检查动作：</strong>空表不删；只有 A 时删后 H.next 应为空。</p></details></article>
+<article id="s2-data04" data-training="cs408" data-course="data">
+<h4>数据结构 04｜原地反转带头结点链表 H→1→2→3，给出指针步骤和复杂度。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>初始化 prev=空，cur=H.next。每轮先 next=cur.next，再 cur.next=prev，最后 prev=cur，cur=next。</li>
+<li>三轮已反转部分依次为 1→空、2→1→空、3→2→1→空；终止后 H.next=prev。</li>
+<li>时间 O(n)，额外空间 O(1)；循环不变量：prev 指向已反转部分，cur 指向尚未处理部分。</li>
+</ol><p><strong>易错原因：</strong>改 next 指针后才找原后继，使剩余链丢失。</p><p><strong>检查动作：</strong>逐轮检查每个结点恰在已处理或未处理链中；空表、单结点也成立。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：只反转局部链而不更新 H.next 会怎样？答：头结点仍指向原首结点，无法从 H 遍历完整新链。</p></details></section>
+<section id="s2-data-m3" data-chapter="栈、循环队列与表达式">
+<h3>3. 栈、循环队列与表达式</h3>
+<p><strong>先记条件：</strong>循环队列采用 front 指向首元素、rear 指向下一空位，牺牲一个存储单元；后缀计算先弹右操作数。</p>
+<article id="s2-data05" data-training="cs408" data-course="data">
+<h4>数据结构 05｜循环数组容量 5，front=1、rear=4，牺牲一个单元。队长多少？再入队一次后是否满？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>队长 (rear−front+5)%5=3。</li>
+<li>入队写入下标 4 后 rear=(4+1)%5=0，队长变为 4；(rear+1)%5=1=front，队满。最大可存 4 个元素。</li>
+</ol><p><strong>易错原因：</strong>把 rear=front 解释成满；该约定下它表示空。</p><p><strong>检查动作：</strong>画 0～4 五个格子，把保留空位单独标出。</p></details></article>
+<article id="s2-data06" data-training="cs408" data-course="data">
+<h4>数据结构 06｜计算后缀表达式 3 4 2 * + 5 −，列出操作数栈。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>读入 3、4、2，栈为 [3,4,2]；乘法弹出 2、4，压入 8，栈 [3,8]。</li>
+<li>加法得到 [11]；读 5 得 [11,5]；减法是 11−5，结果 [6]。</li>
+</ol><p><strong>易错原因：</strong>先弹出的 5 是右操作数，不能计算为 5−11。</p><p><strong>检查动作：</strong>每个二元运算消耗两个数并压入一个；最终栈中恰有一个结果。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：若改用计数器判断满，容量是否仍只能用 4？答：不必；可以用满 5，但空满判定规则必须随之改变。</p></details></section>
+<section id="s2-data-m4" data-chapter="压缩存储与 KMP 前缀函数">
+<h3>4. 压缩存储与 KMP 前缀函数</h3>
+<p><strong>先记条件：</strong>地址题先声明下标起点、存储顺序和元素字节数；KMP 的 π、next、nextval 定义不可混用。</p>
+<article id="s2-data07" data-training="cs408" data-course="data">
+<h4>数据结构 07｜4 阶下三角矩阵含主对角线，按行紧凑存储，零基下标。基址 1000，每元素 4 字节，求 A[3,1] 地址。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>第 3 行前共有 1+2+3=6 个元素；本行前有 1 个，所以紧凑下标为 7。</li>
+<li>地址为 1000+7×4=1028。总存储元素数为 4×5/2=10。</li>
+</ol><p><strong>易错原因：</strong>把主对角线遗漏，或把零基下标直接套一基公式。</p><p><strong>检查动作：</strong>A[0,0] 应落在基址；A[3,3] 应是最后一个元素，下标 9。</p></details></article>
+<article id="s2-data08" data-training="cs408" data-course="data">
+<h4>数据结构 08｜模式串 ababaca，π[i] 定义为前缀 s[0..i] 的最长真前后缀长度。求 π 数组。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>逐项得到 [0,0,1,2,3,0,1]。例如 ababa 的最长真前后缀为 aba，长度 3。</li>
+<li>处理下标 5 的 c：候选 j=3，比较 s[3]=b 失败，退到 π[2]=1；s[1]=b 仍失败，退到 π[0]=0，s[0]=a 仍失败，因此 π[5]=0。</li>
+<li>最后一个 a 与 s[0] 相等，所以 π[6]=1。</li>
+</ol><p><strong>易错原因：</strong>失配时 j 只减 1，或将 π 值当成另一套一基 next 下标。</p><p><strong>检查动作：</strong>对每项验证 0≤π[i]≤i，并实际截取长度为 π[i] 的前缀、后缀比较。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：KMP 失配是否需要把文本指针回退？答：标准实现只沿前缀函数回退模式状态，文本指针不回退。</p></details></section>
+<section id="s2-data-m5" data-chapter="二叉树还原与 Huffman 代价">
+<h3>5. 二叉树还原与 Huffman 代价</h3>
+<p><strong>先记条件：</strong>先序与中序且结点标识互异才能唯一还原；Huffman 每次合并最小的两个权值，WPL 等于合并权值之和。</p>
+<article id="s2-data09" data-training="cs408" data-course="data">
+<h4>数据结构 09｜先序为 A B D E C F，中序为 D B E A C F，求后序。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>先序首项 A 为根；中序分为左 D B E、右 C F。</li>
+<li>左子树根 B，左右分别 D、E；右子树根 C，只有右孩子 F。</li>
+<li>后序依次为 D E B、F C、A，即 D E B F C A。</li>
+</ol><p><strong>易错原因：</strong>把中序中的左右范围按字符顺序猜测；未核对子树结点集合。</p><p><strong>检查动作：</strong>把还原树再输出一次先序与中序，应与题设完全一致。</p></details></article>
+<article id="s2-data10" data-training="cs408" data-course="data">
+<h4>数据结构 10｜权值 2、3、7、9 构造二叉 Huffman 树，求 WPL。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>合并 2+3=5；再合并 5+7=12；最后合并 9+12=21。</li>
+<li>WPL=5+12+21=38；按深度核算为 2×3+3×3+7×2+9×1=38。</li>
+</ol><p><strong>易错原因：</strong>把根的权值 21 当作 WPL；或按原输入相邻而不是当前最小合并。</p><p><strong>检查动作：</strong>用叶权乘深度与全部合并值求和两种方式交叉核对。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：只有先序和后序能否一般唯一还原？答：不能；仅一个孩子时无法判断它是左孩子还是右孩子。</p></details></section>
+<section id="s2-data-m6" data-chapter="BST、AVL 与查找路径">
+<h3>6. BST、AVL 与查找路径</h3>
+<p><strong>先记条件：</strong>BST 的中序有序；删除双孩子结点可以使用中序后继；AVL 必须从插入点向上找首个失衡祖先。</p>
+<article id="s2-data11" data-training="cs408" data-course="data">
+<h4>数据结构 11｜依次插入 30、10、40、20、35 构造 BST。查 20 比较几次？用中序后继删除 30 后的根是什么？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>树根 30，左孩子 10（右孩子 20），右孩子 40（左孩子 35）。</li>
+<li>查 20 路径为 30→10→20，共 3 次关键字比较。</li>
+<li>30 的后继是右子树最小结点 35；以 35 替代根并删除原叶 35，新树根 35，右孩子 40。</li>
+</ol><p><strong>易错原因：</strong>把右孩子 40 直接认作后继；忽略它的左子树。</p><p><strong>检查动作：</strong>删除后中序应为 10、20、35、40，保持严格递增。</p></details></article>
+<article id="s2-data12" data-training="cs408" data-course="data">
+<h4>数据结构 12｜向空 AVL 树插入 30、10、20、40、50，给出两次调整与最终结构。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>插入 20 后，30 的左孩子 10 的右侧过高，属于 LR：先左旋 10，再右旋 30；得到根 20、左 10、右 30。</li>
+<li>插入 40、50 后，首个失衡祖先为 30，属于 RR，对 30 左旋。</li>
+<li>最终根 20，左孩子 10；右孩子 40，40 的左右孩子为 30、50。</li>
+</ol><p><strong>易错原因：</strong>按新结点相对整棵树根的方向选旋转，而非相对首个失衡祖先。</p><p><strong>检查动作：</strong>每个结点左右高度差至多 1；中序仍为 10、20、30、40、50。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：AVL 与红黑树是否都要求每个结点左右子树高度差至多 1？答：只有 AVL 有此要求；红黑树依据颜色与黑高约束平衡。</p></details></section>
+<section id="s2-data-m7" data-chapter="多路查找树与散列探测">
+<h3>7. 多路查找树与散列探测</h3>
+<p><strong>先记条件：</strong>本组 m 阶 B 树指最多 m 个孩子、m−1 个关键字，根有例外；散列失败查找须计入遇到首个空位的探测。</p>
+<article id="s2-data13" data-training="cs408" data-course="data">
+<h4>数据结构 13｜5 阶 B 树非根结点最少多少关键字？向空树依次插入 1～5，采用溢出后分裂。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>非根内部结点最少 ceil(5/2)=3 个孩子，故最少 2 个关键字；最多 4 个关键字。</li>
+<li>插入 1～4 后根含 [1,2,3,4]；插入 5 后暂有 5 个关键字，提升中间的 3。</li>
+<li>新根 [3]，两叶分别 [1,2]、[4,5]。根可仅含 1 个关键字。</li>
+</ol><p><strong>易错原因：</strong>将阶数误认为最大关键字数；把非根最少关键字数限制套在根上。</p><p><strong>检查动作：</strong>所有叶深度一致；提升的 3 不再留在 B 树叶中。B+ 树的叶层规则另论。</p></details></article>
+<article id="s2-data14" data-training="cs408" data-course="data">
+<h4>数据结构 14｜表长 7，h(k)=k mod 7，线性探测插入 10、17、24、31。成功 ASL 与查找 38 的探测次数是多少？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>四个关键字初始地址都是 3，依次占据下标 3、4、5、6，成功比较次数分别 1、2、3、4。</li>
+<li>等概率成功 ASL=(1+2+3+4)/4=2.5。</li>
+<li>查 38 从 3 出发，检查 3、4、5、6 后在 0 发现空位，共 5 次探测，失败。</li>
+</ol><p><strong>易错原因：</strong>失败查找只算已有元素的比较，不算确认终止的空位；或忘记回绕。</p><p><strong>检查动作：</strong>探测序列按 (h+i)%7 写全；删除时不能随意清空冲突链中的位置。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：B+ 树范围查询为何常用叶链？答：定位起点后沿有序叶链扫描，无需反复从根查找；具体阶数定义以题设为准。</p></details></section>
+<section id="s2-data-m8" data-chapter="图遍历、拓扑与关键路径">
+<h3>8. 图遍历、拓扑与关键路径</h3>
+<p><strong>先记条件：</strong>遍历结果依赖邻接次序；AOE 关键路径分析需要 DAG，最早、最迟事件时间不是顶点入度。</p>
+<article id="s2-data15" data-training="cs408" data-course="data">
+<h4>数据结构 15｜无向图边 AB、AC、BD、CD、CE，从 A 开始，邻接点按字母序访问。写 BFS、DFS 序列。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>BFS：A 出队发现 B、C；B 发现 D；C 发现 E，得到 A B C D E。入队时即标记已访问。</li>
+<li>DFS：A→B→D→C→E，得到 A B D C E；回退时跳过访问过的顶点。</li>
+</ol><p><strong>易错原因：</strong>队列出队时才标记而造成重复入队；未声明邻接次序却声称序列唯一。</p><p><strong>检查动作：</strong>每个顶点输出一次；不同次序可以合法，但本题必须遵守字母序。</p></details></article>
+<article id="s2-data16" data-training="cs408" data-course="data">
+<h4>数据结构 16｜AOE 边 A→B:3，A→C:2，B→D:2，C→D:4，C→E:3，D→F:2，E→F:4。求工期和关键路径。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>按拓扑序 A B C D E F，最早事件 ve 为 A0、B3、C2、D6、E5、F9，工期 9。</li>
+<li>反向算 vl：F9，D7，E5，B5，C2，A0；汇合点 ve 取最大，分叉点 vl 取最小。</li>
+<li>活动 u→v 的最早开始为 ve[u]，最迟开始为 vl[v]−w；相等的活动为 A→C、C→E、E→F。关键路径 A C E F。</li>
+</ol><p><strong>易错原因：</strong>正向汇合取最小，误做最短路；仅凭事件最早最迟相等就把相邻边都判关键。</p><p><strong>检查动作：</strong>沿关键路径长度 2+3+4=9，并逐条验活动时差。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：拓扑排序输出顶点数小于总数说明什么？答：存在有向环；不一定是图不连通，非连通 DAG 也能全部输出。</p></details></section>
+<section id="s2-data-m9" data-chapter="最短路径与最小生成树">
+<h3>9. 最短路径与最小生成树</h3>
+<p><strong>先记条件：</strong>非负边单源最短路可用 Dijkstra；MST 目标是总边权最小，不保证从某源出发的树上距离最短。</p>
+<article id="s2-data17" data-training="cs408" data-course="data">
+<h4>数据结构 17｜无向图 AD:1、AB:4、BC:2、CD:3、AC:5、BD:6。从 A 用 Dijkstra 求距离。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>初始 d(A)=0，d(D)=1，d(B)=4，d(C)=5。确定 D 后，C 改为 1+3=4，B 的候选 7 不优于 4。</li>
+<li>B、C 同为 4，任取其一先确定均可；通过 BC 不会再降低距离。</li>
+<li>最终按 A、B、C、D 排列为 0、4、4、1；可取最短路树 AD、DC、AB，总边权 8。</li>
+</ol><p><strong>易错原因：</strong>用最小出边不断连树，却不维护从源的累计距离；遇负边仍套 Dijkstra。</p><p><strong>检查动作：</strong>对每条边检查 d[v]≤d[u]+w；每个可达非源顶点有前驱实现其距离。</p></details></article>
+<article id="s2-data18" data-training="cs408" data-course="data">
+<h4>数据结构 18｜对上一题同一图用 Kruskal 求 MST，并比较 MST 中 A 到 B 的距离。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>按权排序 AD1、BC2、CD3、AB4、AC5、BD6，前三条均不形成环，已经连通 4 个顶点。</li>
+<li>MST 权为 1+2+3=6；树中 A→D→C→B 长度为 1+3+2=6，而原图 AB 直接边长度为 4。</li>
+<li>因此 MST 总权 6 小于该最短路树总权 8，但其中 A 到 B 并非原图最短路。</li>
+</ol><p><strong>易错原因：</strong>将最短路树与最小生成树混用；认为 MST 不能含负权边。</p><p><strong>检查动作：</strong>确认恰有 n−1 条边且连通无环，再单独检查所问的路径。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：不连通无向图运行 Kruskal 得到什么？答：最小生成森林，不能宣称得到覆盖所有顶点的一棵生成树。</p></details></section>
+<section id="s2-data-m10" data-chapter="内排序与外归并">
+<h3>10. 内排序与外归并</h3>
+<p><strong>先记条件：</strong>排序要区分时间、额外空间、稳定性；外排序的缓冲区须给输出留一块，磁盘 I/O 单位也要明确。</p>
+<article id="s2-data19" data-training="cs408" data-course="data">
+<h4>数据结构 19｜对 [7,2,6,3] 自底向上二路归并，列出各趟，并说明相等关键字如何保持稳定。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>初始四个长度 1 的段；第一趟两两合并为 [2,7]、[3,6]。</li>
+<li>第二趟合并为 [2,3,6,7]；比较相等时先取左段原记录，才能保持同键先后顺序。</li>
+<li>本实现时间 Θ(n log n)、辅助数组 Θ(n)；不能把快速排序最坏 Θ(n²) 或堆排序不稳定混到归并结论中。</li>
+</ol><p><strong>易错原因：</strong>只记算法名不检查相等时分支，导致实现破坏稳定性。</p><p><strong>检查动作：</strong>用带标签的等键记录验证，如左段 2a 与右段 2b 必须输出 2a 在先。</p></details></article>
+<article id="s2-data20" data-training="cs408" data-course="data">
+<h4>数据结构 20｜已有 20 个初始有序段，共 1000 磁盘块，归并阶段共 5 块缓冲区。求归并趟数和读写块次数；最终结果写回磁盘。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>留 1 块作输出，最多 4 路归并；段数依次 20→5→2→1，需要 3 趟。</li>
+<li>每趟每块读一次写一次，共 2000 次块 I/O；归并阶段总计 6000。</li>
+<li>若题目另计生成初始段且该阶段对全文件只读写一次，再加 2000，合计 8000；不能把这部分默认混入只问归并的答案。</li>
+</ol><p><strong>易错原因：</strong>将 5 个缓冲全用于输入，或只计算读不计算写。</p><p><strong>检查动作：</strong>先写段数递推，再明确是否计初始段生成、最后写出；本题两项均已说明。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：若有 6 块缓冲，20 个初始段要几趟？答：最多 5 路，20→4→1，两趟；仍须保留输出缓冲。</p></details></section>
+<p>核对资料（概念参考，题目数据与解答为本站自编）：<a href="https://opendsax.cs.vt.edu/ODSA/Books/Everything/html/BTree.html" target="_blank" rel="noopener noreferrer">OpenDSA：B 树与 B+ 树</a></p>
+</section>
         </div>
     </div>

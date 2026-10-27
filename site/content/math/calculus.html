@@ -22,7 +22,9 @@
                 <li><a href="#ch11">第十一章 无穷级数</a></li>
                 <li><a href="#ch12">第十二章 三重积分与曲线曲面积分</a></li>
                 <li><a href="#ch13">第十三章 多元积分学的应用</a></li>
-            </ul>
+            <li><a href="#review-checkpoints">附录：条件辨析与分步自测</a></li>
+<li><a href="#phase1-calculus">阶段一：13 章强化与综合自测</a></li>
+</ul>
         </div>
 
         <!-- Main Content -->
@@ -673,7 +675,7 @@
             <h4>分部积分</h4>
             <p>$\int_a^b u dv = \left.uv\right|_a^b - \int_a^b v du$</p>
             <h4>Wallis 公式（点火公式）</h4>
-            <pre><code>∫₀^π/² sinⁿx dx = 
+            <pre><code>∫₀^π/² sinⁿx dx =
   n偶: (n-1)(n-3)...1 / n(n-2)...2 · π/2
   n奇: (n-1)(n-3)...2 / n(n-2)...3 · 1</code></pre>
             <h4>区间再现公式</h4>
@@ -1293,6 +1295,128 @@
             <div class="chapter-actions">
                 <a class="chapter-exam-link" href="exam-types.html#ch12">查看本章常考题型 →</a>
             </div>
+<hr>
+<h2 id="review-checkpoints">附录：条件辨析与分步自测</h2>
+<p>以下为补充整理与自编例题，适合学完对应章节后闭卷自测。</p>
 
-        </div>
+<h3>一、使用定理前先检查什么</h3>
+<div class="table-wrapper"><table>
+<tr><th>工具</th><th>使用前检查</th><th>易错边界</th></tr>
+<tr><td>等价无穷小</td><td>通常用于乘除因子的替换；加减项先检查抵消后的阶数</td><td>$\sin x\sim x$ 不能在 $\sin x-x$ 中直接相减替换；这样会丢掉三阶项。</td></tr>
+<tr><td>洛必达法则</td><td>先确认 $0/0$ 或 $\infty/\infty$ 型、去心邻域可导、分母导数非零，并检查导数比的极限</td><td>导数比极限不存在，不能据此断定原式极限不存在。</td></tr>
+<tr><td>拉格朗日中值定理</td><td>闭区间连续、开区间可导</td><td>$f(x)=|x|$ 在 $[-1,1]$ 不满足开区间可导，不能套用。</td></tr>
+<tr><td>二元函数可微</td><td>偏导在邻域内存在且在该点连续，是常用的充分条件</td><td>只知道该点两偏导存在，不能推出连续或可微。</td></tr>
+<tr><td>级数收敛</td><td>先检查通项趋于零，再选择比较、比值或交错级数判别法</td><td>$u_n\to0$ 是必要条件；调和级数说明它并不充分。</td></tr>
+</table></div>
+<h3>二、例题：相减时必须展开到哪一阶</h3>
+<p><strong>题目：</strong>求 $\displaystyle\lim_{x\to0}\frac{\ln(1+x)-x+x^2/2}{x^3}$。</p>
+<ol><li>分子的一阶、二阶项发生抵消，应保留三阶项。</li><li>$\ln(1+x)=x-x^2/2+x^3/3+o(x^3)$。</li><li>分子为 $x^3/3+o(x^3)$，所以极限为 $1/3$。</li></ol>
+<p><strong>复盘：</strong>若只用 $\ln(1+x)\sim x$，会丢掉真正决定极限的项。</p>
+<h3>三、例题：偏导存在但不可微</h3>
+<p>令 $f(x,y)=xy/(x^2+y^2)$（$(x,y)\ne(0,0)$），$f(0,0)=0$。沿两坐标轴函数恒为零，因此 $f_x(0,0)=f_y(0,0)=0$；但沿 $y=x$，函数值为 $1/2$，故原点不连续，也不可微。</p>
+<h3>四、闭卷自测与答案</h3>
+<ol><li>$\sum_{n=1}^{\infty}(-1)^{n-1}/n$ 是什么收敛？<strong>答：</strong>由莱布尼茨判别法收敛，绝对值级数为调和级数，故条件收敛（数一/数三级数内容）。</li><li>$f'(x_0)=0$ 能否推出极值？<strong>答：</strong>不能，$f(x)=x^3$ 在零点导数为零但没有极值；应检查导数变号或其他充分条件。</li><li>计算 $\int_0^1 2x e^{x^2}\,dx$。<strong>答：</strong>令 $u=x^2$，上下限仍为 $0,1$，结果 $\int_0^1 e^u\,du=e-1$。</li></ol>
+<p>复习时将“条件漏看、展开阶数不足、边界遗漏、运算失误”分别记录到<a href="../mistakes.html">错题本</a>，重做时先写适用条件。</p>
+
+
+
+
+<hr>
+<h2 id="phase1-calculus">阶段一：数学一高等数学逐章强化</h2>
+<p>13 个章节练习单元，28 道解析题，每单元含核心条件、基础题、综合题、反例和闭卷自测；另含欧拉方程及傅里叶级数专项。题目均为自编练习。</p>
+<ul>
+<li><a href="#p1-c01">函数、极限与连续</a></li>
+<li><a href="#p1-c02">导数、微分与隐函数</a></li>
+<li><a href="#p1-c03">中值定理、单调性与参数方程</a></li>
+<li><a href="#p1-c04">不定积分：换元、分部与定义域</a></li>
+<li><a href="#p1-c05">定积分、变限积分与反常积分</a></li>
+<li><a href="#p1-c06">定积分的面积、体积与弧长</a></li>
+<li><a href="#p1-c07">常微分方程：初值与共振</a></li>
+<li><a href="#p1-c08">多元微分、可微性与约束极值</a></li>
+<li><a href="#p1-c09">二重积分：换序与极坐标</a></li>
+<li><a href="#p1-c10">向量、平面与空间直线</a></li>
+<li><a href="#p1-c11">数项级数、幂级数与端点</a></li>
+<li><a href="#p1-c12">三重积分与曲线曲面积分</a></li>
+<li><a href="#p1-c13">质量、质心与转动惯量</a></li>
+</ul>
+<section id="p1-c01" data-chapter="ch1"><h3>函数、极限与连续</h3>
+<p><strong>核心知识：</strong>先查定义域和极限类型；乘除中的等价替换要保证比值有意义，含加减抵消时保留首个非零项。</p><p><strong>条件与边界：</strong>泰勒余项除以分母后应趋于零；洛必达法先确认未定式、可导条件及分母导数非零。</p>
+<article id="p1-c01-basic" data-level="basic"><h4>基础题（自编）</h4><p>求 $$\lim_{x\to0}[\ln(1+x)-x+ax^2]/x^2$$。</p><details><summary>查看完整解析</summary><p>$\ln(1+x)=x-x^2/2+o(x^2)$，分子为 $(a-1/2)x^2+o(x^2)$，故极限为 $a-1/2$。</p></details></article>
+<article id="p1-c01-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>求使 $\lim_{x\to0}(\sin x-x+ax^3)/x^5$ 为有限值的 $a$，并求该极限。</p><details><summary>查看完整解析</summary><p>展开 $\sin x=x-x^3/6+x^5/120+o(x^5)$。商为 $(a-1/6)/x^2+1/120+o(1)$；有限极限要求 $a=1/6$，此时为 $1/120$。</p></details></article>
+<p><strong>反例与易错：</strong>$\sin x\sim x$ 不能让 $\sin x-x$ 直接变成0，抵消后的高阶项决定结果。</p><details class="phase1-selftest"><summary>闭卷自测：分母为 $x^5$，分子只展开到三阶能否直接求有限极限？</summary><p>通常不够，先判断三阶是否抵消，再保留五阶项。</p></details>
+<p><a href="#ch1">回到本章知识</a> · <a href="../notes.html#phase1-note-calculus">复习条件笔记</a> · <a href="../mistakes.html#error-calculus">高数错题训练</a></p></section>
+<section id="p1-c02" data-chapter="ch2"><h3>导数、微分与隐函数</h3>
+<p><strong>核心知识：</strong>可导必连续，连续未必可导；导数存在不要求导函数连续。隐函数二阶求导须再次用乘积法则。</p><p><strong>条件与边界：</strong>方程 $F(x,y)=0$ 确定局部可微函数时，核对 $F_y\ne0$；分段函数在分界点先用定义。</p>
+<article id="p1-c02-basic" data-level="basic"><h4>基础题（自编）</h4><p>令 $f(0)=0$，$f(x)=x^2\sin(1/x)$（$x\ne0$）。求 $f'(0)$，判断 $f'$ 在0是否连续。</p><details><summary>查看完整解析</summary><p>$f'(0)=\lim_{h\to0}h\sin(1/h)=0$。对 $x\ne0$，$f'(x)=2x\sin(1/x)-\cos(1/x)$，第二项振荡无极限，故导函数在0不连续。</p></details></article>
+<article id="p1-c02-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>$x^2+xy+y^2=3$ 确定经过 $(1,1)$ 的局部函数，求该点的 $y'$ 和 $y''$。</p><details><summary>查看完整解析</summary><p>$F_y=x+2y=3\ne0$。一次求导得 $2x+y+(x+2y)y'=0$，所以 $y'=-1$；再次求导得 $2+2y'+2(y')^2+(x+2y)y''=0$，所以 $y''=-2/3$。</p></details></article>
+<p><strong>反例与易错：</strong>$|x|$ 在0连续但不可导；本题的振荡函数说明可导也不推出导函数连续。</p><details class="phase1-selftest"><summary>闭卷自测：隐函数二阶求导时，能把 $y'$ 当作常数吗？</summary><p>不能，$y'$ 仍随 $x$ 变化，求导产生 $y''$。</p></details>
+<p><a href="#ch2">回到本章知识</a> · <a href="../notes.html#phase1-note-calculus">复习条件笔记</a> · <a href="../mistakes.html#error-calculus">高数错题训练</a></p></section>
+<section id="p1-c03" data-chapter="ch3"><h3>中值定理、单调性与参数方程</h3>
+<p><strong>核心知识：</strong>存在性证明常用辅助函数和罗尔定理；根的个数可转为水平线与函数图像的交点。</p><p><strong>条件与边界：</strong>先验闭区间连续、开区间可导，罗尔定理还要求两端函数值相同。参数讨论要含临界值。</p>
+<article id="p1-c03-basic" data-level="basic"><h4>基础题（自编）</h4><p>$f$ 在 $[0,1]$ 连续、$(0,1)$ 可导，$f(0)=f(1)=0$。证明存在 $\xi$ 使 $f'(\xi)+f(\xi)=0$。</p><details><summary>查看完整解析</summary><p>令 $g=e^xf$，则 $g(0)=g(1)=0$ 且满足罗尔条件。存在 $\xi\in(0,1)$ 使 $g'(\xi)=e^\xi[f'(\xi)+f(\xi)]=0$，除以非零的 $e^\xi$ 即得。</p></details></article>
+<article id="p1-c03-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>讨论 $\ln x=ax$（$x&gt;0$）的不同实根个数。</p><details><summary>查看完整解析</summary><p>令 $h=\ln x/x$，$h'=(1-\ln x)/x^2$；在 $(0,e)$ 增、$(e,\infty)$ 减，最大值 $1/e$。$x\to0+$ 时 $h\to-\infty$，$x\to\infty$ 时从正侧趋0。故 $a&lt;0$ 有1根，$a=0$ 有1根 $x=1$，$0&lt;a&lt;1/e$ 有2根，$a=1/e$ 有1根 $x=e$，$a&gt;1/e$ 无根。</p></details></article>
+<p><strong>反例与易错：</strong>$x^3$ 在0导数为0，却没有极值；必要条件不能反推。</p><details class="phase1-selftest"><summary>闭卷自测：$a=0$ 时能把无穷远处的极限0算作第二个根吗？</summary><p>不能，无穷远不是定义域内的点。</p></details>
+<p><a href="#ch3">回到本章知识</a> · <a href="../notes.html#phase1-note-calculus">复习条件笔记</a> · <a href="../mistakes.html#error-calculus">高数错题训练</a></p></section>
+<section id="p1-c04" data-chapter="ch4"><h3>不定积分：换元、分部与定义域</h3>
+<p><strong>核心知识：</strong>先拆项、凑微分，再考虑分部积分；结果应求导回代，含对数时保留定义域。</p><p><strong>条件与边界：</strong>不定积分常数在每个连通区间内讨论；$\int u\,dv=uv-\int v\,du$，换元须带微分因子。</p>
+<article id="p1-c04-basic" data-level="basic"><h4>基础题（自编）</h4><p>求 $\int x/(x+1)\,dx$。</p><details><summary>查看完整解析</summary><p>$x/(x+1)=1-1/(x+1)$，故结果为 $x-\ln|x+1|+C$，在不跨过 $-1$ 的区间内成立。求导可回到原式。</p></details></article>
+<article id="p1-c04-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>计算 $\int_0^1x\ln(1+x)\,dx$。</p><details><summary>查看完整解析</summary><p>取 $u=\ln(1+x),dv=x\,dx$，得 $$\ln2/2-\frac12\int_0^1x^2/(x+1)dx$$。拆分 $x^2/(x+1)=x-1+1/(x+1)$，后一积分为 $\ln2-1/2$，所以结果 $1/4$。</p></details></article>
+<p><strong>反例与易错：</strong>$\int1/x\,dx=\ln|x|+C$；在负半轴写 $\ln x$ 没有实数意义。</p><details class="phase1-selftest"><summary>闭卷自测：原函数正确性的最快独立检查是什么？</summary><p>求导并化简成原被积函数，同时检查定义域。</p></details>
+<p><a href="#ch4">回到本章知识</a> · <a href="../notes.html#phase1-note-calculus">复习条件笔记</a> · <a href="../mistakes.html#error-calculus">高数错题训练</a></p></section>
+<section id="p1-c05" data-chapter="ch5"><h3>定积分、变限积分与反常积分</h3>
+<p><strong>核心知识：</strong>变限积分用基本定理和链式法则。端点无界、内部有奇点或区间无穷时，先化为极限。</p><p><strong>条件与边界：</strong>反常积分有多个奇点时须分别收敛，不能用发散项相消；普通变限求导先验被积函数连续。</p>
+<article id="p1-c05-basic" data-level="basic"><h4>基础题（自编）</h4><p>讨论 $\int_0^1x^{-p}dx$ 的收敛性。</p><details><summary>查看完整解析</summary><p>写为 $$\lim_{\varepsilon\to0+}\int_\varepsilon^1x^{-p}dx$$。$p\ne1$ 时为 $(1-\varepsilon^{1-p})/(1-p)$；仅 $p&lt;1$ 收敛，值为 $1/(1-p)$。$p=1$ 时为 $-\ln\varepsilon\to\infty$。</p></details></article>
+<article id="p1-c05-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>设 $G(x)=\int_x^{x^2}\ln t\,dt$（$x&gt;0$），求导数及单调区间。</p><details><summary>查看完整解析</summary><p>$G'=2x\ln(x^2)-\ln x=(4x-1)\ln x$。在 $(0,1/4)$ 为正、$(1/4,1)$ 为负、$(1,\infty)$ 为正，故依次增、减、增；在 $1/4$ 极大、1极小。</p></details></article>
+<p><strong>反例与易错：</strong>$\int_{-1}^11/x\,dx$ 的普通反常积分不存在；对称截断主值为0不能替代普通收敛。</p><details class="phase1-selftest"><summary>闭卷自测：上下限都含 $x$，能只对上限求导吗？</summary><p>不能，要减去下限对应的函数值乘下限导数。</p></details>
+<p><a href="#ch5">回到本章知识</a> · <a href="../notes.html#phase1-note-calculus">复习条件笔记</a> · <a href="../mistakes.html#error-calculus">高数错题训练</a></p></section>
+<section id="p1-c06" data-chapter="ch6"><h3>定积分的面积、体积与弧长</h3>
+<p><strong>核心知识：</strong>先画交点和上下曲线。面积取非负；圆盘、圆环、柱壳对应不同截面；弧长用 $\int\sqrt{1+(y')^2}dx$。</p><p><strong>条件与边界：</strong>绕 $x$ 轴圆环体积为 $\pi\int(R^2-r^2)dx$，不是半径差的平方。</p>
+<article id="p1-c06-basic" data-level="basic"><h4>基础题（自编）</h4><p>求 $y=x$、$y=x^2$ 在 $[0,1]$ 围成的面积。</p><details><summary>查看完整解析</summary><p>交点为0、1，区间内 $x\ge x^2$，面积 $\int_0^1(x-x^2)dx=1/2-1/3=1/6$。</p></details></article>
+<article id="p1-c06-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>把同一区域绕 $x$ 轴旋转，求体积。</p><details><summary>查看完整解析</summary><p>外半径 $R=x$，内半径 $r=x^2$。$$V=\pi\int_0^1(x^2-x^4)dx=\pi(1/3-1/5)=2\pi/15$$。须先构造截面积，再积成体积。</p></details></article>
+<p><strong>反例与易错：</strong>$R=2,r=1$ 时圆环面积为 $3\pi$，不是 $\pi(R-r)^2=\pi$。</p><details class="phase1-selftest"><summary>闭卷自测：上下曲线有交叉时，面积怎样处理？</summary><p>按交点分段，每段取上减下。</p></details>
+<p><a href="#ch6">回到本章知识</a> · <a href="../notes.html#phase1-note-calculus">复习条件笔记</a> · <a href="../mistakes.html#error-calculus">高数错题训练</a></p></section>
+<section id="p1-c07" data-chapter="ch7"><h3>常微分方程：初值与共振</h3>
+<p><strong>核心知识：</strong>一阶线性用积分因子；二阶常系数先求齐次特征根，再按右端选特解，最后代入初值并回代方程。</p><p><strong>条件与边界：</strong>右端指数与特征根重合时乘 $x^s$，$s$ 为根重数；分离变量时除含 $y$ 的因子可能丢掉常值解。</p>
+<article id="p1-c07-basic" data-level="basic"><h4>基础题（自编）</h4><p>解 $y'+y=e^x,y(0)=1$。</p><details><summary>查看完整解析</summary><p>乘积分因子 $e^x$ 得 $(e^xy)'=e^{2x}$，于是 $y=e^x/2+Ce^{-x}$；初值得 $C=1/2$，解为 $(e^x+e^{-x})/2$。</p></details></article>
+<article id="p1-c07-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>解 $y''-2y'+y=e^x,y(0)=0,y'(0)=1$。</p><details><summary>查看完整解析</summary><p>特征根1为二重。令 $y=e^xu$，左端为 $e^xu''$，故 $u''=1$，$u=x^2/2+C_1x+C_2$。初值得 $C_2=0,C_1=1$，所以 $y=e^x(x+x^2/2)$。</p></details></article>
+<p><strong>反例与易错：</strong>$y'=y(1-y)$ 中除以 $y(1-y)$ 会漏掉 $y\equiv0$、$y\equiv1$。</p><details class="phase1-selftest"><summary>闭卷自测：二重共振只乘一个 $x$ 够吗？</summary><p>不够，应乘 $x^2$，避免仍落在齐次解空间。</p></details>
+<p><a href="#ch7">回到本章知识</a> · <a href="../notes.html#phase1-note-calculus">复习条件笔记</a> · <a href="../mistakes.html#error-calculus">高数错题训练</a></p><article id="p1-c07-euler" data-level="integrated"><h4>补充综合题：欧拉方程（自编）</h4><p>求 $x^2y''-xy'+y=x$（$x&gt;0$）的通解。</p><details><summary>查看完整解析</summary><p>令 $t=\ln x,Y(t)=y(e^t)$，则 $xy'=Y'$、$x^2y''=Y''-Y'$。原方程化为 $Y''-2Y'+Y=e^t$；特征根1二重，令 $Y=e^tu$ 得 $u''=1$。所以 $y=x[C_1+C_2\ln x+(\ln x)^2/2]$，其中 $(\ln x)^2$ 来自二重共振。换元前后的定义域须保留 $x&gt;0$。</p></details></article></section>
+<section id="p1-c08" data-chapter="ch8"><h3>多元微分、可微性与约束极值</h3>
+<p><strong>核心知识：</strong>可微比偏导存在更强；方向导数沿单位方向计算。驻点只是极值候选点，约束题先写可行域。</p><p><strong>条件与边界：</strong>拉格朗日法在约束梯度非零的正规点给必要条件，须比较候选点与边界；二阶判别式为0不能直接定性。</p>
+<article id="p1-c08-basic" data-level="basic"><h4>基础题（自编）</h4><p>$f(0,0)=0$，其余点 $f=x^2y/(x^2+y^2)$。判断原点连续性、偏导和可微性。</p><details><summary>查看完整解析</summary><p>$|f|\le|y|\le\sqrt{x^2+y^2}$，故连续；沿两轴恒为0，两偏导为0。若可微则线性主部为0；沿 $x=y=t$，$|f|/\sqrt{x^2+y^2}=1/(2\sqrt2)$ 不趋0，所以不可微。</p></details></article>
+<article id="p1-c08-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>在 $x+y=1$ 下求 $x^2+4y^2$ 的最小值。</p><details><summary>查看完整解析</summary><p>令 $L=x^2+4y^2-\lambda(x+y-1)$，由 $2x=\lambda,8y=\lambda$ 解得 $(4/5,1/5)$，值为 $4/5$。代 $x=1-y$ 得 $5(y-1/5)^2+4/5$，证明为全局最小。</p></details></article>
+<p><strong>反例与易错：</strong>$x^2-y^2$ 在原点是鞍点；$x^4+y^4$ 在原点二阶判别式为0却有极小值。</p><details class="phase1-selftest"><summary>闭卷自测：方向向量 $(3,4)$ 能直接与梯度点乘吗？</summary><p>先单位化为 $(3/5,4/5)$。</p></details>
+<p><a href="#ch8">回到本章知识</a> · <a href="../notes.html#phase1-note-calculus">复习条件笔记</a> · <a href="../mistakes.html#error-calculus">高数错题训练</a></p></section>
+<section id="p1-c09" data-chapter="ch9"><h3>二重积分：换序与极坐标</h3>
+<p><strong>核心知识：</strong>画区域，分别固定 $x$ 和 $y$ 读边界。极坐标面积元为 $r\,dr\,d\theta$，对称性须同时看区域和函数。</p><p><strong>条件与边界：</strong>换序须描述同一区域；不能仅交换积分符号而不更改上下限。</p>
+<article id="p1-c09-basic" data-level="basic"><h4>基础题（自编）</h4><p>计算 $\int_0^1\int_x^1e^{y^2}\,dy\,dx$。</p><details><summary>查看完整解析</summary><p>区域 $0\le x\le y\le1$。换序为 $$\int_0^1\int_0^ye^{y^2}dx\,dy=\int_0^1ye^{y^2}dy=(e-1)/2$$，避开没有初等原函数的内层。</p></details></article>
+<article id="p1-c09-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>求上半单位圆盘 $D:x^2+y^2\le1,y\ge0$ 上的 $\iint_D(x^2+y^2)dA$。</p><details><summary>查看完整解析</summary><p>取 $0\le r\le1,0\le\theta\le\pi$，函数为 $r^2$，面积元含 $r$，所以积分为 $$\int_0^\pi d\theta\int_0^1r^3dr=\pi/4$$。</p></details></article>
+<p><strong>反例与易错：</strong>区域仅关于 $y$ 轴对称时，$x$ 的奇函数积分可为0，但 $y$ 的奇函数未必。</p><details class="phase1-selftest"><summary>闭卷自测：极坐标少乘一个 $r$，误差来自哪里？</summary><p>坐标变换的雅可比改变了面积元。</p></details>
+<p><a href="#ch9">回到本章知识</a> · <a href="../notes.html#phase1-note-calculus">复习条件笔记</a> · <a href="../mistakes.html#error-calculus">高数错题训练</a></p></section>
+<section id="p1-c10" data-chapter="ch10"><h3>向量、平面与空间直线</h3>
+<p><strong>核心知识：</strong>平面用一点和法向量描述，直线用一点和方向向量描述；夹角、投影、距离前先区分两类向量。</p><p><strong>条件与边界：</strong>平行向量叉积为0，不能归一化；直线与平面角和方向与法向的相应锐角互余。</p>
+<article id="p1-c10-basic" data-level="basic"><h4>基础题（自编）</h4><p>求经过 $(1,0,0)$、法向量 $(1,2,2)$ 的平面及原点到它的距离。</p><details><summary>查看完整解析</summary><p>平面为 $(x-1)+2y+2z=0$，距离 $|-1|/\sqrt{1+4+4}=1/3$。</p></details></article>
+<article id="p1-c10-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>两平面 $x+y=1,y+z=1$ 相交，求交线参数式和原点到直线距离。</p><details><summary>查看完整解析</summary><p>令 $y=t$，交线为 $(1-t,t,1-t)$，方向 $(-1,1,-1)$。距离平方 $2(1-t)^2+t^2=3(t-2/3)^2+2/3$，最小距离 $\sqrt{2/3}$，垂足 $(1/3,2/3,1/3)$。</p></details></article>
+<p><strong>反例与易错：</strong>平面 $x=1$ 的法向是 $(1,0,0)$，平面内直线方向应与它垂直，不能混用。</p><details class="phase1-selftest"><summary>闭卷自测：空间两直线方向不同就相交吗？</summary><p>不一定，可能异面，需联立参数方程或判断共面性。</p></details>
+<p><a href="#ch10">回到本章知识</a> · <a href="../notes.html#phase1-note-calculus">复习条件笔记</a> · <a href="../mistakes.html#error-calculus">高数错题训练</a></p></section>
+<section id="p1-c11" data-chapter="ch11"><h3>数项级数、幂级数与端点</h3>
+<p><strong>核心知识：</strong>先用通项趋零筛查，再选正项、交错或一般项判别。幂级数先求半径再查两端；逐项微积分先在开区间内讨论。</p><p><strong>条件与边界：</strong>比值或根值极限为1通常失效。交错本身不保证收敛；条件收敛和绝对收敛要分别验。</p>
+<article id="p1-c11-basic" data-level="basic"><h4>基础题（自编）</h4><p>求 $\sum_{n=1}^\infty n x^n$ 的收敛区间。</p><details><summary>查看完整解析</summary><p>比值绝对值趋 $|x|$，半径1。$x=\pm1$ 时通项均不趋0，因此两端都发散，区间 $(-1,1)$。</p></details></article>
+<article id="p1-c11-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>求 $\sum_{n=1}^\infty x^n/n$ 的收敛区间，并在开区间内求和。</p><details><summary>查看完整解析</summary><p>在 $|x|&lt;1$ 内对几何级数逐项积分，得和 $-\ln(1-x)$。$x=1$ 调和级数发散，$x=-1$ 交错调和级数条件收敛，所以区间 $[-1,1)$。端点结论独立判定。</p></details></article>
+<p><strong>反例与易错：</strong>$\sum(-1)^n$ 交错但通项不趋0；$\sum1/n$ 通项趋0仍发散。</p><details class="phase1-selftest"><summary>闭卷自测：比值极限为1能直接判发散吗？</summary><p>不能，换用比较、积分或其他适当判别法。</p></details>
+<p><a href="#ch11">回到本章知识</a> · <a href="../notes.html#phase1-note-calculus">复习条件笔记</a> · <a href="../mistakes.html#error-calculus">高数错题训练</a></p><article id="p1-c11-fourier" data-level="integrated"><h4>补充综合题：傅里叶级数与端点（自编）</h4><p>将 $f(x)=x$（$-\pi&lt;x&lt;\pi$）按周期 $2\pi$ 延拓，求其傅里叶系数，并说明级数在 $x=\pi$ 的和。</p><details><summary>查看完整解析</summary><p>函数奇，故 $a_0=a_n=0$。分部积分得 $$b_n=\frac2\pi\int_0^\pi x\sin nx\,dx=2(-1)^{n+1}/n$$。因此区间内 $$x=2\sum_{n=1}^\infty(-1)^{n+1}\sin(nx)/n$$。周期延拓在 $\pi$ 两侧极限为 $\pi$、$-\pi$，满足狄利克雷收敛条件时级数和为两侧平均值0；不能把端点和直接写为 $\pi$。</p></details></article></section>
+<section id="p1-c12" data-chapter="ch12"><h3>三重积分与曲线曲面积分</h3>
+<p><strong>核心知识：</strong>柱坐标体积元 $r\,dr\,d\theta\,dz$，球坐标 $$r^2\sin\varphi\,dr\,d\varphi\,d\theta$$。格林、高斯、斯托克斯都要检查光滑性和方向。</p><p><strong>条件与边界：</strong>高斯用闭曲面外法向；斯托克斯边界与法向满足右手规则。第一类曲线积分与方向无关，第二类反向变号。</p>
+<article id="p1-c12-basic" data-level="basic"><h4>基础题（自编）</h4><p>$F=(x,y,z)$，求半径2的球面外向通量。</p><details><summary>查看完整解析</summary><p>散度3，场在球内光滑。高斯公式得通量 $3(4\pi\,2^3/3)=32\pi$。直接用 $F\cdot n=2$ 乘球面积 $16\pi$ 也得到 $32\pi$；内向则为负。</p></details></article>
+<article id="p1-c12-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>$F=(-y/2,x/2,0)$，$C$ 为 $z=1$ 半径2的圆，从 $z$ 轴正方向看逆时针，求 $\oint_CF\cdot dr$。</p><details><summary>查看完整解析</summary><p>取圆盘上向法线，旋度 $(0,0,1)$，符合定向。斯托克斯得圆盘面积 $4\pi$；参数式 $(2\cos t,2\sin t,1)$ 代入得到 $2\,dt$，积分同为 $4\pi$。</p></details></article>
+<p><strong>反例与易错：</strong>场 $(-y/(x^2+y^2),x/(x^2+y^2))$ 在原点无定义，绕单位圆积分 $2\pi$，不能对整个圆盘直接套格林公式。</p><details class="phase1-selftest"><summary>闭卷自测：只反转曲面法向而不改边界方向，能直接用斯托克斯吗？</summary><p>不能，法向和边界必须满足相应右手定向。</p></details>
+<p><a href="#ch12">回到本章知识</a> · <a href="../notes.html#phase1-note-calculus">复习条件笔记</a> · <a href="../mistakes.html#error-calculus">高数错题训练</a></p></section>
+<section id="p1-c13" data-chapter="ch13"><h3>质量、质心与转动惯量</h3>
+<p><strong>核心知识：</strong>质量是密度的积分，质心为一次矩除以质量；绕 $z$ 轴转动惯量用到轴的距离平方 $x^2+y^2$。</p><p><strong>条件与边界：</strong>总质量须有限非零；对称性要看区域与密度，只有均匀时质心才与形心一致。</p>
+<article id="p1-c13-basic" data-level="basic"><h4>基础题（自编）</h4><p>薄板 $0\le y\le x\le1$，密度恒为2，求质量和质心。</p><details><summary>查看完整解析</summary><p>$M=\int_0^1\int_0^x2\,dy\,dx=1$；$M\bar x=\int_0^12x^2dx=2/3$，$M\bar y=\int_0^1x^2dx=1/3$，故质心 $(2/3,1/3)$。</p></details></article>
+<article id="p1-c13-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>单位球内密度1，求绕 $z$ 轴的转动惯量。</p><details><summary>查看完整解析</summary><p>由对称性，三坐标平方的积分相等；它们之和 $$\iiint r^2dV=4\pi\int_0^1r^4dr=4\pi/5$$。故 $$I_z=\iiint(x^2+y^2)dV=2(4\pi/15)=8\pi/15$$。</p></details></article>
+<p><strong>反例与易错：</strong>圆盘密度 $1+x/2$ 偏向右侧，几何对称不能推出质心在原点。</p><details class="phase1-selftest"><summary>闭卷自测：均匀薄板密度加倍、形状不变，质心变吗？</summary><p>不变，分子与分母同比例变化。</p></details>
+<p><a href="#ch13">回到本章知识</a> · <a href="../notes.html#phase1-note-calculus">复习条件笔记</a> · <a href="../mistakes.html#error-calculus">高数错题训练</a></p></section>
+<p>条件核对参考：<a href="https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/">MIT 多元微积分：重积分、方向与积分定理</a>。本节题目及解析为自编整理。</p>
+</div>
     </div>

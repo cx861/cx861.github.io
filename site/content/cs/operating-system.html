@@ -14,12 +14,14 @@
                 <li><a href="#ch3">第3章 内存管理</a></li>
                 <li><a href="#ch4">第4章 文件管理</a></li>
                 <li><a href="#ch5">第5章 输入/输出（I/O）管理</a></li>
-            </ul>
+            <li><a href="#review-checkpoints">附录：地址转换与同步易错题</a></li>
+<li><a href="#stage2-os">阶段 2：操作系统推演与计算专项</a></li>
+</ul>
         </div>
 
         <!-- Main Content -->
         <div class="content-card">
-<blockquote>来源：《2027王道考研·操作系统》高清版<br>共5章，涵盖408统考操作系统全部考点</blockquote>
+<blockquote>资料说明：原稿书目标签与对应页码尚未逐条核验，按旧笔记框架保留；本页阶段 2 题目均为自编。复习范围以目标年度正式考试大纲为准。</blockquote>
 <hr>
 <h2 id="ch1">第1章 计算机系统概述</h2>
 <h3>1.1 操作系统的基本概念</h3>
@@ -921,7 +923,7 @@ I/O控制（设备驱动 + 中断处理）
 <div class="table-wrapper"><table><tr class="table-header"><th>方式</th><th>CPU介入程度</th><th>数据传送单位</th><th>适用场景</th></tr>
 <tr><td><strong>程序直接控制（轮询）</strong></td><td>CPU全程参与</td><td>字</td><td>简单、低速设备</td></tr>
 <tr><td><strong>中断驱动方式</strong></td><td>每传送一单位数据中断一次</td><td>字</td><td>低速设备</td></tr>
-<tr><td><strong>DMA方式</strong></td><td>仅在开始和结束时介入</td><td>块</td><td>高速块设备</td></tr>
+<tr><td><strong>DMA方式</strong></td><td>经典模型中主要在设置、完成时介入</td><td>块</td><td>高速块设备</td></tr>
 <tr><td><strong>通道控制方式</strong></td><td>极少介入</td><td>一组块</td><td>大型机</td></tr></table></div>
 <p><strong>⭐ DMA（直接存储器访问）</strong>：</p>
 <div class="table-wrapper"><table><tr class="table-header"><th>特点</th><th>说明</th></tr>
@@ -1042,6 +1044,214 @@ Tt：传输时间（数据读写）</code></pre>
     <a class="chapter-exam-link" href="os-exam-types.html#s13">查看本章常考题型 →</a>
 </div>
 <hr>
-<blockquote>📚 <strong>参考资料</strong>：《2027年操作系统考研复习指导》（王道论坛组编）<br>📝 <strong>说明</strong>：本文档严格按照408统考大纲编写，涵盖操作系统五章全部考点<br>⭐ 标注星号 = 高频考点/重点内容</blockquote>
+<blockquote>📚 <strong>旧稿书目标签（对应页码待核）</strong>：《2027年操作系统考研复习指导》（王道论坛组编）<br>📝 <strong>说明</strong>：本页按操作系统五章框架整理；阶段 2 补充典型计算与边界条件，不作为全部考点已逐项审定的声明<br>⭐ 标注星号 = 高频考点/重点内容</blockquote>
+<hr>
+<h2 id="review-checkpoints">附录：地址转换与同步易错题</h2>
+<p>以下为补充整理与自编例题，适合学完对应章节后闭卷自测。</p>
+
+<h3>一、自编例题：分页地址转换</h3>
+<p>按字节编址，虚拟地址 32 位，页大小 4 KiB。页内偏移为 12 位，虚页号为 20 位。逻辑地址 <code>0x00001234</code> 的页号为 $1$，偏移为 <code>0x234</code>；若页表映射到物理页框 $5$，则物理地址为 <code>0x5234</code>。</p>
+<p><strong>必要检查：</strong>页表项不在内存时产生缺页异常，由系统调入；TLB 未命中只表示需要查页表，并不一定缺页。单级页表若每项 4 B，完整覆盖 $2^{20}$ 个虚页需要 $2^{22}$ B，即 4 MiB。</p>
+<h3>二、自编例题：TLB 有效访问时间</h3>
+<p>假设 TLB 查询与内存访问串行，TLB 查询 10 ns，内存访问 100 ns，命中率 $0.9$，单级页表常驻内存且不发生缺页。命中耗时 $10+100=110$ ns；未命中需要一次读页表、一次读数据，耗时 $10+100+100=210$ ns。平均为 $0.9\times110+0.1\times210=120$ ns。多级页表或并行查询模型应按题设重算。</p>
+<h3>三、生产者—消费者：为什么先申请资源</h3>
+<pre><code># 容量 N；初值 empty=N, full=0, mutex=1
+生产者: P(empty); P(mutex); 放入产品; V(mutex); V(full)
+消费者: P(full);  P(mutex); 取出产品; V(mutex); V(empty)</code></pre>
+<p>若生产者先执行 $P(mutex)$，再因缓冲区满而阻塞在 $P(empty)$，就会持锁等待空位；消费者无法获得锁来取走产品，形成死锁。资源计数信号量表示“能否进行操作”，互斥信号量保护临界区，不能交换申请次序。</p>
+<h3>四、调度计算自测</h3>
+<p>三个进程同时在时刻 $0$ 到达，运行时间依次为 $4,2,1$，按此顺序 FCFS，且忽略切换开销。完成时刻为 $4,6,7$，平均周转时间 $(4+6+7)/3=17/3$；等待时间为 $0,4,6$，平均 $10/3$；带权周转时间为 $1,3,7$，平均 $11/3$。周转时间从到达算到完成，响应时间只算到首次获得 CPU。</p>
+<p>概念核对：<a href="https://pages.cs.wisc.edu/~remzi/OSTEP/">OSTEP 操作系统教材</a>的地址转换、TLB 与信号量章节。数值题为自编。</p>
+
+
+<section id="stage2-os">
+<h2>阶段 2：操作系统 · 推演与计算专项</h2>
+<p><a href="../notes.html#note-os">本课核心笔记</a> · <a href="../mistakes.html#error-os">本课易错题复盘</a></p>
+<p>以下题目均为自编训练，不标注为历年真题。每组先复习适用条件，再独立作答，最后展开解析。编号固定，便于个人笔记和错题本回链。</p>
+<ul>
+<li><a href="#s2-os-m1">运行模式、进程与 fork</a></li>
+<li><a href="#s2-os-m2">调度时间轴与统计口径</a></li>
+<li><a href="#s2-os-m3">信号量顺序与公平性</a></li>
+<li><a href="#s2-os-m4">银行家算法：安全检查与试分配</a></li>
+<li><a href="#s2-os-m5">资源分配图与死锁判据</a></li>
+<li><a href="#s2-os-m6">分页地址与多级页表空间</a></li>
+<li><a href="#s2-os-m7">TLB、访存次数与缺页时间</a></li>
+<li><a href="#s2-os-m8">页面置换的逐步状态</a></li>
+<li><a href="#s2-os-m9">索引文件的偏移与容量</a></li>
+<li><a href="#s2-os-m10">磁盘寻道与缓冲重叠</a></li>
+</ul>
+<section id="s2-os-m1" data-chapter="运行模式、进程与 fork">
+<h3>1. 运行模式、进程与 fork</h3>
+<p><strong>先记条件：</strong>用户态/内核态是权限状态，进程切换是执行身份变化，两者并不等价；fork 题默认调用均成功并明确执行条件。</p>
+<article id="s2-os01" data-training="cs408" data-course="os">
+<h4>操作系统 01｜进程 P 发起系统调用后返回；随后定时器中断，调度器仍选择 P。各事件是否必然发生进程切换？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>系统调用通过陷入进入内核态，仍可在 P 的进程上下文中执行，返回 P 的用户态，因此不必切换进程。</li>
+<li>定时器中断使处理器执行中断处理，是否切换进程取决于调度；题设仍选 P，不发生 P→Q 的进程切换。</li>
+<li>若调度器选择 Q，才需要保存 P 的上下文并恢复 Q；模式切换本身不推出身份变化。</li>
+</ol><p><strong>易错原因：</strong>把每次中断、异常、系统调用都等同于进程切换。</p><p><strong>检查动作：</strong>分别记录当前模式和当前执行进程，两列分开判断。</p></details></article>
+<article id="s2-os02" data-training="cs408" data-course="os">
+<h4>操作系统 02｜从一个进程开始，顺序执行两次无条件 fork，所有后代均继续执行，调用均成功。最终多少进程、新建多少个？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>第一次后有父、子共 2 个；这两个各执行第二次，最终 4 个进程。</li>
+<li>原进程只有 1 个，故新建 3 个；fork 在子进程返回 0，在父进程返回该次子进程 PID。</li>
+</ol><p><strong>易错原因：</strong>只让原父进程执行第二次；或把最终总数 4 写成新建数。</p><p><strong>检查动作：</strong>画两层分叉树，并给每个分支标是否继续执行下一次调用。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：fork 复制后父子是否共享同一套普通局部变量的逻辑地址空间？答：逻辑地址空间独立；实际物理页可以通过写时复制暂时共享。</p></details></section>
+<section id="s2-os-m2" data-chapter="调度时间轴与统计口径">
+<h3>2. 调度时间轴与统计口径</h3>
+<p><strong>先记条件：</strong>周转=完成−到达，等待=周转−运行（本题无 I/O）；先画时间轴再求平均，不要把响应时间当周转。</p>
+<article id="s2-os03" data-training="cs408" data-course="os">
+<h4>操作系统 03｜FCFS，P1 到达 0/运行 5，P2 到达 1/运行 2，P3 到达 2/运行 1，无切换开销。求平均周转和等待。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>时间轴 P1:0～5，P2:5～7，P3:7～8；完成时刻 5、7、8。</li>
+<li>周转分别 5、6、6，平均 17/3；等待分别 0、4、5，平均 3。</li>
+</ol><p><strong>易错原因：</strong>完成时刻不减到达时刻；或只求首次响应时长。</p><p><strong>检查动作：</strong>每个进程都应满足 等待+运行=周转，且调度顺序遵循到达顺序。</p></details></article>
+<article id="s2-os04" data-training="cs408" data-course="os">
+<h4>操作系统 04｜三个进程都在 0 到达，初始队列 P1,P2,P3，运行时间 5,3,1，时间片 2，无切换开销。求 RR 时间轴及平均等待。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>依次为 P1:0～2，P2:2～4，P3:4～5，P1:5～7，P2:7～8，P1:8～9。</li>
+<li>P1/P2/P3 完成时刻 9/8/5；平均周转 (9+8+5)/3=22/3。</li>
+<li>等待分别 9−5=4、8−3=5、5−1=4，平均 13/3。</li>
+</ol><p><strong>易错原因：</strong>未用满时间片的 P3 也强行占 2 个单位；完成后仍放回队尾。</p><p><strong>检查动作：</strong>CPU 总忙时长 5+3+1=9，时间轴无空隙，终点应是 9。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：时间片越小是否总越好？答：不是，交互响应可能改善，但真实系统切换开销占比也会上升。</p></details></section>
+<section id="s2-os-m3" data-chapter="信号量顺序与公平性">
+<h3>3. 信号量顺序与公平性</h3>
+<p><strong>先记条件：</strong>资源计数与临界区互斥承担不同任务；等待资源时不能持有对方完成操作所需的互斥锁。正确互斥不自动保证公平。</p>
+<article id="s2-os05" data-training="cs408" data-course="os">
+<h4>操作系统 05｜容量 N=2 的有界缓冲，empty=2、full=0、mutex=1。给出生产者/消费者 P、V 顺序，并求完成一次生产后的计数。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>生产者：P(empty)；P(mutex)；放入；V(mutex)；V(full)。消费者：P(full)；P(mutex)；取出；V(mutex)；V(empty)。</li>
+<li>仅生产一次且无其他操作，empty=1、full=1、mutex=1。</li>
+<li>若先 P(mutex) 再 P(empty)，缓冲满时生产者持锁等待空位，消费者拿不到锁，无法释放空位，会形成死锁。</li>
+</ol><p><strong>易错原因：</strong>认为两个 P 可任意交换；或生产后 V(empty) 而非 V(full)。</p><p><strong>检查动作：</strong>把 N=1 且已满作为反例推演，检查等待方是否占有对方必需的锁。</p></details></article>
+<article id="s2-os06" data-training="cs408" data-course="os">
+<h4>操作系统 06｜读者优先模型：rmutex 保护读者计数 count，wmutex 保护文件。写出首/末读者操作并判断写者是否可能饥饿。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>读者进入：P(rmutex)；count++；若 count=1 则 P(wmutex)；V(rmutex)；读文件。</li>
+<li>读者离开：P(rmutex)；count--；若 count=0 则 V(wmutex)；V(rmutex)。写者：P(wmutex)；写；V(wmutex)。初值 count=0，其余信号量均为 1。</li>
+<li>有读者在场时，新读者仍可进入；若读者连续交叠，使 count 一直不为 0，等待的写者可能饥饿。</li>
+</ol><p><strong>易错原因：</strong>看到互斥正确就断言不会饥饿；把 count 的更新移出 rmutex 保护。</p><p><strong>检查动作：</strong>设想每次最后一个读者退出前又来新读者，检查写者何时能获得 wmutex。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：将所有共享变量都加一个大锁是否自动解决同步问题？答：不能，还需正确的资源等待顺序以及按题目要求处理公平性。</p></details></section>
+<section id="s2-os-m4" data-chapter="银行家算法：安全检查与试分配">
+<h3>4. 银行家算法：安全检查与试分配</h3>
+<p><strong>先记条件：</strong>Need=Max−Allocation；安全检查完成一个进程后归还的是现有 Allocation，不是 Max。请求合法不等于请求可立即批准。</p>
+<article id="s2-os07" data-training="cs408" data-course="os">
+<h4>操作系统 07｜一种资源总量 6，P0/P1/P2 已分配 1/2/1，最大需求 3/4/5。当前是否安全？给出序列。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>Available=6−(1+2+1)=2；Need=[2,2,4]。</li>
+<li>Work=2，可完成 P0，Work+=1 得 3；再完成 P1，Work+=2 得 5；再完成 P2，Work+=1 得 6。</li>
+<li>安全序列可取 P0→P1→P2；安全序列不必唯一。</li>
+</ol><p><strong>易错原因：</strong>完成 P0 后把 Work 加上 Max=3，虚增可用资源。</p><p><strong>检查动作：</strong>各阶段 Work+尚未完成进程 Allocation 之和恒为总资源 6。</p></details></article>
+<article id="s2-os08" data-training="cs408" data-course="os">
+<h4>操作系统 08｜沿用上题，P2 申请 2 个资源。请求同时不超过 Need、Available，是否应批准？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>2≤Need[P2]=4 且 2≤Available=2，先满足必要条件。</li>
+<li>试分配后 Available=0，Allocation=[1,2,3]，Need=[2,2,2]。任何进程都不能在 Work=0 下完成。</li>
+<li>试分配状态不安全，应回滚，P2 等待；不安全不等于已经死锁，只是无法保证未来最大需求都能满足。</li>
+</ol><p><strong>易错原因：</strong>只检查申请不超过可用量就批准；或把不安全直接写成已死锁。</p><p><strong>检查动作：</strong>试分配、完整安全检查、失败回滚三步必须都有，不能修改真实状态后忘记恢复。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：安全序列是操作系统必须采用的真实执行顺序吗？答：不是，它是存在一条能使所有进程完成的顺序的证明。</p></details></section>
+<section id="s2-os-m5" data-chapter="资源分配图与死锁判据">
+<h3>5. 资源分配图与死锁判据</h3>
+<p><strong>先记条件：</strong>单实例资源的有向等待环可推出死锁；多实例时有环只是必要条件，必须检查其他进程能否释放资源。</p>
+<article id="s2-os09" data-training="cs408" data-course="os">
+<h4>操作系统 09｜R1、R2、R3 各一个实例，P1 持 R1 等 R2，P2 持 R2 等 R3，P3 持 R3 等 R1；资源不可抢占，等待者不会主动释放。判断。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>等待图为 P1→P2→P3→P1。每个进程继续前都需另一个等待进程持有的资源。</li>
+<li>三者均无法先完成并释放，构成死锁；互斥、占有并等待、不可剥夺、循环等待四条件都满足。</li>
+</ol><p><strong>易错原因：</strong>看到系统还有别的空闲 CPU 就认为可继续；瓶颈是所需资源，不是 CPU。</p><p><strong>检查动作：</strong>逐个问谁能第一个完成；在本题约束下无人可完成。</p></details></article>
+<article id="s2-os10" data-training="cs408" data-course="os">
+<h4>操作系统 10｜R1 两实例分别由 P1、P3 持有，R2 单实例由 P2 持有；P1 等 R2、P2 等 R1，P3 不再申请且能完成。图有环，是否必然死锁？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>P1→R2→P2→R1→P1 构成环，但 R1 还有一个实例由可运行的 P3 持有。</li>
+<li>P3 完成归还一个 R1；P2 获得后完成并释放 R2；P1 随后完成。因此不存在必然死锁。</li>
+</ol><p><strong>易错原因：</strong>将单实例的有环充分条件推广到多实例资源图。</p><p><strong>检查动作：</strong>尝试消去不等待的 P3，再看剩余请求能否满足；不要只凭图形中一个环下结论。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：统一资源申请顺序主要破坏哪个必要条件？答：循环等待；它不是银行家安全性检查。</p></details></section>
+<section id="s2-os-m6" data-chapter="分页地址与多级页表空间">
+<h3>6. 分页地址与多级页表空间</h3>
+<p><strong>先记条件：</strong>虚拟地址拆为页号、偏移；物理地址保留偏移。页表项大小、页表是否按需分配、页表自身占页都须说明。</p>
+<article id="s2-os11" data-training="cs408" data-course="os">
+<h4>操作系统 11｜页面 4 KiB，虚拟地址 0x12345，其页映射到物理页框 0xAB。求页号、偏移、物理地址。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>页大小 2¹²，低 12 位为偏移 0x345；虚页号为 0x12。</li>
+<li>物理地址=(0xAB&lt;&lt;12)+0x345=0xAB345。</li>
+</ol><p><strong>易错原因：</strong>把物理页框号直接加上偏移，没有乘页大小；或把虚页号误当物理页框。</p><p><strong>检查动作：</strong>物理地址低 12 位应与虚拟地址完全相同。</p></details></article>
+<article id="s2-os12" data-training="cs408" data-course="os">
+<h4>操作系统 12｜32 位字节虚址，页 4 KiB，页表项 4 B。求单级页表大小；二级采用 10/10/12 位，仅映射虚页地址 0 与 0x00400000，按需分配页表，页目录必占一页。求页表总占用。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>虚页数 2²⁰，单级页表 2²⁰×4=4 MiB。</li>
+<li>二级每个页表含 1024 项，占 4 KiB；地址 0 与 0x00400000 位于两个不同的一级目录项。</li>
+<li>需 1 个目录页+2 个二级表页，共 12 KiB，仅计页表，不计两个数据页框。</li>
+</ol><p><strong>易错原因：</strong>以为映射两个页只占两个页表项的 8 B；漏掉按整页分配与目录自身。</p><p><strong>检查动作：</strong>分别提取两地址最高 10 位，应为 0 与 1，因此需要两个末级页表。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：页表项有效位为 0 是否一定是合法页的换出状态？答：不一定，还可能是未映射或非法地址，应结合页表与系统语义判断。</p></details></section>
+<section id="s2-os-m7" data-chapter="TLB、访存次数与缺页时间">
+<h3>7. TLB、访存次数与缺页时间</h3>
+<p><strong>先记条件：</strong>TLB 未中不等于缺页；多级页表未中需逐级访存。本组采用串行 TLB 查询且无其他 Cache，并排除未说明的重叠。</p>
+<article id="s2-os13" data-training="cs408" data-course="os">
+<h4>操作系统 13｜二级页表，TLB 查询 5 ns，内存 80 ns，TLB 命中率 98%，无缺页。每次访问都先查 TLB，求平均访问时间。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>命中：5+80=85 ns；未中需两次页表访存加一次数据访存，5+3×80=245 ns。</li>
+<li>平均 0.98×85+0.02×245=88.2 ns；也可写成 85+0.02×160。</li>
+</ol><p><strong>易错原因：</strong>套用单级页表的两次访存；或把未中直接当毫秒级缺页处理。</p><p><strong>检查动作：</strong>将一次访问分为地址翻译与最终取数据两部分，统计每一级真实内存访问。</p></details></article>
+<article id="s2-os14" data-training="cs408" data-course="os">
+<h4>操作系统 14｜非缺页分支总耗时 100 ns，缺页概率 10⁻⁶，缺页分支总耗时 8 ms（已含重试）。平均耗时多少？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>8 ms=8,000,000 ns；采用互斥分支加权。</li>
+<li>E=(1−10⁻⁶)×100+10⁻⁶×8,000,000=107.9999 ns，约 108 ns。</li>
+<li>缺页极罕见也可能明显拉高平均值；若 8 ms 是额外罚时，公式才改为 100+p×8 ms。</li>
+</ol><p><strong>易错原因：</strong>混用 ms 和 ns；在已含重试的总耗时上再叠加一次正常访问。</p><p><strong>检查动作：</strong>先统一到 ns，再检查平均值介于两个分支耗时之间。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：TLB 未中但页表项有效时是否必须访问磁盘？答：不需要，只需完成页表查询并按策略回填 TLB。</p></details></section>
+<section id="s2-os-m8" data-chapter="页面置换的逐步状态">
+<h3>8. 页面置换的逐步状态</h3>
+<p><strong>先记条件：</strong>题设固定页框、初始空；FIFO 命中不改变入队顺序，LRU 每次访问都更新最近使用顺序。</p>
+<article id="s2-os15" data-training="cs408" data-course="os">
+<h4>操作系统 15｜3 个空页框，引用串 7,0,1,2,0,3,0,4。分别求 LRU 与 FIFO 缺页次数。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>LRU 按最旧→最新记录： [7]，[7,0]，[7,0,1]，[0,1,2]，[1,2,0]，[2,0,3]，[2,3,0]，[3,0,4]。缺页发生于第 1、2、3、4、6、8 次，共 6。</li>
+<li>FIFO 队列： [7]，[7,0]，[7,0,1]，[0,1,2]，命中 0 不换序，[1,2,3]，[2,3,0]，[3,0,4]，共 7 次。</li>
+</ol><p><strong>易错原因：</strong>FIFO 命中也把页移至队尾，实际做成 LRU；或漏记初次装入也缺页。</p><p><strong>检查动作：</strong>为每次引用写 H/F，并核对淘汰依据是装入最早还是访问最早。</p></details></article>
+<article id="s2-os16" data-training="cs408" data-course="os">
+<h4>操作系统 16｜FIFO 引用串 1,2,3,4,1,2,5,1,2,3,4,5，初始空。比较 3、4 页框缺页数。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>3 页框的缺页标记为 F F F F F F F H H F F H，总计 9。</li>
+<li>4 页框为 F F F F H H F F F F F F，总计 10；增加页框反而增加缺页，称 Belady 异常。</li>
+<li>FIFO 不具备栈性质；LRU、OPT 在同一引用串下不会出现这种增加页框反增缺页的现象。</li>
+</ol><p><strong>易错原因：</strong>凭直觉断言更多页框一定不差，未按 FIFO 入队顺序推演。</p><p><strong>检查动作：</strong>同时维护两套队列，尤其检查第 8、9 次访问在两种容量中的命中差异。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：最优置换 OPT 是否依据过去最久未用？答：不是，它淘汰未来最晚再用或不再使用的页；LRU 才依据过去。</p></details></section>
+<section id="s2-os-m9" data-chapter="索引文件的偏移与容量">
+<h3>9. 索引文件的偏移与容量</h3>
+<p><strong>先记条件：</strong>数据块编号从 0 起；inode 已缓存不代表间接索引块也缓存。容量题区分文件数据容量与元数据占用。</p>
+<article id="s2-os17" data-training="cs408" data-course="os">
+<h4>操作系统 17｜inode 有 10 个直接、1 个一级间接、1 个二级间接指针，块 1 KiB，指针 4 B，inode 已缓存，其余块未缓存。读文件偏移 12 KiB 处字节，需几次块 I/O？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>偏移 12 KiB 位于数据块编号 12；直接块覆盖 0～9，一级间接覆盖 10～265。</li>
+<li>该块在一级间接表中下标为 12−10=2；需读一级索引块一次，再读数据块一次，共 2 次。</li>
+</ol><p><strong>易错原因：</strong>把第 12 KiB 误作第 12 个字节；漏计索引块，或给已缓存 inode 再加一次。</p><p><strong>检查动作：</strong>明确 offset//1024=12、offset%1024=0，确认所在层级。</p></details></article>
+<article id="s2-os18" data-training="cs408" data-course="os">
+<h4>操作系统 18｜沿用上题，忽略文件大小字段上限，仅由指针结构决定的最大文件数据容量是多少？</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>每索引块容纳 1024/4=256 个指针；数据块数量为 10+256+256²=65,802。</li>
+<li>最大数据容量 65,802×1024=67,381,248 B；索引块和 inode 自身不计入文件数据长度。</li>
+</ol><p><strong>易错原因：</strong>一级、二级容量都写成 256；或把索引元数据块当作文件数据块计入长度。</p><p><strong>检查动作：</strong>按直接、一级、二级分层分别算 10、256、65,536，最后才乘块大小。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：读同一个文件块的第二个字节是否一定还要再读索引块？答：不一定，缓存状态改变后 I/O 数可能不同；本题只分析初次冷缓存访问。</p></details></section>
+<section id="s2-os-m10" data-chapter="磁盘寻道与缓冲重叠">
+<h3>10. 磁盘寻道与缓冲重叠</h3>
+<p><strong>先记条件：</strong>磁盘题明确初始方向和是否扫至端点；双缓冲题明确输入、处理与复制能否重叠，不混用不同教材模型。</p>
+<article id="s2-os19" data-training="cs408" data-course="os">
+<h4>操作系统 19｜磁道 0～99，磁头 50，请求 10,20,55,58,90。求 SSTF 总移动；SCAN 初始向大号、到 99 才反向，处理完最后请求即停，求移动。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>SSTF 顺序 55→58→90→20→10，移动 5+3+32+70+10=120。</li>
+<li>SCAN 先处理 55、58、90，继续到 99，再反向处理 20、10；总移动 (99−50)+(99−10)=138。</li>
+<li>若用 LOOK 会在最后请求 90 处反向，移动 40+80=120；这不是题设 SCAN。</li>
+</ol><p><strong>易错原因：</strong>把 SCAN 与 LOOK 混为一谈；在全部请求完成后继续算到磁道 0。</p><p><strong>检查动作：</strong>列出真实运动端点，不只写服务顺序；本题结束条件不包含额外空扫。</p></details></article>
+<article id="s2-os20" data-training="cs408" data-course="os">
+<h4>操作系统 20｜简化双缓冲模型：3 块数据，每块输入 4 ms、CPU 直接在缓冲区处理 6 ms，无额外复制时间，CPU 处理时该缓冲不可覆盖。比较单缓冲与双缓冲总时长。</h4>
+<details><summary>展开推演、易错点与检查</summary><ol>
+<li>单缓冲无法边处理边覆盖该缓冲，每块 4+6=10 ms，共 30 ms。</li>
+<li>双缓冲：输入块 1 在 0～4，CPU 处理 4～10；块 2 输入 4～8，CPU 10～16；块 3 可在缓冲 1 释放后于 10～14 输入，CPU 16～22。</li>
+<li>总时长 22 ms，也可用 4+(3−1)×max(4,6)+6=22；此处专指无复制且输入与 CPU 可并行的模型。</li>
+</ol><p><strong>易错原因：</strong>凭双缓冲名称直接除以 2；忽略首尾段或忽略缓冲仍被 CPU 占用。</p><p><strong>检查动作：</strong>画两个缓冲与 CPU 三条时间线，确保每块输入完成后才处理、处理完成后才覆盖。</p></details></article>
+<details data-recall="cs408"><summary>闭卷自测与答案</summary><p>问：若另有从缓冲复制到工作区的时间，是否还能照搬 22 ms？答：不能，必须把复制、输入、处理及其互斥/并行关系重新排入时间线。</p></details></section>
+<p>核对资料（概念参考，题目数据与解答为本站自编）：<a href="https://pages.cs.wisc.edu/~remzi/OSTEP/" target="_blank" rel="noopener noreferrer">OSTEP：操作系统原理开放教材</a></p>
+</section>
         </div>
     </div>

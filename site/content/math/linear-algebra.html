@@ -16,7 +16,9 @@
                 <li><a href="#ch4">第四章 线性方程组</a></li>
                 <li><a href="#ch5">第五章 特征值与特征向量</a></li>
                 <li><a href="#ch6">第六章 二次型</a></li>
-            </ul>
+            <li><a href="#review-checkpoints">附录：参数讨论与概念辨析</a></li>
+<li><a href="#phase1-linear">阶段一：6 章强化与综合自测</a></li>
+</ul>
         </div>
 
         <!-- Main Content -->
@@ -727,5 +729,75 @@ a_{n1} & a_{n2} & \cdots & a_{nn}
 <blockquote>⚠️ <strong>辨析：</strong>相似不一定合同，合同也不一定相似；实对称矩阵讨论二次型时优先看合同与惯性指数。</blockquote>
 <hr>
 <blockquote><strong>本文档覆盖全书六大章节全部核心知识点，建议结合教材例题和《基础过关660题》同步练习巩固。</strong></blockquote>
-        </div>
+<hr>
+<h2 id="review-checkpoints">附录：参数讨论与概念辨析</h2>
+<p>以下为补充整理与自编例题，适合学完对应章节后闭卷自测。</p>
+
+<h3>一、三种矩阵关系不要混淆</h3>
+<div class="table-wrapper"><table><tr><th>关系</th><th>定义（同阶方阵）</th><th>最实用判据</th></tr>
+<tr><td>等价</td><td>$B=PAQ$，$P,Q$ 可逆</td><td>秩相同；一般不保持特征值。</td></tr>
+<tr><td>相似</td><td>$B=P^{-1}AP$</td><td>保持特征多项式；特征值相同仍不足以保证相似。</td></tr>
+<tr><td>合同（实对称矩阵）</td><td>$B=P^TAP$</td><td>正、负惯性指数分别相同；一般不保持特征值的数值。</td></tr></table></div>
+<h3>二、例题：什么时候必须分情况消元</h3>
+<p><strong>题目：</strong>讨论 $\begin{cases}x+y=1,\\x+ay=b.\end{cases}$ 的解。</p>
+<ol><li>第二行减第一行，得到 $(a-1)y=b-1$。此时不能直接除以 $a-1$。</li><li>$a\ne1$ 时唯一解：$y=(b-1)/(a-1)$，$x=(a-b)/(a-1)$。</li><li>$a=1,b=1$ 时，两式相同，有无穷多解 $(x,y)=(1-t,t)$。</li><li>$a=1,b\ne1$ 时出现 $0=b-1\ne0$，无解。</li></ol>
+<p><strong>秩的解释：</strong>唯一解时 $r(A)=r(A|b)=2$；无穷多解时同为 $1&lt;2$；无解时 $r(A)=1&lt;r(A|b)=2$。</p>
+<h3>三、例题：重根与可对角化</h3>
+<p>$A=\begin{pmatrix}1&amp;1\\0&amp;1\end{pmatrix}$ 的特征值为二重根 $1$，而 $r(A-I)=1$，故特征空间维数为 $2-1=1$，没有两个线性无关特征向量，不能对角化。单位矩阵同样有二重根 $1$，却可以对角化。因此“有重根”本身不能作结论。</p>
+<h3>四、二次型自测</h3>
+<p><strong>题目：</strong>$q(x,y)=2x^2+2axy+2y^2$ 何时正定？</p>
+<p><strong>解：</strong>矩阵为 $\begin{pmatrix}2&amp;a\\a&amp;2\end{pmatrix}$，顺序主子式为 $2$ 与 $4-a^2$，均大于零等价于 $|a|&lt;2$。$a=\pm2$ 时为半正定，$|a|&gt;2$ 时为不定。半正定不能照搬“所有顺序主子式非负”的判据，应检查全部主子式或特征值。</p>
+<p>概念核对：<a href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/positive-definite-matrices-and-applications/positive-definite-matrices-and-minima/">MIT 线性代数：正定矩阵</a>。例题为自编。</p>
+
+
+
+<hr>
+<h2 id="phase1-linear">阶段一：数学一线性代数逐章强化</h2>
+<p>6 个章节单元，12 道自编解析题；先判断对象、数域和矩阵关系，再计算。</p>
+<ul>
+<li><a href="#p1-l01">行列式与参数降秩</a></li>
+<li><a href="#p1-l02">矩阵运算、逆与矩阵多项式</a></li>
+<li><a href="#p1-l03">向量相关性、秩与线性表示</a></li>
+<li><a href="#p1-l04">方程组的秩、解空间与参数分支</a></li>
+<li><a href="#p1-l05">特征结构、对角化与矩阵幂</a></li>
+<li><a href="#p1-l06">二次型、合同与正定参数</a></li>
+</ul>
+<section id="p1-l01" data-chapter="ch1"><h3>行列式与参数降秩</h3>
+<p><strong>核心知识：</strong>行列式反映方阵可逆性，初等行变换要区分交换、倍乘和倍加；行列式为0时需进一步算秩。</p><p><strong>条件与边界：</strong>行交换变号，某行乘 $k$ 使行列式乘 $k$，某行加另一行倍数不变；含参数倍除先分支。</p>
+<article id="p1-l01-basic" data-level="basic"><h4>基础题（自编）</h4><p>计算 $$\det\begin{pmatrix}1&amp;2&amp;3\\2&amp;4&amp;7\\1&amp;1&amp;1\end{pmatrix}$$。</p><details><summary>查看完整解析</summary><p>作 $R_2-2R_1$、$R_3-R_1$ 得 $$\begin{pmatrix}1&amp;2&amp;3\\0&amp;0&amp;1\\0&amp;-1&amp;-2\end{pmatrix}$$。沿第二行展开，结果为 $$(-1)^{2+3}\det\begin{pmatrix}1&amp;2\\0&amp;-1\end{pmatrix}=1$$。</p></details></article>
+<article id="p1-l01-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>$A(a)$ 为三阶矩阵，对角元均为 $a$、其他元均为1。求行列式，并讨论秩。</p><details><summary>查看完整解析</summary><p>$A=(a-1)I+J$，$J$ 为全1矩阵。向量 $(1,1,1)^T$ 对应特征值 $a+2$，与其正交的二维空间对应 $a-1$，所以 $|A|=(a+2)(a-1)^2$。$a\ne1,-2$ 秩3；$a=1$ 为 $J$，秩1；$a=-2$ 特征值 $0,-3,-3$，秩2。</p></details></article>
+<p><strong>反例与易错：</strong>$\operatorname{diag}(1,0,0)$ 与 $\operatorname{diag}(1,1,0)$ 行列式都为0，但秩不同。</p><details class="phase1-selftest"><summary>闭卷自测：行列式为0是否意味着所有元素都为0？</summary><p>不意味着，只说明列或行线性相关。</p></details>
+<p><a href="#ch1">回到本章知识</a> · <a href="../notes.html#phase1-note-linear">复习条件笔记</a> · <a href="../mistakes.html#error-linear">线代错题训练</a></p></section>
+<section id="p1-l02" data-chapter="ch2"><h3>矩阵运算、逆与矩阵多项式</h3>
+<p><strong>核心知识：</strong>矩阵乘法通常不交换；只有维数适配才能相乘。同一矩阵的多项式之间可交换，不能把它推广到任意两矩阵。</p><p><strong>条件与边界：</strong>同阶方阵有一侧逆即可推出可逆；可用另一侧验算复核。分块计算也须保持乘法次序。</p>
+<article id="p1-l02-basic" data-level="basic"><h4>基础题（自编）</h4><p>已知 $A^2-3A+2I=0$，求 $A^{-1}$ 并说明特征值的限制。</p><details><summary>查看完整解析</summary><p>$A(3I-A)=(3I-A)A=2I$，故 $A^{-1}=(3I-A)/2$。若 $A\alpha=\lambda\alpha$，则 $(\lambda-1)(\lambda-2)=0$，所以特征值只能为1或2，但两值不一定同时出现。</p></details></article>
+<article id="p1-l02-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>$B$ 为 $m$ 阶矩阵，$$T=\begin{pmatrix}I&amp;B\\0&amp;I\end{pmatrix}$$。求 $T^{-1}$ 与正整数 $n$ 时的 $T^n$。</p><details><summary>查看完整解析</summary><p>写 $T=I_{2m}+N$，其中 $$N=\begin{pmatrix}0&amp;B\\0&amp;0\end{pmatrix}$$，有 $N^2=0$。所以 $(I+N)(I-N)=I$，$T^{-1}=I-N$；二项展开高次项全为0，$$T^n=I+nN=\begin{pmatrix}I&amp;nB\\0&amp;I\end{pmatrix}$$。</p></details></article>
+<p><strong>反例与易错：</strong>取 $$A=\begin{pmatrix}1&amp;1\\0&amp;1\end{pmatrix},B=\begin{pmatrix}1&amp;0\\1&amp;1\end{pmatrix}$$，则 $$AB=\begin{pmatrix}2&amp;1\\1&amp;1\end{pmatrix}$$，$$BA=\begin{pmatrix}1&amp;1\\1&amp;2\end{pmatrix}$$。</p><details class="phase1-selftest"><summary>闭卷自测：$(AB)^{-1}$ 的次序是什么？</summary><p>两矩阵可逆时为 $B^{-1}A^{-1}$，逆序相乘。</p></details>
+<p><a href="#ch2">回到本章知识</a> · <a href="../notes.html#phase1-note-linear">复习条件笔记</a> · <a href="../mistakes.html#error-linear">线代错题训练</a></p></section>
+<section id="p1-l03" data-chapter="ch3"><h3>向量相关性、秩与线性表示</h3>
+<p><strong>核心知识：</strong>秩是最大线性无关向量个数。线性表示问题可转成方程组；加入一个向量后秩不变，等价于它在原向量组张成空间中。</p><p><strong>条件与边界：</strong>向量都必须在同一空间内。三个三维向量不一定独立，向量个数不超过维数只是可能独立。</p>
+<article id="p1-l03-basic" data-level="basic"><h4>基础题（自编）</h4><p>$$v_1=(1,0,1)^T,v_2=(0,1,1)^T,v_3=(1,1,2)^T$$，求秩及一个最大无关组。</p><details><summary>查看完整解析</summary><p>$v_3=v_1+v_2$，所以秩至多2；$v_1,v_2$ 前两坐标组成单位阵，故独立。秩为2，最大无关组可取 $v_1,v_2$，基本相关式 $v_1+v_2-v_3=0$。</p></details></article>
+<article id="p1-l03-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>$w(t)=(1,1,t)^T$，何时在上题向量组张成空间内？加入 $w$ 后秩怎样变化？</p><details><summary>查看完整解析</summary><p>任意 $$\alpha v_1+\beta v_2=(\alpha,\beta,\alpha+\beta)^T$$。匹配前两坐标得 $\alpha=\beta=1$，故仅 $t=2$ 时可表示。$t=2$ 时加列不增秩，仍为2；$t\ne2$ 时新列在原二维空间外，秩为3。</p></details></article>
+<p><strong>反例与易错：</strong>同一平面内的三个非零三维向量可能相关，不能用“全非零”推独立。</p><details class="phase1-selftest"><summary>闭卷自测：一个向量有两种不同线性表示，原表示向量组一定相关吗？</summary><p>是。两种表示相减给出非零系数的零线性组合。</p></details>
+<p><a href="#ch3">回到本章知识</a> · <a href="../notes.html#phase1-note-linear">复习条件笔记</a> · <a href="../mistakes.html#error-linear">线代错题训练</a></p></section>
+<section id="p1-l04" data-chapter="ch4"><h3>方程组的秩、解空间与参数分支</h3>
+<p><strong>核心知识：</strong>有解当且仅当 $r(A)=r(A|b)$；等于未知数个数时唯一解，否则有自由变量。齐次解空间维数为 $n-r(A)$。</p><p><strong>条件与边界：</strong>非齐次解集一般不是线性空间；它是一个特解加上齐次解空间。消元中的参数因子要保留为0分支。</p>
+<article id="p1-l04-basic" data-level="basic"><h4>基础题（自编）</h4><p>求 $x_1+x_2+x_3=0,\ x_2+x_4=0$ 的基础解系与通解。</p><details><summary>查看完整解析</summary><p>令 $x_3=s,x_4=t$，得 $x_2=-t,x_1=t-s$。通解为 $s(-1,0,1,0)^T+t(1,-1,0,1)^T$，两向量独立，构成基础解系。系数矩阵秩2，解空间维数 $4-2=2$。</p></details></article>
+<article id="p1-l04-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>讨论 $x+y+z=1,\ x+ay+z=b,\ x+y+az=c$ 的解。</p><details><summary>查看完整解析</summary><p>后两式分别减第一式得 $(a-1)y=b-1,(a-1)z=c-1$。$a\ne1$ 时唯一解 $$y=(b-1)/(a-1),z=(c-1)/(a-1),x=(a+1-b-c)/(a-1)$$；$a=1,b=c=1$ 时 $y,z$ 自由且 $x=1-y-z$；$a=1$ 且 $b,c$ 至少一个不为1时无解。</p></details></article>
+<p><strong>反例与易错：</strong>$x+y=1$ 的解集不包含零向量，故不是向量空间；不能称其有“基础解系”。</p><details class="phase1-selftest"><summary>闭卷自测：两个非齐次特解之差属于哪里？</summary><p>属于对应齐次方程的解空间。</p></details>
+<p><a href="#ch4">回到本章知识</a> · <a href="../notes.html#phase1-note-linear">复习条件笔记</a> · <a href="../mistakes.html#error-linear">线代错题训练</a></p></section>
+<section id="p1-l05" data-chapter="ch5"><h3>特征结构、对角化与矩阵幂</h3>
+<p><strong>核心知识：</strong>特征值满足特征方程，但可对角化需要足够多独立特征向量。实对称矩阵可正交对角化，不同特征值对应的特征向量正交。</p><p><strong>条件与边界：</strong>在所讨论数域内检查特征多项式分解；每个特征值的几何重数均等于代数重数才可对角化。</p>
+<article id="p1-l05-basic" data-level="basic"><h4>基础题（自编）</h4><p>正交对角化 $$A=\begin{pmatrix}2&amp;1\\1&amp;2\end{pmatrix}$$，并求 $A^n$（$n\ge0$）。</p><details><summary>查看完整解析</summary><p>特征值3、1，单位特征向量分别为 $(1,1)^T/\sqrt2,(1,-1)^T/\sqrt2$。以它们为列构成 $Q$，$Q^TAQ=\operatorname{diag}(3,1)$。所以 $$A^n=\frac12\begin{pmatrix}3^n+1&amp;3^n-1\\3^n-1&amp;3^n+1\end{pmatrix}$$；$n=0$ 给出单位阵，可作复核。</p></details></article>
+<article id="p1-l05-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>$$B=\begin{pmatrix}2&amp;1\\0&amp;2\end{pmatrix}$$ 能否对角化？求 $B^n$（$n\ge1$）。</p><details><summary>查看完整解析</summary><p>唯一特征值2的代数重数为2，而 $r(B-2I)=1$，特征空间维数1，不能对角化。令 $N=B-2I$，$N^2=0$，有 $$B^n=2^nI+n2^{n-1}N=\begin{pmatrix}2^n&amp;n2^{n-1}\\0&amp;2^n\end{pmatrix}$$。</p></details></article>
+<p><strong>反例与易错：</strong>$2I$ 与上题 $B$ 的特征值完全相同，却分别可以和不可以对角化。</p><details class="phase1-selftest"><summary>闭卷自测：有重特征值就一定不能对角化吗？</summary><p>不是；关键是独立特征向量数量。</p></details>
+<p><a href="#ch5">回到本章知识</a> · <a href="../notes.html#phase1-note-linear">复习条件笔记</a> · <a href="../mistakes.html#error-linear">线代错题训练</a></p></section>
+<section id="p1-l06" data-chapter="ch6"><h3>二次型、合同与正定参数</h3>
+<p><strong>核心知识：</strong>二次型矩阵取实对称形式，交叉项系数平分。合同关注惯性指数，正定可用全部特征值为正或顺序主子式全正。</p><p><strong>条件与边界：</strong>正定严格要求非零向量对应正值；半正定不能仅凭顺序主子式非负判断。</p>
+<article id="p1-l06-basic" data-level="basic"><h4>基础题（自编）</h4><p>$q=x^2+2axy+y^2$ 何时正定？边界是什么性质？</p><details><summary>查看完整解析</summary><p>矩阵 $$\begin{pmatrix}1&amp;a\\a&amp;1\end{pmatrix}$$ 的顺序主子式为1和 $1-a^2$，正定当且仅当 $|a|&lt;1$。$a=\pm1$ 时为 $(x\pm y)^2$，半正定；$|a|&gt;1$ 时两特征值异号，故不定。</p></details></article>
+<article id="p1-l06-integrated" data-level="integrated"><h4>综合题（自编）</h4><p>将 $q=x^2+2xy+y^2-z^2$ 化为标准形，求秩和惯性指数，并判断是否正定。</p><details><summary>查看完整解析</summary><p>配方 $q=(x+y)^2-z^2$。取 $u=x+y,v=y,w=z$，这是可逆线性变换，得到 $u^2+0v^2-w^2$。秩2，正、负惯性指数各1；存在正值和负值，故不定。行列式为0只说明退化，不能替代符号判断。</p></details></article>
+<p><strong>反例与易错：</strong>$\operatorname{diag}(0,-1)$ 的顺序主子式为0、0，但并非半正定，说明不能照搬正定判据。</p><details class="phase1-selftest"><summary>闭卷自测：合同保持特征值的具体数值吗？</summary><p>一般不保持；保持正负惯性指数和秩。</p></details>
+<p><a href="#ch6">回到本章知识</a> · <a href="../notes.html#phase1-note-linear">复习条件笔记</a> · <a href="../mistakes.html#error-linear">线代错题训练</a></p></section>
+<p>条件核对参考：<a href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/positive-definite-matrices-and-applications/positive-definite-matrices-and-minima/">MIT 线性代数：正定矩阵及其条件</a>。本节题目及解析为自编整理。</p>
+</div>
     </div>
